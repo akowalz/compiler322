@@ -1,0 +1,12 @@
+#lang plai
+(require racket/file)
+
+(define (read-file-to-s path)
+  (file->value path))
+
+
+
+(define (translate expr)
+  (match expr
+    [`(,x <- ,y) 
+                        
