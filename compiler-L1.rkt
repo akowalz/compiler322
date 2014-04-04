@@ -18,6 +18,7 @@
   [aop-and (l L1-expr?) (r L1-expr?)]
   [sop-left (l L1-expr?) (r L1-expr?)]
   [sop-right (l L1-expr?) (r L1-expr?)]
+  [mem-expr (x L1-expr?) (n L1-expr?)]
   [cmp (c CMP-expr?)])
 
 
@@ -31,6 +32,7 @@
   (match expr
     [(? number?) (numV expr)]
     [(? symbol?) (register expr)]
+    [`(mem ,x ,y) (mem-expr (parse x) (parse y))] 
     [`(,x <- ,y) (arrow-expr (parse x) (parse y))]
     [`(,x += ,y) (aop-plus (parse x) (parse y))]
     [`(,x -= ,y) (aop-minus (parse x) (parse y))]
@@ -59,7 +61,7 @@
                                 "%cl"
                                 (compile r))
                             (compile l))]
-    [cmp (c) ""]))
+    [cmp (c) "" ]))
 
 (define (compile-code code)
   (let ([exprs (first code)])
@@ -75,6 +77,8 @@
       "sarl %cl, $4\n")
 (test (compile (cmp (cmp-greater (register 'ebx) (register 'ecx))))
       "cmpl %ecx, %ebx\nsetl %al\nmovzbl %al, %eax\n")
+(test (compile (arrow-expr (register `eax) (mem-expr (register `ebx) (numV 12))))
+      "movl 12(%ebx), %eax")
 
 
 
