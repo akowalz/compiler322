@@ -1,0 +1,3 @@
+(((eax <- ebp)
+	((mem eax -4) <- 25)
+	(edx <- (mem eax -4))))

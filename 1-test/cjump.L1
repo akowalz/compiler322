@@ -1,0 +1,5 @@
+(((cjump 5 < 11 :here :there)
+	:here
+	(eax <- 5)
+	:there
+	(eax <- 11)))
