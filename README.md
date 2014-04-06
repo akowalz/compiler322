@@ -9,7 +9,7 @@ $ ./test-asm.sh assembly-code
 ### output from linking everything and running it 
 ```
 
-### ASSIGNMENT 1 GAME PLAN / TODO LIST
+# ASSIGNMENT 1 GAME PLAN / TODO LIST
 
 ## Basic template for compiling
 
@@ -31,7 +31,7 @@ and end with
 
 So, our `compile` function should always put these things at the start and end (using string-append probably).
 
-# Compiling "Main"
+### Compiling "Main"
 
 The first element in the L1 instruction list is the `main` function, so it must begin with the "Main Prefix" and end with the "Main Suffix".
 
@@ -58,7 +58,7 @@ compile all the instructions in main sequentially, and then append that to the s
   ret
 ```
 
-# Compiling the L1 level functions
+### Compiling the L1 level functions
 
 The functions in an L1 program have the form `(label i ...)`.  The label is the the name of the function, the `i`s make up the body of the function.
 
@@ -69,7 +69,7 @@ So, we compile L1-main, described above, then we look to the rest of the list, w
 
 ## Making function calls
 
-# Calls into runtime.c
+### Calls into runtime.c
 
 Making calls to the `runtime.c` functions is very straightforward, and described well in the lecture notes.  The arguments will already be in the registers for us thanks to the L1 programmer. The x86 `call` instruction will also automatically store the result for us.
 
@@ -103,7 +103,7 @@ call allocate
 addl $8,%esp
 ```
 
-# Calls to L1 functions `(label i ... )`
+### Calls to L1 functions `(label i ... )`
 
 This slightly more complicated, details all are all in the notes, but here's an attempt to make it more clear what the L1 programmer has to write and what we have have to generate.
 
