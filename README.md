@@ -9,7 +9,7 @@ $ ./test-asm.sh assembly-code
 ### output from linking everything and running it 
 ```
 
-# ASSIGNMENT 1 GAME PLAN / TODO LIST
+# Assignment 1 Notes 
 
 ## Basic template for compiling
 
