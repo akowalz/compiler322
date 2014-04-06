@@ -147,16 +147,16 @@ Above is all the hard stuff.  Other misc. stuff we have to do:
 
 Various pieces of the L1 grammar and their translations
 
-1. label, ex `(:sum_even)`=>
+**label, ex `(:sum_even)`**=>
 
 `_sum_even`
 
-2. (goto label), ex `(goto :sum_even)` =>
+**(goto label), ex `(goto :sum_even)`** =>
 
 `jmp _sum_even`
 
 
-3. (cx <- t cmp t) ex `(%eax <- %ecx < %edx)` =>
+**(cx <- t cmp t) ex `(%eax <- %ecx < %edx)`** =>
 
 t's can be registers or nums, this is straight from the notes:
 
