@@ -108,7 +108,7 @@ addl $8,%esp
 This slightly more complicated, details all are all in the notes, but here's an attempt to make it more clear what the L1 programmer has to write and what we have have to generate.
 
 
-* A function call of the form (call s)
+**A function call of the form (call s)**
 
 The L1 programmer is responsible for putting the arguments in the registers, we don't have to do that.
 
@@ -122,7 +122,7 @@ jmp <s>  // the converted version of s (%, $, etc)
 <new-label>:  // when the function returns, we'll end up here!
 ```
 
-* Returning from a function
+**Returning from a function**
 
 The L1 programmer is responsible for putting the result into %eax and calling L1's (return).
 
@@ -147,16 +147,16 @@ Above is all the hard stuff.  Other misc. stuff we have to do:
 
 Various pieces of the L1 grammar and their translations
 
-* label, ex `(:sum_even)`=>
+1. label, ex `(:sum_even)`=>
 
 `_sum_even`
 
-* (goto label), ex `(goto :sum_even)` =>
+2. (goto label), ex `(goto :sum_even)` =>
 
 `jmp _sum_even`
 
 
-* (cx <- t cmp t) ex `(%eax <- %ecx < %edx)` =>
+3. (cx <- t cmp t) ex `(%eax <- %ecx < %edx)` =>
 
 t's can be registers or nums, this is straight from the notes:
 
