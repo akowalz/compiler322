@@ -21,10 +21,8 @@
   [sop-right (l L1-expr?) (r L1-expr?)]
   [mem-expr (x L1-expr?) (n L1-expr?)]
   [cmp (c CMP-expr?)]
-<<<<<<< .merge_file_0g1gFG
   [print-expr (t L1-expr?)])
   ;[goto-expr (dest L1-expr?)])
->>>>>>> .merge_file_unq7HD
 
 
 (define-type CMP-expr
@@ -37,10 +35,8 @@
   (match expr
     [(? number?) (numV expr)]
     [(? symbol?) (register expr)]
-<<<<<<< .merge_file_0g1gFG
     [`(eax <- (print ,t)) (print-expr (parse t))]
     [`(mem ,x ,y) (mem-expr (parse x) (parse y))]
->>>>>>> .merge_file_unq7HD
     [`(,x <- ,y) (arrow-expr (parse x) (parse y))]
     [`(,x += ,y) (aop-plus (parse x) (parse y))]
     [`(,x -= ,y) (aop-minus (parse x) (parse y))]
@@ -98,7 +94,6 @@
   ret
   ")
 (define (compile-code code)
-<<<<<<< .merge_file_0g1gFG
   (let ([main-expr (first code)]
         [rest-exprs (rest code)])
       (string-append header
@@ -108,14 +103,10 @@
                      main-suffix
       footer)))
 
->>>>>>> .merge_file_unq7HD
-
 (test (compile (arrow-expr (register `eax) (numV 5)))
       "movl $5, %eax\n")
 (test (compile (aop-plus (register `eax) (numV 6)))
       "addl $6, %eax\n")
 (test (compile (sop-right (numV 4) (register `ecx)))
       "sarl %cl, $4\n")
-<<<<<<< .merge_file_0g1gFG
 (display (compile-code '(((edx <- 11) (eax <- (print edx))))))
->>>>>>> .merge_file_unq7HD
