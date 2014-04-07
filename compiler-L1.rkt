@@ -20,8 +20,9 @@
   [sop-right (l L1-expr?) (r L1-expr?)]
   [mem-expr (x L1-expr?) (n L1-expr?)]
   [cmp (c CMP-expr?)]
-  [label-expr (label symbol?)]
-  [goto-expr (dest L1-expr?)])
+  ;[label-expr (label symbol?)]
+  ;[goto-expr (dest L1-expr?)])
+  )
 
 
 (define-type CMP-expr
@@ -34,7 +35,7 @@
   (match expr
     [(? number?) (numV expr)]
     [(? symbol?) (register expr)]
-    [`(mem ,x ,y) (mem-expr (parse x) (parse y))]
+    [`(mem ,x ,y) (mem-expr (parse x) (parse y))] 
     [`(,x <- ,y) (arrow-expr (parse x) (parse y))]
     [`(,x += ,y) (aop-plus (parse x) (parse y))]
     [`(,x -= ,y) (aop-minus (parse x) (parse y))]
@@ -68,7 +69,7 @@
 
 (define (compile-code code)
   (let ([exprs (first code)])
-    (begin
+    (string-append
       (compile (parse (first exprs)))
       (compile (parse (first (rest exprs)))))))
 
@@ -82,7 +83,8 @@
       "cmpl %ecx, %ebx\nsetl %al\nmovzbl %al, %eax\n")
 (test (compile (arrow-expr (register `eax) (mem-expr (register `ebx) (numV 12))))
       "movl 12(%ebx), %eax")
+(test (compile-code `(((ecx <- 21)
+  (ecx >>= 4)))) 
+  "movl $21, %ecx\nsarl $4, %ecx\n")
 
-
-
-
+                        
