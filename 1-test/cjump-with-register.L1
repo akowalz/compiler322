@@ -1,0 +1,9 @@
+(((ebx <- 13)
+	(cjump ebx < 7 :yolo :swaggins)
+	:yolo
+	(eax <- 3)
+	(eax <- (print eax))
+	:swaggins
+	(eax <- 5)
+	(eax <- (print eax))
+	))
