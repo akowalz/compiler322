@@ -1,2 +1,4 @@
 (((eax <- 15)
-  (eax += 5)))
+  (eax += 6)
+  (eax <- (print eax)
+  )))

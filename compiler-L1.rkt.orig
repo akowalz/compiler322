@@ -24,6 +24,10 @@
 <<<<<<< .merge_file_0g1gFG
   [print-expr (t L1-expr?)])
   ;[goto-expr (dest L1-expr?)])
+=======
+  ;[label-expr (label symbol?)]
+  ;[goto-expr (dest L1-expr?)])
+  )
 >>>>>>> .merge_file_unq7HD
 
 
@@ -40,6 +44,8 @@
 <<<<<<< .merge_file_0g1gFG
     [`(eax <- (print ,t)) (print-expr (parse t))]
     [`(mem ,x ,y) (mem-expr (parse x) (parse y))]
+=======
+    [`(mem ,x ,y) (mem-expr (parse x) (parse y))] 
 >>>>>>> .merge_file_unq7HD
     [`(,x <- ,y) (arrow-expr (parse x) (parse y))]
     [`(,x += ,y) (aop-plus (parse x) (parse y))]
@@ -108,6 +114,12 @@
                      main-suffix
       footer)))
 
+
+=======
+  (let ([exprs (first code)])
+    (string-append
+      (compile (parse (first exprs)))
+      (compile (parse (first (rest exprs)))))))
 >>>>>>> .merge_file_unq7HD
 
 (test (compile (arrow-expr (register `eax) (numV 5)))
@@ -118,4 +130,15 @@
       "sarl %cl, $4\n")
 <<<<<<< .merge_file_0g1gFG
 (display (compile-code '(((edx <- 11) (eax <- (print edx))))))
+
+=======
+(test (compile (cmp (cmp-greater (register 'ebx) (register 'ecx))))
+      "cmpl %ecx, %ebx\nsetl %al\nmovzbl %al, %eax\n")
+(test (compile (arrow-expr (register `eax) (mem-expr (register `ebx) (numV 12))))
+      "movl 12(%ebx), %eax")
+(test (compile-code `(((ecx <- 21)
+  (ecx >>= 4)))) 
+  "movl $21, %ecx\nsarl $4, %ecx\n")
+
+                        
 >>>>>>> .merge_file_unq7HD
