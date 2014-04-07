@@ -1,0 +1,10 @@
+(((eax <- 101)
+  (call :a_function))
+  (:a_function
+  (ebx <- 17)
+  (edx <- 11)
+  (eax <- ebx < edx) 
+  (eax <<= 1)
+  (eax += 1)
+  (eax <- (print eax))
+  (return)))
