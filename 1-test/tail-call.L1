@@ -1,0 +1,10 @@
+(((eax <- 7)
+(call :hobbits)
+(eax <- (print eax))
+)
+(:hobbits
+(eax <- 3)
+(tail-call :isengard))
+(:isengard
+(eax += 10)
+(return)))
