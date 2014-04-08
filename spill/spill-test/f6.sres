@@ -1,0 +1,3 @@
+(((mem ebp -4) <- 11)
+ (s0 <- (mem ebp -4))
+ ((mem ebp -8) <- s0))

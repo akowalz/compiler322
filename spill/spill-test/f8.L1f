@@ -1,0 +1,8 @@
+((y <- 15)
+ (z <- 17)
+ (cjump y < z :here :there)
+ :here
+ (y += 10)
+ :there
+ (y -= 10)
+ (y >>= z)) y -8 s
