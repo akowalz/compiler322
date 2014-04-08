@@ -12,11 +12,46 @@ go:
   pushl   %ebp
 
   movl    %esp, %ebp
-  pushl $_magic_label_name_swagger_1
-pushl %ebp
-movl %esp, %ebp
-jmp _L_16
-_magic_label_name_swagger_1:
+  movl $89, %esi
+pushl $3
+pushl %esi
+call allocate
+addl $8, %esp
+movl %eax, %edi
+movl $5, %ebx
+_loop:
+cmpl %esi, %ebx
+jl _keep_going
+jmp _done
+_keep_going:
+movl %ebx, %edx
+subl $4, %edx
+subl $1, %edx
+imull $2, %edx
+addl %edi, %edx
+addl $4, %edx
+movl 0(%edx), %edx
+movl %ebx, %ecx
+subl $2, %ecx
+subl $1, %ecx
+imull $2, %ecx
+addl %edi, %ecx
+addl $4, %ecx
+movl 0(%ecx), %ecx
+addl %ecx, %edx
+subl $1, %edx
+movl %ebx, %ecx
+subl $1, %ecx
+imull $2, %ecx
+addl $4, %ecx
+addl %edi, %ecx
+movl %edx, 0(%ecx)
+addl $2, %ebx
+jmp _loop
+_done:
+pushl %edi
+call print
+addl $4, %esp
 
   popl   %ebp
   popl   %edi
@@ -24,59 +59,5 @@ _magic_label_name_swagger_1:
   popl   %ebx
   leave
   ret
-  _L_16:
-movl %esi, %esi
-movl %edi, %edi
-movl $401, %eax
-pushl $_magic_label_name_swagger_2
-pushl %ebp
-movl %esp, %ebp
-jmp _sum_even
-_magic_label_name_swagger_2:
-movl %eax, %ebx
-pushl %ebx
-call print
-addl $4, %esp
-movl %eax, %eax
-movl %esi, %esi
-movl %edi, %edi
-movl %ebp, %esp
-popl %ebp
-ret
-_sum_even:
-addl $-4, %esp
-movl %eax, -4(%ebp)
-cmpl $1, %eax
-je _L_17
-jmp _L_18
-_L_18:
-andl $3, %eax
-cmpl $3, %eax
-je _L_20
-jmp _L_19
-_L_20:
-movl -4(%ebp), %eax
-subl $2, %eax
-movl %ebp, %esp
-jmp _sum_even
-_L_19:
-movl -4(%ebp), %eax
-subl $2, %eax
-pushl $_magic_label_name_swagger_3
-pushl %ebp
-movl %esp, %ebp
-jmp _sum_even
-_magic_label_name_swagger_3:
-movl -4(%ebp), %ebx
-addl %ebx, %eax
-subl $1, %eax
-movl %ebp, %esp
-popl %ebp
-ret
-_L_17:
-movl $1, %eax
-movl %ebp, %esp
-popl %ebp
-ret
-.size  go, .-go
+  .size  go, .-go
 .section  .note.GNU-stack,"",@progbits
