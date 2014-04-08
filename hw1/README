@@ -1,0 +1,9 @@
+Runtime instructions (in case anything goes wrong):
+
+L1c is a bash script that will invoke our compiler and create a.out as well as several intermediate files (prog.S prog.o ..).  It will also execute a.out at runtime of the script, which we used for testing.
+
+Hopefully nothing goes wrong.
+
+
+
+-- Nathan and Alex
