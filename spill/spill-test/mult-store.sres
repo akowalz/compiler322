@@ -1,0 +1,5 @@
+(((mem ebp -4) <- 17)
+((mem ebp -4) <- 12)
+(eax <- 13)
+((mem ebp -4) <- eax)
+)

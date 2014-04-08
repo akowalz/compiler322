@@ -1,0 +1,12 @@
+(((mem ebp -4) <- 13)
+(s0 <- (mem ebp -4))
+(cjump s0 < 11 :one :two)
+:one
+(s1 <- (mem ebp -4))
+(s1 += 2)
+((mem ebp -4) <- s1)
+:two
+(s2 <- (mem ebp -4))
+(s2 += 4)
+((mem ebp -4) <- s2)
+)
