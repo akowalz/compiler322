@@ -27,7 +27,7 @@
                                        temp addr temp op temp addr temp)]
                                [(equal? v var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
                                                       temp addr temp op x addr temp)]
-                               [(equal? x var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n"
+                               [(equal? x var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)"
                                                       temp addr v op temp)]) (+ 1 count)))]
         ['() ""])))
   
@@ -74,4 +74,10 @@
 ; Ops
 (check-equal? (aSpill-expr (spill-instr '(x += x) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(s0 += s0)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(x *= 4) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(s0 *= 4)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(v *= x) 'x -4 's 1))
+              "(s1 <- (mem ebp -4))\n(v *= s1)")
+(check-equal? (aSpill-expr (spill-instr '(v >>= e) 'b -4 's 1))
+              "(v >>= e)")
                     
