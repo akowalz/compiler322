@@ -22,13 +22,23 @@
                                                    v addr)
                                                    count)])]
         [`(,v ,op ,x) (let ([temp (new-temp count prefix)])
-                        (aSpill(cond [(and (equal? x var) (equal? v var))
-                               (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                       temp addr temp op temp addr temp)]
-                               [(equal? v var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                      temp addr temp op x addr temp)]
-                               [(equal? x var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)"
-                                                      temp addr v op temp)]) (+ 1 count)))]
+                        (aSpill (cond [(and (equal? x var) (equal? v var))
+                                       (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                               temp addr temp op temp addr temp)]
+                                      [(equal? v var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                              temp addr temp op x addr temp)]
+                                      [(equal? x var) (format "(~A <- (mem ebp ~A))\n(~A ~A ~A)"
+                                                              temp addr v op temp)]) (+ 1 count)))]
+        [`(cjump ,a ,cmp ,b ,l1 ,l2) (let ([temp (new-temp count prefix)])
+                                      (aSpill (cond [(and (equal? a var) (equal? b var))
+                                                     (format "(~A <- (mem ebp ~A))\n(cjump ~A ~A ~A ~A ~A)"
+                                                             temp addr temp cmp temp l1 l2)]
+                                                    [(equal? a var)
+                                                     (format "(~A <- (mem ebp ~A))\n(cjump ~A ~A ~A ~A ~A)"
+                                                             temp addr temp cmp b l1 l2)]
+                                                    [(equal? b var)
+                                                     (format "(~A <- (mem ebp ~A))\n(cjump ~A ~A ~A ~A ~A)"
+                                                             temp addr a cmp temp l1 l2)]) (+ 1 count)))]
         ['() ""])))
   
 (define (new-temp count sym)
@@ -80,4 +90,12 @@
               "(s1 <- (mem ebp -4))\n(v *= s1)")
 (check-equal? (aSpill-expr (spill-instr '(v >>= e) 'b -4 's 1))
               "(v >>= e)")
+
+;cjumps 
+(check-equal? (aSpill-expr (spill-instr '(cjump s = 4 :here :there) 's -4 'x 0))
+              "(x0 <- (mem ebp -4))\n(cjump x0 = 4 :here :there)")
+(check-equal? (aSpill-expr (spill-instr '(cjump s < s :here :there) 's -4 'x 0))
+              "(x0 <- (mem ebp -4))\n(cjump x0 < x0 :here :there)")
+(check-equal? (aSpill-expr (spill-instr '(cjump 4 <= s :here :there) 's -4 'x 0))
+              "(x0 <- (mem ebp -4))\n(cjump 4 <= x0 :here :there)")
                     
