@@ -14,6 +14,7 @@
 (define (spill-instr ins var addr prefix count)
   (if (not (includes ins var)) (aSpill (list->string ins) count) 
       (match ins
+<<<<<<< HEAD
         [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
                                 (aSpill (format "(~A <- (mem ebp ~A))\n(eax <- (print ~A))"
                                                 temp addr temp)
@@ -29,6 +30,7 @@
                                                        [(equal? t2 var) (format "~A ~A))"
                                                                                 t1 temp)]))
                                                 (+ 1 count)))]
+=======
         [`(,cx <- ,t1 ,cop ,t2) (let ([temp (new-temp count prefix)])
                                   (aSpill (cond [(and (equal? cx var) (equal? t2 cx) (equal? t1 cx)) 
                                                  (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
@@ -48,6 +50,7 @@
                                                 [(equal? cx var)
                                                  (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
                                                          temp t1 cop t2 addr temp)]) count))]
+>>>>>>> origin
         [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
                            [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
                                                    addr x)
@@ -135,17 +138,7 @@
 ; Ops
 (check-equal? (aSpill-expr (spill-instr '(x += x) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(s0 += s0)\n((mem ebp -4) <- s0)")
-
-;t cmp t
-(check-equal? (aSpill-expr (spill-instr '(eax <- x < 4) 'x -4 's 0))
-              "(s0 <- (mem ebp -4))\n(eax <- s0 < 4)")
-
-(check-equal? (aSpill-expr (spill-instr '(x <- 5 < 4) 'x -4 's 0))
-              "(s0 <- 5 < 4)\n((mem ebp -4) <- s0)")
-(check-equal? (aSpill-expr (spill-instr '(x <- x < 4) 'x -4 's 0))
-              "(s0 <- (mem ebp -4))\n(s0 <- s0 < 4)\n((mem ebp -4) <- s0)")
-(check-equal? (aSpill-expr (spill-instr '(x <- x < x) 'x -4 't 0))
-              "(t0 <- (mem ebp -4))\n(t0 <- t0 < t0)\n((mem ebp -4) <- t0)")
+<<<<<<< HEAD
 (check-equal? (aSpill-expr (spill-instr '(x *= 4) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(s0 *= 4)\n((mem ebp -4) <- s0)")
 (check-equal? (aSpill-expr (spill-instr '(v *= x) 'x -4 's 1))
@@ -172,4 +165,17 @@
               "(s0 <- (mem ebp -4))\n(eax <- (allocate s0 b))")
 (check-equal? (aSpill-expr (spill-instr `(eax <- (allocate 'x 'x)) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(eax <- (allocate s0 s0))")
+=======
+
+;t cmp t
+(check-equal? (aSpill-expr (spill-instr '(eax <- x < 4) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(eax <- s0 < 4)")
+
+(check-equal? (aSpill-expr (spill-instr '(x <- 5 < 4) 'x -4 's 0))
+              "(s0 <- 5 < 4)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(x <- x < 4) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(s0 <- s0 < 4)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(x <- x < x) 'x -4 't 0))
+              "(t0 <- (mem ebp -4))\n(t0 <- t0 < t0)\n((mem ebp -4) <- t0)")
+>>>>>>> origin
                     
