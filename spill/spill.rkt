@@ -66,10 +66,11 @@
   (string-append (thing->string sym)
                  (thing->string count)))
 
-;(define (includes lst sym)
-;  (if (empty? lst) #f
- ;     (or (equal? sym (first lst))
- ;         (includes (rest lst) sym))))
+#;
+(define (includes lst sym)
+  (if (empty? lst) #f
+     (or (equal? sym (first lst))
+         (includes (rest lst) sym))))
 
 (define (includes lst sym)
   (cond [(empty? lst) #f]
