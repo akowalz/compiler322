@@ -14,6 +14,21 @@
 (define (spill-instr ins var addr prefix count)
   (if (not (includes ins var)) (aSpill (list->string ins) count) 
       (match ins
+        [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
+                                (aSpill (format "(~A <- (mem ebp ~A))\n(eax <- (print ~A))"
+                                                temp addr temp)
+                                        (+ count 1)))]
+        [`(eax <- (,runtime ,t1 ,t2)) (let ([temp (new-temp count prefix)])
+                                        (aSpill (string-append
+                                                 (format "(~A <- (mem ebp ~A))\n(eax <- (~A "
+                                                         temp addr runtime)
+                                                 (cond [(equal? t1 t2) (format "~A ~A))"
+                                                                               temp temp)]
+                                                       [(equal? t1 var) (format "~A ~A))"
+                                                                                temp t2)]
+                                                       [(equal? t2 var) (format "~A ~A))"
+                                                                                t1 temp)]))
+                                                (+ 1 count)))]
         [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
                            [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
                                                    addr x)
@@ -42,10 +57,7 @@
                                                      [(equal? b var)
                                                       (format "(cjump ~A ~A ~A ~A ~A)"
                                                               a cmp temp l1 l2)])) (+ 1 count)))]
-        [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
-                                (aSpill (format "(~A <- (mem ebp -4))\n(eax <- (print ~A))"
-                                                temp addr temp)
-                                        (+ count 1)))]
+        
         ;[`(eax <- (,runtime2 ,t1 ,t2))
         ['() ""]
         [else "error"])))
@@ -121,6 +133,12 @@
 ;runtime calls
 
 ;print
-(check-equal? (aSpill-expr (spill-instr '(eax <- (print x)) 'x -8 's 1))
+(check-equal? (aSpill-expr (spill-instr `(eax <- (print x)) 'x -8 's 1))
               "(s1 <- (mem ebp -8))\n(eax <- (print s1))")
+
+;others
+(check-equal? (aSpill-expr (spill-instr `(eax <- (allocate a b)) 'a -4 's 0))
+              "(s0 <- (mem ebp -4))\n(eax <- (allocate s0 b))")
+(check-equal? (aSpill-expr (spill-instr `(eax <- (allocate 'x 'x)) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(eax <- (allocate s0 s0))")
                     
