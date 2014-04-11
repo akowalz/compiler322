@@ -25,10 +25,10 @@
                                                  (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
                                                          temp addr temp t1 cop temp addr temp)]
                                                 [(equal? t1 var) 
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n"
+                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)"
                                                          temp addr cx temp cop t2)]
                                                 [(equal? t2 var)
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n"
+                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)"
                                                          temp addr cx t1 cop temp)]
                                                 [(equal? cx var)
                                                  (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
@@ -93,4 +93,15 @@
 ; Ops
 (check-equal? (aSpill-expr (spill-instr '(x += x) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(s0 += s0)\n((mem ebp -4) <- s0)")
+
+;t cmp t
+(check-equal? (aSpill-expr (spill-instr '(eax <- x < 4) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(eax <- s0 < 4)")
+
+(check-equal? (aSpill-expr (spill-instr '(x <- 5 < 4) 'x -4 's 0))
+              "(s0 <- 5 < 4)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(x <- x < 4) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(s0 <- s0 < 4)\n((mem ebp -4) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(x <- x < x) 'x -4 't 0))
+              "(t0 <- (mem ebp -4))\n(t0 <- t0 < t0)\n((mem ebp -4) <- t0)")
                     
