@@ -47,19 +47,30 @@
                                                 temp addr temp)
                                         (+ count 1)))]
         ;[`(eax <- (,runtime2 ,t1 ,t2))
-        ['() ""])))
+        ['() ""]
+        [else "error"])))
   
 (define (new-temp count sym)
   (string-append (thing->string sym)
                  (thing->string count)))
 
+;(define (includes lst sym)
+;  (if (empty? lst) #f
+ ;     (or (equal? sym (first lst))
+ ;         (includes (rest lst) sym))))
+
 (define (includes lst sym)
-  (if (empty? lst) #f
-      (or (equal? sym (first lst))
-          (includes (rest lst) sym))))
+  (cond [(empty? lst) #f]
+        [(list? (first lst)) (or (includes (first lst) sym)
+                                 (includes (rest list) sym))]
+        [else (or (equal? (first lst) sym)
+                  (includes (rest lst) sym))]))
+                                
+      
 
 (check-equal? (includes '(a b c) 'a) #t)
 (check-equal? (includes '(a b d) 'c) #f)
+(check-equal? (includes '(a b (c d r)) 'r) #t)
 
 (define (thing->string lst)
   (cond [(list? lst) (list->string lst)]
@@ -106,4 +117,10 @@
               "(x0 <- (mem ebp -4))\n(cjump x0 < x0 :here :there)")
 (check-equal? (aSpill-expr (spill-instr '(cjump 4 <= s :here :there) 's -4 'x 0))
               "(x0 <- (mem ebp -4))\n(cjump 4 <= x0 :here :there)")
+
+;runtime calls
+
+;print
+(check-equal? (aSpill-expr (spill-instr '(eax <- (print x)) 'x -8 's 1))
+              "(s1 <- (mem ebp -8))\n(eax <- (print s1))")
                     
