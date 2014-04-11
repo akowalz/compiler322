@@ -14,25 +14,6 @@
 (define (spill-instr ins var addr prefix count)
   (if (not (includes ins var)) (aSpill (list->string ins) count) 
       (match ins
-        [`(,cx <- ,t1 ,cop ,t2) (let ([temp (new-temp count prefix)])
-                                  (aSpill (cond [(and (equal? cx var) (equal? t2 cx) (equal? t1 cx)) 
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                         temp addr temp temp cop temp addr temp)]
-                                                [(and (equal? cx var) (equal? t1 cx)) 
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                         temp addr temp temp cop t2 addr temp)]
-                                                [(and (equal? cx var) (equal? t2 cx)) 
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                         temp addr temp t1 cop temp addr temp)]
-                                                [(equal? t1 var) 
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n"
-                                                         temp addr cx temp cop t2)]
-                                                [(equal? t2 var)
-                                                 (format "(~A <- (mem ebp ~A))\n(~A <- ~A ~A ~A)\n"
-                                                         temp addr cx t1 cop temp)]
-                                                [(equal? cx var)
-                                                 (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                         temp t1 cop t2 addr temp)]) count))]
         [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
                            [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
                                                    addr x)
