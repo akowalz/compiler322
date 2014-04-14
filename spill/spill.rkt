@@ -6,7 +6,7 @@
          [program (first args)]
          [var (second args)]
          [addr (third args)]
-         [prefix (fifth args)])
+         [prefix (fourth args)])
     (display (spill-program program var addr prefix))))
     
 
