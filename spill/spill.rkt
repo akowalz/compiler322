@@ -24,7 +24,7 @@
                                                                          temp dest n addr temp)]
                                                                 [(equal? var dest)
                                                                  (format "(~A <- (mem ~A ~A))"
-                                                                         x temp n)])) count))]
+                                                                         x temp n)])) (+ 1 count)))]
         [`((mem ,dest ,n) <- ,x) (let ([temp (new-temp count prefix)])
                                    (aSpill (string-append (put-in-temp temp addr)
                                                           (cond [(and (equal? var x) (equal? x dest)
@@ -35,7 +35,7 @@
                                                                          dest n temp)]
                                                                 [(equal? var dest)
                                                                  (format "((mem ~A ~A) <- ~A)"
-                                                                         temp n x)])) count))]
+                                                                         temp n x)])) (+ 1 count)))]
         [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
                                 (aSpill (string-append (put-in-temp temp addr)
                                                        (format "(eax <- (print ~A))"
