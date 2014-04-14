@@ -1,15 +1,28 @@
 #lang racket
 (require rackunit)
 
+(define (generate-spilled-program path)
+  (let* ([args (call-with-input-file path (lambda (x) (list (read x) (read x) (read x) (read x))))]
+         [program (first args)]
+         [var (second args)]
+         [addr (third args)]
+         [prefix (fifth args)])
+    (display (spill-program program var addr prefix))))
+    
 
-(define (spill-exprs exprs var addr prefix)
-  (let ([count 0])
-  (foldr string-append (spill-instr (first exprs) var addr prefix)
-         (spill-instr (rest exprs) var addr prefix))))
+(define (spill-program instrs var addr prefix)
+  (string-append "(" (spill-program-int instrs var addr prefix 0) ")"))
+                        
+
+(define (spill-program-int instrs var addr prefix count)
+  (if (empty? instrs) ""
+      (let* ([result (spill-instr (first instrs) var addr prefix count)]
+             [new-count (aSpill-count result)]
+             [result-expr (aSpill-expr result)])
+        (string-append result-expr "\n"
+                       (spill-program-int (rest instrs) var addr prefix new-count)))))
 
 (struct aSpill (expr count))
-  
-  
 
 (define (spill-instr ins var addr prefix count)
   (if (not (includes ins var)) (aSpill (list->string ins) count) 
@@ -53,12 +66,12 @@
                                                             (format "(~A <- ~A ~A ~A)"
                                                                     cx t1 cop temp)]))
                                       (+ 1 count))))]
-[`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
-                   [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
-                                                   addr x)
+        [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) (aSpill "" count)]
+                           [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
+                                                           addr x)
                                                    count)]
                            [(equal? x var) (aSpill (format "(~A <- (mem ebp ~A))"
-                                                   v addr)
+                                                           v addr)
                                                    count)])]
         [`(,v ,op ,x) (let ([temp (new-temp count prefix)])
                         (aSpill 
@@ -84,7 +97,6 @@
                                                        (format "(cjump ~A ~A ~A ~A ~A)"
                                                                a cmp temp l1 l2)])) (+ 1 count)))]
         
-        ;[`(eax <- (,runtime2 ,t1 ,t2))
         ['() ""]
         [else "error"])))
 
@@ -138,6 +150,8 @@
 
 (check-equal? (aSpill-expr (spill-instr '(eax <- s) 's -4 'r 0))
               "(eax <- (mem ebp -4))")
+(check-equal? (aSpill-expr (spill-instr '(v <- v) 'v -4 'r 0))
+              "")
 
 ;(check-equal? (aSpill-expr (spill-exprs '((a <- 5)) 'a -4 's))
               ;"((mem ebp -4) <- 5)")
@@ -186,5 +200,34 @@
 (check-equal? (aSpill-expr (spill-instr `(eax <- (allocate 'x 'x)) 'x -4 's 0))
               "(s0 <- (mem ebp -4))\n(eax <- (allocate s0 s0))")
 
+;spill-program
+(check-equal? (spill-program '((v1 <- 5)) 'v1 -4 's)
+              "(((mem ebp -4) <- 5)\n)")
+(check-equal? (spill-program '((v1 <- 5) (v1 += 7)) 'v1 -4 's)
+              "(((mem ebp -4) <- 5)\n(s0 <- (mem ebp -4))\n(s0 += 7)\n((mem ebp -4) <- s0)\n)")
+(check-equal? (spill-program '((x <- 1) (x += x) (eax <- x)) 'x -4 's)
+              "(((mem ebp -4) <- 1)\n(s0 <- (mem ebp -4))\n(s0 += s0)\n((mem ebp -4) <- s0)\n(eax <- (mem ebp -4))\n)")
+(check-equal? (spill-program '((x <- 21)
+                               (y <- 31)
+                               (eax <- x = y)
+                               (x += 10)
+                               (eax <- x = y)) 
+                             'x -4 's)
+              (string-append "(" (string-join 
+                                  (list
+                                   "((mem ebp -4) <- 21)"
+                                   "(y <- 31)"
+                                   "(s0 <- (mem ebp -4))"
+                                   "(eax <- s0 = y)"
+                                   "(s1 <- (mem ebp -4))"
+                                   "(s1 += 10)"
+                                   "((mem ebp -4) <- s1)"
+                                   "(s2 <- (mem ebp -4))"
+                                   "(eax <- s2 = y)")
+                                  "\n")
+                             "\n)"))
+
+(generate-spilled-program (vector-ref (current-command-line-arguments) 0))
+                             
 
                     
