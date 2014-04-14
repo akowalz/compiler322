@@ -25,102 +25,102 @@
 (struct aSpill (expr count))
 
 (define (spill-instr ins var addr prefix count)
-  (if (not (includes ins var)) (aSpill (list->string ins) count) 
-      (match ins
-        [`(,x <- (mem ,dest ,n)) (let ([temp (new-temp count prefix)])
-                                   (aSpill (string-append (put-in-temp temp addr) 
-                                                          (cond [(and (equal? var x) (equal? x dest)
-                                                                      (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
-                                                                              temp temp n addr temp))]
-                                                                [(equal? var x) 
-                                                                 (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
-                                                                         temp dest n addr temp)]
-                                                                [(equal? var dest)
-                                                                 (format "(~A <- (mem ~A ~A))"
-                                                                         x temp n)])) (+ 1 count)))]
-        [`((mem ,dest ,n) <- ,x) (let ([temp (new-temp count prefix)])
-                                   (aSpill (string-append (put-in-temp temp addr)
-                                                          (cond [(and (equal? var x) (equal? x dest)
-                                                                      (format "((mem ~A ~A) <- ~A)"
-                                                                              temp n temp))]
-                                                                [(equal? var x) 
-                                                                 (format "((mem ~A ~A) <- ~A)"
-                                                                         dest n temp)]
-                                                                [(equal? var dest)
-                                                                 (format "((mem ~A ~A) <- ~A)"
-                                                                         temp n x)])) (+ 1 count)))]
-        [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
-                                (aSpill (string-append (put-in-temp temp addr)
-                                                       (format "(eax <- (print ~A))"
-                                                               temp))
-                                        (+ count 1)))]
-        [`(eax <- (,runtime ,t1 ,t2)) (let ([temp (new-temp count prefix)])
+  (cond [(symbol? ins) (aSpill (symbol->string ins) count)]
+        [(not (includes ins var)) (aSpill (list->string ins) count)]
+        [else (match ins
+                [`(,x <- (mem ,dest ,n)) (let ([temp (new-temp count prefix)])
+                                           (aSpill (string-append (put-in-temp temp addr) 
+                                                                  (cond [(and (equal? var x) (equal? x dest)
+                                                                              (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
+                                                                                      temp temp n addr temp))]
+                                                                        [(equal? var x) 
+                                                                         (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
+                                                                                 temp dest n addr temp)]
+                                                                        [(equal? var dest)
+                                                                         (format "(~A <- (mem ~A ~A))"
+                                                                                 x temp n)])) (+ 1 count)))]
+                [`((mem ,dest ,n) <- ,x) (let ([temp (new-temp count prefix)])
+                                           (aSpill (string-append (put-in-temp temp addr)
+                                                                  (cond [(and (equal? var x) (equal? x dest)
+                                                                              (format "((mem ~A ~A) <- ~A)"
+                                                                                      temp n temp))]
+                                                                        [(equal? var x) 
+                                                                         (format "((mem ~A ~A) <- ~A)"
+                                                                                 dest n temp)]
+                                                                        [(equal? var dest)
+                                                                         (format "((mem ~A ~A) <- ~A)"
+                                                                                 temp n x)])) (+ 1 count)))]
+                [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
                                         (aSpill (string-append (put-in-temp temp addr)
-                                                               (format "(eax <- (~A "
-                                                                       runtime)
-                                                               (cond [(equal? t1 t2) (format "~A ~A))"
-                                                                               temp temp)]
-                                                                     [(equal? t1 var) (format "~A ~A))"
-                                                                                temp t2)]
-                                                                     [(equal? t2 var) (format "~A ~A))"
-                                                                                              t1 temp)]))
-                                                (+ 1 count)))]
-        [`(,cx <- ,t1 ,cop ,t2) (let ([temp (new-temp count prefix)])
-                                  (if (and (not (or (equal? cx t1)
-                                                    (equal? cx t2)))
-                                           (equal? cx var))
-                                      (aSpill (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                              temp t1 cop t2 addr temp) (+ 1 count))
-                                      (aSpill (string-append (put-in-temp temp addr)
-                                                     (cond [(and (equal? cx var) (equal? t2 cx) (equal? t1 cx)) 
-                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                                    temp temp cop temp addr temp)]
-                                                           [(and (equal? cx var) (equal? t1 cx)) 
-                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                                    temp temp cop t2 addr temp)]
-                                                           [(and (equal? cx var) (equal? t2 cx)) 
-                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                                    temp t1 cop temp addr temp)]
-                                                           [(equal? t1 var) 
-                                                            (format "(~A <- ~A ~A ~A)"
-                                                                    cx temp cop t2)]
-                                                           [(equal? t2 var)
-                                                            (format "(~A <- ~A ~A ~A)"
-                                                                    cx t1 cop temp)]))
-                                      (+ 1 count))))]
-        [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) (aSpill "" count)]
-                           [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
-                                                           addr x)
-                                                   count)]
-                           [(equal? x var) (aSpill (format "(~A <- (mem ebp ~A))"
-                                                           v addr)
-                                                   count)])]
-        [`(,v ,op ,x) (let ([temp (new-temp count prefix)])
-                        (aSpill 
-                         (string-append 
-                          (put-in-temp temp addr)
-                          (cond [(and (equal? x var) (equal? v var))
-                                 (format "(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                         temp op temp addr temp)]
-                                [(equal? v var) (format "(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
-                                                        temp op x addr temp)]
-                                [(equal? x var) (format "(~A ~A ~A)"
-                                                         v op temp)])) (+ 1 count)))]
-        [`(cjump ,a ,cmp ,b ,l1 ,l2) (let ([temp (new-temp count prefix)])
-                                       (aSpill (string-append 
-                                                (put-in-temp temp addr)
-                                                (cond [(and (equal? a var) (equal? b var))
-                                                       (format "(cjump ~A ~A ~A ~A ~A)"
-                                                               temp cmp temp l1 l2)]
-                                                      [(equal? a var)
-                                                       (format "(cjump ~A ~A ~A ~A ~A)"
-                                                              temp cmp b l1 l2)]
-                                                      [(equal? b var)
-                                                       (format "(cjump ~A ~A ~A ~A ~A)"
-                                                               a cmp temp l1 l2)])) (+ 1 count)))]
-        
-        ['() ""]
-        [else "error"])))
+                                                               (format "(eax <- (print ~A))"
+                                                                       temp))
+                                                (+ count 1)))]
+                [`(eax <- (,runtime ,t1 ,t2)) (let ([temp (new-temp count prefix)])
+                                                (aSpill (string-append (put-in-temp temp addr)
+                                                                       (format "(eax <- (~A "
+                                                                               runtime)
+                                                                       (cond [(equal? t1 t2) (format "~A ~A))"
+                                                                                                     temp temp)]
+                                                                             [(equal? t1 var) (format "~A ~A))"
+                                                                                                      temp t2)]
+                                                                             [(equal? t2 var) (format "~A ~A))"
+                                                                                                      t1 temp)]))
+                                                        (+ 1 count)))]
+                [`(,cx <- ,t1 ,cop ,t2) (let ([temp (new-temp count prefix)])
+                                          (if (and (not (or (equal? cx t1)
+                                                            (equal? cx t2)))
+                                                   (equal? cx var))
+                                              (aSpill (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                              temp t1 cop t2 addr temp) (+ 1 count))
+                                              (aSpill (string-append (put-in-temp temp addr)
+                                                                     (cond [(and (equal? cx var) (equal? t2 cx) (equal? t1 cx)) 
+                                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                                                    temp temp cop temp addr temp)]
+                                                                           [(and (equal? cx var) (equal? t1 cx)) 
+                                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                                                    temp temp cop t2 addr temp)]
+                                                                           [(and (equal? cx var) (equal? t2 cx)) 
+                                                                            (format "(~A <- ~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                                                    temp t1 cop temp addr temp)]
+                                                                           [(equal? t1 var) 
+                                                                            (format "(~A <- ~A ~A ~A)"
+                                                                                    cx temp cop t2)]
+                                                                           [(equal? t2 var)
+                                                                            (format "(~A <- ~A ~A ~A)"
+                                                                                    cx t1 cop temp)]))
+                                                      (+ 1 count))))]
+                [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) (aSpill "" count)]
+                                   [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
+                                                                   addr x)
+                                                           count)]
+                                   [(equal? x var) (aSpill (format "(~A <- (mem ebp ~A))"
+                                                                   v addr)
+                                                           count)])]
+                [`(,v ,op ,x) (let ([temp (new-temp count prefix)])
+                                (aSpill 
+                                 (string-append 
+                                  (put-in-temp temp addr)
+                                  (cond [(and (equal? x var) (equal? v var))
+                                         (format "(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                 temp op temp addr temp)]
+                                        [(equal? v var) (format "(~A ~A ~A)\n((mem ebp ~A) <- ~A)"
+                                                                temp op x addr temp)]
+                                        [(equal? x var) (format "(~A ~A ~A)"
+                                                                v op temp)])) (+ 1 count)))]
+                [`(cjump ,a ,cmp ,b ,l1 ,l2) (let ([temp (new-temp count prefix)])
+                                               (aSpill (string-append 
+                                                        (put-in-temp temp addr)
+                                                        (cond [(and (equal? a var) (equal? b var))
+                                                               (format "(cjump ~A ~A ~A ~A ~A)"
+                                                                       temp cmp temp l1 l2)]
+                                                              [(equal? a var)
+                                                               (format "(cjump ~A ~A ~A ~A ~A)"
+                                                                       temp cmp b l1 l2)]
+                                                              [(equal? b var)
+                                                               (format "(cjump ~A ~A ~A ~A ~A)"
+                                                                       a cmp temp l1 l2)])) (+ 1 count)))]
+
+                [else "error"])]))
 
 (define (thing->string lst)
   (cond [(list? lst) (list->string lst)]
@@ -258,7 +258,7 @@
                                   "\n")
                              "\n)"))
 
-;(generate-spilled-program (vector-ref (current-command-line-arguments) 0))
+(generate-spilled-program (vector-ref (current-command-line-arguments) 0))
                              
 
                     
