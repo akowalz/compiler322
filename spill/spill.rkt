@@ -14,6 +14,28 @@
 (define (spill-instr ins var addr prefix count)
   (if (not (includes ins var)) (aSpill (list->string ins) count) 
       (match ins
+        [`(,x <- (mem ,dest ,n)) (let ([temp (new-temp count prefix)])
+                                   (aSpill (string-append (put-in-temp temp addr) 
+                                                          (cond [(and (equal? var x) (equal? x dest)
+                                                                      (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
+                                                                              temp temp n addr temp))]
+                                                                [(equal? var x) 
+                                                                 (format "(~A <- (mem ~A ~A))\n((mem ebp ~A) <- ~A)"
+                                                                         temp dest n addr temp)]
+                                                                [(equal? var dest)
+                                                                 (format "(~A <- (mem ~A ~A))"
+                                                                         x temp n)])) count))]
+        [`((mem ,dest ,n) <- ,x) (let ([temp (new-temp count prefix)])
+                                   (aSpill (string-append (put-in-temp temp addr)
+                                                          (cond [(and (equal? var x) (equal? x dest)
+                                                                      (format "((mem ~A ~A) <- ~A)"
+                                                                              temp n temp))]
+                                                                [(equal? var x) 
+                                                                 (format "((mem ~A ~A) <- ~A)"
+                                                                         dest n temp)]
+                                                                [(equal? var dest)
+                                                                 (format "((mem ~A ~A) <- ~A)"
+                                                                         temp n x)])) count))]
         [`(eax <- (print ,t)) (let ([temp (new-temp count prefix)])
                                 (aSpill (string-append (put-in-temp temp addr)
                                                        (format "(eax <- (print ~A))"
@@ -53,7 +75,7 @@
                                                             (format "(~A <- ~A ~A ~A)"
                                                                     cx t1 cop temp)]))
                                       (+ 1 count))))]
-[`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
+        [`(,v <- ,x) (cond [(and (equal? x var) (equal? x v)) ""]
                    [(equal? v var) (aSpill (format "((mem ebp ~A) <- ~A)"
                                                    addr x)
                                                    count)]
@@ -141,6 +163,15 @@
 
 ;(check-equal? (aSpill-expr (spill-exprs '((a <- 5)) 'a -4 's))
               ;"((mem ebp -4) <- 5)")
+;Mem arrows
+(check-equal? (aSpill-expr (spill-instr '((mem ebp 8) <- x) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n((mem ebp 8) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '((mem x 8) <- x) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n((mem s0 8) <- s0)")
+(check-equal? (aSpill-expr (spill-instr '(eax <- (mem x 8)) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(eax <- (mem s0 8))")
+(check-equal? (aSpill-expr (spill-instr '(x <- (mem ebp 8)) 'x -4 's 0))
+              "(s0 <- (mem ebp -4))\n(s0 <- (mem ebp 8))\n((mem ebp -4) <- s0)")
 
 ; Ops
 (check-equal? (aSpill-expr (spill-instr '(x += x) 'x -4 's 0))
