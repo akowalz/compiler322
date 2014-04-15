@@ -1,0 +1,35 @@
+;; this is the (stupid) recursive version of fib, ie:
+;;   fib(0) = 1
+;;   fib(1) = 1
+;;   fib(n) = fib(n-1) + fib(n-2)
+;;
+;; this code works with encoded numbers, so does these 
+;; computations when you actually look at the code:
+;;  fib(n) = 3, where n <= 3
+;;  fib(n) = fib(n-2) + fib (n-4) - 1
+;;
+;; your compiler probably won't produce code that is
+;; that smart, but it is theoretically possible
+
+(((eax <- 10)   ;; initial argument to fib.
+  (eax += eax)  ;; start encoding initial argument
+  (eax += 1)    ;; finish encoding initial argument
+  (call :fib)   ;; make the call and then print the result
+  (eax <- (print eax)))
+ (:fib
+  (cjump eax <= 3 :base :recur)
+  :base            ;; non-recursive case
+  (eax <- 3)       ;; store result
+  (return)         ;; return
+  :recur           ;; recursive case
+  (arg <- eax)     ;; save the argument
+  (arg -= 2)       ;; decrement the argument
+  (eax <- arg)     ;; prepare the argument
+  (call :fib)      ;; make first recursive call
+  (result <- eax)  ;; save the result of first call
+  (arg -= 2)       ;; decrement the arg again
+  (eax <- arg)     ;; prepare the argument
+  (call :fib)      ;; call
+  (eax += result)  ;; sum the two results
+  (eax -= 1)       ;; finish the sum (encoding)
+  (return)))       ;; and we're done.
