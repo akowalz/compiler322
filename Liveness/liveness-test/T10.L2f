@@ -1,0 +1,10 @@
+(:start
+(eax <- 5)
+(cjump eax < 7 :here :there)
+(y += eax)
+:here
+(eax += 1)
+:there
+(y += 5)
+(y += eax)
+)

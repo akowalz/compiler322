@@ -1,0 +1,2 @@
+((in (eax x) (eax x) () (x))
+(out (eax x) () (x) ()))

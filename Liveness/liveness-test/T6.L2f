@@ -1,0 +1,5 @@
+(:r
+(eax <- 10)
+(x <- eax)
+(y += x)
+(print x))

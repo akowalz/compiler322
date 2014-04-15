@@ -1,0 +1,6 @@
+(:hellohello
+(eax <- 10)
+(edx <- 11)
+(ten <- eax)
+(ten += edx)
+(print ten))

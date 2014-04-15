@@ -1,0 +1,4 @@
+(
+(in  () () (eax) (eax edx) (ten edx) (ten))
+(out () (eax) (edx eax) (ten edx) (ten) ())
+)

@@ -1,0 +1,7 @@
+(:p
+(x <- 6)
+(y <- 10)
+:top
+:bottom
+(cjump x < y :top :bottom)
+(x += y))
