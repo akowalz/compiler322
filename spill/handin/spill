@@ -1,2 +1,2 @@
-#!/bin/bash
-racket spill.rkt "#@"
+#!/bin/sh
+racket spill.rkt "$@"
