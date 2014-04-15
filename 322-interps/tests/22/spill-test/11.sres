@@ -1,0 +1,6 @@
+((hi0 <- (mem ebp -16))
+ (hi0 <- hi0 = a)
+ ((mem ebp -16) <- hi0)
+ (hi1 <- (mem ebp -16))
+ (hi1 <- hi1 = a)
+ ((mem ebp -16) <- hi1))

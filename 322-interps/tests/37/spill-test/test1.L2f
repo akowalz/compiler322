@@ -1,0 +1,9 @@
+((a <- 1)
+ (b <- 2)
+ (c <- 3)
+ (eax += a)
+ (ebx += b)
+ (ecx += c)
+ (eax -= a)
+ (ebx -= b)
+ (ecx -= c)) b -8 spill

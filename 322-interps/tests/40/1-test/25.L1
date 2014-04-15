@@ -1,0 +1,22 @@
+((
+  (eax <- 3 = 3)  
+  (eax <- (print eax))  
+  
+  (eax <- 5 < 7)
+  (eax <- (print eax))  
+  
+  (eax <- 5 <= 6)
+  (eax <- (print eax))  
+  
+  (eax <- 7 < 5)
+  (eax += 89)
+  (eax <- (print eax))  
+  
+  (eax <- 6 < 6)
+  (eax += 89)
+  (eax <- (print eax))  
+  
+  (eax <- 6 <= 6)
+  (eax <- (print eax))  
+  
+))

@@ -1,0 +1,30 @@
+((
+	(esi <- 11)
+	(eax <- (allocate esi 3))
+	(edi <- eax)
+	(ebx <- 9)
+	(cjump ebx < esi :label1 :label3)
+	:label1
+	(eax <- (print 5))
+	(call :func)
+	(goto :label5)
+	:label3
+	(ebx *= 3)
+	(eax <- (print ebx))
+	:label5
+ )
+ (:func
+ 	(tail-call :secondfunc))
+ (:secondfunc 
+ 	(edx <- ebx)
+ 	(edx -= 9)
+ 	(edx *= 2)
+ 	(edx += edi)
+ 	(edx += 4)
+ 	(ecx <- (mem edx 0))
+ 	(cjump ecx <= 21 :label7 :label9)
+ 	:label7
+ 	(eax <- (print ecx))
+ 	:label9
+ 	(return))
+)

@@ -1,0 +1,11 @@
+((cjump 2 < 3 :start :finish)
+ :finish
+ (x += y)
+ (y &= z)
+ (a -= b)
+ (b *= c)
+ (d *= e)
+ (d <<= d)
+ (goto :start)
+ :start
+ (return)) q -100 s

@@ -1,0 +1,4 @@
+;;use mask to test and operation 111 & 100
+(((eax <- 15) ;111
+  (eax &= 9)  ;100
+  (eax <- (print eax))))

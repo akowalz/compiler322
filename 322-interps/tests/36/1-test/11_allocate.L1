@@ -1,0 +1,14 @@
+(((eax <- (allocate 11 5)) 
+  ;; 1st arg of allocate is the # of arg, has to be odd after encoded
+  (ebx <- eax)
+  (eax <- (print ebx))
+  (eax <- (allocate 9 3))
+  ((mem ebx 8) <- eax)
+  ;; 2nd arg of mem is the offset in bytes, not encoded
+  ;; pointers are not encoded
+  (eax <- (print ebx))
+  (esi <- (mem ebx 8)) ;; if use ecx instead of esi, won't work
+  (eax <- (allocate 5 7))
+  ((mem esi 8) <- eax)
+  (eax <- (print ebx))
+  ))

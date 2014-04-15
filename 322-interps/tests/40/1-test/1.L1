@@ -1,0 +1,10 @@
+((
+   (eax <- 89)
+   (eax <- (print eax))
+
+   (ebx <- 123)
+   (eax <- (print ebx))
+
+   (esi <- 0)
+   (eax <- (print eax))
+  ))

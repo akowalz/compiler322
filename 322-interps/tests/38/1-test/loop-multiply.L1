@@ -1,0 +1,12 @@
+(((ebx <- 7)
+(eax <- 0)
+:loop
+(cjump 1 <= ebx :go :done)
+:go
+(eax += 2)
+(ebx -= 1)
+(goto :loop)
+:done
+(eax += 1)
+(eax <- (print eax))
+))

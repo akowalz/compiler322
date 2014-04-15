@@ -1,0 +1,7 @@
+((
+  (mem ebp -4) <- 89)
+  (s0 <- (mem ebp -4))
+  (s0 += 1)
+  ((mem ebp -4) <- s0)
+  (s1 <- (mem ebp -4))
+  (eax <- (print s1)))

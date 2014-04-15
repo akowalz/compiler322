@@ -1,0 +1,12 @@
+((:foo
+  :bar
+  (eax <- (print 11))
+  (call :hello)
+  (eax <- (print eax)))
+ (:baz
+  :qux
+  (return))
+ (:hello
+  :hi
+  (eax <- 3)
+  (return)))

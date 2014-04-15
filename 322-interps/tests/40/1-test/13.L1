@@ -1,0 +1,16 @@
+;calculate the sum
+((
+  (eax <- 89)
+  (ecx <- 1)
+  (ebx <- 1)
+  
+  :loop
+  (cjump ebx < eax :l1 :done)
+  :l1
+  (ebx += 1)
+  (ecx += ebx)
+  (goto :loop)
+  
+  :done
+  (eax <- (print ecx))
+))

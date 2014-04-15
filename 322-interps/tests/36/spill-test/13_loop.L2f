@@ -1,0 +1,3 @@
+(:loop 
+ (x += 1) 
+ (goto :loop)) x -4 s_

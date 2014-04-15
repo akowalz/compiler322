@@ -1,0 +1,12 @@
+((
+  (call :a)
+)(
+  :a
+  (call :b)
+  (return)
+)(
+  :b
+  (eax <- 441)
+  (eax <- (print eax))
+  (return)
+))

@@ -1,0 +1,10 @@
+((s <- 21)
+  (eax <- (allocate s 3))
+  (a <- eax)
+  (d <- (mem a 0))
+  (c <- (mem a 4))
+  (d += c)
+  ((mem a 8) <- d)
+  (eax <- (print a)))
+
+s -4 x

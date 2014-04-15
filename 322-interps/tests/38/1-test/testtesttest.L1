@@ -1,0 +1,4 @@
+(((eax <- 5)
+(eax += 100)
+(eax -= 100)
+(eax <- (print eax))))

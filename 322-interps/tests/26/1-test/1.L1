@@ -1,0 +1,10 @@
+(((esi <- 1)
+
+  ;; Count from 0 to 9
+  :loop
+  (eax <- (print esi))
+  (esi += 2)
+  (cjump esi < 21 :loop :done)
+
+  :done
+))

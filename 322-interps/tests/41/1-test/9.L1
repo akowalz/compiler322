@@ -1,0 +1,3 @@
+;; 2 is less than 5
+(((eax <- 2 < 5) 
+  (eax <- (print eax))))

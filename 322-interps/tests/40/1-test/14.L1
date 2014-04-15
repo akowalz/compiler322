@@ -1,0 +1,20 @@
+;this is to evaluate the power
+((
+  (eax <- (print 9))
+  (eax <- (print 7))
+  (eax <- 4) ; 4 encoded as 9
+  (ebx <- eax) 
+  (edx <- 3) ; 3 encoded as 7
+  :loop
+  (cjump edx <= 1 :done :multi)
+  :multi
+  (eax *= ebx)
+  (edx -= 1)
+  (goto :loop)
+
+  :done
+
+  (eax <<= 1)
+  (eax += 1)
+  (eax <- (print eax))
+))

@@ -1,0 +1,19 @@
+((a <- 1)
+ (b <- 2)
+ (c <- eax)
+
+ :label
+ (cjump 0 < c :label1 :label2)
+
+ :label1
+ (x += a)
+ (x += b)
+ (a += 1)
+ (b += b)
+
+ (c -= 1)
+ (goto :label)
+
+ :label2
+ (eax <- a)
+ (return)) b -4 s

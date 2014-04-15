@@ -1,0 +1,13 @@
+((
+  (goto :a)
+  :b
+  (call :t)
+  (eax <- (print 19293))
+  (goto :c)
+  :a
+  (goto :b)
+  :c
+)(
+  :t
+  (return)
+))

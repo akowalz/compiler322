@@ -1,0 +1,33 @@
+
+
+
+
+;; Add all numbers less than or equal to 10
+
+
+(((esi <- 21) 
+  (eax <- 1)
+  
+  :loop
+  (cjump 1 < esi :__ :_)
+  :__
+  
+  (eax += esi)
+  (eax -= 1)
+  
+  (esi -= 2)
+  (goto :loop)
+  
+  :_
+  (eax <- (print eax))))
+
+
+
+
+
+
+
+
+
+
+

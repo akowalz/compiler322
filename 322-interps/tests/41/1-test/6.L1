@@ -1,0 +1,22 @@
+;; Add all even numbers less than or equal to 10
+(((esi <- 21) 
+  (eax <- 1)
+  
+  :loop
+  (cjump 1 < esi :go :stop)
+  :go
+  
+  (edx <- 3)
+  (edx &= esi)
+  (cjump 1 = edx :sum :increment)
+
+  :sum
+  (eax += esi)
+  (eax -= 1)
+  
+  :increment
+  (esi -= 2)
+  (goto :loop)
+  
+  :stop
+  (eax <- (print eax))))

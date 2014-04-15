@@ -1,0 +1,6 @@
+((
+  (eax <- 255)
+  (ebx <- 15)
+  (eax &= ebx)
+  (eax <- (print eax))
+))

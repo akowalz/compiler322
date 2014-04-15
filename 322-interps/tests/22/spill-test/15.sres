@@ -1,0 +1,7 @@
+((hi0 <- (mem ebp 0))
+ (cjump hi0 < b :meow :miao)
+ :miao
+ (hi1 <- (mem ebp 0))
+ (eax <- (print hi1))
+ :meow
+ (eax <- (print b)))

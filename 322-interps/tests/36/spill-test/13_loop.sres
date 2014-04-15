@@ -1,0 +1,5 @@
+(:loop
+(s_0 <- (mem ebp -4))
+(s_0 += 1)
+((mem ebp -4) <- s_0)
+(goto :loop))

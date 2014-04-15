@@ -1,0 +1,17 @@
+((
+  (esi <- 0)
+  (edi <- 1)
+
+  (ebx <- esi < edi)
+  (ebx *= 2)
+  (ebx += 1)
+  (eax <- (print ebx))
+  (ebx <- esi <= edi)
+  (ebx *= 2)
+  (ebx += 1)
+  (eax <- (print ebx))
+  (ebx <- esi = edi)
+  (ebx *= 2)
+  (ebx += 1)
+  (eax <- (print ebx))
+))

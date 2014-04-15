@@ -1,0 +1,4 @@
+((cjump x = x :T :f)
+ (cjump x < y :T :f)
+ (cjump x <= z :T :f)
+ (x <- y < x)) x -4 s

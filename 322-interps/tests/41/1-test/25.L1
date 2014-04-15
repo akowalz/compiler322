@@ -1,0 +1,7 @@
+(((esp += -40)
+  (call :whaat)
+  (esp -= -40)
+  (eax <- (print eax)))
+ (:whaat
+  (eax <- 3)
+  (return)))

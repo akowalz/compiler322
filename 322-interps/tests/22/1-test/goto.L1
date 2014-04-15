@@ -1,0 +1,7 @@
+(((ebx <- 5)
+  (ebx *= 5)
+  (goto :miao)
+  (ebx += 5)
+  (eax <- (print ebx))
+  :miao
+  (eax <- (print ebx))))

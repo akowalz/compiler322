@@ -1,0 +1,3 @@
+(((ecx <- 3)
+	(eax <- (allocate ecx 0))
+	(eax <- (array-error eax 8))))

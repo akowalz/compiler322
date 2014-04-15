@@ -1,0 +1,12 @@
+((
+  (eax <- (allocate 15 7))
+  (ecx <- eax)
+  (edi <- 7)
+  (ebx <- 89)
+;writing data
+  ((mem ecx 4) <- 3)
+  ((mem ecx 8) <- ebx)
+  ((mem ecx 16) <- edi)
+  (eax <- (mem ecx 8))
+  (eax <- (print eax))
+))

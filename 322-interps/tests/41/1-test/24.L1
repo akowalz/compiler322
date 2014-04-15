@@ -1,0 +1,15 @@
+(((call :whaat))
+ (:whaat
+  :what
+  (ebx <- 21)
+  (eax <- (allocate ebx 3))
+  (edx <- (mem eax 4))
+  (ecx <- (mem eax 8))
+  (edx += ecx)
+  (edx -= 1)
+  ((mem eax 12) <- edx)
+  (eax <- (print eax))
+  (eax <- 1)
+  (cjump 7 <= 5 :what :why)
+  :why
+  (return)))
