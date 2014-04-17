@@ -1,6 +1,8 @@
 #lang racket
-
+(require racket/set)
+(require rackunit)
 (struct kill-gen (kills gens))
+(struct in-out (ins outs))
 (provide kills/gens)
 
 (define/contract (label? x)
@@ -89,8 +91,61 @@
     [(symbol? t2) '(t2)]
     [else '()]))
 
-(define/contract (in/out )
+#;
+(define/contract (in/out func)
+  (let* ([ins (kill-gen-gens (map kill/gen func))])
+    ([outs (copy-inds ins (map preds func) (make-list-of-empties (length func)))])
+    
+  ))
+
+(define/contract (copy-not-killed ins outs kill-list)
+  (-> list? list? list? list?)
+  (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
+       kill-list)
   )
+
+
+
+(define (make-list-of-empties n)
+  (if (= n 0) '()
+      (cons empty (make-list-of-empties (- n 1)))))
+(check-equal? (make-list-of-empties 3)
+              '( () () ()))
+
+(define (make-list-of-increasing-ints n)
+  (if (= n 1) '((0)) 
+      (append (make-list-of-increasing-ints (- n 1)) (list (list (- n 1))))))
+
+(check-equal? (make-list-of-increasing-ints 3)
+              '((0) (1) (2)))
+(check-equal? (make-list-of-increasing-ints 1)
+              '((0)))
+
+;; wtfomgbbq
+(define/contract (copy-inds src preds dst)
+  (-> list? list? list? list?)
+  (map (lambda (x y) (get-new-outs src x y)) 
+       preds dst))
+
+(define/contract (get-new-outs ins preds out)
+  (-> list? list? list? list?)
+  (if (empty? preds) out
+      (set-union (list-ref ins (first preds))
+                 (get-new-outs ins (rest preds) out))))
+
+(check-equal? (get-new-outs '((a) (b)) '(0 1) '())
+              '(b a))
+(check-equal? (get-new-outs '((a) (b)) '(0 1) '(c))
+              '(b c a))
+(check-equal? (get-new-outs '((a) (b)) '(0) '(c))
+              '(c a))
+
+(check-equal? (copy-inds '((a) (b) (c)) '((2 1) (1) (0)) '(() () ()))
+              '((b c) (b) (a))) 
+
+(check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
+              '(() (b a) (b)))
+  
 
 #|  THE PARSER!
 (define/contract (kills/gens instr)
