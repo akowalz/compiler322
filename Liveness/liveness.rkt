@@ -4,8 +4,12 @@
 (provide kills/gens)
 
 (define/contract (label? x)
-  (-> (or/c symbol? number?) boolean?)
-  (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$" x))
+  (-> (or/c symbol? number? list?) boolean?)
+  (if (symbol? x)
+      (if (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$" (symbol->string x))
+          #t
+          #f)
+      #f))
 
 (define/contract (kills/gens instr)
   (-> list? kill-gen?)
@@ -42,7 +46,7 @@
   (-> list? symbol? boolean?)
   (kill-gen-kills (kills/gens instr)))
 
-(define/contract (pred num func)
+(define/contract (preds num func)
   (-> number? list? list?)
   (let ([instr (list-ref func num)])
     (if (= num 0) 
@@ -55,15 +59,15 @@
   (-> label? list? list?)
   (let ([preds '()])
     (for/list ([instr func]
-               [i (in-range (- (length func) 1))])
+               [i (in-range (length func))])
       (match instr
         [`(cjump ,t1 ,cop ,t2 ,lab1 ,lab2) 
          (if (or (symbol=? label lab1) (symbol=? label lab2))
-             (set! preds (append preds i))
+             (set! preds (cons i preds))
              preds)]
         [`(goto ,lab) 
          (if (symbol=? label lab) 
-             (set! preds (append preds i))
+             (set! preds (cons i preds))
              preds)]
         [else preds]))
     preds))
@@ -102,4 +106,4 @@
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 |#
 
-
+(preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
