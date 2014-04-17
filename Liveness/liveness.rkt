@@ -1,6 +1,8 @@
 #lang racket
 (require racket/set)
 (require rackunit)
+(require racket/stream)
+
 (struct kill-gen (kills gens))
 (struct in-out (ins outs))
 (provide kills/gens)
@@ -14,7 +16,7 @@
       #f))
 
 (define/contract (kills/gens instr)
-  (-> list? kill-gen?)
+  (-> (or/c list? symbol?) kill-gen?)
   (match instr
     [`(eax <- (print ,t)) (kill-gen `(eax ecx edx) (if (symbol? t)
                                                        (list t)
@@ -49,13 +51,22 @@
   (kill-gen-kills (kills/gens instr)))
 
 (define/contract (preds num func)
-  (-> number? list? list?)
+  (-> number? (or/c list? symbol?) list?)
   (let ([instr (list-ref func num)])
     (if (= num 0) 
         (find-refs instr func)
         (if (label? instr)
             (append (find-refs instr func) (list (- num 1)))
             (list (- num 1))))))
+
+
+
+(define/contract (all-preds func)
+  (-> list? list?)
+  (map (lambda (n) (preds n func))
+       (stream->list (in-range (length func)))))
+       
+
 
 (define/contract (find-refs label func)
   (-> label? list? list?)
@@ -79,11 +90,7 @@
   (and (symbol? s) (not (label? s))))
 
 (define/contract (two-ts t1 t2)
-
-  (-> (or/c symbol? number?)
-      (or/c symbol? number?)
-      list?)
-
+  (-> (or/c symbol? number?) (or/c symbol? number?) list?)
   (cond
     [(and (symbol? t1) (symbol? t2))
      '(t1 t2)]
@@ -91,20 +98,32 @@
     [(symbol? t2) '(t2)]
     [else '()]))
 
-#;
+
 (define/contract (in/out func)
-  (let* ([ins (kill-gen-gens (map kill/gen func))])
-    ([outs (copy-inds ins (map preds func) (make-list-of-empties (length func)))])
-    
-  ))
+  (-> list? in-out?)
+  (let* ([kill-list (map kill-gen-kills (map kills/gens func))]
+         [pred-list (all-preds func)]
+         [ins (map kill-gen-gens (map kills/gens func))]
+         [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
+    (in/out-help ins outs kill-list pred-list))
+  )
+
+(define/contract (in/out-help ins outs kill-list preds)
+  (-> list? list? list? list? in-out?)
+  (let* ([new-ins (copy-not-killed ins outs kill-list)]
+         [new-outs (copy-inds new-ins preds outs)])
+  (if (equal? ins new-ins)
+      (in-out ins outs)
+        (if (equal? outs new-outs)
+            (in-out new-ins outs)
+            (in/out-help new-ins new-outs kill-list preds)))))
+  
 
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
        kill-list)
   )
-
-
 
 (define (make-list-of-empties n)
   (if (= n 0) '()
@@ -145,6 +164,10 @@
 
 (check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
               '(() (b a) (b)))
+
+(in-out-outs (in/out '(:f (eax <- 4) (eax += 1))))
+
+(copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
   
 
 #|  THE PARSER!
