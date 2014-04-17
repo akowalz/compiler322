@@ -1,1 +1,33 @@
 #lang racket
+(require "./liveness.rkt")
+(require rackunit)
+
+(define (set-eql? x y)
+  (check-equal? (list->set x)
+                (list->set y)))
+
+(check-equal? (kill/gens `(x <- (mem ebp -4)))
+              (kill-gen '(x) ('ebp)))
+(check-equal? '((mem ebp -8) <- x)
+              (kill-gen '() '(x ebp)))
+(check-equal? '((mem ebp -4) <- :label)
+              (kill-gen '() '(ebp)))
+
+(check-equal? '(eax <- (print eax))
+              (kill-gen '(eax esi edi) '(eax ecx edx ebx)))
+(check-equal? '(eax <- (print edx))
+              (kill-gen '(eax esi edi) '(edx ecx edx ebx)))
+(check-equal? '(eax <- (print 21))
+              (kill-gen '(eax exc edx ebx) (esi edi)))
+(check-equal? '(eax <- (allocate x 5))
+              (kill-gen '(eax) '(x)))
+(check-equal? '(eax <- (allocate 1 y))
+              (kill-gen '(eax) '(y)))
+(check-equal? '(eax <- (allocate 54 54))
+              (kill-gen '(eax) empty))
+
+
+              
+                
+
+
