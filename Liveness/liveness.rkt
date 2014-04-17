@@ -52,7 +52,7 @@
     (if (= num 0) 
         (find-refs instr func)
         (if (label? instr)
-            (append (find-refs instr func) (- num 1))
+            (append (find-refs instr func) (list (- num 1)))
             (list (- num 1))))))
 
 (define/contract (find-refs label func)
@@ -85,6 +85,9 @@
     [(symbol? t2) '(t2)]
     [else '()]))
 
+(define/contract (in/out )
+  )
+
 #|  THE PARSER!
 (define/contract (kills/gens instr)
   (-> list? kill-gen?)
@@ -107,3 +110,5 @@
 |#
 
 (preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
+(preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+(preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
