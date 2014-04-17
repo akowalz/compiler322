@@ -64,7 +64,9 @@
   (and (symbol? s) (not (label? s))))
 
 (define/contract (two-ts t1 t2)
-  (-> (or/c symbol? number?) list?)
+  (-> (or/c symbol? number?)
+      (or/c symbol? number?)
+      list?)
   (cond
     [(and (symbol? t1) (symbol? t2))
      '(t1 t2)]
