@@ -6,7 +6,7 @@
   (-> list? kill-gen?)
   (match instr
     [`(,x <- (mem ,y ,n)) (kill-gen '(x) '(y))]
-    [`((mem ,y ,n) <- ,s) ]
+    [`((mem ,y ,n) <- ,s) (kill-gen ]
     [`(eax <- (allocate ,t1 ,t2)) ]
     [`(eax <- (array-error ,t1 ,t2)) ]
     [`(,x <- ,s) ]
