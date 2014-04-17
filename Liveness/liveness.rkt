@@ -1,6 +1,9 @@
 #lang racket
 
-(define (kill instr)
+(struct kill-gen (kills gens))
+
+(define/contract (kills/gens instr)
+  (-> list? kill-gen?)
   (match instr
     [`(,x <- (mem ,y ,n)) ]
     [`((mem ,y ,n) <- ,s) ]
@@ -17,4 +20,8 @@
     [`(return) ]
     [`(eax <- (print ,t)) ]
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
+#;
+(define/contract (killed? instr x)
+  (-> list? symbol? bool?)
+  (kill-gen-kills (kills/gens instr)))
     
