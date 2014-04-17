@@ -7,8 +7,8 @@
 (define/contract (kills/gens instr)
   (-> list? kill-gen?)
   (match instr
-    [`(,x <- (mem ,y ,n)) (kill-gen '(x) '(y))]
-    [`((mem ,y ,n) <- ,s) (kill-gen ]
+    [`(,x <- (mem ,y ,n)) ]
+    [`((mem ,y ,n) <- ,s) ]
     [`(eax <- (allocate ,t1 ,t2)) ]
     [`(eax <- (array-error ,t1 ,t2)) ]
     [`(,x <- ,s) ]
@@ -47,6 +47,3 @@
   (-> list? symbol? bool?)
   (kill-gen-kills (kills/gens instr)))
     
-(define/contract (label? x)
-  (-> (or/c symbol? number?) bool?)
-  (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$" x))
