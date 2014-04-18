@@ -1,5 +1,5 @@
 #lang racket
-
+(require racket/set)
 (struct kill-gen (kills gens))
 (provide kills/gens)
 
@@ -88,8 +88,8 @@
     [(symbol? t1) '(t1)]
     [(symbol? t2) '(t2)]
     [else '()]))
-
-(define/contract (in/out )
+#;
+(define/contract (in/out)
   )
 
 #|  THE PARSER!
