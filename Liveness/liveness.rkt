@@ -127,7 +127,10 @@
 
 ;  I think is makes way more sense...
 (define/contract (copy-not-killed ins outs kill-list)
-  (-> list? list? list? list?)
+  (-> (listof (listof symbol?))
+      (listof (listof symbol?))
+      (listof (listof symbol?))
+      list?)
   (map set-subtract (map set-union ins outs) kill-list))
 
 (define (make-list-of-empties n)
