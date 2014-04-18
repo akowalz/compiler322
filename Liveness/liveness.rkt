@@ -109,7 +109,11 @@
   )
 
 (define/contract (in/out-help ins outs kill-list preds)
-  (-> list? list? list? list? in-out?)
+  (-> (listof (listof symbol?))
+      (listof (listof symbol?))
+      (listof (listof symbol?))
+      (listof (listof number?))
+      in-out?)
   (let* ([new-ins (copy-not-killed ins outs kill-list)]
          [new-outs (copy-inds new-ins preds outs)])
   (if (equal? ins new-ins)
