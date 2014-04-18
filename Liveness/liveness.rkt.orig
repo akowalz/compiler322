@@ -1,8 +1,11 @@
 #lang racket
 (require racket/set)
+<<<<<<< HEAD
+=======
 (require rackunit)
 (require racket/stream)
 
+>>>>>>> FETCH_HEAD
 (struct kill-gen (kills gens))
 (struct in-out (ins outs))
 (provide kills/gens)
@@ -97,6 +100,10 @@
     [(symbol? t1) '(t1)]
     [(symbol? t2) '(t2)]
     [else '()]))
+<<<<<<< HEAD
+#;
+(define/contract (in/out)
+=======
 
 
 (define/contract (in/out func)
@@ -123,6 +130,7 @@
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
        kill-list)
+>>>>>>> FETCH_HEAD
   )
 
 (define (make-list-of-empties n)
