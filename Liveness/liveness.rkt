@@ -45,13 +45,22 @@
                                            `(eax ecx edx esi edi)))]
     [`(return) (kill-gen (list ) `(eax esi edi))]
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
+
+(define (kills/gens-program prog)
+  (map kills/gens prog))
+
+(define (all-kills prog)
+  (map kill-gen-kills (kills/gens-program prog)))
+
+(define (all-gens prog)
+  (map kill-gen-gens (kills/gens-program prog)))
 #;
 (define/contract (killed? instr x)
   (-> list? symbol? boolean?)
   (kill-gen-kills (kills/gens instr)))
 
 (define/contract (preds num func)
-  (-> number? (or/c list? symbol?) list?)
+  (-> number? (or/c list? symbol?) (listof number?))
   (let ([instr (list-ref func num)])
     (if (= num 0) 
         (find-refs instr func)
@@ -62,14 +71,14 @@
 
 
 (define/contract (all-preds func)
-  (-> list? list?)
+  (-> list? (listof (listof number?)))
   (map (lambda (n) (preds n func))
        (stream->list (in-range (length func)))))
        
 
 
 (define/contract (find-refs label func)
-  (-> label? list? list?)
+  (-> label? list? (listof number?))
   (let ([preds '()])
     (for/list ([instr func]
                [i (in-range (length func))])
@@ -184,10 +193,18 @@
 (check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
               '(() (a b) (b)))
 
-(in-out-outs (in/out '(:f (eax <- 4) (eax += 1))))
 
+
+; hold on, I think this is correct...
+; no one is referencing slot 2, so eax is never being copied. 
+; Is that wrong?
+#;
 (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
-             '(() (eax) ()))
+             '(() (eax) ())) ;'(() () ()) ?
+
+
+(check-equal? (copy-inds '(() (a)) '(() (1)) '(() ()))
+              '(() (a)))
 (check-equal? (copy-inds '((a)) '((0)) '(()))
               '((a)))
   
@@ -213,6 +230,25 @@
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 |#
 
-(preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
-(preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
-(preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+(check-equal? (preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
+              '(4))
+(check-equal? (preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+              '(5 2))
+(check-equal? (preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+              '(6 2 3))
+
+
+; the (eax <- 4) can never be gotten to, so does it's predecessors should be empty
+; this test doesn't pass
+#; ;Is this a bug?
+(check-equal? (preds 3 '(:f (eax <- 1) (cjump 2<4 :f :f) (eax <- 4)))
+              '())
+
+
+
+(check-equal? (all-gens '(:f (eax <- 4) (eax += 1)))
+              '(() ()(eax)))
+(check-equal? (all-kills '(:f (eax <- 4) (eax += 1)))
+              '(() (eax) (eax)))
+
+
