@@ -118,12 +118,17 @@
             (in-out new-ins outs)
             (in/out-help new-ins new-outs kill-list preds)))))
   
-
+#;
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
        kill-list)
   )
+
+;  I think is makes way more sense...
+(define/contract (copy-not-killed ins outs kill-list)
+  (-> list? list? list? list?)
+  (map set-subtract (map set-union ins outs)))
 
 (define (make-list-of-empties n)
   (if (= n 0) '()
@@ -131,6 +136,7 @@
 (check-equal? (make-list-of-empties 3)
               '( () () ()))
 
+; and we might not need this
 (define (make-list-of-increasing-ints n)
   (if (= n 1) '((0)) 
       (append (make-list-of-increasing-ints (- n 1)) (list (list (- n 1))))))
