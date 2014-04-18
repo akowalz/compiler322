@@ -128,7 +128,7 @@
 ;  I think is makes way more sense...
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
-  (map set-subtract (map set-union ins outs)))
+  (map set-subtract (map set-union ins outs) kill-list))
 
 (define (make-list-of-empties n)
   (if (= n 0) '()
@@ -148,12 +148,18 @@
 
 ;; wtfomgbbq
 (define/contract (copy-inds src preds dst)
-  (-> list? list? list? list?)
+  (-> (listof (listof symbol?))
+      (listof (listof number?))
+      (listof (listof symbol?))
+      list?)
   (map (lambda (x y) (get-new-outs src x y)) 
        preds dst))
 
 (define/contract (get-new-outs ins preds out)
-  (-> list? list? list? list?)
+  (-> (listof (listof symbol?))
+      (listof number?)
+      (listof symbol?)
+      list?)
   (if (empty? preds) out
       (set-union (list-ref ins (first preds))
                  (get-new-outs ins (rest preds) out))))
@@ -169,11 +175,14 @@
               '((b c) (b) (a))) 
 
 (check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
-              '(() (b a) (b)))
+              '(() (a b) (b)))
 
 (in-out-outs (in/out '(:f (eax <- 4) (eax += 1))))
 
-(copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
+(check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
+             '(() (eax) ()))
+(check-equal? (copy-inds '((a)) '((0)) '(()))
+              '((a)))
   
 
 #|  THE PARSER!
