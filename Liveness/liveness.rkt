@@ -150,13 +150,13 @@
               '((0)))
 
 ;; wtfomgbbq
-(define/contract (copy-inds src preds dst)
+(define/contract (copy-inds src indexes dst)
   (-> (listof (listof symbol?))
       (listof (listof number?))
       (listof (listof symbol?))
       list?)
   (map (lambda (x y) (get-new-outs src x y)) 
-       preds dst))
+       indexes dst))
 
 (define/contract (get-new-outs ins preds out)
   (-> (listof (listof symbol?))
