@@ -198,7 +198,7 @@
 
 ; hold on, I think this is correct...
 ; no one is referencing slot 2, so eax is never being copied. 
-; Is that wrong?
+; Is that wrong? We had thought this was a bug
 #;
 (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
              '(() (eax) ())) ;'(() () ()) ?
