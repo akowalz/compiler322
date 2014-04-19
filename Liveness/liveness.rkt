@@ -13,6 +13,7 @@
   (and (symbol? x)
        ((listof string?) (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
                                        (symbol->string x)))))
+; label? tests
 (check-equal? (label? ':hello) #t)
 (check-equal? (label? 5) #f)
 (check-equal? (label? '_hello) #f)
@@ -62,7 +63,7 @@
   (-> list? symbol? boolean?)
   (kill-gen-kills (kills/gens instr)))
 
-
+; FIXME
 ; think about changing the last line to see if previous instruction was a jump, goto, call, etc
 (define/contract (preds num func)
   (-> number? (or/c list? symbol?) (listof number?))
@@ -120,8 +121,7 @@
          [pred-list (all-preds func)]
          [ins (map kill-gen-gens (map kills/gens func))]
          [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
-    (in/out-help ins outs kill-list pred-list))
-  )
+    (in/out-help ins outs kill-list pred-list))) 
 
 (define/contract (in/out-help ins outs kill-list preds)
   (-> (listof (listof symbol?))
@@ -151,6 +151,11 @@
       (listof (listof symbol?))
       list?)
   (map set-subtract (map set-union ins outs) kill-list))
+
+(check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
+              '(() (a b) (b)))
+(check-equal? (copy-not-killed '(() (eax edx x y) (z)) '((ebx eax) (eax edx x y z) ()) '((ebx) () ()))
+              '((eax) (y x edx eax z) (z)))
 
 (define (make-list-of-empties n)
   (if (= n 0) '()
@@ -198,17 +203,15 @@
 (check-equal? (copy-inds '((a) (b) (c)) '((2 1) (1) (0)) '(() () ()))
               '((b c) (b) (a))) 
 
-(check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
-              '(() (a b) (b)))
+
 
 
 
 ; hold on, I think this is correct...
 ; no one is referencing slot 2, so eax is never being copied. 
 ; Is that wrong? We had thought this was a bug
-#;
 (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
-             '(() (eax) ())) ;'(() () ()) ?
+             '(() () ())) ; we expected '(() (eax) ()) ?
 
 
 (check-equal? (copy-inds '(() (a)) '(() (1)) '(() ()))
@@ -246,9 +249,8 @@
               '(6 2 3))
 
 
-; the (eax <- 4) can never be gotten to, so does it's predecessors should be empty
-; this test doesn't pass
-#; ;Is this a bug?
+; FIXME : this test is currently failing. see piazza question
+#;
 (check-equal? (preds 3 '(:f (eax <- 1) (cjump 2<4 :f :f) (eax <- 4)))
               '())
 
