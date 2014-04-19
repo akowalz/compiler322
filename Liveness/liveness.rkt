@@ -34,16 +34,16 @@
                                          (list x t)
                                          (list x)))]
     [`(,cx <- ,t1 ,cop ,t2) (kill-gen (list cx) (two-ts t1 t2))]
-    [(? symbol?) (kill-gen (list ) (list ))]
-    [`(goto ,label) (kill-gen (list ) (list ))]
+    [(? symbol?) (kill-gen '() '())]
+    [`(goto ,label) (kill-gen '() '())]
     [`(cjump ,t1 ,cop ,t2 ,label1 ,label2) (kill-gen '() (two-ts t1 t2))]
     [`(call ,u) (kill-gen `(eax ebx ecx edx) (if (not (label? u))
                                                  `(,u eax ecx edx)
                                                  `(eax ecx edx)))]
-    [`(tail-call ,u) (kill-gen (list ) (if (not (label? u))
+    [`(tail-call ,u) (kill-gen '() (if (not (label? u))
                                            `(,u eax ecx edx esi edi)
                                            `(eax ecx edx esi edi)))]
-    [`(return) (kill-gen (list ) `(eax esi edi))]
+    [`(return) (kill-gen '() `(eax esi edi))]
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 
 (define (kills/gens-program prog)
@@ -59,6 +59,8 @@
   (-> list? symbol? boolean?)
   (kill-gen-kills (kills/gens instr)))
 
+
+; think about changing the last line to see if previous instruction was a jump, goto, call, etc
 (define/contract (preds num func)
   (-> number? (or/c list? symbol?) (listof number?))
   (let ([instr (list-ref func num)])
@@ -132,7 +134,7 @@
             (in-out new-ins outs)
             (in/out-help new-ins new-outs kill-list preds)))))
   
-#;
+#; ;this was cool and all but..
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
@@ -151,9 +153,10 @@
   (if (= n 0) '()
       (cons empty (make-list-of-empties (- n 1)))))
 (check-equal? (make-list-of-empties 3)
-              '( () () ()))
+              '(() () ()))
 
 ; and we might not need this
+#|
 (define (make-list-of-increasing-ints n)
   (if (= n 1) '((0)) 
       (append (make-list-of-increasing-ints (- n 1)) (list (list (- n 1))))))
@@ -162,6 +165,7 @@
               '((0) (1) (2)))
 (check-equal? (make-list-of-increasing-ints 1)
               '((0)))
+|#
 
 ;; wtfomgbbq
 (define/contract (copy-inds src indexes dst)
