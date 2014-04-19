@@ -7,13 +7,16 @@
 (struct in-out (ins outs))
 (provide kills/gens)
 
+
 (define/contract (label? x)
   (-> (or/c symbol? number? list?) boolean?)
-  (if (symbol? x)
-      (if (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$" (symbol->string x))
-          #t
-          #f)
-      #f))
+  (and (symbol? x)
+       ((listof string?) (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
+                                       (symbol->string x)))))
+(check-equal? (label? ':hello) #t)
+(check-equal? (label? 5) #f)
+(check-equal? (label? '_hello) #f)
+(check-equal? (label? '(a b 5)) #f)
 
 (define/contract (kills/gens instr)
   (-> (or/c list? symbol?) kill-gen?)
