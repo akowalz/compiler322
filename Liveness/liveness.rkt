@@ -100,6 +100,9 @@
         [else preds]))
     preds))
 
+(check-equal? (find-refs ':hello '(:f (cjump 1 = 1 :hello :f) (goto :hello) :hello))
+              '(2 1))
+
 (define/contract (check-var-reg s)
   (-> (or/c symbol? number?) boolean?)
   (and (symbol? s) (not (label? s))))
@@ -141,8 +144,7 @@
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
-       kill-list)
-  )
+       kill-list))
 
 ;  I think is makes way more sense...
 (define/contract (copy-not-killed ins outs kill-list)
@@ -154,7 +156,9 @@
 
 (check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
               '(() (a b) (b)))
-(check-equal? (copy-not-killed '(() (eax edx x y) (z)) '((ebx eax) (eax edx x y z) ()) '((ebx) () ()))
+(check-equal? (copy-not-killed '(() (eax edx x y) (z))
+                               '((ebx eax) (eax edx x y z) ())
+                               '((ebx) () ()))
               '((eax) (y x edx eax z) (z)))
 
 (define (make-list-of-empties n)
