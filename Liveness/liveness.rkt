@@ -36,7 +36,7 @@
     [`(,cx <- ,t1 ,cop ,t2) (kill-gen (list cx) (two-ts t1 t2))]
     [(? symbol?) (kill-gen (list ) (list ))]
     [`(goto ,label) (kill-gen (list ) (list ))]
-    [`(cjump ,t1 ,cop ,t2 ,label1 ,label2) (kill-gen (list ) (two-ts t1 t2))]
+    [`(cjump ,t1 ,cop ,t2 ,label1 ,label2) (kill-gen '() (two-ts t1 t2))]
     [`(call ,u) (kill-gen `(ecx edx eax ebx) (if (not (label? u))
                                                  `(,u eax ecx edx)
                                                  `(eax ecx edx)))]
@@ -102,9 +102,10 @@
   (-> (or/c symbol? number?) (or/c symbol? number?) list?)
   (cond
     [(and (symbol? t1) (symbol? t2))
-     '(t1 t2)]
-    [(symbol? t1) '(t1)]
-    [(symbol? t2) '(t2)]
+     (if (symbol=? t1 t2) (list t1)
+         (list t1 t2))]
+    [(symbol? t1) (list t1)]
+    [(symbol? t2) (list t2)]
     [else '()]))
 
 
@@ -250,5 +251,9 @@
               '(() ()(eax)))
 (check-equal? (all-kills '(:f (eax <- 4) (eax += 1)))
               '(() (eax) (eax)))
+(check-equal? (all-kills '(:f (eax <- 10) (eax += 10) (cjump eax = eax :f :f)))
+              '(() (eax) (eax) ()))
+(check-equal? (all-gens '(:f (eax <- 10) (eax += 10) (cjump eax = eax :f :f)))
+              '(() () (eax) (eax)))
 
 
