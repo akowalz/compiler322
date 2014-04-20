@@ -1,11 +1,11 @@
 #lang racket
 (require racket/set)
-;(require rackunit)
+(require rackunit)
 (require racket/stream)
 
 (struct kill-gen (kills gens))
 (struct in-out (ins outs))
-(provide kills/gens)
+;(provide kills/gens)
 
 
 (define/contract (label? x)
@@ -28,7 +28,7 @@
     [`(eax <- (array-error ,t1 ,t2)) (kill-gen `(eax ecx edx) (two-ts t1 t2))]
     [`(,x <- ,s) (kill-gen (list x) (if (check-var-reg s)
                                         (list s) 
-                                        (list)))]
+                                        '()))]
     [`(,x ,op ,t) (kill-gen (list x) (if (symbol? t) 
                                          (list x t)
                                          (list x)))]
@@ -87,10 +87,6 @@
              preds)]
         [else preds]))
     preds))
-
-
-
-
 
 
 (define/contract (all-preds func)
