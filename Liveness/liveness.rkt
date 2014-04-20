@@ -12,7 +12,7 @@
   (-> (or/c symbol? number? list?) boolean?)
   (and (symbol? x)
        (regexp-match? #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
-                                       (symbol->string x))))
+                      (symbol->string x))))
 ; label? tests
 (check-equal? (label? ':hello) #t)
 (check-equal? (label? 5) #f)
@@ -68,20 +68,12 @@
 (define/contract (preds num func)
   (-> number? (or/c list? symbol?) (listof number?))
   (let ([instr (list-ref func num)])
-    (if (= num 0) 
+    (remove-duplicates
+     (if (= num 0) 
         (find-refs instr func)
         (if (label? instr)
             (append (find-refs instr func) (list (- num 1)))
-            (list (- num 1))))))
-
-
-
-(define/contract (all-preds func)
-  (-> list? (listof (listof number?)))
-  (map (lambda (n) (preds n func))
-       (stream->list (in-range (length func)))))
-       
-
+            (list (- num 1)))))))
 
 (define/contract (find-refs label func)
   (-> label? list? (listof number?))
@@ -99,6 +91,61 @@
              preds)]
         [else preds]))
     preds))
+
+
+(define/contract (all-preds func)
+  (-> list? (listof (listof number?)))
+  (map (lambda (n) (preds n func))
+       (stream->list (in-range (length func)))))
+
+(check-equal? (all-preds '(:f (eax <- 1)))
+              '(() (0)))
+(check-equal? (all-preds '(:f (eax <- 1) (edx <- 2)))
+              '(() (0) (1)))
+(check-equal? (all-preds '(:f (eax += 5) ((mem ebp -4) <- 11)))
+              '(() (0) (1)))
+(check-equal? (all-preds '(:f (eax += 5) :g ((mem ebp -4) <- 11)))
+              '(() (0) (1) (2)))
+(check-equal? (all-preds '(:f (eax += 5) (goto :g) :g))
+              '(() (0) (1) (2)))
+(check-equal? (all-preds
+               '(:f (cjump eax = eax :here :there) :here (eax <- 0) :there (eax <- 1)))
+              '(() (0) (1) (2) (1 3) (4)))
+(check-equal? (all-preds '(:g (eax <- 1) (eax <- (print eax)) (x <- 5)))
+              '(() (0) (1) (2)))
+(check-equal? (all-preds '(:f (x <- 1) (y <- 2) (edx <- x = y)))
+              '(() (0) (1) (2)))
+; FIXME, this is a really tough test case
+; :h is actually unreachable, becuase the goto will always skip it
+; so, if :h is unreachable, :g cannot be reached through h
+; to fix: maybe add a recursive call on on each node to check? could get expensive
+(check-equal? (all-preds 
+               '(:f (eax += 5) (goto :g) :h :g))
+              '(() (0) (1) () (2)))
+; also fails, because (x <- 5) can't be reached
+(check-equal? (all-preds '(:f (cjump eax < eax :l1 :l2) (x <- 5) :l1 :l2))
+              '(() (0) () (1) (1 3)))
+; here's a very simple one to try fixing
+(check-equal? (all-preds '(:g (goto :r) :q :r))
+              '(() (0) () (1)))
+;a also toug we never configured calls either
+(check-equal? (all-preds '(:g (call :h) (eax += 1)))
+              '(() (0) ()))
+(check-equal? (all-preds '(:h (return) :g))
+              '(() (0) ()))
+(check-equal? (all-preds '(:g (tail-call :h) (x <- 10)))
+              '(() (0) ()))
+(check-equal? (all-preds '(:g (eax <- :fun) (tail-call :fun) (eax <- 1)))
+              '(() (0) (1) ()))
+
+
+
+
+
+       
+
+
+
 
 (check-equal? (find-refs ':hello '(:f (cjump 1 = 1 :hello :f) (goto :hello) :hello))
               '(2 1))
