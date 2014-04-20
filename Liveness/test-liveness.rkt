@@ -235,5 +235,5 @@
  (check-equal? (find-refs ':no '(:f (goto :yes) :no :yes))
                '())
  (check-equal? (find-refs ':yes '(:f (goto :yes) :yes))
-               '(1))
+               '(1)))
 
