@@ -75,6 +75,7 @@
             (append (find-refs instr func) (list (- num 1)))
             (list (- num 1)))))))
 
+
 (define/contract (find-refs label func)
   (-> label? list? (listof number?))
   (let ([preds '()])
@@ -91,6 +92,32 @@
              preds)]
         [else preds]))
     preds))
+
+
+(check-equal? (preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
+              '(4))
+(check-equal? (preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+              '(5 2))
+(check-equal? (preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
+              '(6 2 3))
+(check-equal? (preds 2 '(:f (return) (eax <- 1)))
+              '())
+(check-equal? (preds 2 '(:f (call :g) (eax <- 1)))
+              '())
+(check-equal? (preds 2 '(:f (tail-call :g) (eax += 1)))
+              '())
+(check-equal? (preds 3 '(:f (cjump eax = eax :here :there) :here :there))
+              '(1))
+(check-equal? (preds 2 '(:f (cjump eax = 2 :l1 :l2) :lx :l1 :l2))
+              '())
+(check-equal? (preds 2 '(:f (cjump eax < 1 :l1 :l2) (eax <- 3) :l1 :l2))
+              '())
+(check-equal? (preds 2 '(:f (goto :g) (eax <- 1) :g))
+              '())
+; FIXME
+(check-equal? (preds 3 '(:f (eax <- 1) (cjump 2<4 :f :f) (eax <- 4)))
+              '())
+
 
 
 (define/contract (all-preds func)
@@ -121,7 +148,7 @@
 ; to fix: maybe add a recursive call on on each node to check? could get expensive
 (check-equal? (all-preds 
                '(:f (eax += 5) (goto :g) :h :g))
-              '(() (0) (1) () (2)))
+               '(() (0)        (1)       () (2)))
 ; also fails, because (x <- 5) can't be reached
 (check-equal? (all-preds '(:f (cjump eax < eax :l1 :l2) (x <- 5) :l1 :l2))
               '(() (0) () (1) (1 3)))
@@ -137,12 +164,6 @@
               '(() (0) ()))
 (check-equal? (all-preds '(:g (eax <- :fun) (tail-call :fun) (eax <- 1)))
               '(() (0) (1) ()))
-
-
-
-
-
-       
 
 
 
@@ -187,7 +208,7 @@
             (in-out new-ins outs)
             (in/out-help new-ins new-outs kill-list preds)))))
   
-#; ;this was cool and all but..
+#; 
 (define/contract (copy-not-killed ins outs kill-list)
   (-> list? list? list? list?)
   (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
@@ -231,7 +252,7 @@
   (-> (listof (listof symbol?))
       (listof (listof number?))
       (listof (listof symbol?))
-      list?)
+      list?) ; functional programming, man
   (map (lambda (x y) (get-new-outs src x y)) 
        indexes dst))
 
@@ -253,6 +274,11 @@
 
 (check-equal? (copy-inds '((a) (b) (c)) '((2 1) (1) (0)) '(() () ()))
               '((b c) (b) (a))) 
+(check-equal? (copy-inds '(() (eax) (x eax))
+                         '((0) (2 1) (1))
+                         '((edx) () ()))
+             '((edx) (x eax) (eax)))
+
 
 
 
@@ -262,13 +288,15 @@
 ; no one is referencing slot 2, so eax is never being copied. 
 ; Is that wrong? We had thought this was a bug
 (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
-             '(() () ())) ; we expected '(() (eax) ()) ?
+             '(() () ())) ; on Saturday we were expecting '(() (eax) ())
 
 
 (check-equal? (copy-inds '(() (a)) '(() (1)) '(() ()))
               '(() (a)))
 (check-equal? (copy-inds '((a)) '((0)) '(()))
               '((a)))
+(check-equal? (copy-inds '((a) (a) (a)) '(() () (0 1 2)) '(() () ()))
+              '(() () (a)))
   
 
 #|  THE PARSER!
@@ -292,18 +320,6 @@
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 |#
 
-(check-equal? (preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
-              '(4))
-(check-equal? (preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
-              '(5 2))
-(check-equal? (preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
-              '(6 2 3))
-
-
-; FIXME : this test is currently failing. see piazza question
-#;
-(check-equal? (preds 3 '(:f (eax <- 1) (cjump 2<4 :f :f) (eax <- 4)))
-              '())
 
 
 
