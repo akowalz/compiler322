@@ -11,8 +11,8 @@
 (define/contract (label? x)
   (-> (or/c symbol? number? list?) boolean?)
   (and (symbol? x)
-       ((listof string?) (regexp-match #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
-                                       (symbol->string x)))))
+       (regexp-match? #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
+                                       (symbol->string x))))
 ; label? tests
 (check-equal? (label? ':hello) #t)
 (check-equal? (label? 5) #f)
