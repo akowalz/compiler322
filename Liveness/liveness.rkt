@@ -126,7 +126,7 @@
 (define/contract (in/out func)
   (-> list? in-out?)
   (let* ([kill-list (all-kills func)]
-         [pred-list (transform-indexes (all-preds func))]
+         [pred-list (successors func)]
          [ins (all-gens func)]
          [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
     (in/out-help ins outs kill-list pred-list))) 
@@ -209,6 +209,8 @@
             (set! result (cons j result))
             result))
       result)))
+
+(define successors (λ (i) (transform-indexes (all-preds i))))
      
   
 
