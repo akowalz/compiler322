@@ -28,7 +28,7 @@
  (check-equal? (preds 2 '(:f (tail-call :g) (eax += 1)))
                '())
  (check-equal? (preds 3 '(:f (cjump eax = eax :here :there) :here :there))
-               '(1 2))
+               '(1))
  (check-equal? (preds 2 '(:f (cjump eax = 2 :l1 :l2) :lx :l1 :l2))
                '())
  (check-equal? (preds 2 '(:f (cjump eax < 1 :l1 :l2) (eax <- 3) :l1 :l2))
