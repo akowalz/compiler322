@@ -45,7 +45,13 @@
                '(1))
  (check-equal? (preds 4 '(:f (cjump eax < 5 :l1 :l2) :l1 (return) :l2))
                '(1)))
- 
+
+(test-case
+ "Stops control flow"
+ (check-true (stops-control-flow? 2 '(:f (eax <- 1) (return))))
+ (check-true (stops-control-flow? 2 '(:f (eax <- 1) (tail-call :fun) (x <- eax))))
+ (check-true (stops-control-flow? 2 '(:f (eax <- 1) (cjump 1 = 1 :f :g) :f :g)))
+ ) 
 
 (test-case
  "All-preds tests"
