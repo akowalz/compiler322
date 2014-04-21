@@ -233,6 +233,15 @@
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 |#
 
+(define (in/out-pretty fun)
+  (let ([ios (in/out fun)])
+    (list (cons 'in (map (λ (lst) (sort lst symbol<?)) (in-out-ins ios)))
+          (cons 'out (map (λ (lst) (sort lst symbol<?)) (in-out-outs ios))))))
+
+(display (call-with-input-file
+          (vector-ref (current-command-line-arguments) 0)
+          (lambda (x) (in/out-pretty (read x)))))
+
 (provide (all-defined-out))
 
 
