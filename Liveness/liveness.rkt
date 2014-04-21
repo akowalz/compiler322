@@ -65,11 +65,22 @@
   (let ([instr (list-ref func num)])
     (remove-duplicates
      (if (= num 0) 
-        (find-refs instr func)
-        (if (label? instr)
-            (append (find-refs instr func) (list (- num 1)))
-            (list (- num 1)))))))
+         (find-refs instr func)
+         (if (label? instr)
+             (append (find-refs instr func) (if (stops-control-flow? (- num 1) func) (list )
+                                                (list (- num 1))))
+             (if (stops-control-flow? (- num 1) func) (list )
+                 (list (- num 1))))))))
 
+(define/contract (stops-control-flow? index func)
+  (-> number? list? boolean?)
+  (let ([instr (list-ref func index)])
+    (match instr 
+      [`(cjump _ _ _ _ _) #t]
+      [`(goto _) #t]
+      [`(return) #t]
+      [`(tail-call _) #t]
+      [else #f])))
 
 (define/contract (find-refs label func)
   (-> label? list? (listof number?))
