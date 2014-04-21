@@ -97,7 +97,7 @@
  (check-equal? (copy-not-killed '(() (eax edx x y) (z))
                                 '((ebx eax) (eax edx x y z) ())
                                 '((ebx) () ()))
-               '((eax) (y x edx eax z) (z))))
+               '((eax) (z y x edx eax) (z))))
 
 ;make list of empties test
 (check-equal? (make-list-of-empties 3)

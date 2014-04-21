@@ -125,9 +125,9 @@
 
 (define/contract (in/out func)
   (-> list? in-out?)
-  (let* ([kill-list (map kill-gen-kills (map kills/gens func))]
-         [pred-list (all-preds func)]
-         [ins (map kill-gen-gens (map kills/gens func))]
+  (let* ([kill-list (all-kills func)]
+         [pred-list (transform-indexes (all-preds func))]
+         [ins (all-gens func)]
          [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
     (in/out-help ins outs kill-list pred-list))) 
 
@@ -157,7 +157,9 @@
       (listof (listof symbol?))
       (listof (listof symbol?))
       list?)
-  (map set-subtract (map set-union ins outs) kill-list))
+ ; (map set-subtract (map set-union ins outs) kill-list))
+  (map set-union (map set-subtract outs kill-list) ins))
+
 
 
 (define (make-list-of-empties n)
