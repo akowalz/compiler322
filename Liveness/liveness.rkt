@@ -183,8 +183,17 @@
       (listof (listof number?))
       (listof (listof symbol?))
       list?) ; functional programming, man
-  (map (lambda (x y) (get-new-outs src x y)) 
-       indexes dst))
+  ;(map (lambda (x y) (get-new-outs src x y)) 
+   ;    indexes dst))
+   (for/list ([in src]
+              [preds indexes]
+              [out dst]
+              [i (in-range (length src))])
+     (set! out
+           (set-union out
+                      (foldr set-union '() 
+                             (map (lambda (n) (list-ref src n))
+                                  preds))))))
 
 (define/contract (get-new-outs ins preds out)
   (-> (listof (listof symbol?))
