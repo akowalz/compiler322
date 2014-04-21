@@ -182,29 +182,32 @@
   (-> (listof (listof symbol?))
       (listof (listof number?))
       (listof (listof symbol?))
-      list?) ; functional programming, man
-  ;(map (lambda (x y) (get-new-outs src x y)) 
-   ;    indexes dst))
-   (for/list ([in src]
-              [preds indexes]
-              [out dst]
-              [i (in-range (length src))])
-     (set! out
-           (set-union out
-                      (foldr set-union '() 
-                             (map (lambda (n) (list-ref src n))
-                                  preds))))))
-
-(define/contract (get-new-outs ins preds out)
-  (-> (listof (listof symbol?))
-      (listof number?)
-      (listof symbol?)
       list?)
-  (if (empty? preds) out
-      (set-union (list-ref ins (first preds))
-                 (get-new-outs ins (rest preds) out))))
+  (for/list ([is indexes]
+             [j (in-range (length dst))])
+    (set-union (list-ref dst j)
+               (foldr set-union '()
+                      (map (lambda (n) (list-ref src n)) is)))))
+   
+   
+(define/contract (includes? lst n)
+  (-> (listof number?) number? boolean?)
+  (if (empty? lst) #f
+      (or (= (car lst) n)
+          (includes? (rest lst) n))))
 
-
+(define/contract (transform-indexes indexes)
+  (-> (listof (listof number?))
+      (listof (listof number?)))
+  (for/list ([i (in-range (length indexes))])
+    (let ([result empty])
+      (for ([p indexes]
+            [j (in-range (length indexes))])
+        (if (includes? p i)
+            (set! result (cons j result))
+            result))
+      result)))
+     
   
 
 #|  THE PARSER!

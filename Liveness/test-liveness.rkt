@@ -1,3 +1,4 @@
+
 #lang racket
 
 ;(require racket/include)
@@ -115,20 +116,27 @@
 (test-case
  "copy inds"
  (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
-               '(() (eax) ()))
+               '(() () ()))
  (check-equal? (copy-inds '(() (a)) '(() (0)) '(() ()))
-               '((a) ()))
+               '(() ()))
  (check-equal? (copy-inds '((a)) '((0)) '(()))
                '((a)))
  (check-equal? (copy-inds '((a) (a) (a)) '(() () (0 1 2)) '(() () ()))
-               '((a) (a) (a)))
+               '(() () (a)))
   
  (check-equal? (copy-inds '((a) (b) (c)) '((2 1) (1) (0)) '(() () ()))
-               '((c) (b a) (a))) 
+               '((c b) (b) (a))) 
  (check-equal? (copy-inds '(() (eax) (x eax))
                           '((0) (2 1) (1))
                           '((edx) () ()))
-               '((edx) (x eax) (eax))))
+               '((edx) (eax x) (eax))))
+
+(test-case
+ "transform indexes"
+ (check-equal? (transform-indexes '((0 1) (1)))
+               '((0) (1 0)))
+ (check-equal? (transform-indexes '((3 4) (1 2) (0) () (3)))
+              '((2) (1) (1) (4 0) (0))))
 
 ; kill and gen
 (test-case
@@ -230,3 +238,10 @@
  ;(check-equal? (find-refs ':yes '(:f (goto :yes) :yes))
   ;             '(1)))
 
+(test-case 
+ "In/out"
+ (let ([prog '(:f (eax <- 1) (eax += 2))])
+   (check-equal? (in-out-ins (in/out prog))
+                 '(() () (eax)))
+   (check-equal? (in-out-outs (in/out prog))
+                 '(() (eax) ()))))
