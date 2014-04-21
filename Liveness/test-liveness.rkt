@@ -15,8 +15,6 @@
 
 (test-case
  "Preds Tests"
- (check-equal? (preds 0 '(:rrr (eax <- 3) (eax += 4) (ebx <- 4) (goto :rrr)))
-               '(4))
  (check-equal? (preds 3 '(:f (eax <- 3) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
                '(5 2))
  (check-equal? (preds 4 '(:f (eax <- 3) (cjump 2 < 4 :f :rrr) (eax += 4) :rrr (ebx <- 4) (goto :rrr)))
@@ -53,6 +51,7 @@
  (check-true (stops-control-flow? 2 '(:f (eax <- 1) (cjump 1 = 1 :f :g) :f :g)))
  ) 
 
+#;
 (test-case
  "All-preds tests"
  (check-equal? (all-preds '(:f (eax <- 1)))
@@ -102,6 +101,7 @@
 ;make list of empties test
 (check-equal? (make-list-of-empties 3)
               '(() () ()))
+#|
 (test-case
  "get new outs"
  (check-equal? (get-new-outs '((a) (b)) '(0 1) '())
@@ -109,28 +109,22 @@
  (check-equal? (get-new-outs '((a) (b)) '(0 1) '(c))
                '(b c a))
  (check-equal? (get-new-outs '((a) (b)) '(0) '(c))
-               '(c a))
-)
-
+               '(c a)))
+|#
 
 (test-case
  "copy inds"
-; hold on, I think this is correct...
-; no one is referencing slot 2, so eax is never being copied. 
-; Is that wrong? We had thought this was a bug
  (check-equal? (copy-inds '(() () (eax)) '(() (0) (1)) '(() () ()))
-               '(() () ())) ; on Saturday we were expecting '(() (eax) ())
- 
- 
- (check-equal? (copy-inds '(() (a)) '(() (1)) '(() ()))
-               '(() (a)))
+               '(() (eax) ()))
+ (check-equal? (copy-inds '(() (a)) '(() (0)) '(() ()))
+               '((a) ()))
  (check-equal? (copy-inds '((a)) '((0)) '(()))
                '((a)))
  (check-equal? (copy-inds '((a) (a) (a)) '(() () (0 1 2)) '(() () ()))
-               '(() () (a)))
+               '((a) (a) (a)))
   
  (check-equal? (copy-inds '((a) (b) (c)) '((2 1) (1) (0)) '(() () ()))
-               '((b c) (b) (a))) 
+               '((c) (b a) (a))) 
  (check-equal? (copy-inds '(() (eax) (x eax))
                           '((0) (2 1) (1))
                           '((edx) () ()))
@@ -223,16 +217,16 @@
  (check-equal? (find-refs ':hello '(:f (cjump 1 = 1 :hello :f) (goto :hello) :hello))
                '(2 1))
  (check-equal? (find-refs ':g '(:f (goto :g) :g))
-               '(1))
+               '(1)))
  ;here's a tough one.  Maybe we should implement a "reacheable?" function
  ;Not exactly sure what we should return...there is a reference after all
- (check-equal? (find-refs ':h '(:f (return) (cjump 1 = 1 :h :j) :h))
-               '())
- (check-equal? (find-refs ':out-of-reach '(:f (cjump 1 = 1 :in-reach :in-reach)
-                                               :out-of-reach :in-reach))
-               '())
- (check-equal? (find-refs ':no '(:f (goto :yes) :no :yes))
-               '())
- (check-equal? (find-refs ':yes '(:f (goto :yes) :yes))
-               '(1)))
+ ;(check-equal? (find-refs ':h '(:f (return) (cjump 1 = 1 :h :j) :h))
+  ;             '())
+ ;(check-equal? (find-refs ':out-of-reach '(:f (cjump 1 = 1 :in-reach :in-reach)
+  ;                                             :out-of-reach :in-reach))
+   ;            '())
+ ;(check-equal? (find-refs ':no '(:f (goto :yes) :no :yes))
+  ;             '())
+ ;(check-equal? (find-refs ':yes '(:f (goto :yes) :yes))
+  ;             '(1)))
 
