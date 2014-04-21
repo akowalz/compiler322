@@ -1,0 +1,6 @@
+(:f
+(eax += 4)
+(x <- y)
+(goto :r)
+:r
+(call :afunction))
