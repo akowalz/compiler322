@@ -52,7 +52,7 @@
  (check-true (stops-control-flow? 2 '(:f (eax <- 1) (cjump 1 = 1 :f :g) :f :g)))
  ) 
 
-#;
+#;  ;Commenting out for now, basically just more complex "preds" calls
 (test-case
  "All-preds tests"
  (check-equal? (all-preds '(:f (eax <- 1)))
@@ -75,12 +75,10 @@
  (check-equal? (all-preds 
                 '(:f (eax += 5) (goto :g) :h :g))
                 '(() (0)        (1)       () (2)))
- ; also fails, because (x <- 5) can't be reached
  (check-equal? (all-preds '(:f (cjump eax < eax :l1 :l2) (x <- 5) :l1 :l2))
                '(() (0) () (1) (1 3)))
  (check-equal? (all-preds '(:g (goto :r) :q :r))
                '(() (0) () (1)))
- ;a also tough we never configured calls either
  (check-equal? (all-preds '(:g (call :h) (eax += 1)))
                '(() (0) ()))
  (check-equal? (all-preds '(:h (return) :g))
@@ -91,7 +89,7 @@
                '(() (0) (1) ())))
 
 (test-case
- "copy not killed tests"
+ "copy-not-killed tests"
  (check-equal? (copy-not-killed '(() (a) (b)) '((a) (b) ()) '((a) () ()))
                '(() (a b) (b)))
  (check-equal? (copy-not-killed '(() (eax edx x y) (z))
@@ -107,16 +105,6 @@
 ;make list of empties test
 (check-equal? (make-list-of-empties 3)
               '(() () ()))
-#|
-(test-case
- "get new outs"
- (check-equal? (get-new-outs '((a) (b)) '(0 1) '())
-               '(b a))
- (check-equal? (get-new-outs '((a) (b)) '(0 1) '(c))
-               '(b c a))
- (check-equal? (get-new-outs '((a) (b)) '(0) '(c))
-               '(c a)))
-|#
 
 (test-case
  "copy inds"
@@ -231,8 +219,7 @@
                '(2 1))
  (check-equal? (find-refs ':g '(:f (goto :g) :g))
                '(1)))
- ;here's a tough one.  Maybe we should implement a "reacheable?" function
- ;Not exactly sure what we should return...there is a reference after all
+#|  Very tricky cases.  Ask about these.
  ;(check-equal? (find-refs ':h '(:f (return) (cjump 1 = 1 :h :j) :h))
   ;             '())
  ;(check-equal? (find-refs ':out-of-reach '(:f (cjump 1 = 1 :in-reach :in-reach)
@@ -242,7 +229,7 @@
   ;             '())
  ;(check-equal? (find-refs ':yes '(:f (goto :yes) :yes))
   ;             '(1)))
-
+|#
 (test-case 
  "In/out"
  (let ([prog '(:f (eax <- 1) (eax += 2))])
@@ -285,3 +272,27 @@
                  '(() () () () (x)))
    (check-equal? (in-out-outs (in/out prog))   
                  '(() () () () ()))))
+  
+
+#|  THE PARSER!
+(define/contract (kills/gens instr)
+  (-> list? kill-gen?)
+  (match instr
+    [`(,x <- (mem ,y ,n)) ]
+    [`((mem ,y ,n) <- ,s) ]
+    [`(eax <- (allocate ,t1 ,t2)) ]
+    [`(eax <- (array-error ,t1 ,t2)) ]
+    [`(,x <- ,s) ]
+    [`(,x ,op ,t) ]
+    [`(,cx <- ,t1 ,cop, ,t2) ]
+    [(? symbol?) ]
+    [`(goto ,label) ]
+    [`(cjump ,t1 ,cop ,t2 ,label1 ,label2) ]
+    [`(call ,u) ]
+    [`(tail-call ,u) ]
+    [`(return) ]
+    [`(eax <- (print ,t)) ]
+    [else (error 'parse "Expression didn't conform to L1 grammar")]))
+|#
+
+

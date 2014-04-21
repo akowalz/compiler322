@@ -1,18 +1,12 @@
 #lang racket
 (require racket/set)
 (require rackunit)
-(require racket/stream)
 
+
+; Data
 (struct kill-gen (kills gens))
 (struct in-out (ins outs))
-;(provide kills/gens)
 
-
-(define/contract (label? x)
-  (-> (or/c symbol? number? list?) boolean?)
-  (and (symbol? x)
-       (regexp-match? #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
-                      (symbol->string x))))
 
 (define/contract (kills/gens instr)
   (-> (or/c list? symbol?) kill-gen?)
@@ -45,6 +39,12 @@
     [`(return) (kill-gen '() `(eax esi edi))]
     [else (error 'parse "Expression didn't conform to L1 grammar")]))
 
+(define/contract (label? x)
+  (-> (or/c symbol? number? list?) boolean?)
+  (and (symbol? x)
+       (regexp-match? #rx"^:[a-zA-Z_][a-zA-Z_0-9]*$"
+                      (symbol->string x))))
+
 (define (kills/gens-program prog)
   (map kills/gens prog))
 
@@ -53,13 +53,7 @@
 
 (define (all-gens prog)
   (map kill-gen-gens (kills/gens-program prog)))
-#;
-(define/contract (killed? instr x)
-  (-> list? symbol? boolean?)
-  (kill-gen-kills (kills/gens instr)))
 
-; FIXME
-; think about changing the last line to see if previous instruction was a jump, goto, call, etc
 (define/contract (preds num func)
   (-> number? (or/c list? symbol?) (listof number?))
   (let ([instr (list-ref func num)])
@@ -100,13 +94,10 @@
         [else preds]))
     preds))
 
-
 (define/contract (all-preds func)
   (-> list? (listof (listof number?)))
   (map (lambda (n) (preds n func))
        (stream->list (in-range (length func)))))
-
-
 
 (define/contract (check-var-reg s)
   (-> (or/c symbol? number?) boolean?)
@@ -122,62 +113,16 @@
     [(symbol? t2) (list t2)]
     [else '()]))
 
-
-(define/contract (in/out func)
-  (-> list? in-out?)
-  (let* ([kill-list (all-kills func)]
-         [pred-list (successors func)]
-         [ins (all-gens func)]
-         [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
-    (in/out-help ins outs kill-list pred-list))) 
-
-(define/contract (in/out-help ins outs kill-list preds)
-  (-> (listof (listof symbol?))
-      (listof (listof symbol?))
-      (listof (listof symbol?))
-      (listof (listof number?))
-      in-out?)
-  (let* ([new-ins (copy-not-killed ins outs kill-list)]
-         [new-outs (copy-inds new-ins preds outs)])
-  (if (equal? ins new-ins)
-      (in-out ins outs)
-        (if (equal? outs new-outs)
-            (in-out new-ins outs)
-            (in/out-help new-ins new-outs kill-list preds)))))
-  
-#; 
-(define/contract (copy-not-killed ins outs kill-list)
-  (-> list? list? list? list?)
-  (map set-subtract (copy-inds outs (make-list-of-increasing-ints (length ins)) ins)
-       kill-list))
-
-;  I think is makes way more sense...
 (define/contract (copy-not-killed ins outs kill-list)
   (-> (listof (listof symbol?))
       (listof (listof symbol?))
       (listof (listof symbol?))
       list?)
- ; (map set-subtract (map set-union ins outs) kill-list))
   (map set-union (map set-subtract outs kill-list) ins))
-
-
 
 (define (make-list-of-empties n)
   (if (= n 0) '()
       (cons empty (make-list-of-empties (- n 1)))))
-
-
-; and we might not need this
-#|
-(define (make-list-of-increasing-ints n)
-  (if (= n 1) '((0)) 
-      (append (make-list-of-increasing-ints (- n 1)) (list (list (- n 1))))))
-
-(check-equal? (make-list-of-increasing-ints 3)
-              '((0) (1) (2)))
-(check-equal? (make-list-of-increasing-ints 1)
-              '((0)))
-|#
 
 ;; wtfomgbbq
 (define/contract (copy-inds src indexes dst)
@@ -211,39 +156,40 @@
       result)))
 
 (define successors (λ (i) (transform-indexes (all-preds i))))
+
+(define/contract (in/out func)
+  (-> list? in-out?)
+  (let* ([kill-list (all-kills func)]
+         [pred-list (successors func)]
+         [ins (all-gens func)]
+         [outs (copy-inds ins pred-list (make-list-of-empties (length func)))])
+    (in/out-help ins outs kill-list pred-list))) 
+
+(define/contract (in/out-help ins outs kill-list preds)
+  (-> (listof (listof symbol?))
+      (listof (listof symbol?))
+      (listof (listof symbol?))
+      (listof (listof number?))
+      in-out?)
+  (let* ([new-ins (copy-not-killed ins outs kill-list)]
+         [new-outs (copy-inds new-ins preds outs)])
+  (if (equal? ins new-ins)
+      (in-out ins outs)
+        (if (equal? outs new-outs)
+            (in-out new-ins outs)
+            (in/out-help new-ins new-outs kill-list preds)))))
      
-  
-
-#|  THE PARSER!
-(define/contract (kills/gens instr)
-  (-> list? kill-gen?)
-  (match instr
-    [`(,x <- (mem ,y ,n)) ]
-    [`((mem ,y ,n) <- ,s) ]
-    [`(eax <- (allocate ,t1 ,t2)) ]
-    [`(eax <- (array-error ,t1 ,t2)) ]
-    [`(,x <- ,s) ]
-    [`(,x ,op ,t) ]
-    [`(,cx <- ,t1 ,cop, ,t2) ]
-    [(? symbol?) ]
-    [`(goto ,label) ]
-    [`(cjump ,t1 ,cop ,t2 ,label1 ,label2) ]
-    [`(call ,u) ]
-    [`(tail-call ,u) ]
-    [`(return) ]
-    [`(eax <- (print ,t)) ]
-    [else (error 'parse "Expression didn't conform to L1 grammar")]))
-|#
-
 (define (in/out-pretty fun)
   (let ([ios (in/out fun)])
     (list (cons 'in (map (λ (lst) (sort lst symbol<?)) (in-out-ins ios)))
           (cons 'out (map (λ (lst) (sort lst symbol<?)) (in-out-outs ios))))))
 
-(display (call-with-input-file
-          (vector-ref (current-command-line-arguments) 0)
-          (lambda (x) (in/out-pretty (read x)))))
-
+(if  (not (= (vector-length (current-command-line-arguments)) 1))
+  (display "Usaage: liveness ./file.L2f")
+  (display (call-with-input-file
+               (vector-ref (current-command-line-arguments) 0)
+             (lambda (x) (in/out-pretty (read x))))))
+  
 (provide (all-defined-out))
 
 
