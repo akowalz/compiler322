@@ -97,15 +97,12 @@
  (check-equal? (copy-not-killed '(() (eax edx x y) (z))
                                 '((ebx eax) (eax edx x y z) ())
                                 '((ebx) () ()))
-<<<<<<< HEAD
-               '((eax) (y x edx eax z) (z)))
+               '((eax) (z y x edx eax) (z)))
  (check-equal? (copy-not-killed '(() () (eax)) '(() (eax) ()) '(() (eax) ()))
                '(() () (eax)))
  (check-equal? (copy-not-killed '(() () (eax)) '(() (eax) ()) '(() (eax) (eax)))
                '(() () (eax))))
-=======
-               '((eax) (z y x edx eax) (z))))
->>>>>>> FETCH_HEAD
+
 
 ;make list of empties test
 (check-equal? (make-list-of-empties 3)
