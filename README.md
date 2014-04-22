@@ -1,6 +1,5 @@
-##  Compiler Construction (Northwestern EECS Department)
+## EECS 322 | Compiler Construction 
 
-Compiler created for EECS 322.
+Compiler created for course EECS 322, taught by Robby Findler at Northwestern.
 
-
-*--Alex Kowalczuk and Nathan Yeazel*
+*--Pair-programmed by Alex Kowalczuk (akowalz) and Nathan Yeazel*
