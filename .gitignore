@@ -1,3 +1,7 @@
 compiled/
 *~
 .DS_Store
+
+*.S
+*.out
+
