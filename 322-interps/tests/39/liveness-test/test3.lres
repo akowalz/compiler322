@@ -1,0 +1,14 @@
+(
+  (in
+    ()
+    (edi)
+    (edi esi)
+    (eax edi esi)
+  )
+  (out
+    (edi)
+    (edi esi)
+    (eax edi esi)
+    ()
+  )
+)

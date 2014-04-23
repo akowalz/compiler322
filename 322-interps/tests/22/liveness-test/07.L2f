@@ -1,0 +1,3 @@
+(:funs
+ (eax <- 11)
+ (return))

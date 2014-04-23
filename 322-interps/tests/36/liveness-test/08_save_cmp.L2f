@@ -1,0 +1,13 @@
+(
+  ;; <
+  ;; x x
+  (esi <- 1)
+  (edi <- 3)
+  (r <- esi < edi)
+  (eax <- (print r)) 
+  
+  ;; x num
+  (esi <- 1)
+  (r <- esi < 3)
+  (eax <- (print r)) 
+) 

@@ -1,0 +1,4 @@
+((x <- 3)
+(eax <- 1)
+(x += x)
+(eax <- (print eax)))

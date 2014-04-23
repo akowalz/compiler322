@@ -1,0 +1,12 @@
+(:return
+ (return)
+ (x <<= 1)
+ (y <<= 1)
+ (z <<= 1)
+ (return)
+ (z *= 1)
+ (return)
+ (return)
+ :goto
+ (goto :goto)
+ (return))

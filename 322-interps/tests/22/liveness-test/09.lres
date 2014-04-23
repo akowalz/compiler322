@@ -1,0 +1,12 @@
+((in
+  ()
+  (ebx)
+  (ebx)
+  (eax ebx)
+  (ebx))
+ (out
+  (ebx)
+  (ebx)
+  (eax ebx)
+  (ebx)
+  ()))

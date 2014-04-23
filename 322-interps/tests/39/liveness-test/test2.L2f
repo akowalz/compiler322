@@ -1,0 +1,8 @@
+(
+  :f
+  (x <- eax)
+  (y <- ecx)
+  (x += y)
+  (eax <- x)
+  (return)
+)

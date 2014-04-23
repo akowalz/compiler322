@@ -1,0 +1,7 @@
+(
+  :func
+  (ebx <- 1)
+  (eax <- (print ebx))
+  (eax <- ecx)
+  (return)
+)

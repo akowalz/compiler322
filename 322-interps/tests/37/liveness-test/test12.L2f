@@ -1,0 +1,7 @@
+(:f9
+ (eax <- 0)
+ (eax <- 1)
+ (eax <- 1)
+ (call :f7)
+ (a += eax)
+ (return))

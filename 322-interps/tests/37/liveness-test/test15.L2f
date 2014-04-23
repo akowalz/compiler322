@@ -1,0 +1,12 @@
+(:f7
+ (k <- 7)
+ (eax <- a)
+ :loop1
+ (goto :loop2)
+ (k <<= 2)
+ (a <- 19)
+ :loop2
+ (k >>= 1)
+ (a <<= 2)
+ (goto :loop1)
+ (return))
