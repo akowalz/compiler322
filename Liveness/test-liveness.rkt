@@ -43,7 +43,11 @@
  (check-equal? (preds 3 '(:f (cjump eax < 5 :l1 :l2) (return) :l1 :l2))
                '(1))
  (check-equal? (preds 4 '(:f (cjump eax < 5 :l1 :l2) :l1 (return) :l2))
-               '(1)))
+               '(1))
+ (check-equal? (preds 2 '(:f (eax <- (array-error 4 5)) :test))
+               '())
+ (check-equal? (preds 2 '(:f (eax <- (array-error 1 1)) (eax += 4)))
+               '()))
 
 (test-case
  "Stops control flow"
@@ -272,6 +276,24 @@
                  '(() () () () (x)))
    (check-equal? (in-out-outs (in/out prog))   
                  '(() () () () ()))))
+
+(check-equal? (in/out-pretty '((abc <- 11)
+                               (abc <- 11)
+                               (abc <- 11)
+                               (abc <- 11)
+                               (eax <- (array-error s0 s1))
+                               (eax <- (array-error s2 s3))))
+              '((in (s0 s1) (s0 s1) (s0 s1) (s0 s1) (s0 s1) (s2 s3))
+                (out (s0 s1) (s0 s1) (s0 s1) (s0 s1) () ())))
+
+(check-equal? (in/out-pretty '((x <- ebp)
+                               ((mem x -4) <- 1)
+                               (y <- (mem ebp -4))
+                               (y *= x)
+                               (y += y)))
+              '((in () (x) (x) (x y) (y)) (out (x) (x) (x y) (y) ())))
+              
+                             
   
 
 #|  THE PARSER!

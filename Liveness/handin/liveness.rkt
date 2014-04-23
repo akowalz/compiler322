@@ -16,8 +16,8 @@
                                                        '()))]
     [`(,x <- (mem ,y ,n)) (kill-gen (list x) (list y))]
     [`((mem ,y ,n) <- ,s) (kill-gen '() (if (check-var-reg s) 
-                                                (list y s) 
-                                                (list y)))]
+                                            (list y s) 
+                                            (list y)))]
     [`(eax <- (allocate ,t1 ,t2)) (kill-gen `(eax ecx edx) (two-ts t1 t2))]
     [`(eax <- (array-error ,t1 ,t2)) (kill-gen `(eax ecx edx) (two-ts t1 t2))]
     [`(,x <- ,s) (kill-gen (list x) (if (check-var-reg s)
@@ -62,9 +62,11 @@
          '()
          (if (label? instr)
              (append (find-refs instr func) 
-                     (if (stops-control-flow? (- num 1) func) (list )
+                     (if (stops-control-flow? (- num 1) func)
+                         '()
                          (list (- num 1))))
-             (if (stops-control-flow? (- num 1) func) (list )
+             (if (stops-control-flow? (- num 1) func)
+                 '()
                  (list (- num 1))))))))
 
 (define/contract (stops-control-flow? index func)
@@ -75,6 +77,7 @@
       [`(goto ,_) #t]
       [`(return) #t]
       [`(tail-call ,_) #t]
+      [`(eax <- (array-error ,_ ,_)) #t]
       [else #f])))
 
 (define/contract (find-refs label func)
@@ -101,7 +104,8 @@
 
 (define/contract (check-var-reg s)
   (-> (or/c symbol? number?) boolean?)
-  (and (symbol? s) (not (label? s))))
+  (and (symbol? s)
+       (not (label? s))))
 
 (define/contract (two-ts t1 t2)
   (-> (or/c symbol? number?) (or/c symbol? number?) list?)
@@ -181,8 +185,10 @@
      
 (define (in/out-pretty fun)
   (let ([ios (in/out fun)])
-    (list (cons 'in (map (λ (lst) (sort lst symbol<?)) (in-out-ins ios)))
-          (cons 'out (map (λ (lst) (sort lst symbol<?)) (in-out-outs ios))))))
+    (list (cons 'in (map (λ (lst) (sort (set-subtract lst '(esp ebp))
+                                        symbol<?)) (in-out-ins ios)))
+          (cons 'out (map (λ (lst) (sort (set-subtract lst '(esp ebp))
+                                         symbol<?)) (in-out-outs ios))))))
 
 (if  (not (= (vector-length (current-command-line-arguments)) 1))
   (display "Usaage: liveness ./file.L2f")
