@@ -1,15 +1,25 @@
 #lang racket
 (require "liveness.rkt" rackunit racket/set)
 
-(define all-registers '(eax ebx ecx edx esi edi))
+(define all-registers '(eax ebx ecx edi edx esi))
 
-(struct colored-node (color name))
+(struct colored-node (color name) #:transparent)
+
+(define (pretty-out code)
+  (let* ([i-graph (interferes code)]
+         [c-graph (filter (λ (v) (not (set-member? all-registers (colored-node-name v))))
+                          (color-graph i-graph))])
+    (display i-graph)
+    (display "\n")
+    (display (map (λ (node) (list (colored-node-name node)
+                         (list-ref all-registers
+                                   (colored-node-color node))))
+         c-graph))))
 
 (define (all-vars+regs prog)
   (sort (set-union (foldr set-union '() (all-kills prog)) 
              (foldr set-union '() (all-gens prog)) 
              '(eax ebx ecx edx esi edi)) symbol<?))
-
 
 (define (interferes code)
    (let* ([var-list (all-vars+regs code)]
@@ -51,44 +61,59 @@
                        [else '()])
                      '()))
     (else '())))
+
 (define (color-graph graph)
-  (let* ([G graph]
-         [colored-graph '()]
+  (let* ([colored-graph '()]
          [stack '()])
     ;Take out all non-register variables and put in stack
     (begin (for ([var-node graph])
              (if (set-member? all-registers (first var-node))
                  void
-                 (begin (set! graph (set-subtract G (var-node)))
-                        (set! stack (cons var-node stack)))))
+                 (set! stack (cons var-node stack))))
     ;Build colored graph with registers
-    (for ([register G]
+    (for ([register all-registers]
           [i (in-range 6)])
-      (set! colored-graph (cons (colored-node i (first register)) colored-graph)))
+      (set! colored-graph (cons (colored-node i register) colored-graph)))
     ;Add back in variables to colored graph
     (for ([var-node stack])
       (let ([new-graph (att-to-color colored-graph var-node)])
-        (if (graph=? new-graph colored-graph)
+        (if (equal? new-graph colored-graph)
+            ;failed to color
             (set! colored-graph (cons #f colored-graph))
-            (set! colored-graph new-newgraph))))
-    colored-graph)
-  ))
+            ;succeeded to color
+            (set! colored-graph new-graph))))
+    colored-graph)))
 
 (define (att-to-color colored-graph var-node)
-  (let [newgraph colored-graph])
-  (for (i (in range 6))
-    (if (check-neighbors colored-graph var-node i) 
-        (set! newgraph (cons (colored-node i (first var-node)) newgraph))
-        void))
-  newgraph)
+  (let ([newgraph colored-graph]
+        [succeeded #f])
+    (for [(i (in-range 6))]
+      (if (and (not succeeded)
+               (check-neighbors colored-graph var-node i))
+          (begin (set! succeeded #t)
+                 (set! newgraph (cons (colored-node i (first var-node))
+                                      newgraph)))
+          void))
+    newgraph))
 
 (define (check-neighbors colored-graph var-node i)
   (let ([neighbors (rest var-node)])
-    (andmap (λ (neighb) (color-check neighb i)) neighbors)
+    (andmap (λ (neighb) (color-check colored-graph neighb i)) neighbors)
    ))
 
-(define (color-check neighbor num)
-  (not (equal? num (colored-node-color neighbor))))
+(define (color-check colored-graph neighbor num)
+  (andmap (λ (cn) (not (and (equal? (colored-node-name cn) neighbor)
+                            (equal? (colored-node-color cn) num))))
+          colored-graph))
+
+;(color-graph (interferes '(:f (eax <- 1) (eax += 2) (x += 5) (ebx <- 5))))
+
+(if  (not (= (vector-length (current-command-line-arguments)) 1))
+  (display "")
+  (call-with-input-file
+      (vector-ref (current-command-line-arguments) 0)
+    (lambda (x) (pretty-out (read x)))))
+(provide (all-defined-out))
 
 #|(check-equal? (var-interferes 'x '((y z) (x t)) '(() ()) '(()()))
               '(t))

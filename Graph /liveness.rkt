@@ -190,11 +190,11 @@
           (cons 'out (map (λ (lst) (sort (set-subtract lst '(esp ebp))
                                          symbol<?)) (in-out-outs ios))))))
 
-(if  (not (= (vector-length (current-command-line-arguments)) 1))
-  (display "Usaage: liveness ./file.L2f")
+#|(if  (not (= (vector-length (current-command-line-arguments)) 1))
+  (display "")
   (display (call-with-input-file
                (vector-ref (current-command-line-arguments) 0)
-             (lambda (x) (in/out-pretty (read x))))))
+             (lambda (x) (in/out-pretty (read x))))))|#
   
 (provide (all-defined-out))
 
