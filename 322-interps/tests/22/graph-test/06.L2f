@@ -1,0 +1,7 @@
+((x <- 5)
+ (y <- 7)
+ :hi
+ (y += x)
+ (x <- 11)
+ (cjump eax < ebx :hi :bye)
+ :bye)

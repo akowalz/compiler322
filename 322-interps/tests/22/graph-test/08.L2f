@@ -1,0 +1,6 @@
+((x <- 11)
+ (x += x)
+ (eax <- (print x))
+ (y <- 13)
+ (edi <- y)
+ (eax <- (print edi)))

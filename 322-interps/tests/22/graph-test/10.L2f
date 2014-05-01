@@ -1,0 +1,5 @@
+((tail-call x)
+ (return)
+ (eax <- eax)
+ (ebx <- ecx)
+ (x += 5))
