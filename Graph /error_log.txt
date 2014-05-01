@@ -1,0 +1,377 @@
+>>>> graph <<<<
+Testing robby/graph-test/9.L2f ............... passed
+Testing robby/graph-test/89.L2f .............. passed
+Testing robby/graph-test/88.L2f .............. passed
+Testing robby/graph-test/87.L2f .............. passed
+Testing robby/graph-test/86.L2f .............. passed
+Testing robby/graph-test/85.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Testing robby/graph-test/84.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Testing robby/graph-test/83.L2f .............. passed
+Testing robby/graph-test/82.L2f .............. passed
+Testing robby/graph-test/81.L2f .............. passed
+Testing robby/graph-test/80.L2f .............. passed
+Testing robby/graph-test/8.L2f ............... passed
+Testing robby/graph-test/79.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s2 s3) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s2 s3) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax ecx edx s0 s1 s3) (s3 eax ecx edx s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s2 s3) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s2 s3) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax ecx edx s0 s1 s3) (s3 eax ecx edx s0 s1 s2))
+Testing robby/graph-test/78.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Testing robby/graph-test/77.L2f .............. passed
+Testing robby/graph-test/76.L2f .............. passed
+Testing robby/graph-test/75.L2f .............. passed
+Testing robby/graph-test/74.L2f .............. passed
+Testing robby/graph-test/73.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s1) (esi eax ebx ecx edi edx) (s0 s1) (s1 eax ecx edx s0))
+Expected: ((eax ebx ecx edi edx esi s0 s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s1) (esi eax ebx ecx edi edx) (s0 eax s1) (s1 eax ecx edx s0))
+Testing robby/graph-test/72.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1) (s1 s0))
+Expected: ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1) (s1 s0))
+Testing robby/graph-test/71.L2f .............. passed
+Testing robby/graph-test/70.L2f .............. passed
+Testing robby/graph-test/7.L2f ............... failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x1 x3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x0 eax x1 x2 x3) (x1 eax x0 x2 x3) (x2 eax x0 x1 x3) (x3 eax x0 x1 x2))
+Expected: ((eax ebx ecx edi edx esi x0 x1 x2 x3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x0 eax x1 x2 x3) (x1 eax x0 x2 x3) (x2 eax x0 x1 x3) (x3 eax x0 x1 x2))
+Testing robby/graph-test/69.L2f .............. passed
+Testing robby/graph-test/68.L2f .............. passed
+Testing robby/graph-test/67.L2f .............. passed
+Testing robby/graph-test/66.L2f .............. passed
+Testing robby/graph-test/65.L2f .............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing robby/graph-test/64.L2f .............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing robby/graph-test/63.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi s0 s1) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx s0 s1) (s0 ecx edi edx esi s1) (s1 ecx edi edx esi s0))
+Expected: ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi s0 s1) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx s0 s1) (s0 eax ecx edi edx esi s1) (s1 ecx edi edx esi s0))
+Testing robby/graph-test/62.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi s0 s1) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx s0 s1) (s0 ecx edi edx esi s1) (s1 ecx edi edx esi s0))
+Expected: ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi s0 s1) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx s0 s1) (s0 eax ecx edi edx esi s1) (s1 ecx edi edx esi s0))
+Testing robby/graph-test/61.L2f .............. passed
+Testing robby/graph-test/60.L2f .............. passed
+Testing robby/graph-test/6.L2f ............... failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x0 eax x1 x2 x3) (x1 eax x0 x2 x3) (x2 eax x0 x1 x3) (x3 x0 x1 x2))
+Expected: ((eax ebx ecx edi edx esi x0 x1 x2) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x0 eax x1 x2 x3) (x1 eax x0 x2 x3) (x2 eax x0 x1 x3) (x3 x0 x1 x2))
+Testing robby/graph-test/59.L2f .............. passed
+Testing robby/graph-test/58.L2f .............. passed
+Testing robby/graph-test/57.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi s1) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx) (s0 ecx edx s1) (s1 eax ebx ecx edx s0))
+Expected: ((eax ebx ecx edi edx esi s0 s1) (ebx eax ecx edi edx esi s1) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx) (s0 eax ecx edx s1) (s1 eax ebx ecx edx s0))
+Testing robby/graph-test/56.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx) (s0 ecx edx s1) (s1 ecx edx s0))
+Expected: ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi s0 s1) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi s0 s1) (esi eax ebx ecx edi edx) (s0 eax ecx edx s1) (s1 ecx edx s0))
+Testing robby/graph-test/55.L2f .............. passed
+Testing robby/graph-test/54.L2f .............. passed
+Testing robby/graph-test/53.L2f .............. passed
+Testing robby/graph-test/52.L2f .............. passed
+Testing robby/graph-test/51.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 eax s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 eax s0 s1 s2))
+Testing robby/graph-test/50.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 eax s0 s1 s2))
+Expected: ((eax ebx ecx edi edx esi s0 s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 eax s0 s1 s2))
+Testing robby/graph-test/5.L2f ............... passed
+Testing robby/graph-test/49.L2f .............. passed
+Testing robby/graph-test/48.L2f .............. passed
+Testing robby/graph-test/47.L2f .............. passed
+Testing robby/graph-test/46.L2f .............. passed
+Testing robby/graph-test/45.L2f .............. passed
+Testing robby/graph-test/44.L2f .............. passed
+Testing robby/graph-test/43.L2f .............. passed
+Testing robby/graph-test/42.L2f .............. passed
+Testing robby/graph-test/41.L2f .............. failed (wrong output)
+Actual:   ((cx s2 s3) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 s0 s2 s3) (s2 cx s0 s1 s3) (s3 cx s0 s1 s2))
+Expected: ((cx edi esi s2 s3) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 s0 s2 s3) (s2 cx s0 s1 s3) (s3 cx s0 s1 s2))
+Testing robby/graph-test/40.L2f .............. failed (wrong output)
+Actual:   ((cx) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1) (s1 s0))
+Expected: ((cx edi esi) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 s1) (s1 s0))
+Testing robby/graph-test/4.L2f ............... passed
+Testing robby/graph-test/39.L2f .............. failed (wrong output)
+Actual:   ((abc s0 s1 s2 s3) (cx s2 s3) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 abc s1 s2 s3) (s1 abc s0 s2 s3) (s2 abc cx s0 s1 s3) (s3 abc cx s0 s1 s2))
+Expected: ((abc s0 s1 s2 s3) (cx edi esi s2 s3) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 abc s1 s2 s3) (s1 abc s0 s2 s3) (s2 abc cx s0 s1 s3) (s3 abc cx s0 s1 s2))
+Testing robby/graph-test/38.L2f .............. failed (wrong output)
+Actual:   ((abc s0 s1) (cx) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 abc s1) (s1 abc s0))
+Expected: ((abc s0 s1) (cx edi esi) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 abc s1) (s1 abc s0))
+Testing robby/graph-test/37.L2f .............. failed (wrong output)
+Actual:   ((cx s2 s3) (eax ebx ecx edi edx esi s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 cx eax s0 s1 s3) (s3 cx eax s0 s1 s2))
+Expected: ((cx edi esi s2 s3) (eax ebx ecx edi edx esi s0 s1 s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 cx eax s0 s1 s3) (s3 cx eax s0 s1 s2))
+Testing robby/graph-test/36.L2f .............. failed (wrong output)
+Actual:   ((cx) (eax ebx ecx edi edx esi s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Expected: ((cx edi esi) (eax ebx ecx edi edx esi s0 s1 s2) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi cx eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi cx eax ebx ecx edi edx) (s0 eax s1 s2 s3) (s1 eax s0 s2 s3) (s2 eax s0 s1 s3) (s3 s0 s1 s2))
+Testing robby/graph-test/35.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num x0 x1) (x0 num x1) (x1 num x0))
+Expected: ((eax ebx ecx edi edx esi num) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num eax ebx edi edx esi x0 x1) (x0 num x1) (x1 num x0))
+Testing robby/graph-test/34.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num x0) (x0 num))
+Expected: ((eax ebx ecx edi edx esi num) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num eax ebx edi edx esi x0) (x0 num))
+Testing robby/graph-test/33.L2f .............. failed (wrong output)
+Actual:   ((abc num x0 x1) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num abc x0 x1) (x0 abc num x1) (x1 abc num x0))
+Expected: ((abc num x0 x1) (eax ebx ecx edi edx esi num) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num abc eax ebx edi edx esi x0 x1) (x0 abc num x1) (x1 abc num x0))
+Testing robby/graph-test/32.L2f .............. failed (wrong output)
+Actual:   ((abc num x0) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num abc x0) (x0 abc num))
+Expected: ((abc num x0) (eax ebx ecx edi edx esi num) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num abc eax ebx edi edx esi x0) (x0 abc num))
+Testing robby/graph-test/31.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi num x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num eax x0 x1) (x0 num x1) (x1 eax num x0))
+Expected: ((eax ebx ecx edi edx esi num x0 x1) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num eax ebx edi edx esi x0 x1) (x0 eax num x1) (x1 eax num x0))
+Testing robby/graph-test/30.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi num) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (num eax x0 x1) (x0 num x1) (x1 num x0))
+Expected: ((eax ebx ecx edi edx esi num x0) (ebx eax ecx edi edx esi num) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi num) (edx eax ebx ecx edi esi num) (esi eax ebx ecx edi edx num) (num eax ebx edi edx esi x0 x1) (x0 eax num x1) (x1 num x0))
+Testing robby/graph-test/3.L2f ............... passed
+Testing robby/graph-test/29.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx x0 x1) (x0 sx x1) (x1 sx x0))
+Expected: ((eax ebx ecx edi edx esi sx) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx eax ebx edi edx esi x0 x1) (x0 sx x1) (x1 sx x0))
+Testing robby/graph-test/28.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx x0) (x0 sx))
+Expected: ((eax ebx ecx edi edx esi sx) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx eax ebx edi edx esi x0) (x0 sx))
+Testing robby/graph-test/27.L2f .............. failed (wrong output)
+Actual:   ((abc sx x0 x1) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx abc x0 x1) (x0 abc sx x1) (x1 abc sx x0))
+Expected: ((abc sx x0 x1) (eax ebx ecx edi edx esi sx) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx abc eax ebx edi edx esi x0 x1) (x0 abc sx x1) (x1 abc sx x0))
+Testing robby/graph-test/26.L2f .............. failed (wrong output)
+Actual:   ((abc sx x0) (eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx abc x0) (x0 abc sx))
+Expected: ((abc sx x0) (eax ebx ecx edi edx esi sx) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx abc eax ebx edi edx esi x0) (x0 abc sx))
+Testing robby/graph-test/25.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi sx x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx eax x0 x1) (x0 sx x1) (x1 eax sx x0))
+Expected: ((eax ebx ecx edi edx esi sx x0 x1) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx eax ebx edi edx esi x0 x1) (x0 eax sx x1) (x1 eax sx x0))
+Testing robby/graph-test/24.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi sx) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (sx eax x0 x1) (x0 sx x1) (x1 sx x0))
+Expected: ((eax ebx ecx edi edx esi sx x0) (ebx eax ecx edi edx esi sx) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi sx) (edx eax ebx ecx edi esi sx) (esi eax ebx ecx edi edx sx) (sx eax ebx edi edx esi x0 x1) (x0 eax sx x1) (x1 sx x0))
+Testing robby/graph-test/23.L2f .............. passed
+Testing robby/graph-test/22.L2f .............. passed
+Testing robby/graph-test/21.L2f .............. passed
+Testing robby/graph-test/20.L2f .............. passed
+Testing robby/graph-test/2.L2f ............... passed
+Testing robby/graph-test/19.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0 s1 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 s0 s1 x1) (x1 eax s0 s1 x0))
+Expected: ((eax ebx ecx edi edx esi s0 s1 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing robby/graph-test/18.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 s0 s1 x1) (x1 eax s0 s1 x0))
+Expected: ((eax ebx ecx edi edx esi s0 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing robby/graph-test/17.L2f .............. passed
+Testing robby/graph-test/16.L2f .............. passed
+Testing robby/graph-test/15.L2f .............. passed
+Testing robby/graph-test/14.L2f .............. passed
+Testing robby/graph-test/13.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0 s1 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 s0 s1 x1) (x1 eax s0 s1 x0))
+Expected: ((eax ebx ecx edi edx esi s0 s1 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing robby/graph-test/12.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 s0 s1 x1) (x1 eax s0 s1 x0))
+Expected: ((eax ebx ecx edi edx esi s0 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing robby/graph-test/11.L2f .............. passed
+Testing robby/graph-test/10.L2f .............. passed
+Testing robby/graph-test/1.L2f ............... failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0 s1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 eax s1 x1) (x1 eax s0 x0))
+Expected: ((eax ebx ecx edi edx esi s0 s1 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 eax s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing robby/graph-test/0.L2f ............... failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi s0) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 eax s1 x1) (x1 eax s0 s1 x0))
+Expected: ((eax ebx ecx edi edx esi s0 x0 x1) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (s0 eax s1 x0 x1) (s1 s0 x0 x1) (x0 eax s0 s1 x1) (x1 eax s0 s1 x0))
+Testing 41/graph-test/9.L2f .................. passed
+Testing 41/graph-test/8.L2f .................. passed
+Testing 41/graph-test/7.L2f .................. passed
+Testing 41/graph-test/6.L2f .................. passed
+Testing 41/graph-test/5.L2f .................. passed
+Testing 41/graph-test/4.L2f .................. passed
+Testing 41/graph-test/3.L2f .................. passed
+Testing 41/graph-test/2.L2f .................. passed
+Testing 41/graph-test/16.L2f ................. passed
+Testing 41/graph-test/15.L2f ................. passed
+Testing 41/graph-test/14.L2f ................. passed
+Testing 41/graph-test/13.L2f ................. passed
+Testing 41/graph-test/12.L2f ................. passed
+Testing 41/graph-test/11.L2f ................. passed
+Testing 41/graph-test/10.L2f ................. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 41/graph-test/1.L2f .................. passed
+Testing 39/graph-test/test9.L2f .............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:105:10
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:87:0: att-to-color
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:78:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:65:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 39/graph-test/test8.L2f .............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi s1 s2 s3) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx s1 s2 s3) (s1 edi esi s2 s3) (s2 eax edi esi s1 s3) (s3 eax edi esi s1 s2))
+Expected: ((eax ebx ecx edi edx esi s2 s3) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi s1 s2 s3) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx s1 s2 s3) (s1 edi esi s2 s3) (s2 eax edi esi s1 s3) (s3 eax edi esi s1 s2))
+Testing 39/graph-test/test7.L2f .............. passed
+Testing 39/graph-test/test6.L2f .............. passed
+Testing 39/graph-test/test5.L2f .............. passed
+Testing 39/graph-test/test4.L2f .............. passed
+Testing 39/graph-test/test3.L2f .............. passed
+Testing 39/graph-test/test2.L2f .............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 39/graph-test/test15.L2f ............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi x) (ecx eax ebx edi edx esi x) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi x) (esi eax ebx ecx edi edx) (x eax ebx ecx edx))
+Expected: ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi x) (ecx eax ebx edi edx esi x) (edi eax ebx ecx edx esi x) (edx eax ebx ecx edi esi x) (esi eax ebx ecx edi edx x) (x eax ebx ecx edi edx esi))
+Testing 39/graph-test/test14.L2f ............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x eax))
+Expected: ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi x) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx x) (x eax edi esi))
+Testing 39/graph-test/test13.L2f ............. passed
+Testing 39/graph-test/test12.L2f ............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (x eax))
+Expected: ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi x) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi x) (edx eax ebx ecx edi esi x) (esi eax ebx ecx edi edx x) (x eax ebx edi edx esi))
+Testing 39/graph-test/test11.L2f ............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi s1 s2 s3 s6 s7 s8) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx s1 s2 s3 s6 s7 s8) (s1 edi esi s2 s3) (s2 eax edi esi s1 s3) (s3 eax edi esi s1 s2) (s6 edi esi s7 s8) (s7 eax edi esi s6 s8) (s8 eax edi esi s6 s7))
+Expected: ((eax ebx ecx edi edx esi s2 s3 s7 s8) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi s1 s2 s3 s6 s7 s8) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx s1 s2 s3 s6 s7 s8) (s1 edi esi s2 s3) (s2 eax edi esi s1 s3) (s3 eax edi esi s1 s2) (s6 edi esi s7 s8) (s7 eax edi esi s6 s8) (s8 eax edi esi s6 s7))
+Testing 39/graph-test/test10.L2f ............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:105:10
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:78:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:65:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 39/graph-test/test1.L2f .............. passed
+Testing 37/graph-test/test9.L2f .............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:105:10
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:78:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:65:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 37/graph-test/test8.L2f .............. passed
+Testing 37/graph-test/test7.L2f .............. passed
+Testing 37/graph-test/test6.L2f .............. passed
+Testing 37/graph-test/test5.L2f .............. passed
+Testing 37/graph-test/test4.L2f .............. passed
+Testing 37/graph-test/test3.L2f .............. passed
+Testing 37/graph-test/test2.L2f .............. passed
+Testing 37/graph-test/test15.L2f ............. passed
+Testing 37/graph-test/test14.L2f ............. passed
+Testing 37/graph-test/test13.L2f ............. passed
+Testing 37/graph-test/test12.L2f ............. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 37/graph-test/test11.L2f ............. passed
+Testing 37/graph-test/test10.L2f ............. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx) (t y) (y t))
+Expected: ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi t) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx t) (t edi esi y) (y t))
+Testing 37/graph-test/test1.L2f .............. passed
+Testing 35/graph-test/9.L2f .................. passed
+Testing 35/graph-test/8.L2f .................. passed
+Testing 35/graph-test/7.L2f .................. passed
+Testing 35/graph-test/6.L2f .................. passed
+Testing 35/graph-test/5.L2f .................. failed (wrong output)
+Actual:   ((eax ebp ebx ecx edi edx esi) (ebp eax) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
+Expected: ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
+Testing 35/graph-test/4.L2f .................. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi) (ebp) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
+Expected: ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
+Testing 35/graph-test/3.L2f .................. passed
+Testing 35/graph-test/2.L2f .................. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 35/graph-test/17.L2f ................. passed
+Testing 35/graph-test/16.L2f ................. passed
+Testing 35/graph-test/15.L2f ................. passed
+Testing 35/graph-test/14.L2f ................. passed
+Testing 35/graph-test/13.L2f ................. passed
+Testing 35/graph-test/12.L2f ................. passed
+Testing 35/graph-test/11.L2f ................. passed
+Testing 35/graph-test/10.L2f ................. passed
+Testing 35/graph-test/1.L2f .................. passed
+Testing 22/graph-test/15.L2f ................. passed
+Testing 22/graph-test/14.L2f ................. passed
+Testing 22/graph-test/13.L2f ................. passed
+Testing 22/graph-test/12.L2f ................. passed
+Testing 22/graph-test/11.L2f ................. passed
+Testing 22/graph-test/10.L2f ................. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 22/graph-test/09.L2f ................. passed
+Testing 22/graph-test/08.L2f ................. passed
+Testing 22/graph-test/07.L2f ................. passed
+Testing 22/graph-test/06.L2f ................. passed
+Testing 22/graph-test/05.L2f ................. failed (graph returned non-zero status)
+stderr:
+colored-node-name: contract violation
+  expected: colored-node?
+  given: #f
+  context...:
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:10:26
+   /Applications/Racket v6.0/collects/racket/private/list.rkt:256:2: filter
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
+Testing 22/graph-test/04.L2f ................. failed (wrong output)
+Actual:   ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi x) (ecx eax ebx edi edx esi x) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi x) (esi eax ebx ecx edi edx) (x eax ebx ecx))
+Expected: ((eax ebx ecx edi edx esi x) (ebx eax ecx edi edx esi x) (ecx eax ebx edi edx esi x) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi x) (esi eax ebx ecx edi edx) (x eax ebx ecx edx))
+Testing 22/graph-test/03.L2f ................. passed
+Testing 22/graph-test/02.L2f ................. passed
+Testing 22/graph-test/01.L2f ................. passed
+>>>> Summaries <<<<
+graph: 110 of 168 (65%)
