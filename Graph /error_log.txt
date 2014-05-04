@@ -187,14 +187,14 @@ colored-node-name: contract violation
   expected: colored-node?
   given: #f
   context...:
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:110:10
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:117:10
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:95:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:92:0: att-to-color
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:83:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:70:0: color-graph
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:102:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:99:0: att-to-color
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:77:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:11:0: pretty-out
    /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
 Testing 39/graph-test/test8.L2f .............. failed (wrong output)
 Actual:   ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi s1 s2 s3) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx s1 s2 s3) (s1 edi esi s2 s3) (s2 eax edi esi s1 s3) (s3 eax edi esi s1 s2))
@@ -224,13 +224,13 @@ colored-node-name: contract violation
   expected: colored-node?
   given: #f
   context...:
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:110:10
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:117:10
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:95:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:83:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:70:0: color-graph
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:102:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:77:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:11:0: pretty-out
    /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
 Testing 39/graph-test/test1.L2f .............. passed
 Testing 37/graph-test/test9.L2f .............. failed (graph returned non-zero status)
@@ -239,13 +239,13 @@ colored-node-name: contract violation
   expected: colored-node?
   given: #f
   context...:
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:110:10
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:117:10
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
    /Applications/Racket v6.0/collects/racket/private/map.rkt:75:13: andmap
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:95:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:83:4: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:70:0: color-graph
-   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:8:0: pretty-out
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:102:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:90:4: for-loop
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:77:0: color-graph
+   /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt:11:0: pretty-out
    /Users/Alex/code/Koala-Yeazy-322/Graph /Graph.rkt: [running body]
 Testing 37/graph-test/test8.L2f .............. passed
 Testing 37/graph-test/test7.L2f .............. passed
@@ -267,12 +267,8 @@ Testing 35/graph-test/9.L2f .................. passed
 Testing 35/graph-test/8.L2f .................. passed
 Testing 35/graph-test/7.L2f .................. passed
 Testing 35/graph-test/6.L2f .................. passed
-Testing 35/graph-test/5.L2f .................. failed (wrong output)
-Actual:   ((eax ebp ebx ecx edi edx esi) (ebp eax) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
-Expected: ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
-Testing 35/graph-test/4.L2f .................. failed (wrong output)
-Actual:   ((eax ebx ecx edi edx esi) (ebp) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
-Expected: ((eax ebx ecx edi edx esi) (ebx eax ecx edi edx esi) (ecx eax ebx edi edx esi) (edi eax ebx ecx edx esi) (edx eax ebx ecx edi esi) (esi eax ebx ecx edi edx))
+Testing 35/graph-test/5.L2f .................. passed
+Testing 35/graph-test/4.L2f .................. passed
 Testing 35/graph-test/3.L2f .................. passed
 Testing 35/graph-test/2.L2f .................. passed
 Testing 35/graph-test/17.L2f ................. passed
@@ -302,4 +298,4 @@ Testing 22/graph-test/03.L2f ................. passed
 Testing 22/graph-test/02.L2f ................. passed
 Testing 22/graph-test/01.L2f ................. passed
 >>>> Summaries <<<<
-graph: 118 of 168 (70%)
+graph: 120 of 168 (71%)
