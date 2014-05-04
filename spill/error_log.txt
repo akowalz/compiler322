@@ -6,22 +6,16 @@ Testing robby/spill-test/98-r.L2f ............ passed
 Testing robby/spill-test/96-x.L2f ............ passed
 Testing robby/spill-test/96-r.L2f ............ passed
 Testing robby/spill-test/93-r.L2f ............ passed
-Testing robby/spill-test/93-M.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp 0)) (b <- s0 < M) (s1 <- (mem ebp 0)) (b <- s1 < M) (s2 <- (mem ebp 0)) (b <- s2 < M) (s3 <- (mem ebp 0)) (b <- s3 < M))
-Expected: ((s0 <- (mem ebp 0)) (b <- s0 < s0) (s1 <- (mem ebp 0)) (b <- s1 < s1) (s2 <- (mem ebp 0)) (b <- s2 < s2) (s3 <- (mem ebp 0)) (b <- s3 < s3))
+Testing robby/spill-test/93-M.L2f ............ passed
 Testing robby/spill-test/93-b.L2f ............ passed
 Testing robby/spill-test/92-r.L2f ............ passed
 Testing robby/spill-test/92-p.L2f ............ passed
 Testing robby/spill-test/91-r.L2f ............ passed
-Testing robby/spill-test/91-N.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -16)) (l <- s0 < N) (s1 <- (mem ebp -16)) (l <- s1 < N))
-Expected: ((s0 <- (mem ebp -16)) (l <- s0 < s0) (s1 <- (mem ebp -16)) (l <- s1 < s1))
+Testing robby/spill-test/91-N.L2f ............ passed
 Testing robby/spill-test/91-l.L2f ............ passed
 Testing robby/spill-test/90-t.L2f ............ passed
 Testing robby/spill-test/90-r.L2f ............ passed
-Testing robby/spill-test/90-Iu.L2f ........... failed (wrong output)
-Actual:   ((s0 <- (mem ebp -20)) (t <- s0 <= Iu))
-Expected: ((s0 <- (mem ebp -20)) (t <- s0 <= s0))
+Testing robby/spill-test/90-Iu.L2f ........... passed
 Testing robby/spill-test/9-r1.L2f ............ passed
 Testing robby/spill-test/9-r.L2f ............. passed
 Testing robby/spill-test/89-r.L2f ............ passed
@@ -123,36 +117,26 @@ Testing robby/spill-test/28-C.L2f ............ passed
 Testing robby/spill-test/27-r.L2f ............ passed
 Testing robby/spill-test/27-f.L2f ............ passed
 Testing robby/spill-test/26-y.L2f ............ passed
-Testing robby/spill-test/26-u.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -32)) (s0 <- (mem y 0)) ((mem ebp -32) <- s0) (s1 <- (mem ebp -32)) (s1 <- (mem y 0)) ((mem ebp -32) <- s1) (s2 <- (mem ebp -32)) (s2 <- (mem y 0)) ((mem ebp -32) <- s2))
-Expected: ((s0 <- (mem y 0)) ((mem ebp -32) <- s0) (s1 <- (mem y 0)) ((mem ebp -32) <- s1) (s2 <- (mem y 0)) ((mem ebp -32) <- s2))
+Testing robby/spill-test/26-u.L2f ............ passed
 Testing robby/spill-test/26-r.L2f ............ passed
 Testing robby/spill-test/25-r.L2f ............ passed
-Testing robby/spill-test/24-x.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -4)) (s0 <- (mem I 0)) ((mem ebp -4) <- s0) (s1 <- (mem ebp -4)) (s1 <- (mem I 0)) ((mem ebp -4) <- s1) (s2 <- (mem ebp -4)) (s2 <- (mem I 0)) ((mem ebp -4) <- s2))
-Expected: ((s0 <- (mem I 0)) ((mem ebp -4) <- s0) (s1 <- (mem I 0)) ((mem ebp -4) <- s1) (s2 <- (mem I 0)) ((mem ebp -4) <- s2))
+Testing robby/spill-test/24-x.L2f ............ passed
 Testing robby/spill-test/24-r.L2f ............ passed
 Testing robby/spill-test/24-I.L2f ............ passed
 Testing robby/spill-test/23-r.L2f ............ passed
 Testing robby/spill-test/23-cA.L2f ........... passed
 Testing robby/spill-test/22-X.L2f ............ passed
-Testing robby/spill-test/22-UX.L2f ........... failed (wrong output)
-Actual:   ((s0 <- (mem ebp -24)) (s0 <- (mem X 0)) ((mem ebp -24) <- s0))
-Expected: ((s0 <- (mem X 0)) ((mem ebp -24) <- s0))
+Testing robby/spill-test/22-UX.L2f ........... passed
 Testing robby/spill-test/22-r.L2f ............ passed
 Testing robby/spill-test/21-r1.L2f ........... passed
-Testing robby/spill-test/21-r.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -28)) (s0 <- (mem eax 0)) ((mem ebp -28) <- s0))
-Expected: ((s0 <- (mem eax 0)) ((mem ebp -28) <- s0))
+Testing robby/spill-test/21-r.L2f ............ passed
 Testing robby/spill-test/20-r.L2f ............ passed
 Testing robby/spill-test/20-N.L2f ............ passed
 Testing robby/spill-test/2-r.L2f ............. passed
 Testing robby/spill-test/2-e.L2f ............. passed
 Testing robby/spill-test/19-u.L2f ............ passed
 Testing robby/spill-test/19-r.L2f ............ passed
-Testing robby/spill-test/19-j.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -32)) (s0 <- (mem u 0)) ((mem ebp -32) <- s0) (s1 <- (mem ebp -32)) (s1 <- (mem u 0)) ((mem ebp -32) <- s1) (s2 <- (mem ebp -32)) (s2 <- (mem u 0)) ((mem ebp -32) <- s2))
-Expected: ((s0 <- (mem u 0)) ((mem ebp -32) <- s0) (s1 <- (mem u 0)) ((mem ebp -32) <- s1) (s2 <- (mem u 0)) ((mem ebp -32) <- s2))
+Testing robby/spill-test/19-j.L2f ............ passed
 Testing robby/spill-test/189-r.L2f ........... passed
 Testing robby/spill-test/188-r.L2f ........... passed
 Testing robby/spill-test/187-r.L2f ........... passed
@@ -169,9 +153,7 @@ Testing robby/spill-test/181-r.L2f ........... passed
 Testing robby/spill-test/180-r.L2f ........... passed
 Testing robby/spill-test/180-B.L2f ........... passed
 Testing robby/spill-test/18-r.L2f ............ passed
-Testing robby/spill-test/18-o.L2f ............ failed (wrong output)
-Actual:   ((s0 <- (mem ebp -4)) (s0 <- (mem b 0)) ((mem ebp -4) <- s0))
-Expected: ((s0 <- (mem b 0)) ((mem ebp -4) <- s0))
+Testing robby/spill-test/18-o.L2f ............ passed
 Testing robby/spill-test/18-b.L2f ............ passed
 Testing robby/spill-test/179-r.L2f ........... passed
 Testing robby/spill-test/179-L.L2f ........... passed
@@ -231,24 +213,10 @@ Testing robby/spill-test/147-r.L2f ........... passed
 Testing robby/spill-test/146-r.L2f ........... passed
 Testing robby/spill-test/145-r.L2f ........... passed
 Testing robby/spill-test/144-r.L2f ........... passed
-Testing robby/spill-test/144-Qi.L2f .......... failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing robby/spill-test/144-Qi.L2f .......... passed
 Testing robby/spill-test/143-r.L2f ........... passed
 Testing robby/spill-test/142-r.L2f ........... passed
-Testing robby/spill-test/142-e.L2f ........... failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing robby/spill-test/142-e.L2f ........... passed
 Testing robby/spill-test/141-r.L2f ........... passed
 Testing robby/spill-test/140-r.L2f ........... passed
 Testing robby/spill-test/14-r.L2f ............ passed
@@ -256,23 +224,9 @@ Testing robby/spill-test/139-r.L2f ........... passed
 Testing robby/spill-test/138-r.L2f ........... passed
 Testing robby/spill-test/137-r.L2f ........... passed
 Testing robby/spill-test/136-r.L2f ........... passed
-Testing robby/spill-test/136-k.L2f ........... failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing robby/spill-test/136-k.L2f ........... passed
 Testing robby/spill-test/135-r.L2f ........... passed
-Testing robby/spill-test/135-a.L2f ........... failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing robby/spill-test/135-a.L2f ........... passed
 Testing robby/spill-test/134-r.L2f ........... passed
 Testing robby/spill-test/133-r.L2f ........... passed
 Testing robby/spill-test/132-r.L2f ........... passed
@@ -334,15 +288,7 @@ Testing robby/spill-test/1-r.L2f ............. passed
 Testing 42/spill-test/test15.L2f ............. passed
 Testing 42/spill-test/test14.L2f ............. passed
 Testing 42/spill-test/test13.L2f ............. passed
-Testing 42/spill-test/test12.L2f ............. failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:17:0: spill-program-int
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 42/spill-test/test12.L2f ............. passed
 Testing 42/spill-test/test11.L2f ............. passed
 Testing 42/spill-test/test10.L2f ............. passed
 Testing 42/spill-test/test09.L2f ............. passed
@@ -353,12 +299,8 @@ Testing 42/spill-test/test04.L2f ............. passed
 Testing 42/spill-test/test03.L2f ............. passed
 Testing 42/spill-test/test02.L2f ............. passed
 Testing 42/spill-test/test01.L2f ............. passed
-Testing 41/spill-test/9.L2f .................. failed (wrong output)
-Actual:   ((s <- 21) (eax <- (allocate s 3)) (a <- eax) (d <- (mem a 0)) (x0 <- (mem ebp -4)) (x0 <- (mem a 4)) ((mem ebp -4) <- x0) (x1 <- (mem ebp -4)) (d += x1) ((mem a 8) <- d) (eax <- (print a)))
-Expected: ((s <- 21) (eax <- (allocate s 3)) (a <- eax) (d <- (mem a 0)) (x0 <- (mem a 4)) ((mem ebp -4) <- x0) (x1 <- (mem ebp -4)) (d += x1) ((mem a 8) <- d) (eax <- (print a)))
-Testing 41/spill-test/8.L2f .................. failed (wrong output)
-Actual:   ((s <- 21) (eax <- (allocate s 3)) (a <- eax) (x0 <- (mem ebp -4)) (x0 <- (mem a 0)) ((mem ebp -4) <- x0) (c <- (mem a 4)) (x1 <- (mem ebp -4)) (x1 += c) ((mem ebp -4) <- x1) (x2 <- (mem ebp -4)) ((mem a 8) <- x2) (eax <- (print a)))
-Expected: ((s <- 21) (eax <- (allocate s 3)) (a <- eax) (x0 <- (mem a 0)) ((mem ebp -4) <- x0) (c <- (mem a 4)) (x1 <- (mem ebp -4)) (x1 += c) ((mem ebp -4) <- x1) (x2 <- (mem ebp -4)) ((mem a 8) <- x2) (eax <- (print a)))
+Testing 41/spill-test/9.L2f .................. passed
+Testing 41/spill-test/8.L2f .................. passed
 Testing 41/spill-test/7.L2f .................. passed
 Testing 41/spill-test/6.L2f .................. passed
 Testing 41/spill-test/5.L2f .................. passed
@@ -391,15 +333,11 @@ Testing 40/spill-test/11.L2f ................. passed
 Testing 40/spill-test/10.L2f ................. passed
 Testing 40/spill-test/1.L2f .................. passed
 Testing 39/spill-test/test9.L2f .............. passed
-Testing 39/spill-test/test8.L2f .............. failed (wrong output)
-Actual:   ((s0 <- (mem ebp -8)) (eax <- s0 < 1) (s1 <- (mem ebp -8)) (eax <- 1 < s1) (s2 <- (mem ebp -8)) (eax <- s2 < x) (s3 <- (mem ebp -8)) (eax <- s3 < y) (s4 <- (mem ebp -8)) (eax <- y < s4) (s5 <- 1 < 1) ((mem ebp -8) <- s5) (s6 <- (mem ebp -8)) (s6 <- 1 < s6) ((mem ebp -8) <- s6) (s7 <- 1 < y) ((mem ebp -8) <- s7) (s8 <- (mem ebp -8)) (s8 <- s8 < y) ((mem ebp -8) <- s8) (s9 <- (mem ebp -8)) (s9 <- s9 < s9) ((mem ebp -8) <- s9))
-Expected: ((s0 <- (mem ebp -8)) (eax <- s0 < 1) (s1 <- (mem ebp -8)) (eax <- 1 < s1) (s2 <- (mem ebp -8)) (eax <- s2 < s2) (s3 <- (mem ebp -8)) (eax <- s3 < y) (s4 <- (mem ebp -8)) (eax <- y < s4) (s5 <- 1 < 1) ((mem ebp -8) <- s5) (s6 <- (mem ebp -8)) (s6 <- 1 < s6) ((mem ebp -8) <- s6) (s7 <- 1 < y) ((mem ebp -8) <- s7) (s8 <- (mem ebp -8)) (s8 <- s8 < y) ((mem ebp -8) <- s8) (s9 <- (mem ebp -8)) (s9 <- s9 < s9) ((mem ebp -8) <- s9))
+Testing 39/spill-test/test8.L2f .............. passed
 Testing 39/spill-test/test7.L2f .............. passed
 Testing 39/spill-test/test6.L2f .............. passed
 Testing 39/spill-test/test5.L2f .............. passed
-Testing 39/spill-test/test4.L2f .............. failed (wrong output)
-Actual:   (((mem ebp 4) <- 1) ((mem ebp 4) <- eax) ((mem ebp 4) <- :label) (s_0 <- (mem ebp 4)) (s_0 <- (mem eax 0)) ((mem ebp 4) <- s_0) ((mem ebp 4) <- y) (s_1 <- (mem ebp 4)) ((mem eax 0) <- s_1))
-Expected: (((mem ebp 4) <- 1) ((mem ebp 4) <- eax) ((mem ebp 4) <- :label) (s_0 <- (mem eax 0)) ((mem ebp 4) <- s_0) ((mem ebp 4) <- y) (s_1 <- (mem ebp 4)) ((mem eax 0) <- s_1))
+Testing 39/spill-test/test4.L2f .............. passed
 Testing 39/spill-test/test3.L2f .............. passed
 Testing 39/spill-test/test2.L2f .............. passed
 Testing 39/spill-test/test15.L2f ............. passed
@@ -407,48 +345,23 @@ Testing 39/spill-test/test14.L2f ............. passed
 Testing 39/spill-test/test13.L2f ............. passed
 Testing 39/spill-test/test12.L2f ............. passed
 Testing 39/spill-test/test11.L2f ............. passed
-Testing 39/spill-test/test10.L2f ............. failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 39/spill-test/test10.L2f ............. passed
 Testing 39/spill-test/test1.L2f .............. passed
 Testing 37/spill-test/test9.L2f .............. passed
 Testing 37/spill-test/test8.L2f .............. passed
 Testing 37/spill-test/test7.L2f .............. passed
 Testing 37/spill-test/test6.L2f .............. passed
-Testing 37/spill-test/test5.L2f .............. failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 37/spill-test/test5.L2f .............. passed
 Testing 37/spill-test/test4.L2f .............. passed
-Testing 37/spill-test/test3.L2f .............. failed (wrong output)
-Actual:   ((s0 <- (mem ebp -4)) (s0 <- (mem eax -12)) ((mem ebp -4) <- s0) (eax <- (mem ebp -4)))
-Expected: ((s0 <- (mem eax -12)) ((mem ebp -4) <- s0) (eax <- (mem ebp -4)))
+Testing 37/spill-test/test3.L2f .............. passed
 Testing 37/spill-test/test2.L2f .............. passed
 Testing 37/spill-test/test17.L2f ............. passed
 Testing 37/spill-test/test16.L2f ............. passed
 Testing 37/spill-test/test15.L2f ............. passed
 Testing 37/spill-test/test14.L2f ............. passed
 Testing 37/spill-test/test13.L2f ............. passed
-Testing 37/spill-test/test12.L2f ............. failed (wrong output)
-Actual:   ((c0 <- (mem ebp -32)) (c0 <- (mem ebp -12)) ((mem ebp -32) <- c0) (c1 <- (mem ebp -32)) (c1 -= 4) ((mem ebp -32) <- c1))
-Expected: ((c0 <- (mem ebp -12)) ((mem ebp -32) <- c0) (c1 <- (mem ebp -32)) (c1 -= 4) ((mem ebp -32) <- c1))
-Testing 37/spill-test/test11.L2f ............. failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 37/spill-test/test12.L2f ............. passed
+Testing 37/spill-test/test11.L2f ............. passed
 Testing 37/spill-test/test10.L2f ............. passed
 Testing 37/spill-test/test1.L2f .............. passed
 Testing 36/spill-test/20_assign.L2f .......... passed
@@ -456,25 +369,11 @@ Testing 36/spill-test/19_store.L2f ........... passed
 Testing 36/spill-test/18_print.L2f ........... passed
 Testing 36/spill-test/17_redundant.L2f ....... passed
 Testing 36/spill-test/16_multi.L2f ........... passed
-Testing 36/spill-test/15_label.L2f ........... failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 36/spill-test/15_label.L2f ........... passed
 Testing 36/spill-test/14_none.L2f ............ passed
 Testing 36/spill-test/13_loop.L2f ............ passed
 Testing 36/spill-test/12_cjump.L2f ........... passed
-Testing 36/spill-test/12_call.L2f ............ failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 36/spill-test/12_call.L2f ............ passed
 Testing 36/spill-test/11_add.L2f ............. passed
 Testing 36/spill-test/01_nothing.L2f ......... passed
 Testing 24/spill-test/spill-15.L2f ........... passed
@@ -508,14 +407,7 @@ Testing 22/spill-test/01.L2f ................. passed
 Testing 00/spill-test/test7.L2f .............. passed
 Testing 00/spill-test/test6.L2f .............. passed
 Testing 00/spill-test/test5.L2f .............. passed
-Testing 00/spill-test/test4.L2f .............. failed (handin/spill returned non-zero status)
-stderr:
-aSpill-count: contract violation
-  expected: aSpill?
-  given: "error"
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt:4:0: generate-spilled-program
-   /Users/Alex/code/Koala-Yeazy-322/spill/handin/spill.rkt: [running body]
+Testing 00/spill-test/test4.L2f .............. passed
 Testing 00/spill-test/test3.L2f .............. passed
 Testing 00/spill-test/test15.L2f ............. passed
 Testing 00/spill-test/test14.L2f ............. passed
@@ -523,4 +415,4 @@ Testing 00/spill-test/test13.L2f ............. passed
 Testing 00/spill-test/test12.L2f ............. passed
 Testing 00/spill-test/test11.L2f ............. passed
 >>>> Summaries <<<<
-spill: 389 of 415 (93%)
+spill: 415 of 415 (100%)
