@@ -7,14 +7,19 @@
 
 (define (pretty-out code)
   (let* ([i-graph (interferes code)]
-         [c-graph (filter (λ (v) (not (set-member? all-registers (colored-node-name v))))
-                          (color-graph i-graph))])
+         [temp-c (color-graph i-graph)]
+         [c-graph (if (set-member? temp-c #f)
+                      #f
+                      (filter (λ (v) (not (set-member? all-registers (colored-node-name v))))
+                              temp-c))])
     (display i-graph)
     (display "\n")
-    (display (map (λ (node) (list (colored-node-name node)
+    (display (if c-graph
+                 (map (λ (node) (list (colored-node-name node)
                          (list-ref all-registers
                                    (colored-node-color node))))
-         c-graph))))
+                      c-graph)
+                 #f))))
 
 (define (all-vars+regs prog)
   (sort (set-union (foldr set-union '() (all-kills prog)) 
