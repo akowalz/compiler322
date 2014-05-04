@@ -1,4 +1,4 @@
-#lang racket
+ #lang racket
 (require rackunit)
 
 (define (generate-spilled-program path)
