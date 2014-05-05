@@ -1,0 +1,2 @@
+#!/bin/sh
+racket L2.rkt "$@"
