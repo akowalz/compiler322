@@ -1,0 +1,9 @@
+(((call :func)
+  (eax <- (print eax)))
+ (:func
+  (eax <- 7)
+  (return))
+ (:add
+  (eax += eax)
+  (return))
+)

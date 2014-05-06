@@ -1,0 +1,11 @@
+(((call :start))
+ (:start
+ (a <- 1)
+ :loop
+ (cjump a < 11 :keep_going :done)
+ :keep_going
+ (eax <- (print a))
+ (a += 2)
+ (goto :loop)
+ :done
+ (return)))

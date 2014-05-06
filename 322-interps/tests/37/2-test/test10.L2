@@ -1,0 +1,11 @@
+(((a <- 5)
+  (b <- 7)
+  (c <- 3)
+  :loop
+  (a += b)
+  (a -= c)
+  (a *= c)
+  (eax <- (print a))
+  (cjump a < 1001 :loop :done)
+  :done
+  (eax <- (print b))))

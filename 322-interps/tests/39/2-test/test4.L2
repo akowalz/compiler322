@@ -1,0 +1,11 @@
+(
+  (
+  (ecx <- 1)
+  (ebx <- 8)
+  (ebx <<= 2)
+  (ebx += 1)
+  (old_ecx <- ecx)
+  (eax <- (print ebx))
+  (eax <- (print old_ecx))
+  )
+)

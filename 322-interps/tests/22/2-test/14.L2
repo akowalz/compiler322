@@ -1,0 +1,7 @@
+(((call :miao))
+ (:miao
+  (eax <- (print 15))
+  (tail-call :meow))
+ (:meow
+  (eax <- (print 19))
+  (return)))

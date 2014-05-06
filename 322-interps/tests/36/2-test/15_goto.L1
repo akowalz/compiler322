@@ -1,0 +1,14 @@
+(
+	(
+		(edi <- 5)
+		(ebx <- 3)
+		(eax <- (print edi))
+		(goto :wtf)
+		:wtf
+		(edi -= ebx)
+		(edi += 1)
+		(eax <- (print edi))
+		:end
+		(eax <- (print edi))
+	)
+) 

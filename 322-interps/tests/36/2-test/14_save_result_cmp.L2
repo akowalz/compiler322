@@ -1,0 +1,25 @@
+((;; <
+  (var <- 7 < 9)
+  (eax <- (print var)) ;; 0 for true
+  
+  (ecx <- 2)
+  (edx <- 3)
+  (var <- ecx < edx)
+  (eax <- (print var))
+  
+  (ecx <- 2)
+  (var <- ecx < 3)
+  (eax <- (print var))
+  
+  (edx <- 3)
+  (var <- 2 < edx)
+  (eax <- (print var))
+  ;; =
+  (ecx <- 3)
+  (var <- ecx = 3)
+  (eax <- (print var))
+  ;; <=
+  (ecx <- 2)
+  (var <- ecx <= 2)
+  (eax <- (print var))
+  ))

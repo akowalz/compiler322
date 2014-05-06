@@ -1,0 +1,4 @@
+(((call :miao)
+  (eax <- (print 5)))
+ (:miao
+  (return)))

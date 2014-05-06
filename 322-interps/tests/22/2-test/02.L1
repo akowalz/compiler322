@@ -1,0 +1,13 @@
+(((ebx <- 1)
+	:loop
+	(cjump ebx = 6 :end :cont)
+	:cont
+	(edx <- ebx)
+	(edx *= edx)
+	(edx *= 2)
+	(edx += 1)
+	(eax <- (print edx))
+	(ebx += 1)
+	(goto :loop)
+	:end
+	))
