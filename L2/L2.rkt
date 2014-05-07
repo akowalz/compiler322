@@ -71,7 +71,7 @@
     (display "")
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
-      (lambda (x) (display (read x)))))
+      (lambda (x) (display (L2->L1 (read x))))))
          
 
                  
@@ -113,3 +113,38 @@
                 ((mem ebp -4) <- 11)
                 ((mem ebp -4) <- 11)
                 (tail-call ebx)))
+
+(check-equal? (L2->L1 '(((eax <- 1) (x <- 5) (call :foo)) (:foo (ebx += 10))))
+              '(((eax <- 1) (ebx <- 5) (call :foo)) (:foo (ebx += 10))))
+
+#;; I think they register allocated poorly...this should be good
+(check-equal? (L2->L1 '(((a <- 5)
+                         (ecx <- a)
+                         :loop
+                         (cjump a <= 1 :end :cont)
+                         :cont
+                         (a -= 1)
+                         (ecx *= a)
+                         (goto :loop)
+                         :end
+                         (ecx *= 2)
+                         (ecx += 1)
+                         (eax <- (print ecx)))))
+              '(((edx <- 5)
+                 (ecx <- edx)
+                 :loop
+                 (cjump edx <= 1 :end :cont)
+                 :cont
+                 (edx -= 1)
+                 (ecx *= edx)
+                 (goto :loop)
+                 :end
+                 (ecx *= 2)
+                 (ecx += 1)
+                 (eax <- (print ecx)))))
+
+
+
+              
+              
+
