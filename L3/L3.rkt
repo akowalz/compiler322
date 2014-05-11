@@ -173,6 +173,16 @@
                 :magic-if-label-0else
                 (eax <- 7)))
 
+(check-equal? (compile-e `(if x (if 0 4 5) 3))
+              `((cjump x = 0 :magic-if-label-0else :magic-if-label-0then)
+                :magic-if-label-0then
+                (cjump 0 = 0 :magic-if-label-1else :magic-if-label-1then)
+                :magic-if-label-1then
+                (eax <- 9)
+                :magic-if-label-1else
+                (eax <- 11)
+                :magic-if-label-0else
+                (eax <- 7)))
 
               
                
