@@ -1,0 +1,24 @@
+(((call :main123))
+  (:main123
+   (eax <- (allocate 7 0))
+   ((mem eax 4) <- 3)
+   ((mem eax 8) <- 5)
+   ((mem eax 12) <- 7)
+   (x <- eax)
+   (y <- 5)
+   (y >>= 1)
+   (bounds-temp <- (mem x 0))
+   (cjump
+    y
+    <
+    bounds-temp
+    :magic_bounds_label_1pass
+    :magic_bounds_label_1fail)
+   :magic_bounds_label_1fail
+   (eax <- (array-error x 5))
+   :magic_bounds_label_1pass
+   (y *= 4)
+   (y += x)
+   (y <- (mem y 4))
+   (eax <- (print y))
+   (return)))

@@ -1,0 +1,9 @@
+(((call :main123))
+  (:main123
+   (x <- 11)
+   (y <- x)
+   (y &= 1)
+   (y *= 2)
+   (y += 1)
+   (eax <- (print y))
+   (return)))

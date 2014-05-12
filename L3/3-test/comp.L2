@@ -1,0 +1,19 @@
+(((call :main123))
+  (:main123
+   (x <- 11)
+   (y <- 21)
+   (z <- x < y)
+   (z <<= 1)
+   (z += 1)
+   (cjump
+    z
+    =
+    0
+    :magic_if_label_0else
+    :magic_if_label_0then)
+   :magic_if_label_0then
+   (eax <- (print 2049))
+   (return)
+   :magic_if_label_0else
+   (eax <- (print 4097))
+   (return)))

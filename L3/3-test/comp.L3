@@ -1,0 +1,6 @@
+((let ([x 5])
+  (let ([y 10])
+    (let ([z (< x y)])
+        (if z
+            (print 1024)
+            (print 2048))))))

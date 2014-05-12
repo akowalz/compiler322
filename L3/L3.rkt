@@ -49,11 +49,12 @@
   (match d
     [`(aref ,a ,off) (aref a off dest) ]
     [`(aset ,a ,off ,new) (aset a off new dest) ]
-    [`(alen ,a) `((dest <- ,a)
-                  (dest >>= 1))]
+    [`(alen ,a) `((,dest <- (mem ,a 0))
+                  (,dest <<= 1)
+                  (,dest += 1))]
     [`(new-array ,size ,init) `((eax <- (allocate ,(encode size) ,(encode init)))
                                 (,dest <- eax))]
-    [`(new-tuple ,vs ...) (init-tuple vs)]
+    [`(new-tuple ,vs ...) (init-tuple vs dest)]
     ;biops
     [`(+ ,v1 ,v2) `((,dest <- ,(encode v1))
                     (,dest += ,(encode v2))
@@ -71,43 +72,31 @@
     [`(<= ,v1 ,v2) (compile-comp '<= v1 v2 dest)]
     [`(= ,v1 ,v2) (compile-comp '= v1 v2 dest)]
     ;preds
-    [`(number? ,v) (compile-huh? 'number? v dest)]
-    [`(a? ,v) (compile-huh? 'a? v dest)]
-    [`(print ,v) `((eax <- (print ,v)))]
+    [`(number? ,v) (compile-huh 'number? v dest)]
+    [`(a? ,v) (compile-huh 'a? v dest)]
+    [`(print ,v) `((eax <- (print ,(encode v))))]
     [`(make-closure ,label ,v) (compile-d `(new-tuple ,label ,v))]
     [`(closure-proc ,v) (compile-d `(aref ,v 0) dest tail?)]
     [`(closure-vars ,v) (compile-d `(aref ,v 1) dest tail?)]
-    [`(,fn) (if tail?
-                `((tail-call ,fn))
-                `((call ,fn)
-                  (,dest <- eax))) ]
-    [`(,fn ,v1) (append `((ecx <- ,(encode v1)))
-                          (if tail?
-                          `((tail-call ,fn))
-                          `((call ,fn)
-                            (,dest <- eax))))]
-    [`(,fn ,v1 ,v2) (append `((ecx <- ,(encode v1))
-                              (edx <- ,(encode v2)))
-                      (if tail?
-                          `((tail-call ,fn))
-                          `((call ,fn)
-                            (,dest <- eax))))]
-    [`(,fn ,v1 ,v2 ,v3) (append `((ecx <- ,(encode v1))
-                                  (edx <- ,(encode v2))
-                                  (eax <- ,(encode v3)))
-                                  (if tail?
-                                      `((tail-call ,fn))
-                                      `((call ,fn)
-                                        (,dest <- eax))))]
-    [v `((,dest <- ,(encode v)))] ;check for labels
-    ))
+    [`(,fn) (compile-call fn '() tail? dest) ]
+    [`(,fn ,arglist ...) (compile-call fn arglist tail? dest)]
+    [v `((,dest <- ,(encode v)))])) ;check for labels
+
+(define (compile-call fn arglist tail? dest)
+  (append (for/list [(arg arglist)
+                     (i (in-naturals))]
+            `(,(list-ref arg-registers i) <- ,(encode arg)))
+          (if tail?
+              `((tail-call ,fn))
+              `((call ,fn) (,dest <- eax)))))
+           
 
 (define (compile-comp op v1 v2 dest)
  `((,dest <- ,v1 ,op ,v2)
    (,dest <<= 1)
    (,dest += 1)))
 
-(define (compile-huh? huh v1 dest)
+(define (compile-huh huh v1 dest)
   (append `((,dest <- ,(encode v1))
             (,dest &= 1))
           (cond [(symbol=? huh 'a?)
@@ -146,32 +135,29 @@
       ,pass
       (,dest *= 4)
       (,dest += ,array)
-      (,dest <- (mem ,dest 4)))))
-                  
+      (,dest <- (mem ,dest 4)))))                  
 
 (define (compile-let dest dexpr e count)
   (let* ((newIC (compile-e-int e count))
          (instrs (instr/count-instr newIC))
          (new-count (instr/count-count newIC)))
-  (instr/count
-   (append (compile-d dexpr dest #f) 
-           instrs)
-   new-count)))
+    (instr/count
+     (append (compile-d dexpr dest #f) 
+             instrs)
+     new-count)))
 
 
 (define (compile-if test then else count)
   (let* ([else-lab (new-if-label count "else")]
          [then-lab (new-if-label count "then")]
          [compiled-then (compile-e-int then (+ 1 count))]
-         [compiled-else (compile-e-int else 
-                                       (instr/count-count compiled-then))])
+         [compiled-else (compile-e-int else (instr/count-count compiled-then))])
     (instr/count (append `((cjump ,test = 0 ,else-lab ,then-lab))
                          (list then-lab)
                          (instr/count-instr compiled-then)
                          (list else-lab)
                          (instr/count-instr compiled-else))
-                 (instr/count-count compiled-else))
-    ))
+                 (instr/count-count compiled-else))))
 
 
 (define (new-if-label count then/else)
@@ -187,11 +173,12 @@
                   pass/fail)))
 
 
-(define (init-tuple values)
+(define (init-tuple values dest)
   (append `((eax <- (allocate ,(encode (length values)) 0)))
           (for/list ((v values)
                      (i (in-naturals)))
-          `((mem eax ,(* 4 (+ 1 i))) <- ,(encode v))))) 
+          `((mem eax ,(* 4 (+ 1 i))) <- ,(encode v)))
+          `((,dest <- eax)))) 
 
 (define/contract (encode x)
   (-> (or/c number? symbol?)
@@ -200,11 +187,12 @@
     ((number? x) (+ 1 (* 2 x)))
     ((symbol? x) x)))
 
-(check-equal? (init-tuple '(3 4 5))
+(check-equal? (init-tuple '(3 4 5) 'x)
               `((eax <- (allocate 7 0))
                 ((mem eax 4) <- 7)
                 ((mem eax 8) <- 9)  
-                ((mem eax 12) <- 11)))  
+                ((mem eax 12) <- 11)
+                (x <- eax)))  
 
 (check-equal? (compile-e '(let ([x 5]) x))
               '((x <- 11)
@@ -359,7 +347,33 @@
 
 (check-equal? (L3->L2 '((let ([x (new-array 10 3)])
                           (let ([y (aref x 4)])
-                            (print y))))) '())
+                            (print y))))) '(((call :main123))
+                                            (:main123
+                                             (eax <- (allocate 21 7))
+                                             (x <- eax)
+                                             (y <- 9)
+                                             (y >>= 1)
+                                             (bounds-temp <- (mem x 0))
+                                             (cjump
+                                              y
+                                              <
+                                              bounds-temp
+                                              :magic_bounds_label_0pass
+                                              :magic_bounds_label_0fail)
+                                             :magic_bounds_label_0fail
+                                             (eax <- (array-error x 9))
+                                             :magic_bounds_label_0pass
+                                             (y *= 4)
+                                             (y += x)
+                                             (y <- (mem y 4))
+                                             (eax <- (print y))
+                                             (return))))
+
+(if (= (vector-length (current-command-line-arguments)) 1)
+    (call-with-input-file
+        (vector-ref (current-command-line-arguments) 0)
+      (λ (x) (display (L3->L2 (read x)))))
+    (display ""))
               
                      
               

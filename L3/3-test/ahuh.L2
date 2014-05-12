@@ -1,0 +1,10 @@
+(((call :main123))
+  (:main123
+   (eax <- (allocate 7 1))
+   (x <- eax)
+   (y <- x)
+   (y &= 1)
+   (y *= -2)
+   (y += 3)
+   (eax <- (print y))
+   (return)))

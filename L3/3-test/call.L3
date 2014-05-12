@@ -1,0 +1,2 @@
+((let ([x (:two_plus_two)]) (print x))
+                        (:two_plus_two () (+ 2 2)))

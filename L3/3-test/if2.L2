@@ -1,0 +1,40 @@
+(((call :main123))
+  (:main123
+   (eax <- (allocate 1 21))
+   (x <- eax)
+   (y <- x)
+   (y &= 1)
+   (y *= -2)
+   (y += 3)
+   (cjump
+    y
+    =
+    0
+    :magic_if_label_0else
+    :magic_if_label_0then)
+   :magic_if_label_0then
+   (cjump
+    0
+    =
+    0
+    :magic_if_label_1else
+    :magic_if_label_1then)
+   :magic_if_label_1then
+   (eax <- (print 23))
+   (return)
+   :magic_if_label_1else
+   (eax <- (print 25))
+   (return)
+   :magic_if_label_0else
+   (cjump
+    1
+    =
+    0
+    :magic_if_label_2else
+    :magic_if_label_2then)
+   :magic_if_label_2then
+   (eax <- (print 29))
+   (return)
+   :magic_if_label_2else
+   (eax <- (print 31))
+   (return)))

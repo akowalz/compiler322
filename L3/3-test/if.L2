@@ -1,0 +1,14 @@
+(((call :main123))
+  (:main123
+   (cjump
+    0
+    =
+    0
+    :magic_if_label_0else
+    :magic_if_label_0then)
+   :magic_if_label_0then
+   (eax <- (print 3))
+   (return)
+   :magic_if_label_0else
+   (eax <- (print 5))
+   (return)))
