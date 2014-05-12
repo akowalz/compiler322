@@ -1,4 +1,5 @@
-(((ecx <- 37) (tail-call :fib))
+(((call :main123) (eax <- (print eax)))
+  (:main123 (ecx <- 37) (tail-call :fib))
   (:fib
    (x <- ecx)
    (xlt2 <- x < 2)
@@ -12,6 +13,7 @@
     :magic_if_label_0then)
    :magic_if_label_0then
    (eax <- 3)
+   (return)
    :magic_if_label_0else
    (x1 <- x)
    (x1 -= 3)
@@ -27,4 +29,5 @@
    (f2 <- eax)
    (eax <- f1)
    (eax += f2)
-   (eax -= 1)))
+   (eax -= 1)
+   (return)))

@@ -1,5 +1,5 @@
 #lang racket
-(require rackunit)
+(require rackunit racket/set)
 ;L3 compiler
 
 (struct instr/count (instr count))
@@ -7,7 +7,9 @@
 (define arg-registers '(ecx edx eax))
 
 (define (L3->L2 prog)
-  (append (list (compile-e (first prog)))
+  (append (list '((call :main123)))
+          (list (cons ':main123 
+                      (compile-e (first prog))))
           (map compile-L3f (rest prog))))
 
 (define (compile-L3f fn)
@@ -19,7 +21,15 @@
                        (i (in-naturals)))
               `(,arg <- ,(list-ref arg-registers i)))
             (compile-e e))))
-            
+
+(define/contract (list-contains? sym lst)
+  (-> symbol? list? boolean?)
+  (cond [(empty? lst) #f]
+        [(list? (car lst)) (or (list-contains? sym (car lst))
+                               (list-contains? sym (cdr lst)))]
+        [(symbol? (car lst)) (or (symbol=? (car lst) sym)
+                                 (list-contains? sym (cdr lst)))]
+        [else #f]))
 
 (define (compile-e e)
   (instr/count-instr
@@ -29,7 +39,10 @@
   (match e 
     [`(let ([,x ,d]) ,e1) (compile-let x d e1 count)]
     [`(if ,test ,then ,else) (compile-if test then else count)]
-    [d (instr/count (compile-d d 'eax #t) count)]))
+    [d (instr/count (let ([d-code (compile-d d 'eax #t)])
+                      (if (list-contains? 'tail-call d-code)
+                          d-code
+                          (append d-code `((return))))) count)]))
   
 
 (define (compile-d d dest tail?)
@@ -38,7 +51,8 @@
     [`(aset ,a ,off ,new) (aset a off new dest) ]
     [`(alen ,a) `((dest <- ,a)
                   (dest >>= 1))]
-    [`(new-array ,size ,init) `((eax <- (allocate ,(encode size) ,init)))]
+    [`(new-array ,size ,init) `((eax <- (allocate ,(encode size) ,(encode init)))
+                                (,dest <- eax))]
     [`(new-tuple ,vs ...) (init-tuple vs)]
     ;biops
     [`(+ ,v1 ,v2) `((,dest <- ,(encode v1))
@@ -194,18 +208,22 @@
 
 (check-equal? (compile-e '(let ([x 5]) x))
               '((x <- 11)
-                (eax <- x)))
+                (eax <- x)
+                (return)))
+
 (check-equal? (compile-e '(let ([x (+ 2 3)]) x))
               '((x <- 5)
                 (x += 7)
                 (x -= 1)
-                (eax <- x)))
+                (eax <- x)
+                (return)))
 
 (check-equal? (compile-e '(let ([x (- 3 2)]) x))
               '((x <- 7)
                 (x -= 5)
                 (x += 1)
-                (eax <- x)))
+                (eax <- x)
+                (return)))
 
 (check-equal? (compile-e '(let ([x (* 10 11)]) x))
               '((yoloswaggins <- 21)
@@ -214,7 +232,8 @@
                 (x *= yoloswaggins)
                 (x *= 2)
                 (x += 1)
-                (eax <- x))
+                (eax <- x)
+                (return))
               )
 
 (check-equal? (compile-e '(let ([x (* 10 11)]) (let ([y 3]) (+ y x))))
@@ -227,7 +246,8 @@
                 (y <- 7) 
                 (eax <- y) 
                 (eax += x) 
-                (eax -= 1))
+                (eax -= 1)
+                (return))
               )
 
 (check-equal? (compile-e `(let ([x (< 4 5)]) (+ x 3))) 
@@ -236,24 +256,29 @@
                 (x += 1)
                 (eax <- x)
                 (eax += 7)
-                (eax -= 1)))
+                (eax -= 1)
+                (return)))
 (check-equal? (compile-e `(a? 3)) 
               '((eax <- 7)
                 (eax &= 1)
                 (eax *= -2)
-                (eax += 3)))
+                (eax += 3)
+                (return)))
 (check-equal? (compile-e `(number? 3)) 
               '((eax <- 7)
                 (eax &= 1)
                 (eax *= 2)
-                (eax += 1)))
+                (eax += 1)
+                (return)))
 
 (check-equal? (compile-e `(if 1 2 3))
               `((cjump 1 = 0 :magic_if_label_0else :magic_if_label_0then)
                 :magic_if_label_0then
                 (eax <- 5)
+                (return)
                 :magic_if_label_0else
-                (eax <- 7)))
+                (eax <- 7)
+                (return)))
 
 (check-equal? (compile-e `(if x (if 0 4 5) 3))
               `((cjump x = 0 :magic_if_label_0else :magic_if_label_0then)
@@ -261,10 +286,13 @@
                 (cjump 0 = 0 :magic_if_label_1else :magic_if_label_1then)
                 :magic_if_label_1then
                 (eax <- 9)
+                (return)
                 :magic_if_label_1else
                 (eax <- 11)
+                (return)
                 :magic_if_label_0else
-                (eax <- 7)))
+                (eax <- 7)
+                (return)))
 (check-equal? (compile-e `(f)) 
               `((tail-call f)))
 (check-equal? (compile-e `(f y)) 
@@ -275,7 +303,8 @@
               `((ecx <- y)
                 (call f)
                 (x <- eax)
-                (eax <- x)))
+                (eax <- x)
+                (return)))
               
 (check-equal? (compile-e `(let ([x (f z z1 z2)]) x)) 
               `((ecx <- z)
@@ -283,6 +312,57 @@
                 (eax <- z2)
                 (call f)
                 (x <- eax)
-                (eax <- x)))
+                (eax <- x)
+                (return)))
+
+(check-equal? (L3->L2 `((let ([x 5]) x)))
+              '(((call :main123))
+                (:main123
+                 (x <- 11)
+                 (eax <- x)
+                 (return))))
+
+(check-equal? (L3->L2 `((let ([x 5]) (print x))))
+              '(((call :main123))
+               (:main123 (x <- 11) (eax <- (print x)) (return))))
+(check-equal? (L3->L2 '((let ([x (+ 1 4)]) (print x)))) 
+              '(((call :main123)) (:main123 (x <- 3) (x += 9) (x -= 1)
+                                            (eax <- (print x)) (return))))
+(check-equal? (L3->L2 '((let ([x (:two_plus_two)]) (print x))
+                        (:two_plus_two () (+ 2 2)))) 
+              '(((call :main123))
+                (:main123
+                 (call :two_plus_two)
+                 (x <- eax)
+                 (eax <- (print x))
+                 (return))
+                (:two_plus_two
+                 (eax <- 5)
+                 (eax += 5)
+                 (eax -= 1)
+                 (return))))
+(check-equal? (L3->L2 '((let ([x (:two_plus_z 3)]) (print x))
+                        (:two_plus_z (z) (+ z 2)))) 
+              '(((call :main123))
+                (:main123
+                 (ecx <- 7)
+                 (call :two_plus_z)
+                 (x <- eax)
+                 (eax <- (print x))
+                 (return))
+                (:two_plus_z
+                 (z <- ecx)
+                 (eax <- z)
+                 (eax += 5)
+                 (eax -= 1)
+                 (return))))
+
+(check-equal? (L3->L2 '((let ([x (new-array 10 3)])
+                          (let ([y (aref x 4)])
+                            (print y))))) '())
+              
+                     
+              
+                     
                
     
