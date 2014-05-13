@@ -1,0 +1,5 @@
+((let ((a (new-array 10 0)))
+  (let ((x1 (aref a 0)))
+    (if x1
+      (print 1)
+      (print 2)))))

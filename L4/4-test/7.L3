@@ -1,0 +1,7 @@
+((let ((x1 (new-array 10 0)))
+  (let ((x2 (:fun x1 101)))
+    (let ((x3 (= x2 1)))
+      (print x3))))
+(:fun (a n)
+  (let ((x (alen a)))
+    (<= n x))))

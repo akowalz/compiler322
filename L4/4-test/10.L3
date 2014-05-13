@@ -1,0 +1,4 @@
+((let ((a (new-tuple 0 0 0)))
+  (let ((b (aset a 0 10)))
+    (let ((c (aref a 0)))
+      (print c))))))

@@ -1,0 +1,7 @@
+((let ((a (new-tuple 1 2)))
+  (let ((f (aref a 0)))
+    (let ((s (aref a 1)))
+      (let ((eq (= f s)))
+        (if eq
+            (print 10)
+            (print 20)))))))
