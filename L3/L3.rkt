@@ -56,15 +56,12 @@
                                 (,dest <- eax))]
     [`(new-tuple ,vs ...) (init-tuple vs dest)]
     ;biops
-    [`(+ ,v1 ,v2) `((,dest <- ,(encode v1))
-                    (,dest += ,(encode v2))
-                    (,dest -= 1))]
-    [`(- ,v1 ,v2) `((,dest <- ,(encode v1))
-                    (,dest -= ,(encode v2))
-                    (,dest += 1))]
+    [`(+ ,v1 ,v2) (compile-add/sub dest v1 v2 '+=)]
+    [`(- ,v1 ,v2) (compile-add/sub dest v1 v2 '-=)]
     [`(* ,v1 ,v2) `((yoloswaggins <- ,(encode v1))
                     (yoloswaggins >>= 1)
                     (,dest <- ,(encode v2))
+                    (,dest >>= 1)
                     (,dest *= yoloswaggins)
                     (,dest *= 2)
                     (,dest += 1))]
@@ -80,7 +77,35 @@
     [`(closure-vars ,v) (compile-d `(aref ,v 1) dest tail?)]
     [`(,fn) (compile-call fn '() tail? dest) ]
     [`(,fn ,arglist ...) (compile-call fn arglist tail? dest)]
-    [v `((,dest <- ,(encode v)))])) ;check for labels
+    [v `((,dest <- ,(encode v)))]));check for labels
+
+(define (tmp)
+    (string->symbol
+     (string-append "__x_"
+                    (number->string (random 1000)))))
+
+(define (compile-add/sub dest v1 v2 op)
+  (let* ([temp (tmp)]
+         (store-instr `(,temp <- ,dest))
+         (not-op (if (symbol=? op '+=)
+                     '-=
+                     '+=))
+         (newv1  (encode v1))
+         (newv2 (if (and (not (number? v2)) (symbol=? v2 dest))
+                    temp
+                    (encode v2))))
+    (cond [(equal? v1 dest)
+           `((,dest ,op ,newv2)
+             (,dest ,not-op 1))]
+          [(equal? temp newv2)
+           `(,store-instr
+             (,dest <- ,newv1)
+             (,dest ,op ,newv2)
+             (,dest ,not-op 1))]
+          [else 
+           `((,dest <- ,newv1)
+             (,dest ,op ,newv2)
+             (,dest ,not-op 1))])))
 
 (define (compile-call fn arglist tail? dest)
   (append (for/list [(arg arglist)
@@ -92,7 +117,7 @@
            
 
 (define (compile-comp op v1 v2 dest)
- `((,dest <- ,v1 ,op ,v2)
+ `((,dest <- ,(encode v1) ,op ,(encode v2))
    (,dest <<= 1)
    (,dest += 1)))
 
@@ -108,12 +133,13 @@
                 
 (define (aset array pos new dest)
   (let ([pass (new-bounds-label bounds-count "pass")]
-        [fail (new-bounds-label bounds-count "fail")])
+        [fail (new-bounds-label bounds-count "fail")]
+        [bounds-temp (tmp)])
     (set! bounds-count (add1 bounds-count))
     `((,dest <- ,(encode pos))
       (,dest >>= 1)
-      (bounds-temp <- (mem ,array 0))
-      (cjump ,dest < bounds-temp ,pass ,fail)
+      (,bounds-temp <- (mem ,array 0))
+      (cjump ,dest < ,bounds-temp ,pass ,fail)
       ,fail
       (eax <- (array-error ,array ,(encode pos)))
       ,pass
@@ -152,7 +178,7 @@
          [then-lab (new-if-label count "then")]
          [compiled-then (compile-e-int then (+ 1 count))]
          [compiled-else (compile-e-int else (instr/count-count compiled-then))])
-    (instr/count (append `((cjump ,test = 0 ,else-lab ,then-lab))
+    (instr/count (append `((cjump ,(encode test) = 1 ,else-lab ,then-lab))
                          (list then-lab)
                          (instr/count-instr compiled-then)
                          (list else-lab)
@@ -187,6 +213,8 @@
     ((number? x) (+ 1 (* 2 x)))
     ((symbol? x) x)))
 
+
+#|
 (check-equal? (init-tuple '(3 4 5) 'x)
               `((eax <- (allocate 7 0))
                 ((mem eax 4) <- 7)
@@ -217,18 +245,19 @@
               '((yoloswaggins <- 21)
                 (yoloswaggins >>= 1)
                 (x <- 23)
+                (x >>= 1)
                 (x *= yoloswaggins)
                 (x *= 2)
                 (x += 1)
                 (eax <- x)
-                (return))
-              )
+                (return)))
 
 (check-equal? (compile-e '(let ([x (* 10 11)]) (let ([y 3]) (+ y x))))
               '((yoloswaggins <- 21) 
                 (yoloswaggins >>= 1) 
                 (x <- 23)
-                (x *= yoloswaggins) 
+                (x >>= 1)
+                (x *= yoloswaggins)
                 (x *= 2) 
                 (x += 1) 
                 (y <- 7) 
@@ -368,6 +397,55 @@
                                              (y <- (mem y 4))
                                              (eax <- (print y))
                                              (return))))
+
+(check-equal? (L3->L2 '(
+  (let ([result (* 1 0)])
+    (if result (:truefunc) (:falsefunc))
+  )
+  (:truefunc () (print 100))
+  (:falsefunc () (print 200))
+)
+) '())
+|#
+#;
+(check-equal? (L3->L2 '((let ((a -1)) (let ((a (- 5 a))) (print a)))))
+              '(((call :main123))
+                (:main123
+                 (a <- -1)
+                 (x_1 <- a)
+                 (a <- 11)
+                 (a -= x_1)
+                 (a += 1)
+                 (eax <- (print a))
+                 (return))))
+#;
+(check-equal? (L3->L2 '((let ((a -1)) (let ((a (- a 5))) (print a)))))
+              '(((call :main123))
+                (:main123
+                 (a <- -1)
+                 (x_1 <- a)
+                 (a <- x_1)
+                 (a -= 11)
+                 (a += 1)
+                 (eax <- (print a))
+                 (return))))
+#;
+(L3->L2 '((let ((x_2 (:fib 5))) (print x_2))
+ (:fib
+  (n_1)
+  (let ((x_3 (< n_1 2)))
+    (if x_3
+      1
+      (let ((x_4 (- n_1 1)))
+        (let ((x_5 (:fib x_4)))
+          (let ((x_6 (- n_1 2))) (let ((x_7 (:fib x_6))) (+ x_5 x_7)))))))))
+)
+
+
+;(L3->L2 '((let ((a -1)) (let ((a (+ a 5))) (print a)))))
+;(L3->L2 '((let ((a 3)) (let ((a (+ a a))) (print a)))))
+
+(L3->L2 '((let ((a 1)) (let ((a (new-tuple a 2 3))) (aref a a)))))
 
 (if (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
