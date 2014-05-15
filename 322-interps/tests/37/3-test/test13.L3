@@ -1,0 +1,5 @@
+((let ([x (new-array 10 7)])
+    (let ([y (aref x 5)])
+        (let ([len (alen x)])
+            (let ([result (+ y len)])
+                (print result))))))

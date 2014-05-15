@@ -1,0 +1,5 @@
+(
+  (let ([which (number? 1)])
+    (print which)
+  )
+)

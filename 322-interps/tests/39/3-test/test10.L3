@@ -1,0 +1,7 @@
+(
+  (let ([x (new-array 5 1)])
+    (let ([which (a? 1)])
+      (print which)
+    )
+  )
+)
