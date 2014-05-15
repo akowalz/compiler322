@@ -75,7 +75,7 @@
     [`(number? ,v) (compile-huh 'number? v dest)]
     [`(a? ,v) (compile-huh 'a? v dest)]
     [`(print ,v) `((eax <- (print ,(encode v))))]
-    [`(make-closure ,label ,v) (compile-d `(new-tuple ,label ,v))]
+    [`(make-closure ,label ,v) (compile-d `(new-tuple ,label ,v) dest tail?)]
     [`(closure-proc ,v) (compile-d `(aref ,v 0) dest tail?)]
     [`(closure-vars ,v) (compile-d `(aref ,v 1) dest tail?)]
     [`(,fn) (compile-call fn '() tail? dest) ]
