@@ -146,4 +146,8 @@
 (test (norm `(a (b c d)))
       '(let ((__x0 (b c d))) (a __x0)))
 
+(test (norm `(new-array (+ 1 5) x))
+      `(let ((__x0 (+ 1 5)))
+         (new-array __x0 x)))
+
 
