@@ -22,10 +22,11 @@
                             #f)])
           (if fn-name
               (append (list fn-name)
-                      (list 'esp '-= (* attempt 4))
+                      (list `(esp -= ,(* attempt 4)))
                       (rest allocated-fun))
-              (cons (list 'esp '-= (* attempt 4)) 
-                    allocated-fun)))
+              (append (list `(esp -= ,(* attempt 4)))
+                      allocated-fun
+                      (list `(esp += ,(* attempt 4))))))
           (L2f->L1f-internal (spill-function fun vars attempt)
                              (add1 attempt)
                              (rest vars)))))
@@ -112,7 +113,8 @@
               '((esp -= 4)
                 ((mem ebp -4) <- 11)
                 ((mem ebp -4) <- 11)
-                (tail-call ebx)))
+                (tail-call ebx)
+                (esp += 4)))
 
 (check-equal? (L2->L1 '(((eax <- 1) (x <- 5) (call :foo)) (:foo (ebx += 10))))
               '(((eax <- 1) (ebx <- 5) (call :foo)) (:foo (ebx += 10))))

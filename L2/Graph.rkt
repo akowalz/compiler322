@@ -67,9 +67,10 @@
 
 (define (var-interferes var out-list in-list kill-list code)
   (let ([return-list
-        (if (set-member? (first in-list) var)
-            (first in-list)
-            '())])
+         (cond [(empty? in-list) '()]
+                [(set-member? (first in-list) var)
+                 (first in-list)]   
+                [#t '()])])
     (set! return-list (foldr set-union return-list 
                              (for/list ([out out-list]
                                         [killed kill-list]
