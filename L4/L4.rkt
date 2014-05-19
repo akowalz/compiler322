@@ -153,51 +153,8 @@
 (test (norm `(a (b c d)))
       '(let ((__x0 (b c d))) (a __x0)))
 
-(test (norm `(let ((a (new-tuple 1 2)))
-               (if
-                (= (aref a 0)
-                   (aref a 1))
-                10
-                20))) 
-      '(let ((a (new-tuple 1 2)))
-         (let ((__x0 (aref a 0)))
-           (let ((__x1 (aref a 1)))
-             (let ((__x2 (= __x0 __x1))) (if __x2 10 20))))))
+(test (norm `(new-array (+ 1 5) x))
+      `(let ((__x0 (+ 1 5)))
+         (new-array __x0 x)))
 
-(test (norm `(let ((a (new-tuple 0 0 0)))
-            (begin
-              (aset a 0 10)
-              (print (aref a 0)))))
-      `(let ((a (new-tuple 0 0 0)))
-        (let ((__x0 (aset a 0 10)))
-          (let ((__x1 (aref a 0)))
-            (print __x1)))))
-(test (norm '(print
-              (= (:fun
-                  (new-array 10 0) 101)
-                 1)))
-      `(let ((__x0 (new-array 10 0)))
-         (let ((__x1 (:fun __x0 101)))
-           (let ((__x2 (= __x1 1)))
-             (print __x2)))))
 
-(test (L4->L3 
-       '((print (= (:len_greater_than_n
-                    (new-array 10 0) 101)
-                   1))
-         (:len_greater_than_n (a n)
-                              (<= n (alen a)))))
-      '((let ((__x0 (new-array 10 0)))
-    (let ((__x1 (:len_greater_than_n __x0 101)))
-      (let ((__x2 (= __x1 1))) (print __x2))))
-  (:len_greater_than_n
-   (a n)
-   (let ((__x0 (alen a))) (<= n __x0)))))
-
-(if (= (vector-length (current-command-line-arguments)) 1)
-    (call-with-input-file
-        (vector-ref (current-command-line-arguments) 0)
-                 (λ (x) (display (L4->L3 (read x)))))
-    (display ""))
-      
-      
