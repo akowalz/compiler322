@@ -1,0 +1,3 @@
+((let ((a (new-array 4 3)))
+  (let ((b (aset a 0 1)))
+    (print b))))

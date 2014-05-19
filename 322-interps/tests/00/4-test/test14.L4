@@ -1,0 +1,10 @@
+((print (if (< 1 0)
+         (:a 2 (new-tuple 3 4))
+        (begin
+	 (print 3)
+	 (print 2))))
+ (:a
+  (x results)
+  (new-tuple
+        (+ x (aref results 0))
+        (+ x (aref results 1)))))

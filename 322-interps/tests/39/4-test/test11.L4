@@ -1,0 +1,5 @@
+(
+ (let ([x (new-array 1 100)])
+   (begin
+     (aset x 0 50)
+     (print x))))

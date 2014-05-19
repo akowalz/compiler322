@@ -1,0 +1,10 @@
+((let ((res (:range 100))) (print res))
+ (:range (to)
+  (let ((arr (new-array 100 0))) (:fill arr 0)))
+ (:fill (arr pos)
+  (let ((bool (< pos 100)))
+   (if bool
+    (let ((narr (aset arr pos pos)))
+     (let ((npos (+ pos 1)))
+      (:fill arr npos)))
+    arr))))

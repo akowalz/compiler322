@@ -1,0 +1,5 @@
+((let ((arr (new-array 3 0))) (print (:increment arr 0)))
+ (:increment (arr pos)
+  (if (< pos (alen arr))
+   (begin (aset arr pos (+ 1 (aref arr pos))) (:increment arr (+ pos 1)))
+   arr)))

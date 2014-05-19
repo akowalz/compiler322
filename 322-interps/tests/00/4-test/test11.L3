@@ -1,0 +1,15 @@
+((let ((x (new-tuple 3 4)))
+   (let ((_result (:a 0 x)))
+        (print _result)))
+ (:a
+  (pass results)
+    (let ((x (aref results 0)))
+      (let ((passed x))
+        (if pass
+          (let ((y (+ 1 passed)))
+           (let ((z (aref results 1)))
+             (let ((b (+ 1 z)))
+               (new-tuple y b))))
+          (let ((c (aref results 1)))
+             (let ((d (+ 1 c)))
+               (new-tuple passed d))))))))

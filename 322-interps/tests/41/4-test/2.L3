@@ -1,0 +1,1 @@
+((let ((res (new-array 100 7))) (print res)))

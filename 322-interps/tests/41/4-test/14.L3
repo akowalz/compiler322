@@ -1,0 +1,11 @@
+((let ((arr (new-array 3 0))) (let ((res (:increment arr 0))) (print res)))
+ (:increment (arr pos)
+  (let ((len (alen arr)))
+   (let ((bool (< pos len)))
+    (if bool
+     (let ((val (aref arr pos)))
+      (let ((nval (+ 1 val)))
+       (let ((x (aset arr pos nval)))
+        (let ((npos (+ pos 1)))
+         (:increment arr npos)))))
+     arr)))))

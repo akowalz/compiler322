@@ -1,0 +1,5 @@
+((print (:add 0 1))
+ (:add (sum next)
+   (if (<= next 100)
+     (:add (* sum next) (+ 1 next))
+     sum)))

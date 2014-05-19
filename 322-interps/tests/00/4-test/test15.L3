@@ -1,0 +1,10 @@
+((let ((t (new-tuple 10 11)))
+   (let ((res (:a 1 t)))
+	(print res)))
+ (:a
+  (x results)
+  (let ((y (aref results 0)))
+	(let ((z (aref results 1)))
+	  (let ((val1 (+ x y)))
+		(let ((val2 (+ x z)))  
+  			(new-tuple val1 val2)))))))

@@ -1,0 +1,6 @@
+((let ((x (print 1)))
+   (let ((y (print x)))
+        (let ((z (print 0)))
+          (let ((a (print z)))
+	     (let ((t (new-tuple y a)))
+	(print t)))))))

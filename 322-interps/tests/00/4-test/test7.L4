@@ -1,0 +1,6 @@
+((print
+  (new-tuple
+   (if (< 1 0)
+     (print (print 1))
+	0)
+   (print (print 2)))))
