@@ -194,6 +194,15 @@
    (a n)
    (let ((__x0 (alen a))) (<= n __x0)))))
 
+(test (L4->L3 `((print ((:higher_order)))
+                (:higher_order () :afunc)
+                (:afunc () 12)))
+      `((let ((__x0 (:higher_order)))
+          (let ((__x1 (__x0)))
+            (print (__x1))))
+        (:higher_order () :afunc)
+        (:afunc () 12)))
+
 (if (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
