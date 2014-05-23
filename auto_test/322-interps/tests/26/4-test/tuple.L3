@@ -1,0 +1,5 @@
+((let ([x (+ 9 8)])
+   (let ([y (+ 7 6)])
+     (let ([arr (new-tuple x y)])
+       (let ([p (aref arr 1)])
+         (print p))))))

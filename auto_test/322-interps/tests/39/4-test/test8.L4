@@ -1,0 +1,5 @@
+((let ([x 1])
+   (let ([x (:get_afunc)])
+     (print (x))))
+ (:get_afunc () :afunc)
+ (:afunc () 101))

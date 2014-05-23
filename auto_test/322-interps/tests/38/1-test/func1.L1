@@ -1,0 +1,7 @@
+(((eax <- 7)
+	(call :swagEnd)
+	(eax <- (print eax)))
+(:swagEnd
+(eax <- 25)
+(return)
+))

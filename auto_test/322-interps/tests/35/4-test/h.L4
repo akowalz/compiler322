@@ -1,0 +1,1 @@
+((new-tuple 5 10 15 20 25 30) (:b (x y) (print (+ x y))))

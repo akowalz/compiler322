@@ -1,0 +1,4 @@
+(
+(in (b eax) (a b) (a b) (a))
+(out (a b) (a b) (a) ())
+)

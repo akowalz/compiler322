@@ -1,0 +1,2 @@
+((let ((bool (a? 5)))
+  (if bool (print 0) (print 1))))

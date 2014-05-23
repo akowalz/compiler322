@@ -1,0 +1,13 @@
+;; test 1 revisited
+(((call :first)
+  (esi <- eax)
+  (call :second)
+  (eax += esi)
+  (eax -= 1)  
+  (eax <- (print eax)))
+ (:first
+  (eax <- 3)
+  (return))
+ (:second
+  (eax <- 3)
+  (return)))

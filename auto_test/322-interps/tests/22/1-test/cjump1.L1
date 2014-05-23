@@ -1,0 +1,11 @@
+(((ebx <- 5)
+  (ebx *= 5)
+  (cjump 31 < ebx :meow :miao)
+  (ebx += 5)
+  (eax <- (print ebx))
+  :miao
+  (ebx -= 8)
+  :meow
+  (ebx += 6)  
+  :meou
+  (eax <- (print ebx))))

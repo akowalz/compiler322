@@ -1,0 +1,20 @@
+(((mem ebp -4) <- 13)
+(s0 <- (mem ebp -4))
+(s0 += 2)
+((mem ebp -4) <- s0)
+(s1 <- (mem ebp -4))
+(s1 -= 3)
+((mem ebp -4) <- s1)
+(eax <- 25)
+(s2 <- (mem ebp -4))
+(cjump s2 < eax :true :false)
+
+:true
+(s3 <- (mem ebp -4))
+(eax += s3)
+(goto :done)
+
+:false
+(s4 <- (mem ebp -4))
+(eax -= s4)
+:done)

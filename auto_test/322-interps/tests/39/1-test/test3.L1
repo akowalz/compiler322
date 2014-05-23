@@ -1,0 +1,36 @@
+(((ebx <- 1)
+  (edi <- 1)
+  (esi <- 1)
+  (eax <- (allocate 9 1))
+  ((mem eax 4) <- 9)
+  ((mem eax 8) <- 17)
+  ((mem eax 12) <- 33)
+  ((mem eax 16) <- 65)
+  (call :mult_array))
+
+ (:mult_array
+  (esp -= 8)
+  ((mem esp 0) <- ebx)
+  ((mem esp 4) <- edi)
+  (ebx <- 3) ;result = 1
+  (ecx <- (mem eax 0)) ;untagged size
+  (edx <- eax) ;pointer
+  (edx += 4)
+  :loop
+  (edi <- (mem edx 0))
+  (ebx >>= 1)
+  (edi -= 1)
+  (ebx *= edi)
+  (ebx += 1)
+  (edx += 4)
+  (ecx -= 1)
+  (cjump ecx = 0 :done :loop)
+  :done
+  (eax <- (print eax))
+  (eax <- (print ebx))
+  (ebx <- (mem esp 0))
+  (edi <- (mem esp 4))
+  (esp += 8)
+  (return)
+  ))
+  

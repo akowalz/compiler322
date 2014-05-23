@@ -1,0 +1,8 @@
+(((cjump 40 < 50 :always :never)
+  :always
+  (eax <- (print 1001))
+  (goto :done)
+  :never
+  (eax <- (print 2001))
+  :done
+))

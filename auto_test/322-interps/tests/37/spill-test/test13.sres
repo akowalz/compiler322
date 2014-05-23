@@ -1,0 +1,11 @@
+(((mem ebp -8) <- eax)
+ (s0 <- (mem ebp -8))
+ (cjump x < s0 :true :false)
+ :true
+ (s1 <- (mem ebp -8))
+ (x += s1)
+ (goto :end)
+ :false
+ (s2 <- (mem ebp -8))
+ (s2 += x)
+ ((mem ebp -8) <- s2))

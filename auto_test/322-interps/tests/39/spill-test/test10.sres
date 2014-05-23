@@ -1,0 +1,10 @@
+(
+  (call :x)
+  (x_0 <- (mem ebp -4))
+  (call x_0)
+  (call :x_0)
+  (tail-call :x)
+  (x_1 <- (mem ebp -4))
+  (tail-call x_1)
+  (tail-call :x_1)
+)

@@ -1,0 +1,18 @@
+
+
+((
+
+
+  (cjump 5 < 7 :l1 :l2)
+  :l1
+  (eax <- 89)
+  (goto :end)
+  
+  :l2
+  (eax <- 1)
+  
+  :end
+  (eax <- (print eax))
+
+
+))

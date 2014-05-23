@@ -1,0 +1,12 @@
+(((a <- 5)
+	(ecx <- a)
+	:loop
+	(cjump a <= 1 :end :cont)
+	:cont
+	(a -= 1)
+	(ecx *= a)
+	(goto :loop)
+	:end
+	(ecx *= 2)
+	(ecx += 1)
+	(eax <- (print ecx))))

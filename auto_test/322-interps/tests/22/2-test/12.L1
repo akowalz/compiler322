@@ -1,0 +1,4 @@
+(((ebx <- 31)
+	(ebx <<= 1)
+	(ebx >>= 3)
+	(eax <- (print ebx))))

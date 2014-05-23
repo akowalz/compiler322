@@ -1,0 +1,9 @@
+((a <- 3)
+(b <- 5)
+(eax <- (print a))
+(a *= b)
+(eax <- (print a))
+(a <<= 1)
+(eax <- (print a))
+(a += 1)
+(eax <- (print a))) a -4 s

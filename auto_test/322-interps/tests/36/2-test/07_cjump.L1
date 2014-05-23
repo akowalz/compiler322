@@ -1,0 +1,28 @@
+(
+	(
+		(call :foo)
+	)
+	(
+		:foo
+		;;(esp -= 8)
+		;;((mem ebp -4) <- esi)
+		;;((mem ebp -8) <- edi)
+		(ebx <- 9)
+		(cjump ebx < 11 :if0 :else0)
+		:if0
+		(eax <- (print 77))
+		(cjump 11 < ebx :if1 :else1)
+		:else0
+		(eax <- (print 79))
+		:if1
+		(eax <- (print 81))
+		(goto :end)
+		:else1
+		(eax <- (print 83))
+		:end
+		;;(edi <- (mem ebp -8))
+		;;(esi <- (mem ebp -4))
+		;;(esp += 8)
+		(return)
+	)
+) 

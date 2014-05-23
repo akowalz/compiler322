@@ -1,0 +1,10 @@
+(((call :mult)
+  (eax <- (print eax)))
+  (:mult
+   (cjump 5 <= 5 :true :false)
+   :true
+   (eax <- 45)
+   (return)
+   :false
+   (eax <- 5)
+   (return)))

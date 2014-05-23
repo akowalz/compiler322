@@ -1,0 +1,10 @@
+(
+	((:fn 1) 16)
+	(:fn (n)
+		(if n
+			:sub1
+			:sub2))
+	(:sub1 (n)
+		(print (+ n n)))
+	(:sub2 (n)
+		(print (- n n))))

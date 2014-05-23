@@ -1,0 +1,3 @@
+(((ebx <- 85)
+  (eax <- (print ebx))))
+ 

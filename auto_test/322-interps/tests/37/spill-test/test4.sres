@@ -1,0 +1,10 @@
+((call :start)
+ (tail-call :start)
+ (goto :finish)
+ :finish
+ (s0 <- (mem ebp -20))
+ (s0 &= y)
+ ((mem ebp -20) <- s0)
+ (s1 <- (mem ebp -20))
+ (s1 -= y)
+ ((mem ebp -20) <- s1))

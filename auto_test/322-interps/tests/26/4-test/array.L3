@@ -1,0 +1,5 @@
+((let ([arr (new-array 5 25)])
+  (let ([y (alen arr)])
+    (let ([z (print y)])
+      (let ([q (a? arr)])
+        (print q))))))

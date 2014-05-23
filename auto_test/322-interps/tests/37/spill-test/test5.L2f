@@ -1,0 +1,3 @@
+((call x)
+ (tail-call x)
+ (goto :x)) x -24 s

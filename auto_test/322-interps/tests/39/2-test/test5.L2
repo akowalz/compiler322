@@ -1,0 +1,10 @@
+((
+  (x <- :afunc)
+  (call x)
+  )
+  (
+    :afunc
+    (eax <- (print 7))
+    (return)
+  )
+)

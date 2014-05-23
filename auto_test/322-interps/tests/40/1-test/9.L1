@@ -1,0 +1,10 @@
+((
+  (eax <- (allocate 11 3))
+  (edi <- eax) 
+
+  ((mem edi 4) <- 11)
+  ((mem edi 8) <- 9) 
+  ((mem edi 12) <- 7) 
+  ((mem edi 16) <- 5)
+  (eax <- (print edi))
+))

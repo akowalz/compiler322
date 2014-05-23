@@ -1,0 +1,8 @@
+((a <- 105)
+ (b <- 95)
+ (s0 <- a < b)
+ ((mem ebp -16) <- s0)
+ (eax <- (print a))
+ (eax <- (print b))
+ (s1 <- (mem ebp -16))
+ (eax <- (print s1)))

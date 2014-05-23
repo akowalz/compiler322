@@ -1,0 +1,8 @@
+((x <- 89)
+(y <- 2)
+(eax <- (print x))
+(z <- 3)
+(x >>= y)
+(eax <- (print x))
+(x <<= z)
+(eax <- (print x))) x -12 s

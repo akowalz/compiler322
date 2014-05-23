@@ -1,0 +1,31 @@
+(((call :foo))
+ (:foo
+  ;; <<
+  (var <- 3)
+  (var <<= 1)
+  (var *= 2)
+  (var += 1)
+  (eax <- (print var)) ;; print 6
+  
+  (var <- 3)
+  (ecx <- 1)
+  (var <<= ecx)
+  (var *= 2)
+  (var += 1)
+  (eax <- (print var)) ;; print 6
+  
+  ;; >>
+  (var <- 7)
+  (var >>= 1)
+  (var *= 2)
+  (var += 1)
+  (eax <- (print var)) ;; print 3
+  
+  (var <- 7)
+  (ecx <- 1)
+  (var >>= ecx)
+  (var *= 2)
+  (var += 1)
+  (eax <- (print var)) ;; print 3
+  (return)
+  ))

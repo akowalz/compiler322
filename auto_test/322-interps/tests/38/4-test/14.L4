@@ -1,0 +1,2 @@
+((print
+  (alen (new-array 10 0))))

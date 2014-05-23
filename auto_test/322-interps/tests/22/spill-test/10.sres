@@ -1,0 +1,6 @@
+((hi0 <- a = c)
+ ((mem ebp 0) <- hi0)
+ ((mem ebp 0) <- a)
+ (a += c)
+ (hi1 <- (mem ebp 0))
+ (a -= hi1))

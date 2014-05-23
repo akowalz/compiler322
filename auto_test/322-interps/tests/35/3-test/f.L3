@@ -1,0 +1,1 @@
+((let ([x 5]) (make-closure :f x))(:f (y) 5))

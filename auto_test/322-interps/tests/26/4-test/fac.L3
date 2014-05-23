@@ -1,0 +1,9 @@
+((let ([x (:fac 6)])
+   (print x))
+ (:fac (n)
+   (let ([t (< 1 n)])
+     (if t
+         (let ([n1 (- n 1)])
+            (let ([n2 (:fac n1)])
+               (* n n2)))
+         1))))

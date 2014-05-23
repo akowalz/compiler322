@@ -1,0 +1,1 @@
+((in (a ebx) (a ebx) (a eax ebx) (a eax ebx) (a ebx) (eax edi esi)) (out (a ebx) (a eax ebx) (a eax ebx) (a ebx) (a ebx) ()))

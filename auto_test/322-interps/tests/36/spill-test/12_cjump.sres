@@ -1,0 +1,2 @@
+((var_0 <- (mem ebp -4))
+(cjump ebx < var_0 :true :false))

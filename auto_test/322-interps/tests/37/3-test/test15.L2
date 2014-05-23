@@ -1,0 +1,10 @@
+(((eax <- 5)
+  (ebx <- 2)
+  (call :multiply)
+  (eax <- (print eax)))
+ (:multiply
+  (eax *= ebx)
+  (eax *= 2)
+  (eax += 1)
+  (return)))
+

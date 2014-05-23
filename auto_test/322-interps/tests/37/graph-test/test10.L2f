@@ -1,0 +1,32 @@
+(:l8
+ (y <- 11)
+ (t <- y <= 7)
+ (cjump t <= y :true1 :false1)
+ :true1
+ (eax <- 0)
+ (goto :end1)
+ :false1
+ (eax <- 1)
+ :end1
+ (eax <- (print eax))
+ (y <- 7)
+ (t <- y < 14)
+ (cjump t < y :true2 :false2)
+ :true2
+ (eax <- 0)
+ (goto :end2)
+ :false2
+ (eax <- 1)
+ :end2
+ (eax <- (print eax))
+ (y <- 11)
+ (t <- y = 7)
+ (cjump t = y :true2 :false2)
+ :true3
+ (eax <- 0)
+ (goto :end2)
+ :false3
+ (eax <- 1)
+ :end3
+ (eax <- (print eax))
+ (return))

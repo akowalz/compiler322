@@ -1,0 +1,5 @@
+(
+	(print 
+		(begin 
+			(print 5) 
+			6)))

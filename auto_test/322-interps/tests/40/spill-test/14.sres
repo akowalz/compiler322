@@ -1,0 +1,1 @@
+((s0 <- (mem ebp -4)) (cjump s0 = s0 :T :f) (s1 <- (mem ebp -4)) (cjump s1 < y :T :f) (s2 <- (mem ebp -4)) (cjump s2 <= z :T :f) (s3 <- (mem ebp -4)) (s3 <- y < s3) ((mem ebp -4) <- s3))

@@ -1,0 +1,52 @@
+(((ebx <- 1)
+  (edi <- 1)
+  (esi <- 1)
+  (esp -= 124)
+  (eax <- esp)
+  ((mem eax 0) <- 30)
+  (call :calc_exponents)
+  (call :print_stack_array)
+  (esp += 124)
+  )
+ (:calc_exponents
+   (esp -= 8)
+   ((mem esp 0) <- edi)
+   ((mem esp 4) <- ebx)
+   (edi <- (mem eax 0)) ;size
+   (ecx <- 0) 
+   (ebx <- eax)
+   (ebx += 4)
+   
+   :loop
+   (edx <- 1)
+   (edx <<= ecx)
+   (edx <<= 1)
+   (edx += 1)
+   ((mem ebx 0) <- edx)
+   (ebx += 4)
+   (ecx += 1)
+   (cjump ecx < edi :loop :done)
+   :done
+   (edi <- (mem esp 0))
+   (ebx <- (mem esp 4))
+   (return)
+   )
+ (:print_stack_array
+  (esp -= 8)
+  (edx <- eax)
+  (edx += 4)
+  (ecx <- (mem eax 0))
+  :loop_print
+  (eax <- (mem edx 0))
+  ((mem esp 0) <- edx)
+  ((mem esp 4) <- ecx)
+  (eax <- (print eax))
+  (edx <- (mem esp 0))
+  (ecx <- (mem esp 4))
+  (edx += 4)
+  (ecx -= 1)
+  (cjump 0 = ecx :done_print :loop_print)
+  :done_print
+  (return)
+  ))
+   

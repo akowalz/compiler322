@@ -1,0 +1,12 @@
+(
+ (
+  (eax <- (print 3))
+  (call :omg)
+  )
+ 
+ (
+  :omg
+  (eax <- (print 5))
+  (return)
+  )
+ )

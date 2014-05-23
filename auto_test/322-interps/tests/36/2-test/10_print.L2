@@ -1,0 +1,5 @@
+((
+  (var <- 3)
+  (eax <- (print var))
+  (eax <- (print 3))
+  ))

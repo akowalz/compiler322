@@ -1,0 +1,4 @@
+((let ((clo (make-closure :foo 2)))
+  (let ((res (closure-vars clo)))
+   (print res)))
+ (:foo () (- 1 1)))

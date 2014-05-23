@@ -1,0 +1,3 @@
+;; print some 9s 
+(((eax <- (allocate 23 19))
+  (eax <- (print eax))))

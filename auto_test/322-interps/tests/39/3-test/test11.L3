@@ -1,0 +1,13 @@
+(
+  (let ([x (new-array 5 1)])
+    (let ([y (new-array 1 1)])
+      (let ([ignore (aset x 0 y)])
+        (let ([inside (aref x 0)])
+          (let ([which (a? inside)])
+            (print which)
+          )
+        )
+      )
+    )
+  )
+)

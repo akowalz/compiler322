@@ -1,0 +1,25 @@
+;this is to test the cmp
+(
+  (y <- 9)
+  (z <- 9)
+  (a <- -15)
+  (x <- y <= z)
+  (b <- y < a)
+  (y <- a < y)
+
+  (y <- x)
+  (z <- b)
+  (a <- c)
+
+  (y *= 2)
+  (y += 1)
+  (eax <- (print y))
+
+  (z *= 2)
+  (z += 1)
+  (eax <- (print z))
+
+  (a *= 2)
+  (a += 1)
+  (eax <- (print a))
+) y -20 s

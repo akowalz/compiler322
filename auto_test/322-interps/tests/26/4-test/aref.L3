@@ -1,0 +1,3 @@
+((let ([arr (new-array 1 42)])
+   (let ([x (aref arr 0)])
+      (print x))))

@@ -1,0 +1,17 @@
+((
+  (eax <- 10)
+  (call :countdown)
+)(
+  :countdown
+  (ebx <- eax)
+  (eax *= 2)
+  (eax += 1)
+  (eax <- (print eax))
+  (eax <- ebx)
+  (eax -= 1)
+  (cjump eax < 1 :done :continue)
+  :done
+  (return)
+  :continue
+  (tail-call :countdown)
+))

@@ -1,0 +1,7 @@
+(:a
+(x <- :l)
+(call x)
+(x <- 2)
+(eax <- 3)
+(x *= x)
+(return))

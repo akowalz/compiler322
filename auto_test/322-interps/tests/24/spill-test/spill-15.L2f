@@ -1,0 +1,6 @@
+((a <- 105)
+(b <- 95)
+(c <- a < b)
+(eax <- (print a))
+(eax <- (print b))
+(eax <- (print c))) c -16 s

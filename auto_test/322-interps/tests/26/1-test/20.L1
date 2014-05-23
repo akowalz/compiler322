@@ -1,0 +1,10 @@
+((
+  (goto :cindy)
+  :bob
+  (eax <- (print eax))
+  (goto :greg)
+  :cindy
+  (eax <- 99)
+  (goto :bob)
+  :greg
+))

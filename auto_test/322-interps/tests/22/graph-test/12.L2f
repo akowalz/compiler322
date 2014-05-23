@@ -1,0 +1,3 @@
+((eax <- (allocate x z))
+ (b <- eax)
+ (eax <- (print b)))

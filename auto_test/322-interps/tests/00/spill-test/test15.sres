@@ -1,0 +1,3 @@
+((eax += ebx) 
+(p0 <- (mem ebp -4))
+(eax += p0))

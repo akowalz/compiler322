@@ -1,0 +1,15 @@
+((
+	(eax <- 5)
+	(cjump 3 < eax :label1 :label3)
+	:label1
+	(eax <- (print 5))
+	(call :func)
+	(goto :label5)
+	:label3
+	(eax <- (print 3))
+	:label5
+ )
+ (:func 
+ 	(eax <- (print 7))
+ 	(return))
+)

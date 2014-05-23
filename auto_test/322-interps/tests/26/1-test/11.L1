@@ -1,0 +1,16 @@
+((
+  (esi <- 1365)
+
+  ; do some shifts on an alternating binary pattern
+  :loop
+  (cjump esi < 2 :done :continue)
+  :continue
+  (edi <- esi)
+  (edi *= 2)
+  (edi += 1)
+  (eax <- (print edi))
+  (esi >>= 1)
+
+  (goto :loop)
+  :done
+))

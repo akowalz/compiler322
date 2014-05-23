@@ -1,0 +1,10 @@
+(
+  (let ([vars 1])
+    (let ([aclosure (make-closure :alabel 50)])
+      (let ([closurelabel (closure-proc aclosure)])
+        (:alabel)
+      )
+    )
+  )
+  (:alabel () (print 1))
+)

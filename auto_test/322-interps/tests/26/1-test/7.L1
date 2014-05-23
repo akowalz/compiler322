@@ -1,0 +1,20 @@
+((
+  ; compute 25 + 40
+  (ecx <- 51)
+  (edx <- 81)
+  (call :add)
+  (edi <- eax)
+  (eax <- (print edi))
+)
+(:add
+ (eax <- 0)
+ (ecx -= 1)
+ (ecx >>= 1)
+ (eax += ecx)
+ (edx -= 1)
+ (edx >>= 1)
+ (eax += edx)
+ (eax <<= 1)
+ (eax += 1)
+ (return))
+)

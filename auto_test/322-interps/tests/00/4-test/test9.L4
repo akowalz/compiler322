@@ -1,0 +1,3 @@
+((begin 
+  (print (print 1))
+  (print (print 0))))

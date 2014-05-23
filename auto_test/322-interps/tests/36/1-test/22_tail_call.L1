@@ -1,0 +1,47 @@
+(
+ ;; main
+ (
+  (ebp <- esp)
+  (esp -= 12)
+  ((mem esp 0) <- 21)
+  ((mem esp 4) <- 30)
+  ((mem esp 8) <- 9)
+  (eax <- (mem esp 0))
+  (edx <- (mem esp 4))
+  (ecx <- (mem esp 8))
+  (edi <- :print_max)
+  (call edi)
+  (esp <- ebp)
+  )
+ 
+ (
+  :print_max
+  
+  (cjump eax < edx :omg0 :wtf0)
+  :omg0
+  (eax <- edx)
+  :wtf0
+  (tail-call :bigger)
+  
+  ;; no restore esp
+  ;; no args passing, use the current argument setting
+  )
+ 
+ (
+  :bigger
+  (ebp <- esp)
+  
+  (cjump eax < ecx :omg1 :wtf1)
+  :omg1
+  (eax <- ecx)
+  :wtf1
+  
+  (eax *= 2)
+  (eax += 1)
+  (eax <- (print eax))
+  
+  (esp <- ebp)
+  (return)
+  )
+ 
+ )

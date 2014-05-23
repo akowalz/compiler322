@@ -1,0 +1,13 @@
+((a <- 15)
+(b <- 15)
+(cjump a = b :eq :neq)
+
+:eq
+(a += b)
+(eax <- a)
+(return)
+
+:neq
+(a -= b)
+(eax <- a)
+(return)) a -8 s

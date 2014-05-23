@@ -1,0 +1,29 @@
+((
+  (eax <- (allocate 9 0))
+  (stored <- eax)
+  (x <- :f)
+  (s1 <- 1)
+  (s2 <- 2)
+  (s3 <- 3)
+  (s4 <- 4)
+  (s5 <- 5)
+  (s6 <- 6)
+  ((mem stored 4) <- x)
+  (sr <- s1)
+  (sr += s2)
+  (sr += s3)
+  (sr += s4)
+  (sr += s5)
+  (sr += s6)
+  (eax <- (print sr))
+  (eax <- (mem stored 4))
+  (call eax)
+  )
+
+  (
+  :f
+  (eax <- (print 135))
+  (return)
+  )
+
+)

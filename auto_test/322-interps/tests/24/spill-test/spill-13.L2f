@@ -1,0 +1,5 @@
+(( x <- 45)
+(y <- x)
+(eax <- (print y))
+(z <- y)
+(eax <- (print z))) y -8 s

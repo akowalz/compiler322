@@ -1,0 +1,12 @@
+((
+  (edi <- 41)
+  (eax <- (allocate edi 3))
+  (ebx <- eax)
+  ((mem ebx 4) <- 555)
+  (call :read)
+)(
+  :read
+  (eax <- (mem eax 4))
+  (eax <- (print eax))
+  (return)
+))

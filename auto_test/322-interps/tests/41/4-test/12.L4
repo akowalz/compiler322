@@ -1,0 +1,3 @@
+((print (:first 10))
+ (:first (x) (if (< x 0) x (:second (- x 1))))
+ (:second (x) (:first (- x 1))))

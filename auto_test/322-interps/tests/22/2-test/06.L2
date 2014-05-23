@@ -1,0 +1,5 @@
+(((b <- 3)
+  (eax <- (allocate b b))
+  (b <- eax)
+  (ecx <- (mem b 4))
+  (eax <- (print ecx))))

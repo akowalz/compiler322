@@ -1,0 +1,5 @@
+;;allocate arrays 44 2s
+((
+  (eax <- (allocate 89 5))
+  (eax <- (print eax))
+))

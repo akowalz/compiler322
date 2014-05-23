@@ -1,0 +1,10 @@
+(
+  (in
+    (ecx edi edx esi)
+    (eax edi esi)
+  )
+  (out
+    (eax edi esi)
+    ()
+  )
+)

@@ -1,0 +1,11 @@
+(((ebx <- 1)
+  (call :call)
+  (ebx <- 3)
+  (call :call)
+  (ebx <- -17)
+  (call :call))
+ (:call
+  (ebx &= 3)
+  (eax <- (print ebx))
+  (return))
+)

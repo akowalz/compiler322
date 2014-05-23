@@ -1,0 +1,3 @@
+((ebx <- 11)
+ (eax <- ebx)
+ (return))

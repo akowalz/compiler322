@@ -1,0 +1,13 @@
+((let ((comp (< 1 0)))
+  (if comp
+ (let ((x (print 1)))
+   (let ((y (print x)))
+        (let ((z (print 2)))
+          (let ((a (print z)))
+             (let ((t (new-tuple y a)))
+        (print t))))))
+ (let ((b 0))
+        (let ((c (print 2)))
+          (let ((d (print c)))
+             (let ((_tuple (new-tuple b d)))
+        (print _tuple))))))))

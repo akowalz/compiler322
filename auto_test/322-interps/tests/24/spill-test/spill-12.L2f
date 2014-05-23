@@ -1,0 +1,11 @@
+(
+:loop
+ (x <- 15)
+ (y <- 21)
+ (x += y)
+ (goto :end)
+ 
+ :end
+ (x -= y)
+ (eax <- x)) x -8 s
+ 

@@ -1,0 +1,19 @@
+((
+  (eax <- 40)  
+  (eax <<= 2)
+  (eax *= 2)
+  (eax += 1)
+  (eax <- (print eax))
+
+  (eax <- 1)  
+  (eax <<= 9)
+  (eax *= 2)
+  (eax += 1)
+  (eax <- (print eax))
+
+  (eax <- 5)  
+  (eax <<= 0)
+  (eax *= 2)
+  (eax += 1)
+  (eax <- (print eax))
+))

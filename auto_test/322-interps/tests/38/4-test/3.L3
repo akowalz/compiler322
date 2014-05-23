@@ -1,0 +1,6 @@
+((let ((x 5))
+  (let ((x1 (+ x 5)))
+    (let ((x2 (+ x 10)))
+      (if x
+        (print x1)
+        (print x2))))))

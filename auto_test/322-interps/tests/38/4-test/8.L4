@@ -1,0 +1,5 @@
+((let ((x 10))
+ (print (new-array 5
+        (if (= x 10)
+        0
+        1)))))

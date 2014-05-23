@@ -1,0 +1,8 @@
+(
+ ;; main
+ (
+  (edi <- :omg)
+  (call edi))
+ 
+ (:omg (eax <- (print 3)) (return))
+ )

@@ -1,0 +1,10 @@
+(((call :loop))
+  (:loop
+   (ebx <- 21)
+   :start
+   (ecx <- ebx)
+   (eax <- (print ecx))
+   (ebx -= 2)
+   (cjump ebx < 3 :end :start)
+   :end
+   (return)))

@@ -1,0 +1,5 @@
+(((eax <- 7)
+ (call :function))
+(:function
+  (eax <- (print eax))
+  (return)))

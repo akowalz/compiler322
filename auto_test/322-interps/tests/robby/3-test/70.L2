@@ -1,0 +1,25 @@
+(((call :L_3))
+ (:L_3
+  (cjump 3 = 1 :L_5 :L_4)
+  :L_5
+  (eax <- (print 27))
+  (eax <- eax)
+  (return)
+  :L_4
+  (x <- 5)
+  (cjump x = 1 :L_7 :L_6)
+  :L_7
+  (eax <- (print 25))
+  (eax <- eax)
+  (return)
+  :L_6
+  (x_1 <- 7)
+  (cjump x_1 = 1 :L_9 :L_8)
+  :L_9
+  (eax <- (print 23))
+  (eax <- eax)
+  (return)
+  :L_8
+  (eax <- (print x_1))
+  (eax <- eax)
+  (return)))

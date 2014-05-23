@@ -1,0 +1,10 @@
+((__s0 <- (mem ebp -4))
+ (cjump __s0 < y :true :false)
+ :true
+ (__s1 <- (mem ebp -4))
+ (__s1 += y)
+ ((mem ebp -4) <- __s1)
+ (goto :end)
+ :false
+ (__s2 <- (mem ebp -4))
+ (y += __s2))

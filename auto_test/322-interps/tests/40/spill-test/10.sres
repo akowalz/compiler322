@@ -1,0 +1,1 @@
+((x <- 89) (y <- 1) ((mem ebp -4) <- 1) :loop (s0 <- (mem ebp -4)) (cjump s0 < x :l1 :done) :l1 (s1 <- (mem ebp -4)) (s1 += 1) ((mem ebp -4) <- s1) (s2 <- (mem ebp -4)) (y += s2) (goto :loop) :done (eax <- (print y)))

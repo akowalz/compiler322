@@ -1,0 +1,13 @@
+(
+  (y <- 1)
+  (eax <- 1)
+  (y_0 <- (mem ebp -8))
+  (y_0 += eax)
+  ((mem ebp -8) <- y_0)
+  (y_1 <- (mem ebp -8))
+  (y_1 += eax)
+  ((mem ebp -8) <- y_1)
+  (y_2 <- (mem ebp -8))
+  (y_2 += eax)
+  ((mem ebp -8) <- y_2)
+)

@@ -1,0 +1,11 @@
+((let ([maths (new-tuple :plus :minus :times)])
+   (:loop maths 0))
+ (:plus (left right) (+ left right))
+ (:minus (left right) (- left right))
+ (:times (left right) (* left right))
+ (:loop (array current) (if (< current (alen array))
+                            (begin
+                              (print ((aref array current) 2 4))
+                              (:loop array (+ 1 current)))
+                            0)))
+                          

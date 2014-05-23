@@ -1,0 +1,25 @@
+((;; <
+  (ebx <- 7 < 9)
+  (eax <- (print ebx)) ;; 0 for true
+  
+  (ecx <- 2)
+  (edx <- 3)
+  (ebx <- ecx < edx)
+  (eax <- (print ebx))
+  
+  (ecx <- 2)
+  (ebx <- ecx < 3)
+  (eax <- (print ebx))
+  
+  (edx <- 3)
+  (ebx <- 2 < edx)
+  (eax <- (print ebx))
+  ;; =
+  (ecx <- 3)
+  (ebx <- ecx = 3)
+  (eax <- (print ebx))
+  ;; <=
+  (ecx <- 2)
+  (ebx <- ecx <= 2)
+  (eax <- (print ebx))
+  ))

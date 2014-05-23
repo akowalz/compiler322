@@ -1,0 +1,25 @@
+((
+	(ebx <- 15)
+	(cjump 3 < 5 :label1 :label3)
+	:label1
+	(eax <- (print 5))
+	(call :func)
+	(goto :label5)
+	:label3
+	(eax <- (print 3))
+	:label5
+ )
+ (:func 
+ 	(eax <- ebx)
+ 	(eax -= 4)
+ 	(ecx <- eax)
+ 	(eax <- (print ecx))
+ 	(call :secondfunc)
+ 	(ebx <- eax)
+ 	(eax <- (print ebx))
+ 	(return))
+
+ (:secondfunc
+ 	(eax <- 7)
+ 	(return))
+)

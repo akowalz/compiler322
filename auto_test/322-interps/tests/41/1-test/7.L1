@@ -1,0 +1,6 @@
+;; Multiply 2165 by 2
+(((eax <- 4331)
+  (eax -= 1)
+  (eax <<= 1)
+  (eax += 1)  
+  (eax <- (print eax))))

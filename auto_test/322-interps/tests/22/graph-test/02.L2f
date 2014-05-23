@@ -1,0 +1,5 @@
+((eax <- 11)
+ (ebx += eax)
+ (eax += ebx)
+ (y <- eax)
+ (y += ebx))

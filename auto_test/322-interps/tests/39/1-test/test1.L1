@@ -1,0 +1,10 @@
+;compute 5*(8+13) - 11
+(((eax <- 8)
+  (eax += 13)
+  (eax *= 5)
+  (eax -= 11)
+  (eax <<= 1)
+  (eax += 1)
+  (eax <- (print eax))
+  (eax <- 0)
+  ))

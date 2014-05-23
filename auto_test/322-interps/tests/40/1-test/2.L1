@@ -1,0 +1,7 @@
+((
+   (ebx <- 89)
+   (ecx <- ebx)
+   (eax <- (print ecx))
+))
+
+

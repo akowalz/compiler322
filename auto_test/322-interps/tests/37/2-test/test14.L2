@@ -1,0 +1,9 @@
+(((call :func))
+ (:func
+ (a <- 3)
+ (eax <- (print a))
+ (tail-call :f9)
+ (return))
+ (:f9
+ (eax <- 5)
+ (return)))

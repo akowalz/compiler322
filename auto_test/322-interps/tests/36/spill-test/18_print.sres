@@ -1,0 +1,2 @@
+((var_0 <- (mem ebp -4))
+(eax <- (print var_0)))

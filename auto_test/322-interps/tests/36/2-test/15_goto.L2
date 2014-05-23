@@ -1,0 +1,20 @@
+((
+  (edi <- 5)
+  (var <- 3)
+  (eax <- (print edi)) ;; 2
+  (goto :wtf)
+  
+  (edi += var)
+  (edi -= 1)
+  (eax <- (print edi)) ;; never get here
+  (goto :end)
+  
+  :wtf
+  (edi -= var)
+  (edi += 1)
+  (eax <- (print edi)) ;; 1
+  
+  :end
+  (eax <- (print edi)) ;; 1
+  ))
+  

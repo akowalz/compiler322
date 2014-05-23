@@ -1,0 +1,4 @@
+((print 
+  (new-tuple
+   (print (print 1))
+   (print (print 0)))))

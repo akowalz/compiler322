@@ -1,0 +1,6 @@
+((goto :hi)
+ :hi
+ (a <- 5)
+ (call :bye)
+ (return)
+ (eax <- (print a)))

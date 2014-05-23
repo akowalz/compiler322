@@ -1,0 +1,8 @@
+(:pop
+ (y <- 2)
+ (eax += y)
+ (ebx -= a)
+ (ecx &= b)
+ (eax *= ebx)
+ (ecx >>= 1)
+ (return))
