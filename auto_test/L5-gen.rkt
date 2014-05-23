@@ -34,7 +34,7 @@ pred ::= number? | a?
 |#
 
 (define (gen-random-L5 depth)
-  `(print ,(random-L5 depth '()))) 
+  `(print ,(random-L5 depth (env '() '() '()))))
 
 (define param-vars '(par1 par2 par3 par4 par4))
 (define var-list '(v1 v2 v3 v4 v5 v6 v7))
@@ -47,7 +47,12 @@ pred ::= number? | a?
        (procs (listof symbol?))
        (arrays (listof symbol?))])
 
+<<<<<<< HEAD
 (define (random-L5 depth binds)
+=======
+(define/contract (random-L5 depth binds)
+  (-> exact-nonnegative-integer? environment? list?)
+>>>>>>> funs-as-values
   
   (let ([n (if (= depth 0)
                0
@@ -58,13 +63,20 @@ pred ::= number? | a?
       `(,(rand-biop) ,(random-L5 d binds)
                      ,(random-L5 d binds)))
     (define (rand-value)
+<<<<<<< HEAD
       (if (empty? binds)
           (random 20)
           (rand-elm-from binds)))
+=======
+      (if (empty? (env-nvars binds))
+          (random 20)
+          (rand-elm-from (env-nvars binds))))
+>>>>>>> funs-as-values
     (define (rand-begin-expr)
       `(begin ,(random-L5 d binds)
               ,(random-L5 d binds)))
     (define (rand-let-expr)
+<<<<<<< HEAD
       (let ([var-name (rand-varname)])
         `(let ([,var-name ,(random-L5 d binds)])
            ,(random-L5 d (cons var-name binds)))))
@@ -72,6 +84,36 @@ pred ::= number? | a?
       (let* ([arity (random 5)]
              [params (take param-vars arity)]
              [lam (random-lambda params d binds)]
+=======
+      (let* ([var-type (rand-elm-from '(num proc))]
+             [var-name (if var-type
+                           (rand-elm-from proc-vars)
+                           (rand-varname))])
+        (case var-type
+          ['num `(let ([,var-name ,(random-L5 d binds)])
+                   ,(random-L5
+                     d 
+                     (type-case environment binds
+                       (env (vs ps as)
+                            (env (cons var-name vs)
+                                 ps
+                                 as)))))]
+          ['proc `(let ([,var-name ,(random-lambda 3 d binds)])
+                    ,(random-L5
+                      d
+                      (type-case environment binds
+                        (env (vs ps as)
+                             (env vs
+                                  (cons var-name ps)
+                                  as)))))])))
+    (define (rand-app-expr)
+      (let* ([arity (if (empty? (env-procs binds))
+                        (random 5)
+                        3)]
+             [lam (if (empty? (env-procs binds))
+                      (random-lambda arity d binds)
+                      (rand-elm-from (env-procs binds)))]
+>>>>>>> funs-as-values
              [args (list-of-n-L5s arity d binds)])
         `(,lam ,@args)))
     (define (rand-pred-expr)
@@ -90,8 +132,15 @@ pred ::= number? | a?
       [else (random-L5 depth binds)])))
 
 
-(define (random-lambda params depth binds)
-  `(lambda ,params ,(random-L5 depth (append params binds))))
+(define (random-lambda arity depth binds)
+  (let ([params (take param-vars arity)])
+    `(lambda ,params
+       ,(random-L5 depth
+                   (type-case environment binds
+                     (env (vs ps as)
+                          (env (append params vs)
+                               ps
+                               as)))))))
 
 (define (list-of-n-L5s n depth vars)
   (for/list [(i (in-range n))]
@@ -108,7 +157,7 @@ pred ::= number? | a?
   (rand-elm-from biops))
 
 (pretty-write
- (gen-random-L5 2))
+ (gen-random-L5 5))
 
 
 
