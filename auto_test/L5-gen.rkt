@@ -3,9 +3,28 @@
 (define (gen-random-L5 depth)
   (random-L5 depth '()))
 
-(define arg-vars '(x y z t q))
+; current issue.  How do I stop procedures from being added to numbers?
+; need a specific type for L5-vals? numbers and procedures? That's a pain
+; Could perhaps I just have two functions?  One that makes number expers
+; and other that makes lambda exprs
+; well, I basically already have that
+; I just need to replace all the places where ONLY number can go with
+; (rand-num-exr depth bindings..)
+; the other places (bodys of lets) I can put anything
+; and in function application, I can only put lambdas
 
-(define (random-L5 depth vars)
+
+(define arg-vars '(arg1 arg2 arg3 arg4 arg4))
+(define var-list '(v1 v2 v3 v4 v5 v6 v7))
+(define proc-vars '(f1 f2 f3 f4 f5 f6 f7))
+(define array-vars '(a1 a2 a3 a4 a5 a6 a7))
+
+(define-type environment
+  [env (nvars (listof symbol?))
+       (procs (listof symbol?))
+       (arrays (listof symbol?))])
+
+(define/contract (random-L5 depth vars)
   
   (define (random-lambda d bindings)
     (define random-arglist
@@ -26,17 +45,17 @@
                                              vars)))
                `(print ,(random 20)))]
       [(1) `(,(rand-biop) ,(random-L5 d vars)
-                            ,(random-L5 d vars))]
+                          ,(random-L5 d vars))]
       [(2) `(begin ,(random-L5 d vars)
                    ,(random-L5 d vars))]
       [(3) (let ([var-name (rand-varname)])
              `(let ([,var-name ,(random-L5 d vars)])
                 ,(random-L5 d (cons var-name vars))))]
       [(4) (random-lambda d vars)]
-      [else (random-L5 d vars)])))
+      [else (random-L5 depth vars)])))
 
 (define (rand-varname)
-    (rand-elm-from '(var1 var2 var3 var4)))
+    (rand-elm-from var-list))
 
 (define (rand-elm-from lst)
   (let ([n (random (length lst))])

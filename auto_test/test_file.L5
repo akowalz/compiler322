@@ -1,5 +1,1 @@
-(begin
-  (lambda (y) (lambda (z y) (begin (print z) (print y))))
-  (+
-   (lambda (y) (begin (lambda () (print 11)) (print 15)))
-   (lambda (y) (begin (print 9) (lambda (t z y) (print t))))))
+(print (new-array 4 (lambda (x) x)))
