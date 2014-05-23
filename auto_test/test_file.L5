@@ -1,12 +1,1 @@
-(print
- (let ((v3
-        (+
-         ((lambda (par1 par2 par3 par4) (begin par2 par3))
-          (begin 14 1)
-          (begin 16 9)
-          ((lambda (par1 par2) par1) 16 9)
-          (begin 14 4))
-         (* (- 16 17) (begin 16 16)))))
-   (let ((v2 ((lambda () (begin v3 v3)))))
-     (let ((v6 (begin v2 v3)))
-       ((lambda (par1 par2 par3 par4) v6) v3 v2 v6 v3)))))
+(print (a? (<= 3 5)))
