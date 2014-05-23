@@ -69,12 +69,12 @@ pred ::= number? | a?
       `(begin ,(random-L5 d binds)
               ,(random-L5 d binds)))
     (define (rand-let-expr)
-      (let* ([var-type (rand-elm-from '(num proc))]
-             [var-name (if var-type
-                           (rand-elm-from proc-vars)
-                           (rand-varname))])
+      (let* ([var-type (random 2)]
+             [var-name (if (zero? var-type)
+                           (rand-elm-from var-list)
+                           (rand-elm-from proc-vars))])
         (case var-type
-          ['num `(let ([,var-name ,(random-L5 d binds)])
+          [(0) `(let ([,var-name ,(random-L5 d binds)])
                    ,(random-L5
                      d 
                      (type-case environment binds
@@ -82,7 +82,7 @@ pred ::= number? | a?
                             (env (cons var-name vs)
                                  ps
                                  as)))))]
-          ['proc `(let ([,var-name ,(random-lambda 3 d binds)])
+          [(1) `(let ([,var-name ,(random-lambda 3 d binds)])
                     ,(random-L5
                       d
                       (type-case environment binds
@@ -129,8 +129,6 @@ pred ::= number? | a?
   (for/list [(i (in-range n))]
     (random-L5 depth vars)))
 
-(define (rand-varname)
-    (rand-elm-from var-list))
 
 (define (rand-elm-from lst)
   (let ([n (random (length lst))])
@@ -140,7 +138,7 @@ pred ::= number? | a?
   (rand-elm-from biops))
 
 (pretty-write
- (gen-random-L5 5))
+ (gen-random-L5 10))
 
 
 

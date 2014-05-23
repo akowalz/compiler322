@@ -1,36 +1,1378 @@
 (print
- ((lambda (par1 par2)
-    (begin
-      (let ((f1 (lambda (par1 par2 par3) (begin (a? par1) (a? par1)))))
-        (f1
-         (a? par1)
-         (number? par1)
-         (let ((f4 (lambda (par1 par2 par3) par1))) par2)))
-      (begin
-        (if (+ par2 par2) (if par1 par2 par2) (+ par1 par2))
-        ((lambda (par1 par2 par3)
-           ((lambda (par1 par2 par3) par3) par2 par3 par3))
-         (< par2 par2)
-         (begin par1 par2)
-         ((lambda (par1 par2) par2) par1 par2)))))
-  (if (begin
-        (if (begin 19 19) (begin 2 5) (if 13 0 9))
-        (let ((f6 (lambda (par1 par2 par3) (begin par3 par2)))) (begin 11 18)))
-    (if (if ((lambda (par1 par2 par3 par4) par2) 14 16 0 15)
-          (let ((f5 (lambda (par1 par2 par3) par1))) 6)
-          (let ((f7 (lambda (par1 par2 par3) par3))) 6))
-      (let ((f2
+ (begin
+   (begin
+     ((lambda (par1 par2)
+        ((lambda (par1 par2)
+           (begin
+             (a?
+              ((lambda (par1 par2 par3)
+                 (a?
+                  (if (begin par2 par2)
+                    ((lambda (par1 par2 par3) par1) par2 par2 par3)
+                    (let ((f7 (lambda (par1 par2 par3) par2))) par2))))
+               (a?
+                (begin
+                  ((lambda (par1 par2) par2) par1 par1)
+                  (let ((v5 par1)) v5)))
+               (let ((v6
+                      (let ((v2
+                             ((lambda (par1 par2 par3 par4) par1)
+                              par1
+                              par1
+                              par1
+                              par2)))
+                        (<= par2 v2))))
+                 (- ((lambda (par1) par1) par1) (<= v6 par2)))
+               ((lambda (par1 par2)
+                  (if (a? par1)
+                    ((lambda (par1) par1) par2)
+                    (let ((v6 par1)) par2)))
+                ((lambda (par1 par2 par3) (if par3 par2 par3))
+                 (number? par2)
+                 (if par1 par2 par1)
+                 (if par1 par1 par2))
+                (number? (let ((f7 (lambda (par1 par2 par3) par1))) par1)))))
+             (if (let ((f7
+                        (lambda (par1 par2 par3)
+                          (let ((v3
+                                 (begin (begin par2 par1) (begin par1 par2))))
+                            (begin (= v3 par1) (let ((v3 par1)) par1))))))
+                   (if (begin
+                         (if par2 par2 par1)
+                         (let ((f2 (lambda (par1 par2 par3) par1))) par2))
+                     (f7 (let ((v6 par2)) par1) (a? par2) (a? par1))
+                     (< (if par2 par1 par2) (number? par2))))
+               (begin
+                 ((lambda (par1 par2)
+                    (if (begin par2 par1) (+ par1 par2) (- par2 par2)))
+                  (<
+                   ((lambda (par1 par2) par2) par2 par2)
+                   ((lambda (par1 par2) par2) par2 par1))
+                  (if (begin par1 par1)
+                    (let ((f1 (lambda (par1 par2 par3) par1))) par2)
+                    (<= par1 par2)))
+                 (let ((v6 (= ((lambda (par1) par1) par2) (a? par1))))
+                   (a? (if v6 par2 par1))))
+               (number?
+                (begin
+                  (let ((v3 ((lambda (par1) par2) par2))) (if v3 par1 par1))
+                  (begin (begin par2 par2) (number? par2)))))))
+         (begin
+           (begin
+             (let ((f7
+                    (lambda (par1 par2 par3)
+                      (let ((f2
+                             (lambda (par1 par2 par3)
+                               (+
+                                (if par3 par1 par2)
+                                ((lambda (par1 par2) par2) par3 par1)))))
+                        (<= (let ((v1 par3)) v1) (begin par1 par1))))))
+               (let ((v5 (let ((v1 (begin par2 par2))) (f7 par1 v1 par1))))
+                 (let ((v2 (let ((f3 (lambda (par1 par2 par3) par3))) par2)))
+                   (if par1 v2 par2))))
+             (begin
+               (begin
+                 ((lambda (par1 par2) (if par2 par1 par1))
+                  (begin par1 par2)
+                  (begin par1 par1))
+                 (begin (if par2 par1 par1) (begin par2 par1)))
+               (begin
+                 (let ((f1 (lambda (par1 par2 par3) (let ((v1 par2)) par2))))
+                   (= par2 par1))
+                 ((lambda (par1 par2 par3 par4) (number? par4))
+                  (if par1 par2 par2)
+                  (begin par2 par2)
+                  (<= par2 par2)
+                  (let ((f2 (lambda (par1 par2 par3) par2))) par1)))))
+           (*
+            (let ((v7
+                   (if (begin ((lambda () par1)) (= par2 par1))
+                     ((lambda (par1 par2 par3) ((lambda () par1)))
+                      (number? par2)
+                      (if par1 par1 par2)
+                      (+ par2 par1))
+                     ((lambda () (if par2 par2 par1))))))
+              (*
+               (if ((lambda () par1))
+                 (begin v7 par1)
+                 (let ((f7 (lambda (par1 par2 par3) v7))) par1))
+               (number? (if par2 par1 par1))))
+            ((lambda (par1)
+               (+
+                ((lambda (par1 par2) ((lambda (par1) par2) par1))
+                 (let ((f4 (lambda (par1 par2 par3) par1))) par1)
+                 (let ((f5 (lambda (par1 par2 par3) par1))) par1))
+                (let ((f7 (lambda (par1 par2 par3) (if par2 par3 par2))))
+                  (= par2 par2))))
+             (begin
+               (begin (begin par2 par1) (begin par2 par1))
+               (begin (< par1 par1) (a? par2))))))
+         ((lambda ()
+            (-
+             ((lambda (par1 par2 par3 par4)
+                (-
+                 (a? (let ((f1 (lambda (par1 par2 par3) par3))) par2))
+                 ((lambda (par1 par2 par3 par4) (a? par1))
+                  (- par4 par4)
+                  (begin par3 par1)
+                  (if par4 par1 par1)
+                  (a? par1))))
+              (number? (begin (if par1 par2 par2) (begin par1 par2)))
+              (+
+               ((lambda (par1) (+ par2 par2)) ((lambda (par1) par2) par2))
+               (< (let ((v7 par2)) v7) ((lambda () par2))))
+              (let ((v2 (begin ((lambda (par1) par1) par2) (begin par2 par1))))
+                ((lambda (par1 par2 par3) (if par2 v2 v2))
+                 (<= par1 par1)
+                 (- v2 v2)
+                 (begin par1 par2)))
+              ((lambda (par1 par2 par3 par4)
+                 (let ((v4 (begin par1 par2))) (a? par2)))
+               (if ((lambda (par1 par2) par2) par2 par1)
+                 (let ((f4 (lambda (par1 par2 par3) par1))) par2)
+                 (if par2 par1 par2))
+               (let ((f3 (lambda (par1 par2 par3) (if par2 par1 par1))))
+                 (* par1 par1))
+               ((lambda (par1 par2) (if par2 par1 par2))
+                (a? par1)
+                (begin par1 par2))
+               (let ((v4 ((lambda (par1 par2) par2) par2 par2))) (< v4 par1))))
+             ((lambda (par1 par2 par3)
+                (=
+                 (number? (< par1 par2))
+                 (if (let ((f1 (lambda (par1 par2 par3) par1))) par1)
+                   (a? par1)
+                   (number? par2))))
+              (-
+               ((lambda (par1 par2 par3 par4) (a? par4))
+                (let ((f3 (lambda (par1 par2 par3) par1))) par2)
+                ((lambda (par1 par2 par3 par4) par1) par1 par1 par2 par2)
+                (<= par2 par2)
+                ((lambda () par2)))
+               (begin (if par1 par2 par1) (let ((v1 par1)) par2)))
+              (if (let ((f3 (lambda (par1 par2 par3) (* par2 par1))))
+                    (let ((f1 (lambda (par1 par2 par3) par3))) par2))
+                (let ((v5 (if par1 par2 par2))) (< par1 par1))
+                (if (begin par1 par1)
+                  (begin par1 par2)
+                  (let ((v6 par2)) par1)))
+              (begin
+                ((lambda () (let ((f4 (lambda (par1 par2 par3) par1))) par1)))
+                (<= (if par1 par2 par1) (< par2 par2)))))))))
+      (if ((lambda (par1 par2 par3 par4)
+             (if (if (<=
+                      (let ((f1 (lambda (par1 par2 par3) (<= par1 par1))))
+                        (number? par3))
+                      (if (a? par4) (+ par2 par2) (if par1 par4 par1)))
+                   (let ((f3
+                          (lambda (par1 par2 par3)
+                            (let ((v2
+                                   (let ((f7 (lambda (par1 par2 par3) par3)))
+                                     par2)))
+                              (begin par2 par4)))))
+                     (< (f3 par3 par2 par2) (let ((v4 par3)) par1)))
+                   (let ((f1
+                          (lambda (par1 par2 par3)
+                            (let ((f7
+                                   (lambda (par1 par2 par3)
+                                     (let ((v1 par1)) par3))))
+                              (< par1 par1)))))
+                     (let ((f5 (lambda (par1 par2 par3) (if par1 par4 par1))))
+                       (let ((f3 (lambda (par1 par2 par3) par3))) par3))))
+               (let ((v4
+                      (-
+                       (if (begin par2 par2)
+                         ((lambda (par1 par2 par3) par2) par4 par4 par3)
+                         (number? par2))
+                       (let ((f5
+                              (lambda (par1 par2 par3) (if par1 par2 par3))))
+                         (let ((f2 (lambda (par1 par2 par3) par1))) par4)))))
+                 (let ((v2
+                        ((lambda (par1 par2 par3 par4) (begin par4 par2))
+                         (begin par1 par4)
+                         (number? par4)
+                         (a? v4)
+                         ((lambda (par1 par2 par3 par4) par4)
+                          par2
+                          v4
+                          par1
+                          par4))))
+                   ((lambda (par1 par2) (< par1 v4))
+                    (number? par2)
+                    (let ((v7 par4)) par2))))
+               (=
+                (let ((v5
+                       (if ((lambda (par1) par1) par3)
+                         ((lambda (par1 par2) par3) par2 par3)
+                         ((lambda (par1 par2 par3 par4) par2)
+                          par3
+                          par2
+                          par1
+                          par1))))
+                  (if (let ((f6 (lambda (par1 par2 par3) par1))) par2)
+                    (begin par1 par1)
+                    (if par3 par2 v5)))
+                (begin
+                  (a? (let ((v2 par2)) v2))
+                  (number? (if par4 par2 par4))))))
+           ((lambda ()
+              (if (a? ((lambda (par1) (<= par1 par1)) (* 3 17)))
+                (number?
+                 (if (if 3 17 11)
+                   ((lambda (par1 par2 par3 par4) par2) 19 7 12 16)
+                   (+ 1 6)))
+                (a? (begin (a? 1) (let ((v3 11)) v3))))))
+           ((lambda (par1 par2 par3 par4)
+              (let ((v7
+                     (begin
+                       (= (= par2 par3) ((lambda (par1) par4) par2))
+                       (begin
+                         (+ par4 par1)
+                         ((lambda (par1 par2 par3) par3) par3 par2 par2)))))
+                (<
+                 (begin (number? par3) (begin par2 v7))
+                 (let ((f1 (lambda (par1 par2 par3) (if par3 par4 par2))))
+                   (let ((v5 par3)) v5)))))
+            (let ((v6
+                   (let ((v5 (let ((v1 (if 9 10 2))) (if v1 v1 v1))))
+                     (begin ((lambda (par1 par2) par1) v5 v5) (a? v5)))))
+              (a?
+               (<= ((lambda (par1 par2 par3 par4) par1) v6 v6 v6 v6) (a? v6))))
+            (if ((lambda (par1 par2 par3 par4)
+                   (begin (number? par3) ((lambda () par3))))
+                 (- (let ((v2 19)) v2) (begin 19 16))
+                 (begin (begin 15 12) (if 13 19 7))
+                 (begin
+                   ((lambda () 15))
+                   (let ((f7 (lambda (par1 par2 par3) par2))) 8))
+                 (- (if 3 6 18) (let ((v6 4)) v6)))
+              (<
+               (if (let ((f4 (lambda (par1 par2 par3) par1))) 12)
+                 (<= 5 9)
+                 (* 13 14))
+               (begin (number? 14) (* 6 9)))
+              (=
+               ((lambda (par1 par2) (begin par1 par2))
+                ((lambda (par1) par1) 16)
+                (if 13 10 7))
+               (a? (let ((v7 3)) v7))))
+            (begin
+              (begin
+                (a? (- 9 11))
+                (if ((lambda (par1 par2 par3 par4) par3) 16 12 11 16)
+                  ((lambda (par1) par1) 16)
+                  (if 11 7 16)))
+              (let ((f3
+                     (lambda (par1 par2 par3)
+                       ((lambda (par1 par2) (if par1 par1 par3))
+                        (let ((v1 par3)) par1)
+                        (let ((f1 (lambda (par1 par2 par3) par3))) par1)))))
+                (if (if 18 7 11) (if 11 3 13) (begin 6 3))))
+            ((lambda (par1 par2) (number? (a? (let ((v2 par2)) par1))))
+             (a? (number? (let ((f1 (lambda (par1 par2 par3) par1))) 10)))
+             (number?
+              (let ((f1 (lambda (par1 par2 par3) (if par3 par1 par1))))
+                (if 12 4 18)))))
+           (let ((v2
+                  (*
+                   (if (begin
+                         ((lambda (par1) par1) 16)
+                         ((lambda (par1 par2 par3 par4) par2) 5 18 6 12))
+                     (a? (if 1 19 5))
+                     (* (a? 3) (let ((f1 (lambda (par1 par2 par3) par1))) 11)))
+                   (if (begin (if 4 4 14) (let ((v1 12)) v1))
+                     (begin (begin 11 16) (let ((v6 2)) v6))
+                     (a? (begin 7 11))))))
+             ((lambda ()
+                (<= (< (number? v2) ((lambda () v2))) (number? (<= v2 v2))))))
+           (let ((f1
+                  (lambda (par1 par2 par3)
+                    (-
+                     (begin
+                       (a? (let ((f4 (lambda (par1 par2 par3) par2))) par2))
+                       (* (number? par2) (number? par3)))
+                     (begin
+                       (let ((v5 (if par1 par1 par1))) (= par2 par1))
+                       (number? (begin par2 par3)))))))
+             (let ((v3
+                    (begin
+                      (if (let ((v6 16)) v6) (< 0 4) (if 14 10 11))
+                      (=
+                       (f1 16 10 11)
+                       (let ((f1 (lambda (par1 par2 par3) par3))) 0)))))
+               (<
+                (f1 (+ v3 v3) (<= v3 v3) (begin v3 v3))
+                (f1 (f1 v3 v3 v3) (let ((v2 v3)) v3) (f1 v3 v3 v3))))))
+        (a?
+         (begin
+           (*
+            (begin
+              (let ((v2 (let ((v1 1)) v1))) (- v2 v2))
+              (let ((f1 (lambda (par1 par2 par3) (if par3 par3 par1))))
+                (- 11 9)))
+            (if ((lambda () (let ((f7 (lambda (par1 par2 par3) par1))) 17)))
+              (a? ((lambda (par1 par2 par3) par3) 6 3 7))
+              ((lambda () ((lambda (par1 par2 par3) par2) 15 8 6)))))
+           (if (if (a? ((lambda (par1) par1) 18))
+                 (a? (let ((f2 (lambda (par1 par2 par3) par3))) 15))
+                 (if (if 16 17 12) (if 10 1 16) (+ 12 0)))
+             (if (if (a? 13) ((lambda () 8)) ((lambda (par1) par1) 2))
+               (begin
+                 (if 12 9 8)
+                 (let ((f1 (lambda (par1 par2 par3) par1))) 9))
+               (begin (if 18 16 17) ((lambda (par1 par2) par2) 2 8)))
+             (let ((v1 (begin (number? 6) (let ((v2 9)) v2))))
+               (let ((v7 (+ v1 v1))) ((lambda (par1) par1) v1))))))
+        (=
+         (if (if (a?
+                  (begin (begin 14 6) ((lambda (par1 par2 par3) par1) 12 1 4)))
+               (+ (number? (begin 10 6)) (begin (< 9 19) (begin 12 14)))
+               (*
+                (begin (begin 14 18) (begin 19 16))
+                ((lambda (par1 par2 par3) (a? par2))
+                 (* 10 12)
+                 (let ((v3 4)) v3)
+                 (begin 17 8))))
+           ((lambda (par1)
+              (begin
+                (begin (if par1 par1 par1) (begin par1 par1))
+                (+
+                 (number? par1)
+                 ((lambda (par1 par2 par3) par3) par1 par1 par1))))
+            ((lambda (par1) (number? (a? par1)))
+             (if ((lambda (par1) par1) 8) (<= 9 6) (begin 18 4))))
+           (if (if (< (let ((v7 1)) v7) (number? 18))
+                 (let ((v4 ((lambda (par1 par2 par3 par4) par1) 12 18 13 3)))
+                   (if v4 v4 v4))
+                 (if (if 17 9 10) (if 14 13 3) (let ((v1 8)) v1)))
+             (let ((f7
+                    (lambda (par1 par2 par3) (+ (= par3 par2) (< par1 par1)))))
+               (begin (begin 7 3) (begin 17 9)))
+             ((lambda (par1)
+                (if (if par1 par1 par1) (begin par1 par1) (if par1 par1 par1)))
+              ((lambda (par1 par2 par3 par4) (begin par4 par4))
+               (number? 19)
+               (let ((v6 10)) v6)
+               (number? 10)
+               (let ((v1 16)) v1)))))
+         (let ((v6
+                (let ((v7
+                       (let ((v4 (let ((v5 ((lambda () 0)))) (begin v5 v5))))
+                         (= (let ((v2 v4)) v2) (number? v4)))))
+                  (if (let ((f6
+                             (lambda (par1 par2 par3)
+                               ((lambda (par1 par2) par1) v7 par3))))
+                        (= v7 v7))
+                    (number? (a? v7))
+                    (begin
+                      (begin v7 v7)
+                      (let ((f6 (lambda (par1 par2 par3) par3))) v7))))))
+           (begin
+             (if (if (let ((f3 (lambda (par1 par2 par3) par1))) v6)
+                   (number? v6)
+                   (if v6 v6 v6))
+               (begin
+                 (let ((f5 (lambda (par1 par2 par3) v6))) v6)
+                 ((lambda (par1 par2) par2) v6 v6))
+               (- (begin v6 v6) (+ v6 v6)))
+             (begin
+               ((lambda () (let ((f1 (lambda (par1 par2 par3) par3))) v6)))
+               (let ((f1 (lambda (par1 par2 par3) (begin par1 par3))))
+                 (if v6 v6 v6)))))))
+      (let ((f5
              (lambda (par1 par2 par3)
-               (let ((f6 (lambda (par1 par2 par3) par2))) par1))))
-        (begin 2 9))
-      (* (let ((f5 10)) f5) ((lambda (par1 par2) par2) 0 9)))
-    (a? (number? (* 19 1))))
-  ((lambda (par1)
-     (let ((f7
-            (*
-             ((lambda (par1 par2 par3) par3) par1 par1 par1)
-             (let ((f2 (lambda (par1 par2 par3) par3))) par1))))
-       (begin ((lambda (par1 par2 par3) par1) par1 f7 f7) (if f7 par1 f7))))
-   (if (begin (+ 19 3) (if 8 16 14))
-     (if (let ((f2 9)) f2) (if 16 18 13) (if 4 1 14))
-     (<= (if 14 18 0) (+ 14 13))))))
+               ((lambda ()
+                  (let ((f2
+                         (lambda (par1 par2 par3)
+                           ((lambda (par1 par2 par3)
+                              (+
+                               (number?
+                                (let ((f1 (lambda (par1 par2 par3) par1)))
+                                  par2))
+                               (let ((f6
+                                      (lambda (par1 par2 par3) (< par3 par1))))
+                                 (f6 par1 par2 par3))))
+                            ((lambda (par1 par2 par3)
+                               (if (begin par3 par3)
+                                 (let ((f1 (lambda (par1 par2 par3) par3)))
+                                   par1)
+                                 (number? par3)))
+                             (if (let ((v3 par1)) v3)
+                               (if par2 par3 par2)
+                               ((lambda (par1 par2) par3) par2 par2))
+                             (begin
+                               (let ((v4 par1)) par3)
+                               (let ((f6 (lambda (par1 par2 par3) par1)))
+                                 par3))
+                             ((lambda (par1 par2 par3 par4)
+                                ((lambda (par1) par3) par1))
+                              (if par1 par3 par1)
+                              (if par3 par3 par3)
+                              (let ((f5 (lambda (par1 par2 par3) par1))) par3)
+                              ((lambda (par1 par2 par3) par3) par2 par3 par1)))
+                            (=
+                             (begin (let ((v3 par1)) par3) (if par2 par2 par2))
+                             (begin (< par3 par3) (begin par1 par3)))
+                            (a? (a? (let ((v6 par1)) par1)))))))
+                    (f2
+                     (if (begin (if par3 par3 par1) (f2 par2 par1 par3))
+                       (if (- par1 par1) (< par1 par3) (let ((v2 par1)) par1))
+                       (let ((f7 (lambda (par1 par2 par3) (< par3 par1))))
+                         (a? par2)))
+                     (let ((v2
+                            (begin
+                              (= par3 par2)
+                              (let ((f4 (lambda (par1 par2 par3) par1)))
+                                par3))))
+                       (if (begin v2 v2)
+                         (let ((f6 (lambda (par1 par2 par3) par2))) par3)
+                         (f2 v2 par3 par3)))
+                     (let ((f2
+                            (lambda (par1 par2 par3)
+                              (f2
+                               (a? par2)
+                               (if par2 par2 par3)
+                               (< par3 par1)))))
+                       (if (f2 par1 par2 par3)
+                         (let ((f1 (lambda (par1 par2 par3) par2))) par3)
+                         (if par2 par1 par1))))))))))
+        (f5
+         (if (<
+              (a? (a? (if 7 14 15)))
+              (number?
+               (let ((v6 (a? 0)))
+                 (let ((f6 (lambda (par1 par2 par3) par2))) v6))))
+           (f5
+            (- (if (begin 17 18) (begin 10 9) (= 10 16)) (a? (begin 1 18)))
+            (let ((f2 (lambda (par1 par2 par3) (number? (f5 par1 par2 par1)))))
+              (f2 (if 10 3 8) (< 5 15) (begin 14 13)))
+            (number? (f5 (if 3 19 16) (begin 10 13) (let ((v3 6)) v3))))
+           (-
+            (begin
+              (begin (* 2 5) (- 2 7))
+              (begin
+                (number? 11)
+                (let ((f7 (lambda (par1 par2 par3) par1))) 0)))
+            (f5
+             (if (- 15 16) (begin 0 11) (< 17 4))
+             (let ((f3 (lambda (par1 par2 par3) (if par1 par1 par2))))
+               (let ((f3 (lambda (par1 par2 par3) par3))) 4))
+             (+ (if 5 15 17) (if 10 2 18)))))
+         (if (begin
+               (-
+                (if (if 2 8 7) (if 14 13 19) (if 10 11 9))
+                (let ((v1 (begin 14 2))) (number? v1)))
+               (if (+ (f5 8 7 7) (let ((v2 6)) v2))
+                 (number? (if 5 11 15))
+                 (if (if 6 10 11) (a? 13) (begin 5 5))))
+           (f5
+            (let ((f3
+                   (lambda (par1 par2 par3)
+                     (let ((v3 (let ((v3 par1)) par1))) (if v3 par1 par3)))))
+              (f3
+               (f3 4 10 8)
+               (let ((f1 (lambda (par1 par2 par3) par2))) 10)
+               (let ((f4 (lambda (par1 par2 par3) par3))) 5)))
+            (let ((v6
+                   (let ((f2 (lambda (par1 par2 par3) (- par2 par3))))
+                     (let ((f3 (lambda (par1 par2 par3) par2))) 19))))
+              (if (let ((f7 (lambda (par1 par2 par3) par3))) v6)
+                (a? v6)
+                (let ((v1 v6)) v6)))
+            (a? (- (a? 13) (let ((v1 17)) v1))))
+           (<
+            (=
+             (f5 (= 4 6) (number? 2) (if 4 0 13))
+             (f5 (if 12 18 18) (if 7 9 11) (* 11 7)))
+            (begin
+              (let ((f4 (lambda (par1 par2 par3) (begin par2 par3))))
+                (begin 18 1))
+              (if (begin 2 11) (a? 9) (let ((v3 14)) v3)))))
+         (a?
+          (let ((v6
+                 (f5
+                  (a? (begin 5 16))
+                  (if (number? 9) (+ 16 12) (<= 6 0))
+                  (let ((v2 (if 6 10 9))) (* v2 v2)))))
+            (a? (begin (number? v6) (let ((v3 v6)) v3))))))))
+     (if (begin
+           (begin
+             ((lambda (par1 par2 par3)
+                ((lambda (par1 par2 par3)
+                   (+
+                    (<= ((lambda () par1)) (begin par1 par2))
+                    (number? ((lambda (par1 par2) par2) par1 par1))))
+                 ((lambda (par1 par2)
+                    (if (if par1 par1 par1)
+                      (begin par2 par2)
+                      (let ((f5 (lambda (par1 par2 par3) par2))) par1)))
+                  (-
+                   (let ((f6 (lambda (par1 par2 par3) par3))) par1)
+                   (number? par1))
+                  (<= (< par3 par1) (number? par3)))
+                 (number? (begin (begin par3 par2) (< par2 par3)))
+                 (if ((lambda (par1 par2) (a? par1))
+                      (begin par1 par3)
+                      (let ((v2 par2)) par3))
+                   ((lambda (par1 par2 par3) (< par2 par1))
+                    ((lambda (par1) par1) par2)
+                    (begin par3 par1)
+                    (* par1 par1))
+                   (begin
+                     ((lambda (par1 par2 par3 par4) par3) par2 par1 par2 par1)
+                     (number? par3)))))
+              (-
+               (a?
+                (* (let ((v2 4)) v2) ((lambda (par1 par2 par3) par2) 13 7 3)))
+               (-
+                (a? (number? 1))
+                ((lambda (par1 par2 par3 par4)
+                   (let ((f3 (lambda (par1 par2 par3) par1))) par2))
+                 (if 11 16 1)
+                 (+ 15 4)
+                 (begin 17 7)
+                 (begin 3 17))))
+              (if (if (= (if 17 17 15) (begin 0 16))
+                    (begin (if 7 3 16) (begin 12 10))
+                    (let ((f1 (lambda (par1 par2 par3) (if par2 par3 par2))))
+                      (begin 18 12)))
+                (begin
+                  (begin (* 13 14) (begin 13 14))
+                  ((lambda (par1 par2 par3) (let ((v1 par3)) par2))
+                   (begin 17 14)
+                   (if 18 17 1)
+                   (let ((f1 (lambda (par1 par2 par3) par2))) 5)))
+                (let ((f4 (lambda (par1 par2 par3) (a? (number? par2)))))
+                  (begin
+                    (let ((f6 (lambda (par1 par2 par3) par2))) 11)
+                    (f4 11 7 17))))
+              (a? (begin (number? (number? 17)) (- (<= 2 6) (* 5 16)))))
+             (number?
+              (a?
+               (let ((v7 (begin (begin 12 15) (let ((v7 3)) v7))))
+                 ((lambda (par1 par2)
+                    ((lambda (par1 par2 par3 par4) par2) par1 v7 par2 par1))
+                  (if v7 v7 v7)
+                  (if v7 v7 v7))))))
+           ((lambda (par1 par2)
+              (let ((v6
+                     (+
+                      (+
+                       (number? (if par2 par1 par2))
+                       (begin (a? par1) (number? par2)))
+                      ((lambda (par1 par2) (number? (+ par2 par2)))
+                       (let ((v1
+                              ((lambda (par1 par2 par3 par4) par2)
+                               par1
+                               par1
+                               par2
+                               par2)))
+                         (< v1 par2))
+                       (if ((lambda (par1 par2 par3 par4) par4)
+                            par1
+                            par1
+                            par1
+                            par1)
+                         (+ par1 par1)
+                         (begin par1 par1))))))
+                (+
+                 (begin
+                   (let ((v3 (a? v6))) (begin par1 v3))
+                   (begin ((lambda () par1)) (= v6 par1)))
+                 (if ((lambda (par1 par2 par3 par4) (if par3 par1 par2))
+                      ((lambda (par1 par2) par2) par2 par2)
+                      (let ((f5 (lambda (par1 par2 par3) par1))) v6)
+                      (if v6 v6 v6)
+                      (<= v6 par2))
+                   (let ((f3 (lambda (par1 par2 par3) (begin par2 par2))))
+                     (a? par1))
+                   (= (a? par2) (<= v6 par2))))))
+            (let ((v4
+                   (-
+                    (begin
+                      (if (+ 1 15) (begin 3 19) (= 8 9))
+                      ((lambda () (begin 6 8))))
+                    (begin
+                      (if ((lambda (par1 par2 par3) par2) 1 15 8)
+                        (begin 15 14)
+                        (begin 5 6))
+                      (begin (+ 16 0) (number? 16))))))
+              (let ((v4
+                     (if ((lambda (par1 par2 par3 par4)
+                            (let ((f4 (lambda (par1 par2 par3) par1))) par1))
+                          (* v4 v4)
+                          (begin v4 v4)
+                          (number? v4)
+                          ((lambda () v4)))
+                       (begin (if v4 v4 v4) (+ v4 v4))
+                       (a? (number? v4)))))
+                (let ((v4 (let ((v1 (* v4 v4))) (a? v1))))
+                  (begin (if v4 v4 v4) (if v4 v4 v4)))))
+            (=
+             (number?
+              ((lambda (par1 par2 par3 par4)
+                 ((lambda (par1 par2)
+                    ((lambda (par1 par2 par3) par3) par3 par1 par2))
+                  ((lambda (par1 par2 par3) par4) par1 par3 par1)
+                  (let ((f1 (lambda (par1 par2 par3) par4))) par2)))
+               (if (let ((f3 (lambda (par1 par2 par3) par1))) 3)
+                 (let ((f7 (lambda (par1 par2 par3) par1))) 4)
+                 (- 5 4))
+               (let ((f7 (lambda (par1 par2 par3) (if par1 par3 par2))))
+                 (- 19 7))
+               (if (if 0 14 1) ((lambda () 17)) (= 1 2))
+               (=
+                (let ((f3 (lambda (par1 par2 par3) par2))) 17)
+                (let ((f2 (lambda (par1 par2 par3) par2))) 19))))
+             (a?
+              ((lambda (par1 par2 par3 par4)
+                 (= (let ((v4 par3)) par1) (let ((v2 par3)) par3)))
+               ((lambda (par1 par2 par3 par4) (if par4 par2 par2))
+                (<= 17 17)
+                (if 10 17 0)
+                (* 9 14)
+                (= 14 19))
+               (begin ((lambda (par1 par2 par3) par3) 9 1 6) ((lambda () 6)))
+               (< (+ 14 9) (if 14 4 5))
+               (begin (number? 12) (if 1 1 5)))))))
+       (begin
+         (<
+          ((lambda (par1)
+             (if ((lambda ()
+                    ((lambda (par1 par2 par3) (if par1 par2 par1))
+                     (a? par1)
+                     (begin par1 par1)
+                     (a? par1))))
+               (begin
+                 (begin (let ((v5 par1)) v5) (if par1 par1 par1))
+                 (if (number? par1) (a? par1) (let ((v5 par1)) par1)))
+               (a? (- (number? par1) (number? par1)))))
+           ((lambda ()
+              (* (+ (a? 4) (let ((v7 11)) v7)) (< (a? 2) (let ((v4 2)) v4))))))
+          (begin
+            ((lambda (par1 par2 par3 par4)
+               (if (<= (let ((v3 par2)) par2) (if par4 par3 par4))
+                 (let ((f6 (lambda (par1 par2 par3) (if par2 par1 par4))))
+                   (let ((v4 par3)) par1))
+                 (= (begin par3 par1) (if par3 par1 par4))))
+             (number? (begin (begin 5 13) ((lambda () 17))))
+             ((lambda (par1 par2 par3)
+                (number? (let ((f3 (lambda (par1 par2 par3) par2))) par3)))
+              (begin (if 9 5 14) (a? 4))
+              (number? (a? 12))
+              (+ (begin 5 17) (if 16 9 19)))
+             (begin (< (< 11 1) (a? 17)) (if (+ 8 4) (if 8 17 3) (* 0 4)))
+             (if ((lambda (par1 par2 par3) ((lambda (par1) par1) par3))
+                  (if 17 2 9)
+                  (number? 3)
+                  (let ((v1 14)) v1))
+               (a? (number? 0))
+               (a? (if 13 8 15))))
+            (let ((f4
+                   (lambda (par1 par2 par3)
+                     (if (let ((f4
+                                (lambda (par1 par2 par3)
+                                  (let ((f3 (lambda (par1 par2 par3) par1)))
+                                    par3))))
+                           (* par2 par2))
+                       (if (+ par3 par3) (let ((v7 par3)) v7) (- par1 par2))
+                       (if ((lambda (par1) par1) par3)
+                         (<= par1 par3)
+                         (number? par3))))))
+              (begin
+                (f4 (let ((v7 5)) v7) (a? 5) (<= 1 3))
+                (if (if 15 0 19)
+                  (f4 3 13 7)
+                  (let ((f1 (lambda (par1 par2 par3) par1))) 14))))))
+         ((lambda (par1 par2)
+            (<
+             (if (let ((f1
+                        (lambda (par1 par2 par3)
+                          (if (if par2 par1 par3)
+                            (if par2 par1 par1)
+                            (begin par2 par1)))))
+                   (begin (a? par1) (if par1 par1 par2)))
+               (if (let ((f1 (lambda (par1 par2 par3) (if par1 par3 par2))))
+                     (if par2 par2 par1))
+                 (begin (if par2 par1 par1) (= par1 par1))
+                 (begin ((lambda (par1 par2) par2) par1 par2) (= par2 par1)))
+               (number?
+                (if ((lambda (par1 par2) par2) par2 par2)
+                  (begin par1 par2)
+                  (if par2 par2 par1))))
+             (begin
+               (a? (let ((v4 (+ par1 par1))) ((lambda () par2))))
+               (begin
+                 ((lambda (par1 par2) (if par2 par1 par2))
+                  (begin par1 par1)
+                  (if par2 par2 par2))
+                 (-
+                  (number? par1)
+                  (let ((f7 (lambda (par1 par2 par3) par3))) par1))))))
+          (a?
+           (number?
+            (if (number? (if 4 14 6))
+              (let ((f3
+                     (lambda (par1 par2 par3)
+                       (let ((f2 (lambda (par1 par2 par3) par3))) par2))))
+                (= 1 19))
+              (if ((lambda (par1 par2) par2) 11 4)
+                (begin 6 11)
+                ((lambda () 8))))))
+          (let ((f1
+                 (lambda (par1 par2 par3)
+                   (if (begin
+                         (+ (a? par2) ((lambda (par1) par1) par2))
+                         (let ((f4
+                                (lambda (par1 par2 par3)
+                                  (let ((v2 par3)) par3))))
+                           (begin par1 par3)))
+                     ((lambda ()
+                        (begin
+                          (begin par3 par2)
+                          ((lambda (par1 par2 par3) par1) par3 par2 par3))))
+                     (if (+
+                          (let ((v3 par3)) v3)
+                          ((lambda (par1 par2 par3 par4) par3)
+                           par2
+                           par1
+                           par2
+                           par3))
+                       (a? (begin par2 par2))
+                       (if ((lambda () par2))
+                         (number? par3)
+                         ((lambda () par3))))))))
+            (f1
+             (if (begin
+                   (let ((f4 (lambda (par1 par2 par3) par1))) 14)
+                   (let ((f5 (lambda (par1 par2 par3) par3))) 19))
+               (f1
+                (let ((f2 (lambda (par1 par2 par3) par1))) 3)
+                (let ((v6 18)) v6)
+                (let ((f4 (lambda (par1 par2 par3) par1))) 15))
+               (< (- 7 12) (begin 7 9)))
+             (begin
+               (a? (begin 12 19))
+               (f1 (if 1 6 19) (if 14 3 18) (begin 0 19)))
+             (number? (f1 (if 18 6 15) (f1 16 7 1) (<= 12 8)))))))
+       (number?
+        ((lambda (par1 par2 par3 par4)
+           (if (+
+                ((lambda (par1 par2)
+                   (if (begin par1 par2) (- par4 par1) ((lambda () par2))))
+                 (number? (+ par1 par3))
+                 (a? (if par3 par3 par1)))
+                ((lambda ()
+                   (<
+                    (if par4 par4 par3)
+                    (let ((f7 (lambda (par1 par2 par3) par2))) par4)))))
+             (if (if (+ (number? par4) (let ((v2 par1)) par1))
+                   (begin (number? par2) (number? par1))
+                   (if (begin par3 par2) (begin par4 par4) (begin par1 par1)))
+               ((lambda (par1 par2 par3)
+                  ((lambda (par1 par2 par3 par4) (if par3 par2 par2))
+                   (number? par2)
+                   (a? par2)
+                   (<= par1 par1)
+                   (begin par3 par1)))
+                (begin (let ((v5 par2)) par1) (- par2 par1))
+                (if (<= par3 par2) (if par2 par1 par3) (if par4 par4 par1))
+                (let ((v1 (* par2 par3))) (if par1 par4 par2)))
+               (a?
+                ((lambda (par1 par2 par3) (if par3 par3 par4))
+                 (begin par3 par2)
+                 (if par2 par3 par4)
+                 (if par2 par4 par2))))
+             (begin
+               (number? (+ (<= par1 par4) (if par3 par1 par4)))
+               ((lambda () (number? (if par4 par1 par4)))))))
+         (if (begin
+               (=
+                (let ((f7 (lambda (par1 par2 par3) (begin par1 par3))))
+                  (<= 5 13))
+                ((lambda (par1 par2 par3 par4) (if par4 par1 par2))
+                 (begin 12 6)
+                 (* 5 19)
+                 ((lambda (par1 par2 par3) par3) 0 19 2)
+                 (let ((f3 (lambda (par1 par2 par3) par2))) 12)))
+               (+
+                ((lambda (par1)
+                   (let ((f4 (lambda (par1 par2 par3) par1))) par1))
+                 (begin 8 4))
+                (* (if 12 9 1) ((lambda () 14)))))
+           (number?
+            (number?
+             (let ((v7 ((lambda (par1 par2 par3) par1) 10 6 12)))
+               (let ((f5 (lambda (par1 par2 par3) par3))) v7))))
+           (begin
+             (let ((v3 (number? ((lambda (par1 par2 par3) par1) 10 12 15))))
+               (let ((f4 (lambda (par1 par2 par3) (+ par2 v3)))) (a? v3)))
+             (let ((f2
+                    (lambda (par1 par2 par3)
+                      ((lambda () ((lambda () par2)))))))
+               (number? (f2 11 16 4)))))
+         ((lambda (par1 par2 par3)
+            (number? (number? (number? (if par2 par3 par3)))))
+          (number? (a? ((lambda () (begin 19 19)))))
+          (begin
+            (a? (begin (a? 12) (begin 14 8)))
+            (let ((v3 (<= ((lambda (par1 par2 par3) par2) 8 4 8) (if 4 11 3))))
+              (a? (number? v3))))
+          ((lambda (par1) (a? ((lambda (par1) (< par1 par1)) (< par1 par1))))
+           (begin
+             (let ((v7 (let ((v3 2)) v3))) ((lambda () v7)))
+             (begin (number? 1) ((lambda (par1 par2) par1) 0 7)))))
+         ((lambda (par1)
+            (number?
+             (< (number? (<= par1 par1)) (* (if par1 par1 par1) (a? par1)))))
+          (number?
+           ((lambda (par1 par2 par3 par4)
+              (begin ((lambda (par1 par2) par4) par2 par3) (+ par3 par1)))
+            ((lambda (par1 par2) (* par1 par1))
+             ((lambda (par1 par2 par3 par4) par2) 18 18 3 3)
+             (if 11 7 12))
+            (if (begin 16 6)
+              (let ((f1 (lambda (par1 par2 par3) par3))) 18)
+              (let ((f3 (lambda (par1 par2 par3) par2))) 5))
+            (+ (let ((f1 (lambda (par1 par2 par3) par2))) 13) (number? 10))
+            ((lambda (par1 par2 par3) (number? par2))
+             (< 15 1)
+             (begin 15 19)
+             (if 7 3 17)))))
+         (*
+          (begin
+            (if (* ((lambda (par1 par2) par2) 10 9) (a? 1))
+              (if ((lambda () 5)) (if 8 11 10) (if 6 19 9))
+              ((lambda (par1) (let ((f3 (lambda (par1 par2 par3) par1))) par1))
+               (begin 12 10)))
+            ((lambda (par1) (begin (begin par1 par1) (let ((v7 par1)) par1)))
+             (number? (begin 5 1))))
+          (number?
+           (* (number? ((lambda (par1) par1) 2)) (< (if 4 4 5) (< 10 7)))))))))
+   (begin
+     (let ((f2
+            (lambda (par1 par2 par3)
+              (a?
+               (begin
+                 ((lambda (par1 par2)
+                    (+
+                     (if (+ (a? par1) ((lambda (par1) par1) par3))
+                       ((lambda (par1 par2 par3 par4) (begin par1 par3))
+                        (begin par2 par2)
+                        (a? par2)
+                        ((lambda (par1 par2 par3 par4) par3)
+                         par2
+                         par2
+                         par2
+                         par2)
+                        (< par1 par3))
+                       (if (begin par3 par2) (begin par1 par1) (number? par3)))
+                     (let ((f6
+                            (lambda (par1 par2 par3)
+                              (begin
+                                ((lambda (par1 par2 par3 par4) par3)
+                                 par2
+                                 par1
+                                 par2
+                                 par2)
+                                (+ par3 par2)))))
+                       (if (let ((v5 par2)) par3)
+                         (if par3 par2 par1)
+                         (if par3 par1 par1)))))
+                  (a?
+                   (if (begin (begin par1 par3) (begin par1 par1))
+                     (number? (<= par1 par3))
+                     (begin (begin par2 par2) (- par3 par2))))
+                  (let ((v1
+                         (a?
+                          (begin
+                            (let ((f5 (lambda (par1 par2 par3) par1))) par3)
+                            (if par3 par2 par1)))))
+                    (<=
+                     ((lambda (par1 par2 par3 par4) (a? v1))
+                      (if par2 par3 v1)
+                      (number? par1)
+                      (+ par3 par1)
+                      (a? par1))
+                     ((lambda (par1 par2) (begin par2 par3))
+                      (if par2 par1 par1)
+                      (begin par1 par2)))))
+                 (+
+                  (=
+                   (*
+                    (begin
+                      ((lambda (par1 par2) par2) par2 par3)
+                      (if par2 par2 par2))
+                    (begin (if par1 par1 par1) (- par2 par3)))
+                   (let ((v2
+                          (if ((lambda (par1) par1) par1)
+                            (<= par2 par1)
+                            (* par2 par3))))
+                     ((lambda (par1 par2 par3) (if par2 par1 par1))
+                      (- v2 par1)
+                      (let ((v2 par2)) par1)
+                      (if par2 v2 par3))))
+                  (let ((v4
+                         (*
+                          (*
+                           (begin par3 par2)
+                           ((lambda (par1 par2) par3) par2 par3))
+                          (begin (= par1 par3) (* par2 par3)))))
+                    (a? ((lambda () (begin v4 par3)))))))))))
+       (begin
+         (let ((f5
+                (lambda (par1 par2 par3)
+                  (begin
+                    (begin
+                      (f2
+                       (a? (let ((v1 par3)) par2))
+                       (let ((f7
+                              (lambda (par1 par2 par3)
+                                (let ((f7 (lambda (par1 par2 par3) par3)))
+                                  par3))))
+                         (begin par3 par1))
+                       (a? (begin par3 par2)))
+                      (begin
+                        (f2
+                         (begin par2 par3)
+                         (+ par2 par3)
+                         (let ((f6 (lambda (par1 par2 par3) par1))) par1))
+                        (number? (let ((v7 par3)) par3))))
+                    (f2
+                     (-
+                      (a? (f2 par1 par2 par1))
+                      (begin (if par1 par2 par1) (begin par3 par3)))
+                     (if (number? (if par1 par1 par2))
+                       (if (f2 par1 par2 par1)
+                         (begin par2 par3)
+                         (f2 par1 par1 par2))
+                       (begin (f2 par1 par2 par2) (begin par1 par2)))
+                     (a? (a? (* par1 par1))))))))
+           (number?
+            (-
+             (f2
+              (<= (if 11 12 3) (f5 2 8 1))
+              (if (if 17 17 17) (if 5 4 19) (+ 12 2))
+              (let ((v2 (if 15 5 9)))
+                (let ((f4 (lambda (par1 par2 par3) par1))) v2)))
+             (f5
+              (f5
+               (let ((f3 (lambda (par1 par2 par3) par2))) 17)
+               (< 0 16)
+               (if 5 18 17))
+              (- (f5 9 17 0) (<= 9 14))
+              (f2 (begin 2 17) (f5 7 1 15) (begin 5 16))))))
+         (begin
+           (number?
+            (if (let ((f4
+                       (lambda (par1 par2 par3)
+                         (<= (let ((v7 par1)) par1) (if par3 par2 par3)))))
+                  (f2 (begin 1 2) (if 16 4 13) (<= 7 4)))
+              (a?
+               (let ((f3 (lambda (par1 par2 par3) (f2 par3 par2 par2))))
+                 (if 0 2 18)))
+              (f2
+               (let ((f3 (lambda (par1 par2 par3) (begin par1 par1))))
+                 (number? 4))
+               (number? (f2 3 1 1))
+               (<= (f2 15 4 0) (<= 1 17)))))
+           (a?
+            (<
+             (let ((f4
+                    (lambda (par1 par2 par3)
+                      (a? (let ((f4 (lambda (par1 par2 par3) par3))) par1)))))
+               (let ((f1 (lambda (par1 par2 par3) (if par1 par2 par1))))
+                 (number? 11)))
+             (let ((v7 (begin (if 12 7 19) (- 3 5))))
+               (<= (number? v7) (if v7 v7 v7))))))))
+     (let ((f4
+            (lambda (par1 par2 par3)
+              (<=
+               ((lambda (par1 par2 par3 par4)
+                  (if (if (number?
+                           ((lambda (par1 par2 par3 par4) (= par2 par4))
+                            (<= par1 par2)
+                            (let ((v1 par4)) par2)
+                            (- par2 par2)
+                            (let ((v3 par3)) par3)))
+                        (if (let ((f7
+                                   (lambda (par1 par2 par3)
+                                     (let ((v5 par2)) par2))))
+                              (f7 par1 par2 par4))
+                          (+ (if par2 par1 par3) ((lambda (par1) par2) par2))
+                          (a?
+                           (let ((f2 (lambda (par1 par2 par3) par1))) par3)))
+                        (begin
+                          ((lambda (par1 par2) (let ((v2 par2)) v2))
+                           (a? par3)
+                           (= par2 par2))
+                          (if (< par4 par1)
+                            (let ((v6 par3)) par3)
+                            (if par1 par2 par3))))
+                    ((lambda (par1)
+                       (let ((v6
+                              (begin
+                                (* par4 par1)
+                                (let ((f6 (lambda (par1 par2 par3) par4)))
+                                  par1))))
+                         (number? (number? par1))))
+                     (*
+                      ((lambda (par1 par2) ((lambda (par1) par1) par1))
+                       (<= par2 par3)
+                       (if par1 par1 par3))
+                      ((lambda (par1) (a? par1)) (if par1 par4 par2))))
+                    ((lambda (par1)
+                       (let ((v3
+                              (begin
+                                (begin par2 par2)
+                                ((lambda (par1) par3) par1))))
+                         (if (< par1 v3) (a? par2) (if par2 v3 par2))))
+                     ((lambda (par1 par2 par3 par4)
+                        (let ((v7
+                               (let ((f4 (lambda (par1 par2 par3) par4)))
+                                 par3)))
+                          (<= par4 par1)))
+                      (number? ((lambda (par1) par3) par1))
+                      (begin
+                        (< par1 par3)
+                        (let ((f5 (lambda (par1 par2 par3) par2))) par2))
+                      (if (if par1 par2 par3)
+                        (if par1 par2 par1)
+                        (if par2 par3 par2))
+                      ((lambda (par1 par2 par3 par4) (a? par4))
+                       (* par3 par1)
+                       ((lambda (par1 par2 par3 par4) par3)
+                        par1
+                        par2
+                        par4
+                        par3)
+                       (begin par1 par2)
+                       (+ par3 par2))))))
+                (begin
+                  (a?
+                   (if (number? (begin par3 par2))
+                     ((lambda (par1 par2) (a? par1))
+                      (* par2 par1)
+                      ((lambda () par2)))
+                     (number? (- par2 par3))))
+                  (if (a? (if (if par2 par3 par2) (a? par2) (* par2 par3)))
+                    (let ((f3
+                           (lambda (par1 par2 par3)
+                             (let ((v1 (* par2 par3))) (+ v1 v1)))))
+                      (if (begin par3 par2)
+                        (if par1 par1 par2)
+                        (if par2 par3 par2)))
+                    (=
+                     ((lambda (par1 par2) (if par1 par3 par2))
+                      (- par3 par1)
+                      (begin par3 par1))
+                     (a? (begin par2 par2)))))
+                (-
+                 (if (if (begin (begin par3 par2) (a? par2))
+                       (begin
+                         (number? par3)
+                         ((lambda (par1 par2 par3) par1) par1 par1 par2))
+                       (begin (let ((v5 par1)) v5) (if par3 par1 par3)))
+                   (if (- (number? par3) (begin par1 par3))
+                     (number? (* par3 par3))
+                     (begin
+                       ((lambda (par1 par2 par3 par4) par2)
+                        par3
+                        par3
+                        par2
+                        par3)
+                       (a? par1)))
+                   (let ((v6
+                          (if ((lambda (par1 par2 par3) par2) par3 par2 par2)
+                            (let ((f2 (lambda (par1 par2 par3) par3))) par3)
+                            (let ((f3 (lambda (par1 par2 par3) par1))) par2))))
+                     (<
+                      (< par3 v6)
+                      (let ((f5 (lambda (par1 par2 par3) par3))) par3))))
+                 (number?
+                  (begin
+                    ((lambda (par1 par2) ((lambda (par1 par2) par2) par1 par2))
+                     ((lambda () par3))
+                     (begin par1 par2))
+                    ((lambda (par1 par2 par3) (begin par1 par1))
+                     (number? par3)
+                     (if par1 par2 par3)
+                     ((lambda (par1 par2 par3) par2) par3 par1 par3)))))
+                (number?
+                 (<=
+                  ((lambda (par1 par2 par3)
+                     (<
+                      (number? par1)
+                      (let ((f7 (lambda (par1 par2 par3) par2))) par1)))
+                   (if (if par2 par3 par2) (<= par2 par3) (begin par3 par3))
+                   (+ (* par2 par2) (let ((v3 par3)) par2))
+                   (begin (number? par2) (let ((v7 par2)) par3)))
+                  (if ((lambda (par1 par2 par3) (+ par3 par1))
+                       (if par2 par2 par2)
+                       (begin par3 par1)
+                       (a? par2))
+                    (let ((f2 (lambda (par1 par2 par3) (a? par2))))
+                      (if par3 par3 par2))
+                    ((lambda (par1) (if par1 par1 par1)) (a? par3)))))
+                ((lambda (par1 par2 par3)
+                   (<=
+                    (let ((v6
+                           (let ((f4
+                                  (lambda (par1 par2 par3)
+                                    (let ((v1 par2)) par3))))
+                             (let ((v4 par1)) par1))))
+                      (a? (let ((f5 (lambda (par1 par2 par3) par3))) par3)))
+                    (*
+                     (if (number? par3) (begin par3 par3) ((lambda () par2)))
+                     (number? ((lambda (par1) par1) par1)))))
+                 ((lambda (par1)
+                    (=
+                     (let ((f3 (lambda (par1 par2 par3) (if par2 par1 par1))))
+                       (let ((f6 (lambda (par1 par2 par3) par1))) par1))
+                     (begin (let ((v2 par3)) par1) (if par1 par1 par1))))
+                  (<=
+                   (- ((lambda (par1) par3) par3) (< par3 par1))
+                   (a? (begin par2 par3))))
+                 (number?
+                  (begin
+                    (<=
+                     (let ((f1 (lambda (par1 par2 par3) par1))) par2)
+                     ((lambda () par2)))
+                    (let ((v5
+                           (let ((f6 (lambda (par1 par2 par3) par2))) par2)))
+                      (begin par1 v5))))
+                 (let ((f1
+                        (lambda (par1 par2 par3)
+                          (*
+                           (* (begin par3 par3) (begin par3 par3))
+                           (if ((lambda () par2))
+                             (begin par3 par2)
+                             (begin par1 par2))))))
+                   (begin
+                     (let ((v4 (if par2 par1 par1))) (f1 par1 par1 par2))
+                     (if (<= par2 par3)
+                       (let ((v1 par2)) par2)
+                       (* par2 par2))))))
+               (if (if ((lambda (par1)
+                          (let ((v7 (begin (begin par2 par1) (<= par3 par1))))
+                            (if (* v7 par1) (= par2 par3) (= par1 par2))))
+                        (+
+                         (+ (begin par2 par3) (= par1 par3))
+                         (begin (< par3 par2) (- par2 par1))))
+                     (number?
+                      (begin
+                        ((lambda (par1 par2)
+                           ((lambda (par1 par2) par1) par2 par3))
+                         (number? par2)
+                         (number? par3))
+                        ((lambda (par1) (let ((v7 par2)) par2))
+                         ((lambda (par1 par2) par1) par3 par3))))
+                     ((lambda (par1)
+                        ((lambda (par1)
+                           (*
+                            (= par2 par1)
+                            (let ((f2 (lambda (par1 par2 par3) par3))) par3)))
+                         (= (number? par2) (begin par2 par1))))
+                      (<
+                       (number? (begin par1 par1))
+                       (begin (number? par2) (begin par3 par2)))))
+                 (let ((f1
+                        (lambda (par1 par2 par3)
+                          (=
+                           (begin
+                             (if (begin par1 par3)
+                               (a? par1)
+                               (if par1 par3 par2))
+                             (begin (begin par2 par2) (a? par1)))
+                           (let ((f5
+                                  (lambda (par1 par2 par3)
+                                    (if (if par2 par1 par3)
+                                      ((lambda () par3))
+                                      (let ((f7
+                                             (lambda (par1 par2 par3) par2)))
+                                        par1)))))
+                             (begin (<= par3 par3) (f5 par1 par2 par1)))))))
+                   (number?
+                    (begin
+                      (if (let ((f1 (lambda (par1 par2 par3) par2))) par1)
+                        (if par1 par2 par2)
+                        (+ par1 par2))
+                      (a? (let ((v2 par3)) v2)))))
+                 (a?
+                  (number?
+                   ((lambda (par1 par2)
+                      (let ((v7 (let ((v3 par3)) v3)))
+                        ((lambda (par1 par2 par3 par4) par1)
+                         par1
+                         par2
+                         par3
+                         par1)))
+                    (if (begin par2 par3) (a? par1) (number? par1))
+                    (begin (< par3 par3) ((lambda () par3)))))))))))
+       (f4
+        (<=
+         (begin
+           (*
+            (f4
+             (let ((f2 (lambda (par1 par2 par3) (number? par1)))) (if 12 0 10))
+             (let ((f3 (lambda (par1 par2 par3) (begin par1 par1)))) (< 5 10))
+             (f4
+              (if 18 15 13)
+              (let ((f4 (lambda (par1 par2 par3) par1))) 18)
+              (number? 12)))
+            (if (let ((v6 (a? 3))) (< v6 v6))
+              (begin (begin 2 15) (if 17 5 3))
+              (if (let ((v7 4)) v7) (let ((v3 16)) v3) (f4 19 18 13))))
+           (*
+            (let ((f1 (lambda (par1 par2 par3) (a? (< par3 par2)))))
+              (a? (let ((f2 (lambda (par1 par2 par3) par3))) 5)))
+            (begin
+              (* (+ 12 5) (begin 9 3))
+              (if (= 15 2) (begin 3 16) (* 6 14)))))
+         (if (if (begin
+                   (if (let ((f3 (lambda (par1 par2 par3) par3))) 0)
+                     (number? 11)
+                     (if 13 19 5))
+                   (a? (begin 1 9)))
+               (let ((f5
+                      (lambda (par1 par2 par3) (number? (begin par3 par2)))))
+                 (begin (let ((v3 9)) v3) (if 12 11 10)))
+               (f4
+                (- (* 8 4) (f4 8 5 16))
+                (= (f4 3 6 9) (if 10 2 19))
+                (if (a? 3) (let ((v4 14)) v4) (- 7 9))))
+           (begin
+             (number? (= (a? 8) (let ((f7 (lambda (par1 par2 par3) par1))) 1)))
+             (let ((f6
+                    (lambda (par1 par2 par3)
+                      (f4
+                       (number? par2)
+                       (- par3 par2)
+                       (let ((f2 (lambda (par1 par2 par3) par2))) par1)))))
+               (f4 (begin 17 0) (let ((v2 6)) v2) (if 11 15 19))))
+           (if (begin
+                 (begin (let ((v2 17)) v2) (if 14 8 5))
+                 (if (<= 11 17) (let ((v2 1)) v2) (if 2 11 15)))
+             (a? (if (f4 9 18 13) (begin 11 2) (let ((v5 11)) v5)))
+             (a? (number? (if 2 2 11))))))
+        (if (<
+             (let ((v5
+                    (f4
+                     (begin (f4 13 15 6) (begin 14 3))
+                     (= (begin 7 4) (begin 2 18))
+                     (if (if 10 7 2) (<= 10 14) (f4 4 7 13)))))
+               (<=
+                (f4 (- v5 v5) (if v5 v5 v5) (<= v5 v5))
+                (begin
+                  (let ((f4 (lambda (par1 par2 par3) par3))) v5)
+                  (a? v5))))
+             (=
+              (f4
+               (let ((v2 (f4 8 10 6)))
+                 (let ((f2 (lambda (par1 par2 par3) v2))) v2))
+               (+ (<= 7 4) (let ((f4 (lambda (par1 par2 par3) par1))) 14))
+               (f4 (if 16 9 17) (begin 0 5) (* 13 3)))
+              (a? (f4 (if 10 16 3) (number? 13) (f4 7 8 17)))))
+          (begin
+            (if (f4
+                 (if (let ((f7 (lambda (par1 par2 par3) par3))) 12)
+                   (f4 5 10 14)
+                   (- 4 8))
+                 (- (a? 2) (a? 9))
+                 (f4 (begin 9 16) (* 13 13) (if 14 9 7)))
+              (let ((f2
+                     (lambda (par1 par2 par3)
+                       (if (begin par3 par2)
+                         (let ((v1 par1)) par3)
+                         (if par3 par3 par3)))))
+                (= (f4 2 14 5) (<= 16 14)))
+              (f4
+               (a? (begin 4 2))
+               (if (a? 14) (if 16 3 18) (a? 14))
+               (f4 (number? 11) (a? 8) (if 8 0 14))))
+            (begin
+              (if (<= (+ 0 18) (begin 19 0))
+                (f4 (begin 17 5) (a? 3) (begin 17 2))
+                (number? (f4 5 15 2)))
+              (f4
+               (begin (a? 8) (if 15 10 5))
+               (begin (if 4 18 13) (begin 18 2))
+               (f4 (f4 6 17 10) (let ((v2 2)) v2) (* 9 15)))))
+          (f4
+           (number? (a? (let ((v2 (a? 4))) (= v2 v2))))
+           (number? (number? (= (begin 3 0) (begin 11 1))))
+           (let ((f4
+                  (lambda (par1 par2 par3)
+                    (begin
+                      (<= (let ((v4 par2)) par1) (< par1 par2))
+                      (* (a? par3) (number? par3))))))
+             (let ((v4 (< (< 17 9) (number? 9))))
+               (if (begin v4 v4) (+ v4 v4) (a? v4))))))
+        (f4
+         (f4
+          (let ((f1
+                 (lambda (par1 par2 par3)
+                   (f4
+                    (begin (if par1 par3 par3) (a? par2))
+                    (a? (let ((f5 (lambda (par1 par2 par3) par2))) par3))
+                    (<= (f4 par3 par1 par1) (f4 par2 par3 par2))))))
+            (if (begin
+                  (if 11 10 16)
+                  (let ((f7 (lambda (par1 par2 par3) par3))) 10))
+              (number? (<= 15 1))
+              (a? (begin 12 4))))
+          (if (f4
+               (= (let ((v6 4)) v6) (f4 10 4 12))
+               (let ((f3 (lambda (par1 par2 par3) (let ((v7 par1)) par1))))
+                 (begin 3 17))
+               (if (number? 19) (< 1 10) (begin 0 5)))
+            (begin
+              (let ((f5 (lambda (par1 par2 par3) (a? par2)))) (begin 15 16))
+              (let ((v2 (f4 10 0 13))) (let ((v1 v2)) v1)))
+            (f4
+             (if (f4 10 11 14) (a? 7) (if 3 4 13))
+             (f4 (if 19 9 14) (f4 1 2 12) (if 4 6 13))
+             (+ (let ((v6 3)) v6) (number? 16))))
+          (let ((v4
+                 (*
+                  (+ (f4 12 18 14) (f4 9 6 7))
+                  (let ((f5 (lambda (par1 par2 par3) (f4 par2 par3 par2))))
+                    (< 17 7)))))
+            (a?
+             (let ((v7 (f4 v4 v4 v4)))
+               (let ((f7 (lambda (par1 par2 par3) v7))) v4)))))
+         (a?
+          (begin
+            (if (let ((v3 (if 16 13 1)))
+                  (let ((f4 (lambda (par1 par2 par3) v3))) v3))
+              (a? (number? 1))
+              (let ((f1 (lambda (par1 par2 par3) (number? par1))))
+                (f1 5 16 1)))
+            (begin (if (if 8 13 8) (f4 1 6 8) (number? 1)) (a? (a? 9)))))
+         (f4
+          (if (if (a? (begin 17 18))
+                (f4 (= 12 5) (let ((v3 10)) v3) (begin 9 15))
+                (let ((f7 (lambda (par1 par2 par3) (f4 par2 par1 par1))))
+                  (f4 14 17 13)))
+            (let ((f5
+                   (lambda (par1 par2 par3)
+                     (f4
+                      (f4 par3 par2 par3)
+                      (if par3 par2 par3)
+                      (if par2 par2 par1)))))
+              (= (begin 13 16) (number? 10)))
+            (-
+             (if (if 12 2 11)
+               (let ((f7 (lambda (par1 par2 par3) par1))) 7)
+               (< 0 6))
+             (= (begin 2 0) (a? 13))))
+          (-
+           (let ((f7
+                  (lambda (par1 par2 par3)
+                    (begin (if par2 par1 par3) (f4 par3 par1 par3)))))
+             (if (a? 4) (begin 14 6) (f7 8 15 6)))
+           (let ((v6 (begin (let ((v6 8)) v6) (* 12 14))))
+             (- (let ((f5 (lambda (par1 par2 par3) v6))) v6) (if v6 v6 v6))))
+          (let ((v2 (a? (if (* 6 5) (f4 12 9 6) (begin 19 18)))))
+            (let ((v1 (+ (f4 v2 v2 v2) (a? v2))))
+              (f4 (number? v2) (begin v1 v1) (begin v2 v2)))))))))))
