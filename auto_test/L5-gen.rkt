@@ -47,7 +47,7 @@ pred ::= number? | a?
        (procs (listof symbol?))
        (arrays (listof symbol?))])
 
-(define (random-L5 depth vars)
+(define (random-L5 depth binds)
   
   (let ([n (if (= depth 0)
                0
@@ -55,29 +55,29 @@ pred ::= number? | a?
         [d (- depth 1)])
     
     (define (rand-biop-expr)
-      `(,(rand-biop) ,(random-L5 d vars)
-                     ,(random-L5 d vars)))
+      `(,(rand-biop) ,(random-L5 d binds)
+                     ,(random-L5 d binds)))
     (define (rand-value)
-      (if (empty? vars)
+      (if (empty? binds)
           (random 20)
-          (rand-elm-from vars)))
+          (rand-elm-from binds)))
     (define (rand-begin-expr)
-      `(begin ,(random-L5 d vars)
-              ,(random-L5 d vars)))
+      `(begin ,(random-L5 d binds)
+              ,(random-L5 d binds)))
     (define (rand-let-expr)
       (let ([var-name (rand-varname)])
-        `(let ([,var-name ,(random-L5 d vars)])
-           ,(random-L5 d (cons var-name vars)))))
+        `(let ([,var-name ,(random-L5 d binds)])
+           ,(random-L5 d (cons var-name binds)))))
     (define (rand-app-expr)
       (let* ([arity (random 5)]
              [params (take param-vars arity)]
-             [lam (random-lambda params d vars)]
-             [args (list-of-n-L5s arity d vars)])
+             [lam (random-lambda params d binds)]
+             [args (list-of-n-L5s arity d binds)])
         `(,lam ,@args)))
     (define (rand-pred-expr)
-      `(,(rand-elm-from '(number? a?)) ,(random-L5 d vars)))
+      `(,(rand-elm-from '(number? a?)) ,(random-L5 d binds)))
     (define (rand-if-expr)
-      `(if ,@(list-of-n-L5s 3 d vars)))
+      `(if ,@(list-of-n-L5s 3 d binds)))
     
     (case n
       [(0) (rand-value)]
@@ -87,7 +87,7 @@ pred ::= number? | a?
       [(4) (rand-app-expr)]
       [(5) (rand-pred-expr)]
       [(6) (rand-if-expr)]
-      [else (random-L5 depth vars)])))
+      [else (random-L5 depth binds)])))
 
 
 (define (random-lambda params depth binds)
