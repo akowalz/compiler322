@@ -137,8 +137,9 @@ pred ::= number? | a?
 (define (rand-biop)
   (rand-elm-from biops))
 
+
 (pretty-write
- (gen-random-L5 10))
+ (gen-random-L5 3))
 
 
 
