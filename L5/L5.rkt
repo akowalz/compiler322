@@ -38,7 +38,7 @@
   
   ;; Top level function generation
   (define top-level-funcs empty) 
-  (define (create-top-level-function body-e free-vars args fn-name)
+  (define (create-top-level-function! body-e free-vars args fn-name)
     (set! top-level-funcs
           (cons
            (if (> (length args) 2)
@@ -70,7 +70,7 @@
       [`(lambda (,args ...) ,body-e) (let [(free-vars (find-frees body-e args '()))
                                            (fn-name (fresh-label))]
                                        (begin
-                                         (create-top-level-function (compile-e-int body-e) free-vars args fn-name)
+                                         (create-top-level-function! (compile-e-int body-e) free-vars args fn-name)
                                          `(make-closure ,fn-name
                                                         (new-tuple ,@free-vars))))] 
       [`(let ([,x ,e]) ,body-e) `(let ([,x ,(compile-e-int e)])
@@ -166,9 +166,10 @@
 (define (prim-lambda prim)
   (cond [(set-member? single-arity-prims prim) `(lambda (q) (,prim q))]
         [(set-member? two-arity-prims prim) `(lambda (q p) (,prim q p))]
-        [(symbol=? 'aset prim) `(lambda (q p r) (aset p q r))]))
+        [(symbol=? 'aset prim) `(lambda (p q r) (aset p q r))]))
 
-; unpack tuples of free variables and arguments into nested let expressions
+
+; unpack tuples of free variables and arguments into nested let expressions (very refactorable)
 (define (unpack-frees free-vars count body)
   (if (= (length free-vars) 0)
       body
@@ -184,13 +185,12 @@
 
 ; command line stuff =========================================================
 
-(if (= (vector-length (current-command-line-arguments)) 1)
+(when (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
-      (λ (x) (display (compile-e (read x)))))
-    (display ""))
+      (λ (x) (display (compile-e (read x))))))
 
-
+;unit
 ;; ____________________________________
 ;;|__   __|  ____|/ ____|__   __/ ____|
 ;;;;;| |  | |__  | (___    | | | (___  
@@ -302,14 +302,33 @@
 
 ;; Known failing tests 
 
-
+#;
 (compile-e `(print
             (let ((x (new-array 10 11)))
               (begin (((lambda (x) x) aset) x 1 202) (aref x 1)))))
            
 #;
 (compile-e `(let ((y 1)) (letrec ((f (lambda (x) y))) (print (f 2)))))
-
+#;
+((print
+  (let ((x (new-array 10 11)))
+    (begin
+      
+      (let ((v1
+             (let ((v2 (make-closure :f1 (new-tuple))))
+               ((closure-proc v2) (closure-vars v2) (make-closure :f2 (new-tuple))))))
+        ((closure-proc v1) (closure-vars v1) (new-tuple x 1 202)))
+      (aref x 1))))
+ 
+ (:f2
+  (vars-tuple args-tuple)
+  (let ((q (aref args-tuple 0)))
+    (let ((p (aref args-tuple 1))) 
+      (let ((r (aref args-tuple 2))) (aset p q r)))))
+ (:f1 (vars-tuple x) x))
+#;
+(compile-e `(let ((arr (new-array 10 11)))
+              ((lambda (x) (aset x 0 20)) arr)))
 
 
 
