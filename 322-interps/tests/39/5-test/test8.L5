@@ -1,0 +1,9 @@
+(letrec ([x
+          (lambda (arg)
+            (if (= arg 0)
+                0
+                (begin
+                  (print arg)
+                  (x (- arg 1)))
+                ))])
+  (print (x 5)))

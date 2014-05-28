@@ -1,0 +1,7 @@
+(
+	(let ([x (make-closure :x (new-tuple))])
+		(print ((closure-proc x) (closure-vars x) 16)))
+
+	(:x (env x)
+		(+ x 16))
+)

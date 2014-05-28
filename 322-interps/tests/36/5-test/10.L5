@@ -1,0 +1,2 @@
+(let ([f (lambda (x) (+ x 12))])
+	(print (f 12)))

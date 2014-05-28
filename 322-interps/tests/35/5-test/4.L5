@@ -1,0 +1,1 @@
+(letrec ([var (+ 5 5)]) (print var))

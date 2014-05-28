@@ -1,0 +1,4 @@
+(
+	(let ([fn (make-closure :omg (new-tuple))]) 
+		(print ((closure-proc fn) (closure-vars fn) 17 18)))
+	(:omg (env a b) (+ a b)))

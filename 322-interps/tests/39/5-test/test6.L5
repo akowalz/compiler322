@@ -1,0 +1,6 @@
+(let ([a_func_with_private_var
+       ((lambda ()
+          (let ([private_var 4])
+            (lambda (arg1 arg2)
+              (+ private_var (+ arg1 arg2))))))])
+  (print (a_func_with_private_var 1 2)))

@@ -1,0 +1,2 @@
+(let ([x (lambda (arg) (+ arg 1))])
+  (print (a? x)))

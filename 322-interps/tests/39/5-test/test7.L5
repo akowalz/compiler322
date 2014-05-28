@@ -1,0 +1,3 @@
+(let ([do_biop_2 (lambda (a_biop x) (a_biop 2 x))])
+  (print (do_biop_2 * 30))
+  )
