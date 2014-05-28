@@ -114,13 +114,15 @@
 ; finds free variables in an e and replaces them with new-var
 ; returns e if the specified var is shadowed
 (define (replace-var var new-var e)
+  
   (define (let-replacement x var new-var e body-e let-type)
-  (if (equal? x var)
-      `(,let-type
-        ([,x ,(replace-var var new-var e)])
-         ,body-e)
-      `(,let-type ([,x ,(replace-var var new-var e)])
-         ,(replace-var var new-var body-e))))
+    (if (equal? x var)
+        `(,let-type
+          ([,x ,(replace-var var new-var e)])
+          ,body-e)
+        `(,let-type ([,x ,(replace-var var new-var e)])
+                    ,(replace-var var new-var body-e))))
+  
   (match e
     [`(lambda (,args ...) ,body-e) (if (set-member? args var)
                                        e
@@ -209,112 +211,115 @@
 ;;;;;| |  | |____ ____) |  | |  ____) |
 ;;;;;|_|  |______|_____/   |_| |_____/ 
 
-(check-equal? (unpack-frees '(a b c) 0 '(+ 1 2))
-              '(let ((a (aref vars-tuple 0)))
-                 (let ((b (aref vars-tuple 1)))
-                   (let ((c (aref vars-tuple 2)))
-                     (+ 1 2)))))
 
-(check-equal? (unpack-frees '(a) 0 (unpack-args '(b) 0 '(+ a b)))
-              '(let ((a (aref vars-tuple 0)))
-                 (let ((b (aref args-tuple 0)))
-                   (+ a b))))
+(begin 
+        (check-equal? (unpack-frees '(a b c) 0 '(+ 1 2))
+                      '(let ((a (aref vars-tuple 0)))
+                         (let ((b (aref vars-tuple 1)))
+                           (let ((c (aref vars-tuple 2)))
+                             (+ 1 2)))))
+        
+        (check-equal? (unpack-frees '(a) 0 (unpack-args '(b) 0 '(+ a b)))
+                      '(let ((a (aref vars-tuple 0)))
+                         (let ((b (aref args-tuple 0)))
+                           (+ a b))))
+        
+        (check-equal? (find-frees '(+ a b) '() '())
+                      '(b a))
+        (check-equal? (find-frees '(+ a b) '(a) '())
+                      '(b))
+        (check-equal? (find-frees '(new-tuple a 1 2 b 4) '() '())
+                      '(a b))
+        (check-equal? (find-frees '(let ([x 5]) (+ x y)) '() '())
+                      '(y))
+        (check-equal? (find-frees '(lambda (a b) (let ([x 5])
+                                                   (+ a (+ b (+ c 5))))) '() '())
+                      '(c))
+        (check-equal? (find-frees '(lambda (a b c)
+                                     (let ([x (+ b c)])
+                                       (new-tuple a b z y e c t)))
+                                  '() '())
+                      '(y t e z))
+        
+        
+        (check-equal? (compile-e `(lambda (x) (+ x 1)))
+                      '((make-closure :f1 (new-tuple)) (:f1 (vars-tuple x) (+ x 1))))
+        
+        (check-equal? (compile-e `(let [(x 1)] (lambda (y) (+ x y))))
+                      '((let ((x 1)) (make-closure :f1 (new-tuple x)))
+                        (:f1 (vars-tuple y) (let ((x (aref vars-tuple 0))) (+ x y)))))
+        (check-equal? (compile-e '(let ([x 1]) ((lambda (y) (+ x y)) 4)))
+                      `((let ([x 1]) (let ([v1 (make-closure :f1 (new-tuple x))])
+                                       ((closure-proc v1) (closure-vars v1) 4)))
+                        (:f1 (vars-tuple y) (let ([x (aref vars-tuple 0)])
+                                              (+ x y)))))
+        
+        
+        
+        (check-equal? (compile-e `(+ 2 1))
+                      '((+ 2 1)))
+        (check-equal? (compile-e `(new-array a 5))
+                      '((new-array a 5)))
+        (check-equal? (compile-e `(begin (+ 4 5)
+                                         (new-array a 6)))
+                      '((begin (+ 4 5)
+                               (new-array a 6))))
+        (check-equal? (compile-e `(new-tuple 1 2 3 4 5 (+ 4 4)))
+                      `((new-tuple 1 2 3 4 5 (+ 4 4))))
+        (check-equal? (compile-e `(if (= 1 1) (new-tuple a 5)
+                                      (new-tuple a 6)))
+                      `((if (= 1 1) (new-tuple a 5)
+                            (new-tuple a 6))))
+        
+        (check-equal? (compile-e `(let ([x 10]) 11))
+                      `((let ([x 10]) 11)))
+        (check-equal? (compile-e `(let ([x (+ 1 1)]) (+ x 5)))
+                      `((let ([x (+ 1 1)]) (+ x 5))))
+        (check-equal? (compile-e `(print 5)) `((print 5)))
+        (check-equal? (compile-e '(print (+ 1 2) (+ 1 2)))
+                      '((print (+ 1 2) (+ 1 2))))
+        
+        
+        (check-equal? (compile-e `(letrec ((y (+ y 1))) (+ y 5)))
+                      `((let ([y (new-tuple 0)])
+                          (begin (aset y 0 (+ (aref y 0) 1))
+                                 (+ (aref y 0) 5)))))
+        
+        
+        (check-equal? (compile-e `(let ([func_with_private_var ((lambda ()
+                                                                  (let ([x 101])
+                                                                    (lambda () x))))])
+                                    (print (func_with_private_var))))
+                      '((let ((func_with_private_var
+                               (let ((v1 (make-closure :f1 (new-tuple))))
+                                 ((closure-proc v1) (closure-vars v1)))))
+                          (print
+                           (let ((v2 func_with_private_var))
+                             ((closure-proc v2) (closure-vars v2)))))
+                        (:f1 (vars-tuple) (let ((x 101)) (make-closure :f2 (new-tuple x))))
+                        (:f2 (vars-tuple) (let ((x (aref vars-tuple 0))) x))))
+        
+        (check-equal? (compile-e '+) '(0))
+        
+        
+        (check-equal? (compile-e '(let ([fn +]) 
+                                    (print (fn 17 189))))
+                      '((let ((fn (make-closure :f1 (new-tuple))))
+                          (print
+                           (let ((v1 fn)) ((closure-proc v1) (closure-vars v1) 17 189))))
+                        (:f1 (vars-tuple q p) (+ q p))))
+        )
 
-(check-equal? (find-frees '(+ a b) '() '())
-              '(b a))
-(check-equal? (find-frees '(+ a b) '(a) '())
-              '(b))
-(check-equal? (find-frees '(new-tuple a 1 2 b 4) '() '())
-              '(a b))
-(check-equal? (find-frees '(let ([x 5]) (+ x y)) '() '())
-              '(y))
-(check-equal? (find-frees '(lambda (a b) (let ([x 5])
-                                           (+ a (+ b (+ c 5))))) '() '())
-              '(c))
-(check-equal? (find-frees '(lambda (a b c)
-                             (let ([x (+ b c)])
-                               (new-tuple a b z y e c t)))
-                          '() '())
-              '(y t e z))
-
-
-(check-equal? (compile-e `(lambda (x) (+ x 1)))
-              '((make-closure :f1 (new-tuple)) (:f1 (vars-tuple x) (+ x 1))))
-
-(check-equal? (compile-e `(let [(x 1)] (lambda (y) (+ x y))))
-              '((let ((x 1)) (make-closure :f1 (new-tuple x)))
-                (:f1 (vars-tuple y) (let ((x (aref vars-tuple 0))) (+ x y)))))
-(check-equal? (compile-e '(let ([x 1]) ((lambda (y) (+ x y)) 4)))
-              `((let ([x 1]) (let ([v1 (make-closure :f1 (new-tuple x))])
-                               ((closure-proc v1) (closure-vars v1) 4)))
-                (:f1 (vars-tuple y) (let ([x (aref vars-tuple 0)])
-                                      (+ x y)))))
 
 
 
-(check-equal? (compile-e `(+ 2 1))
-              '((+ 2 1)))
-(check-equal? (compile-e `(new-array a 5))
-              '((new-array a 5)))
-(check-equal? (compile-e `(begin (+ 4 5)
-                                 (new-array a 6)))
-              '((begin (+ 4 5)
-                       (new-array a 6))))
-(check-equal? (compile-e `(new-tuple 1 2 3 4 5 (+ 4 4)))
-              `((new-tuple 1 2 3 4 5 (+ 4 4))))
-(check-equal? (compile-e `(if (= 1 1) (new-tuple a 5)
-                              (new-tuple a 6)))
-              `((if (= 1 1) (new-tuple a 5)
-                    (new-tuple a 6))))
-
-(check-equal? (compile-e `(let ([x 10]) 11))
-              `((let ([x 10]) 11)))
-(check-equal? (compile-e `(let ([x (+ 1 1)]) (+ x 5)))
-              `((let ([x (+ 1 1)]) (+ x 5))))
-(check-equal? (compile-e `(print 5)) `((print 5)))
-(check-equal? (compile-e '(print (+ 1 2) (+ 1 2)))
-              '((print (+ 1 2) (+ 1 2))))
-
-
-(check-equal? (compile-e `(letrec ((y (+ y 1))) (+ y 5)))
-              `((let ([y (new-tuple 0)])
-                  (begin (aset y 0 (+ (aref y 0) 1))
-                         (+ (aref y 0) 5)))))
-
-
-(check-equal? (compile-e `(let ([func_with_private_var ((lambda ()
-                                                          (let ([x 101])
-                                                            (lambda () x))))])
-                            (print (func_with_private_var))))
-              '((let ((func_with_private_var
-                       (let ((v1 (make-closure :f1 (new-tuple))))
-                         ((closure-proc v1) (closure-vars v1)))))
-                  (print
-                   (let ((v2 func_with_private_var))
-                     ((closure-proc v2) (closure-vars v2)))))
-                (:f1 (vars-tuple) (let ((x 101)) (make-closure :f2 (new-tuple x))))
-                (:f2 (vars-tuple) (let ((x (aref vars-tuple 0))) x))))
-
-(check-equal? (compile-e '+) '(0))
-
-
-(check-equal? (compile-e '(let ([fn +]) 
-                            (print (fn 17 189))))
-              '((let ((fn (make-closure :f1 (new-tuple))))
-                  (print
-                   (let ((v1 fn)) ((closure-proc v1) (closure-vars v1) 17 189))))
-                (:f1 (vars-tuple q p) (+ q p))))
-
-
-
-
-;; Known failing tests (just a selection....)
+;; Known failing tests 
 
 #;
-(print
- (let ((x (new-array 10 11)))
-   (begin (((lambda (x) x) aset) x 1 202) (aref x 1))))
-
+(compile-e `(print
+            (let ((x (new-array 10 11)))
+              (begin (((lambda (x) x) aset) x 1 202) (aref x 1)))))
+           
 #;
 (compile-e `(let ((y 1)) (letrec ((f (lambda (x) y))) (print (f 2)))))
 
