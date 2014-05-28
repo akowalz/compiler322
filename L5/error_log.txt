@@ -1,0 +1,104 @@
+>>>> L5 <<<<
+Testing robby/5-test/9.L5 ..... failed (wrong output)
+Actual:   "aset!: expected the first argument to be an array or a tuple, got 1\n"
+Expected: "202\n"
+Testing robby/5-test/8.L5 ..... passed
+Testing robby/5-test/7.L5 ..... passed
+Testing robby/5-test/6.L5 ..... passed
+Testing robby/5-test/5.L5 ..... passed
+Testing robby/5-test/41.L5 .... passed
+Testing robby/5-test/40.L5 .... passed
+Testing robby/5-test/4.L5 ..... passed
+Testing robby/5-test/39.L5 .... passed
+Testing robby/5-test/38.L5 .... passed
+Testing robby/5-test/37.L5 .... failed (compiler returned non-zero status)
+stderr:
+first: contract violation
+  expected: (and/c list? (not/c empty?))
+  given: 'y
+  context...:
+   f219
+   /Users/Alex/code/Koala-Yeazy-322/L5/L5.rkt:116:0: replace-var
+   f167
+   f167
+   /Users/Alex/code/Koala-Yeazy-322/L5/L5.rkt:37:0: compile-e
+   /Users/Alex/code/Koala-Yeazy-322/L5/L5.rkt:201:6: temp396
+   /Users/Alex/code/Koala-Yeazy-322/L5/L5.rkt: [running body]
+Testing robby/5-test/36.L5 .... passed
+Testing robby/5-test/35.L5 .... passed
+Testing robby/5-test/34.L5 .... passed
+Testing robby/5-test/33.L5 .... passed
+Testing robby/5-test/32.L5 .... passed
+Testing robby/5-test/31.L5 .... passed
+Testing robby/5-test/30.L5 .... passed
+Testing robby/5-test/3.L5 ..... passed
+Testing robby/5-test/29.L5 .... passed
+Testing robby/5-test/28.L5 .... passed
+Testing robby/5-test/27.L5 .... passed
+Testing robby/5-test/26.L5 .... passed
+Testing robby/5-test/25.L5 .... passed
+Testing robby/5-test/24.L5 .... passed
+Testing robby/5-test/23.L5 .... passed
+Testing robby/5-test/22.L5 .... passed
+Testing robby/5-test/21.L5 .... passed
+Testing robby/5-test/20.L5 .... passed
+Testing robby/5-test/2.L5 ..... passed
+Testing robby/5-test/19.L5 .... passed
+Testing robby/5-test/18.L5 .... passed
+Testing robby/5-test/17.L5 .... passed
+Testing robby/5-test/16.L5 .... passed
+Testing robby/5-test/15.L5 .... passed
+Testing robby/5-test/14.L5 .... passed
+Testing robby/5-test/13.L5 .... passed
+Testing robby/5-test/12.L5 .... passed
+Testing robby/5-test/11.L5 .... passed
+Testing robby/5-test/10.L5 .... passed
+Testing robby/5-test/1.L5 ..... passed
+Testing robby/5-test/0.L5 ..... passed
+Testing 39/5-test/test9.L5 .... passed
+Testing 39/5-test/test8.L5 .... passed
+Testing 39/5-test/test7.L5 .... passed
+Testing 39/5-test/test6.L5 .... passed
+Testing 39/5-test/test5.L5 .... passed
+Testing 39/5-test/test4.L5 .... passed
+Testing 39/5-test/test3.L5 .... passed
+Testing 39/5-test/test2.L5 .... passed
+Testing 39/5-test/test15.L5 ... passed
+Testing 39/5-test/test14.L5 ... passed
+Testing 39/5-test/test13.L5 ... passed
+Testing 39/5-test/test12.L5 ... passed
+Testing 39/5-test/test11.L5 ... passed
+Testing 39/5-test/test10.L5 ... passed
+Testing 39/5-test/test1.L5 .... passed
+Testing 36/5-test/9.L5 ........ passed
+Testing 36/5-test/8.L5 ........ passed
+Testing 36/5-test/7.L5 ........ passed
+Testing 36/5-test/6.L5 ........ passed
+Testing 36/5-test/5.L5 ........ passed
+Testing 36/5-test/4.L5 ........ passed
+Testing 36/5-test/3.L5 ........ passed
+Testing 36/5-test/2.L5 ........ passed
+Testing 36/5-test/15.L5 ....... passed
+Testing 36/5-test/14.L5 ....... passed
+Testing 36/5-test/13.L5 ....... passed
+Testing 36/5-test/12.L5 ....... passed
+Testing 36/5-test/11.L5 ....... passed
+Testing 36/5-test/10.L5 ....... passed
+Testing 36/5-test/1.L5 ........ passed
+Testing 35/5-test/9.L5 ........ passed
+Testing 35/5-test/8.L5 ........ passed
+Testing 35/5-test/7.L5 ........ passed
+Testing 35/5-test/6.L5 ........ passed
+Testing 35/5-test/5.L5 ........ passed
+Testing 35/5-test/4.L5 ........ passed
+Testing 35/5-test/3.L5 ........ passed
+Testing 35/5-test/2.L5 ........ passed
+Testing 35/5-test/15.L5 ....... passed
+Testing 35/5-test/14.L5 ....... passed
+Testing 35/5-test/13.L5 ....... passed
+Testing 35/5-test/12.L5 ....... passed
+Testing 35/5-test/11.L5 ....... passed
+Testing 35/5-test/10.L5 ....... passed
+Testing 35/5-test/1.L5 ........ passed
+>>>> Summaries <<<<
+L5: 85 of 87 (97%)
