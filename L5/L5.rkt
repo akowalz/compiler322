@@ -118,13 +118,15 @@
     [`(lambda (,args ...) ,body-e) (if (set-member? args var)
                                        e
                                        `(lambda ,args ,(replace-var var new-var body-e)))]
-    [`(let ([,x ,e]) ,body-e) (if (equal? x var)
-                                  e
-                                  `(let ([,x ,(replace-var var new-var e)])
+    [`(let ([,x ,e1]) ,body-e) (if (equal? x var)
+                                  `(let ([,x ,(replace-var var new-var e1)])
+                                     ,body-e)
+                                  `(let ([,x ,(replace-var var new-var e1)])
                                      ,(replace-var var new-var body-e)))]
-    [`(letrec ([,x ,e]) ,body-e) (if (equal? x var)
-                                     e
-                                     `(letrec ([,x ,(replace-var var new-var e)])
+    [`(letrec ([,x ,e1]) ,body-e) (if (equal? x var)
+                                      `(letrec ([,x ,(replace-var var new-var e1)])
+                                         ,body-e)
+                                     `(letrec ([,x ,(replace-var var new-var e1)])
                                         ,(replace-var var new-var body-e)))]
     [_ (replace-in-list var new-var e)]))
 
