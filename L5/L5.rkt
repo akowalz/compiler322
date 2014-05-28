@@ -69,9 +69,10 @@
     (match e
       [`(lambda (,args ...) ,body-e) (let [(free-vars (find-frees body-e args '()))
                                            (fn-name (fresh-label))]
-                                       (begin (create-top-level-function (compile-e-int body-e) free-vars args fn-name)
-                                              `(make-closure ,fn-name
-                                                             (new-tuple ,@free-vars))))] 
+                                       (begin
+                                         (create-top-level-function (compile-e-int body-e) free-vars args fn-name)
+                                         `(make-closure ,fn-name
+                                                        (new-tuple ,@free-vars))))] 
       [`(let ([,x ,e]) ,body-e) `(let ([,x ,(compile-e-int e)])
                                    ,(compile-e-int body-e))]
       [`(letrec ([,x ,e]) ,body) `(let ([,x (new-tuple 0)])
@@ -116,12 +117,10 @@
 (define (replace-var var new-var e)
   
   (define (let-replacement x var new-var e body-e let-type)
-    (if (equal? x var)
-        `(,let-type
-          ([,x ,(replace-var var new-var e)])
-          ,body-e)
-        `(,let-type ([,x ,(replace-var var new-var e)])
-                    ,(replace-var var new-var body-e))))
+    `(,let-type ([,x ,(replace-var var new-var e)])
+                ,(if (equal? x var)
+                     body-e
+                     (replace-var var new-var body-e))))
   
   (match e
     [`(lambda (,args ...) ,body-e) (if (set-member? args var)
@@ -130,18 +129,6 @@
     [`(let ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'let)]
     [`(letrec ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'letrec)]
     [_ (replace-in-list var new-var e)]))
-
-(define (let-replacement x var new-var e body-e rec?)
-  (if (equal? x var)
-      `(,(if rec?
-             'letrec
-             'let)
-            ([,x ,(replace-var var new-var e)])
-         ,body-e)
-      `(,(if rec?
-             'letrec
-             'let) ([,x ,(replace-var var new-var e)])
-         ,(replace-var var new-var body-e))))
 
 ; simple recursive list-replace function (has known bug....)
 (define (replace-in-list var new-var e)
@@ -315,7 +302,7 @@
 
 ;; Known failing tests 
 
-#;
+
 (compile-e `(print
             (let ((x (new-array 10 11)))
               (begin (((lambda (x) x) aset) x 1 202) (aref x 1)))))
