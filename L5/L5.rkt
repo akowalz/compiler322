@@ -114,12 +114,19 @@
 ; finds free variables in an e and replaces them with new-var
 ; returns e if the specified var is shadowed
 (define (replace-var var new-var e)
+  (define (let-replacement x var new-var e body-e let-type)
+  (if (equal? x var)
+      `(,let-type
+        ([,x ,(replace-var var new-var e)])
+         ,body-e)
+      `(,let-type ([,x ,(replace-var var new-var e)])
+         ,(replace-var var new-var body-e))))
   (match e
     [`(lambda (,args ...) ,body-e) (if (set-member? args var)
                                        e
                                        `(lambda ,args ,(replace-var var new-var body-e)))]
-    [`(let ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e #f)]
-    [`(letrec ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e #t)]
+    [`(let ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'let)]
+    [`(letrec ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'letrec)]
     [_ (replace-in-list var new-var e)]))
 
 (define (let-replacement x var new-var e body-e rec?)
