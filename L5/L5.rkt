@@ -118,18 +118,21 @@
     [`(lambda (,args ...) ,body-e) (if (set-member? args var)
                                        e
                                        `(lambda ,args ,(replace-var var new-var body-e)))]
-    [`(let ([,x ,e1]) ,body-e) (if (equal? x var)
-                                  `(let ([,x ,(replace-var var new-var e1)])
-                                     ,body-e)
-                                  `(let ([,x ,(replace-var var new-var e1)])
-                                     ,(replace-var var new-var body-e)))]
-    [`(letrec ([,x ,e1]) ,body-e) (if (equal? x var)
-                                      `(letrec ([,x ,(replace-var var new-var e1)])
-                                         ,body-e)
-                                     `(letrec ([,x ,(replace-var var new-var e1)])
-                                        ,(replace-var var new-var body-e)))]
+    [`(let ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e #f)]
+    [`(letrec ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e #t)]
     [_ (replace-in-list var new-var e)]))
 
+(define (let-replacement x var new-var e body-e rec?)
+  (if (equal? x var)
+      `(,(if rec?
+             'letrec
+             'let)
+            ([,x ,(replace-var var new-var e)])
+         ,body-e)
+      `(,(if rec?
+             'letrec
+             'let) ([,x ,(replace-var var new-var e)])
+         ,(replace-var var new-var body-e))))
 
 ; simple recursive list-replace function (has known bug....)
 (define (replace-in-list var new-var e)
