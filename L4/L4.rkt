@@ -193,7 +193,7 @@
   (:len_greater_than_n
    (a n)
    (let ((__x0 (alen a))) (<= n __x0)))))
-
+#;
 (test (L4->L3 `((print ((:higher_order)))
                 (:higher_order () :afunc)
                 (:afunc () 12)))
@@ -203,10 +203,11 @@
         (:higher_order () :afunc)
         (:afunc () 12)))
 
-(if (= (vector-length (current-command-line-arguments)) 1)
+(when (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
-                 (λ (x) (display (L4->L3 (read x)))))
-    (display ""))
+                 (λ (x) (display (L4->L3 (read x))))))
+
+
       
-      
+ 

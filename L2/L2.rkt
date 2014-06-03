@@ -1,6 +1,8 @@
 #lang racket
 (require "Graph.rkt" "spill.rkt" "liveness.rkt" rackunit)
 
+
+
 (define/contract (L2->L1 code)
   (-> list? list?)
   (map L2f->L1f code))
@@ -144,6 +146,8 @@
                  (ecx *= 2)
                  (ecx += 1)
                  (eax <- (print ecx)))))
+
+(provide L2->L1)
 
 
 

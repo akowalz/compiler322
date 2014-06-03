@@ -273,5 +273,6 @@
 
 
 ; this is so janky! but it's all cool man
-(display (compile-L1 (vector-ref (current-command-line-arguments) 0)))
+(when (= (vector-length (current-command-line-arguments)) 1)
+  (display (compile-L1 (vector-ref (current-command-line-arguments) 0))))
 
