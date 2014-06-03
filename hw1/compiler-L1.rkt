@@ -131,7 +131,7 @@
     [allocate-expr (t1 t2) (format "pushl ~A\npushl ~A\ncall allocate\naddl $8, %esp\n"
                            (compile t2)
                            (compile t1))]
-    [array-error-expr (t1 t2) (format "pushl ~A\npushl ~A\ncall array-error\naddl $8, %esp\n"
+    [array-error-expr (t1 t2) (format "pushl ~A\npushl ~A\ncall print_error\naddl $8, %esp\n"
                                       (compile t2)
                                       (compile t1))]
     [goto-expr (label) (format "jmp ~A\n" (label-expr-label label))]
