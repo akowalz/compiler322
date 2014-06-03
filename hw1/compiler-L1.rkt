@@ -222,7 +222,7 @@
 
 
 (define (compile-L1 path)
-  (compile-code (file->value path)))
+  (compile-code ((file->value path))))
 
 (test (compile (arrow-expr (register `eax) (numV 5)))
       "movl $5, %eax\n")
@@ -273,6 +273,7 @@
 
 
 ; this is so janky! but it's all cool man
+#;
 (when (= (vector-length (current-command-line-arguments)) 1)
   (display (compile-L1 (vector-ref (current-command-line-arguments) 0))))
 

@@ -202,7 +202,7 @@
             (print (__x1))))
         (:higher_order () :afunc)
         (:afunc () 12)))
-
+#;
 (when (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)

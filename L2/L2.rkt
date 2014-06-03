@@ -69,7 +69,7 @@
         [else (cons (first instr)
                     (replace-instr old new (rest instr)))]))
 
-
+#;
 (if (not (= (vector-length (current-command-line-arguments)) 1))
     (display "")
     (call-with-input-file

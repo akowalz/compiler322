@@ -447,6 +447,7 @@
 #;
 (L3->L2 '((let ((a 1)) (let ((a (new-tuple a 2 3))) (aref a a)))))
 
+#;
 (if (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
