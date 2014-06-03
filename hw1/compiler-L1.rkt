@@ -72,6 +72,10 @@
   (match expr
     [(? symbol?) (label-target (string-append "_" (substring (symbol->string expr) 1)))]
     [`(call ,u) (call-expr (parse-rand u))]
+    [`(array-error ,t1 ,t2) (array-error-expr (parse-rand t1)
+                                              (parse-rand t2))]
+    [`(allocate ,t1 ,t2) (allocate-expr (parse-rand t1)
+                                              (parse-rand t2))]
     [`(tail-call ,u) (tail-call (parse-rand u))]
     [`(return) (return-expr)]
     [`(,dest <- ,a ,op ,b) (cmp-store (parse-rand dest)
