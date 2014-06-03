@@ -1,0 +1,1 @@
+(((lambda (x) (begin (print 2) (print (+ x 1)))) 4))
