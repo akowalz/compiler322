@@ -72,10 +72,6 @@
   (match expr
     [(? symbol?) (label-target (string-append "_" (substring (symbol->string expr) 1)))]
     [`(call ,u) (call-expr (parse-rand u))]
-    [`(array-error ,t1 ,t2) (array-error-expr (parse-rand t1)
-                                              (parse-rand t2))]
-    [`(allocate ,t1 ,t2) (allocate-expr (parse-rand t1)
-                                              (parse-rand t2))]
     [`(tail-call ,u) (tail-call (parse-rand u))]
     [`(return) (return-expr)]
     [`(,dest <- ,a ,op ,b) (cmp-store (parse-rand dest)
@@ -84,7 +80,7 @@
                                       op)]
     [`(eax <- (print ,t)) (print-expr (parse-rand t))]
     [`(eax <- (allocate ,t1 ,t2)) (allocate-expr (parse-rand t1) (parse-rand t2))]
-    [`(eax <- (array-error-expr ,t1 ,t2)) (array-error-expr (parse-rand t1) (parse-rand t2))]
+    [`(eax <- (array-error ,t1 ,t2)) (array-error-expr (parse-rand t1) (parse-rand t2))]
     [`(,dest <- (mem ,addr ,offset)) (mem-ref-expr (parse-rand dest)
                                                    (parse-rand addr)
                                                    offset)]
@@ -136,8 +132,8 @@
                            (compile t2)
                            (compile t1))]
     [array-error-expr (t1 t2) (format "pushl ~A\npushl ~A\ncall print-error\naddl $8, %esp\n"
-                           (compile t2)
-                           (compile t1))]
+                                      (compile t2)
+                                      (compile t1))]
     [goto-expr (label) (format "jmp ~A\n" (label-expr-label label))]
     [cjump-expr (a op b l1 l2) (cond [(and (numV? a) (numV? b)) 
                                            (format "jmp ~A\n"
@@ -175,12 +171,12 @@
                         (format "pushl $~A\npushl %ebp\nmovl %esp, %ebp\njmp ~A\n~A:\n"
                         new-label
                         (if (register? u)
-                            (format "*~A" compile u)
+                            (format "*~A" (compile u))
                             (label-expr-label u))
                         new-label))]
     [tail-call (u) (format "movl %ebp, %esp\njmp ~A\n"
                           (if (register? u)
-                              (format "*~A" compile u)
+                              (format "*~A" (compile u))
                               (label-expr-label u)))]
     [return-expr () "movl %ebp, %esp\npopl %ebp\nret\n"]
     ))

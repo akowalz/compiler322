@@ -18,7 +18,7 @@
       (vector-ref (current-command-line-arguments) 0)
     (λ (x) (display (compile-L (read x))))))
 
-;(compile-L '(+ (+ 1 3) 5))
+(compile-L '((lambda (x) x) 1))
 
 
 
