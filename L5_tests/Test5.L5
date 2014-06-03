@@ -1,0 +1,5 @@
+((let ([y 7])
+	(print
+	(+
+		((lambda (x) (+ x 1)) 2)
+		((lambda () (* y 4)))))))
