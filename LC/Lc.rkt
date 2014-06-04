@@ -18,7 +18,11 @@
       (vector-ref (current-command-line-arguments) 0)
     (λ (x) (display (compile-L (read x))))))
 
-(compile-L '((lambda (x) x) 1))
+(compile-L '((letrec ((f (lambda (x)
+                           (if (= x 0)
+                               (print 10)
+                               (f (- x 1))))))
+               (f 100))))
 
 
 
