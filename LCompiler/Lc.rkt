@@ -1,9 +1,9 @@
 #lang racket
-(require "./hw1/compiler-L1.rkt"
-         "./L2/L2.rkt"
-         "./L3/L3.rkt"
-         "./L4/L4.rkt"
-         "./L5/L5.rkt")
+(require "../hw1/compiler-L1.rkt"
+         "../L2/L2.rkt"
+         "../L3/L3.rkt"
+         "../L4/L4.rkt"
+         "../L5/L5.rkt")
 
 
 (define (compile-L L5-prog)

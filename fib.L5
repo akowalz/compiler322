@@ -1,0 +1,14 @@
+(letrec ([fib
+          (lambda (n)
+            (if (<= n 1)
+                1
+                (+ (fib (- n 1))
+                   (fib (- n 2)))))])
+  (letrec ([print-fibs
+            (lambda (n)
+              (if (= n 16)
+                  12345
+                  (begin
+                    (print (fib n))
+                    (print-fibs (+ n 1)))))])
+    (print-fibs 0)))
