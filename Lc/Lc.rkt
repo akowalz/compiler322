@@ -20,9 +20,5 @@
     (λ (x) (display (compile-L (read x))))))
 
 
-(when (not (string? (compile-L '((lambda (x) x) 1))))
-  (error 'Lc "Compile-L doesn't seem to be working!"))
-
-
 
 
