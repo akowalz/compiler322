@@ -1,13 +1,14 @@
 #lang racket
-(require "compiler-L1.rkt"
+(require "L1.rkt"
          "L2.rkt"
          "L3.rkt"
          "L4.rkt"
-         "L5.rkt")
+         "L5.rkt"
+         rackunit)
 
 
 (define (compile-L L5-prog)
-  (compile-code
+  (L1->x86
    (L2->L1 
     (L3->L2
      (L4->L3 
@@ -18,7 +19,9 @@
       (vector-ref (current-command-line-arguments) 0)
     (λ (x) (display (compile-L (read x))))))
 
-(compile-L '((lambda (x) x) 1))
+
+(when (not (string? (compile-L '((lambda (x) x) 1))))
+  (error 'Lc "Compile-L doesn't seem to be working!"))
 
 
 

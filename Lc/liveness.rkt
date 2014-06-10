@@ -189,9 +189,8 @@
                                         symbol<?)) (in-out-ins ios)))
           (cons 'out (map (λ (lst) (sort (set-subtract lst '(esp ebp))
                                          symbol<?)) (in-out-outs ios))))))
-
-(if  (not (= (vector-length (current-command-line-arguments)) 1))
-  (display "Usaage: liveness ./file.L2f")
+#;
+(when (= (vector-length (current-command-line-arguments)) 1)
   (display (call-with-input-file
                (vector-ref (current-command-line-arguments) 0)
              (lambda (x) (in/out-pretty (read x))))))
