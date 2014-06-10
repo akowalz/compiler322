@@ -204,7 +204,7 @@
   leave
   ret
   ")
-(define (compile-code code)
+(define (L1->x86 code)
   (let ([main-expr (first code)]
         [rest-exprs (rest code)])
       (string-append header
@@ -222,7 +222,7 @@
 
 
 (define (compile-L1 path)
-  (compile-code ((file->value path))))
+  (L1->x86 ((file->value path))))
 
 (test (compile (arrow-expr (register `eax) (numV 5)))
       "movl $5, %eax\n")
@@ -276,5 +276,5 @@
 (when (= (vector-length (current-command-line-arguments)) 1)
   (call-with-input-file
       (vector-ref (current-command-line-arguments) 0)
-      (lambda (x) (display (compile-code (read x))))))
+      (lambda (x) (display (L1->x86 (read x))))))
 
