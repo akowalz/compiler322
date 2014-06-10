@@ -6,7 +6,7 @@ Compiler for Robby Findler's course at Northwestern University
 
 **Current Status**
 
-* L1: (91%)
+* L1: 285 of 310 (91%) 
 * graph: 168 of 168 (100%)
 * spill: 415 of 415 (100%)
 * liveness: 218 of 219 (99%)
