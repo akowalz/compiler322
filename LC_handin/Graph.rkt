@@ -24,30 +24,12 @@
                       c-graph)
                  #f))))
 
-(define (color-mapping code)
-  (let* ([i-graph (interferes code)]
-         [temp-c (color-graph i-graph)])
-    (if (set-member? temp-c #f)
-        #f
-        (let ([nodes (filter (λ (v) (not (set-member? all-registers (colored-node-name v))))
-                             temp-c)])
-          (make-hash (map (λ (node) (cons (colored-node-name node) (list-ref all-registers 
-                                                                             (colored-node-color node))))
-                          nodes))))))
-    
-
 (define (all-vars+regs prog)
   (sort (set-subtract 
          (set-union (foldr set-union '() (all-kills prog)) 
                     (foldr set-union '() (all-gens prog)) 
                     '(eax ebx ecx edx esi edi))
          '(ebp esp))
-        symbol<?))
-
-(define (all-vars prog)
-  (sort (set-subtract (set-union (foldr set-union '() (all-kills prog)) 
-                                 (foldr set-union '() (all-gens prog)))
-                      '(eax ebx ecx edx esi edi ebp esp))
         symbol<?))
 
 (define (interferes code)
@@ -67,10 +49,9 @@
 
 (define (var-interferes var out-list in-list kill-list code)
   (let ([return-list
-         (cond [(empty? in-list) '()]
-                [(set-member? (first in-list) var)
-                 (first in-list)]   
-                [#t '()])])
+        (if (set-member? (first in-list) var)
+            (first in-list)
+            '())])
     (set! return-list (foldr set-union return-list 
                              (for/list ([out out-list]
                                         [killed kill-list]
@@ -172,14 +153,12 @@
                                 (equal? (colored-node-color cn) num))))
               colored-graph)
       #f))
-#|
+
 (if  (not (= (vector-length (current-command-line-arguments)) 1))
   (display "")
   (call-with-input-file
       (vector-ref (current-command-line-arguments) 0)
     (lambda (x) (pretty-out (read x)))))
-|#
-
 (provide (all-defined-out))
 
 #|(check-equal? (var-interferes 'x '((y z) (x t)) '(() ()) '(()()))

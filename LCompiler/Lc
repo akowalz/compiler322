@@ -1,5 +1,0 @@
-#!/bin/bash
-
-racket Lc.rkt $1 > prog.S
-as --32 -o prog.o porg.S
-gcc -m2 -o a.out prog.o runtime.o
