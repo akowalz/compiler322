@@ -69,12 +69,11 @@
         [else (cons (first instr)
                     (replace-instr old new (rest instr)))]))
 
-#;
-(if (not (= (vector-length (current-command-line-arguments)) 1))
-    (display "")
-    (call-with-input-file
-        (vector-ref (current-command-line-arguments) 0)
-      (lambda (x) (display (L2->L1 (read x))))))
+
+(when (= (vector-length (current-command-line-arguments)) 1)
+  (call-with-input-file
+      (vector-ref (current-command-line-arguments) 0)
+    (lambda (x) (display (L2->L1 (read x))))))
          
 
                  

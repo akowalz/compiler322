@@ -157,11 +157,6 @@
                                  (includes (rest lst) sym))]
         [else (or (equal? (first lst) sym)
                   (includes (rest lst) sym))]))
-
-(define (spill code var addr prefix) 
-  (read (open-input-string (spill-program code var addr prefix))))
-
-(provide spill)
                                 
       
 
@@ -278,7 +273,7 @@
               "((s0 <- (mem ebp -20))\n(t <- s0 <= s0)\n)")
 
 
-;(generate-spilled-program (vector-ref (current-command-line-arguments) 0))
+(generate-spilled-program (vector-ref (current-command-line-arguments) 0))
 
                              
 

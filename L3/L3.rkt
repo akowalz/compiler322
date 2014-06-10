@@ -449,9 +449,9 @@
 
 
 (when (= (vector-length (current-command-line-arguments)) 1)
-    (call-with-input-file
-        (vector-ref (current-command-line-arguments) 0)
-      (λ (x) (display (L3->L2 (read x))))))
+  (call-with-input-file
+      (vector-ref (current-command-line-arguments) 0)
+    (λ (x) (display (L3->L2 (read x))))))
 
 (provide L3->L2)
               
