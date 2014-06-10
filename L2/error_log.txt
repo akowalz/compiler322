@@ -1,16 +1,12 @@
 >>>> L2 <<<<
-Testing robby/2-test/init.L2 .............. failed (wrong output)
-Actual:   "{s:7, 0, 1, 2, 3, 4, 5, 6}\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\")\n  (ebp \"4(S)\")\n  (ebx \"(0, 0)(H)\")\n  (edi \"11(5)\")\n  (esi \"7(3)\")\n  (esp \"-12(S)\"))\nStack:\n'((-24 \"return address: ((mem ebp -4) <- 1) ...\")\n  (-20 \"return address: (goto :exit) ...\")\n  (-16 \"(0, 0)(H)\")\n  (-12 \"7(3)\")\n  (-8 \"5(2)\")\n  (-4 \"3(1)\")\n  (0 \"1(0)\"))\nHeap:\n'((0 \"#(7(3) 1(0) 3(1) 5(2) 7(3) 9(4) 11(5) 13(6))\"))\n"
-Expected: "{s:7, 0, 1, 2, 3, 4, 5, 6}\n"
+Testing robby/2-test/init.L2 .............. passed
 Testing robby/2-test/9.L2 ................. passed
 Testing robby/2-test/8.L2 ................. passed
 Testing robby/2-test/7.L2 ................. passed
 Testing robby/2-test/6.L2 ................. passed
 Testing robby/2-test/5.L2 ................. passed
-Testing robby/2-test/43.L2 ................ failed (compiler produced ill-formed output)
-Testing robby/2-test/42.L2 ................ failed (wrong output)
-Actual:   "1\n2\n3\n4\n5\n6\n7\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\") (ebp \"4(S)\") (edi \"15(7)\") (esi \"13(6)\") (esp \"-16(S)\"))\nStack:\n'((-24 \"return address: (goto :exit) ...\")\n  (-20 \"15(7)\")\n  (-16 \"11(5)\")\n  (-12 \"9(4)\")\n  (-8 \"7(3)\")\n  (-4 \"5(2)\")\n  (0 \"3(1)\"))\nHeap:\n'()\n"
-Expected: "1\n2\n3\n4\n5\n6\n7\n"
+Testing robby/2-test/43.L2 ................ passed
+Testing robby/2-test/42.L2 ................ passed
 Testing robby/2-test/41.L2 ................ passed
 Testing robby/2-test/40.L2 ................ passed
 Testing robby/2-test/4.L2 ................. passed
@@ -51,20 +47,7 @@ Testing 41/2-test/8.L2 .................... passed
 Testing 41/2-test/7.L2 .................... passed
 Testing 41/2-test/6.L2 .................... passed
 Testing 41/2-test/5.L2 .................... passed
-Testing 41/2-test/4.L2 .................... failed (compiler returned non-zero status)
-stderr:
-first: contract violation
-  expected: (and/c list? (not/c empty?))
-  given: '()
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:68:0: var-interferes
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:58:5: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:53:0: interferes
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:27:0: color-mapping
-   L2f->L1f
-   L2->L1
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:74:6: temp115
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt: [running body]
+Testing 41/2-test/4.L2 .................... passed
 Testing 41/2-test/3.L2 .................... passed
 Testing 41/2-test/2.L2 .................... passed
 Testing 41/2-test/16.L2 ................... passed
@@ -72,15 +55,11 @@ Testing 41/2-test/15.L2 ................... passed
 Testing 41/2-test/14.L2 ................... passed
 Testing 41/2-test/13.L2 ................... passed
 Testing 41/2-test/12.L2 ................... passed
-Testing 41/2-test/10.L2 ................... failed (wrong output)
-Actual:   "295\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\")\n  (ebp \"4(S)\")\n  (ebx \"591(295)\")\n  (edi \"62(X)\")\n  (esi \"10(X)\")\n  (esp \"-8(S)\"))\nStack:\n'((-16 \"return address: (goto :exit) ...\")\n  (-12 \"591(295)\")\n  (-8 \"45(22)\")\n  (-4 \"10(X)\")\n  (0 \"591(295)\"))\nHeap:\n'()\n"
-Expected: "295\n"
+Testing 41/2-test/10.L2 ................... passed
 Testing 41/2-test/1.L2 .................... passed
-Testing 39/2-test/test9.L2 ................ failed (wrong output)
-Actual:   "10\n67\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\") (ebp \"4(S)\") (edi \"5(2)\") (esi \"3(1)\") (esp \"-8(S)\"))\nStack:\n'((-24 \"return address: (return) ...\")\n  (-20 \"135(67)\")\n  (-16 \"4(S)\")\n  (-12 \"return address: (goto :exit) ...\")\n  (-8 \"3(1)\")\n  (-4 \"2(X)\")\n  (0 \"1(0)\"))\nHeap:\n'((0 \"#(4(X) :f 0(X) 0(X) 0(X))\"))\n"
-Expected: "10\n67\n"
-Testing 39/2-test/test8.L2 ................ failed (compiler produced ill-formed output)
-Testing 39/2-test/test7.L2 ................ failed (compiler produced ill-formed output)
+Testing 39/2-test/test9.L2 ................ passed
+Testing 39/2-test/test8.L2 ................ passed
+Testing 39/2-test/test7.L2 ................ passed
 Testing 39/2-test/test6.L2 ................ failed (compiler returned non-zero status)
 stderr:
 spill-function: broke its contract
@@ -90,16 +69,16 @@ spill-function: broke its contract
       (-> list? list? number? list?)
   contract from: (function spill-function)
   blaming: (function spill-function)
-  at: /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:33.18
+  at: /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:36.18
   context...:
    /Applications/Racket v6.0/collects/racket/contract/private/blame.rkt:135:0: raise-blame-error
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:16:0: L2f->L1f-internal
+   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:18:0: L2f->L1f-internal
    L2->L1
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:74:6: temp115
+   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:76:4: temp115
    /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt: [running body]
 Testing 39/2-test/test5.L2 ................ passed
 Testing 39/2-test/test4.L2 ................ passed
-Testing 39/2-test/test3.L2 ................ failed (compiler produced ill-formed output)
+Testing 39/2-test/test3.L2 ................ passed
 Testing 39/2-test/test2.L2 ................ passed
 Testing 39/2-test/test15.L2 ............... passed
 Testing 39/2-test/test14.L2 ............... passed
@@ -115,44 +94,27 @@ spill-function: broke its contract
       (-> list? list? number? list?)
   contract from: (function spill-function)
   blaming: (function spill-function)
-  at: /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:33.18
+  at: /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:36.18
   context...:
    /Applications/Racket v6.0/collects/racket/contract/private/blame.rkt:135:0: raise-blame-error
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:16:0: L2f->L1f-internal
+   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:18:0: L2f->L1f-internal
    L2->L1
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:74:6: temp115
+   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:76:4: temp115
    /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt: [running body]
 Testing 39/2-test/test1.L2 ................ passed
-Testing 37/2-test/test9.L2 ................ failed (compiler returned non-zero status)
-stderr:
-first: contract violation
-  expected: (and/c list? (not/c empty?))
-  given: '()
-  context...:
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:68:0: var-interferes
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:58:5: for-loop
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:53:0: interferes
-   /Users/Alex/code/Koala-Yeazy-322/L2/Graph.rkt:27:0: color-mapping
-   L2f->L1f
-   L2->L1
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt:74:6: temp115
-   /Users/Alex/code/Koala-Yeazy-322/L2/L2.rkt: [running body]
+Testing 37/2-test/test9.L2 ................ passed
 Testing 37/2-test/test8.L2 ................ passed
 Testing 37/2-test/test7.L2 ................ passed
 Testing 37/2-test/test6.L2 ................ passed
 Testing 37/2-test/test5.L2 ................ passed
 Testing 37/2-test/test4.L2 ................ passed
-Testing 37/2-test/test3.L2 ................ failed (wrong output)
-Actual:   "4\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\")\n  (ebp \"4(S)\")\n  (ebx \"2(X)\")\n  (edi \"1(0)\")\n  (esi \"1(0)\")\n  (esp \"0(S)\"))\nStack:\n'((-8 \"return address: (goto :exit) ...\") (-4 \"9(4)\") (0 \"2(X)\"))\nHeap:\n'()\n"
-Expected: "4\n"
+Testing 37/2-test/test3.L2 ................ passed
 Testing 37/2-test/test2.L2 ................ passed
 Testing 37/2-test/test15.L2 ............... passed
 Testing 37/2-test/test14.L2 ............... passed
 Testing 37/2-test/test13.L2 ............... passed
 Testing 37/2-test/test12.L2 ............... passed
-Testing 37/2-test/test11.L2 ............... failed (wrong output)
-Actual:   "0\n1\n2\n3\n4\n5\n6\nError: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"1(0)\")\n  (ebp \"4(S)\")\n  (ebx \"13(6)\")\n  (edi \"11(5)\")\n  (esi \"9(4)\")\n  (esp \"-12(S)\"))\nStack:\n'((-20 \"return address: (goto :exit) ...\")\n  (-16 \"13(6)\")\n  (-12 \"7(3)\")\n  (-8 \"5(2)\")\n  (-4 \"3(1)\")\n  (0 \"1(0)\"))\nHeap:\n'()\n"
-Expected: "0\n1\n2\n3\n4\n5\n6\n"
+Testing 37/2-test/test11.L2 ............... passed
 Testing 37/2-test/test10.L2 ............... passed
 Testing 37/2-test/test1.L2 ................ passed
 Testing 36/2-test/15_goto.L2 .............. passed
@@ -165,9 +127,7 @@ Testing 36/2-test/07_cjump.L2 ............. passed
 Testing 36/2-test/06_label.L2 ............. passed
 Testing 36/2-test/02_sop.L2 ............... passed
 Testing 36/2-test/01_aop.L2 ............... passed
-Testing 22/2-test/17.L2 ................... failed (wrong output)
-Actual:   "Error: esp should be 4 on exit in instruction (goto :exit)\nRegisters:\n'((eax \"48(X)\")\n  (ebp \"4(S)\")\n  (ebx \"21(10)\")\n  (ecx \"27(13)\")\n  (edi \"27(13)\")\n  (edx \"27(13)\")\n  (esi \"27(13)\")\n  (esp \"0(S)\"))\nStack:\n'((0 \"21(10)\"))\nHeap:\n'()\n"
-Expected: ""
+Testing 22/2-test/17.L2 ................... passed
 Testing 22/2-test/15.L2 ................... passed
 Testing 22/2-test/14.L2 ................... passed
 Testing 22/2-test/13.L2 ................... passed
@@ -184,4 +144,4 @@ Testing 22/2-test/03.L2 ................... passed
 Testing 22/2-test/02.L2 ................... passed
 Testing 22/2-test/01.L2 ................... passed
 >>>> Summaries <<<<
-L2: 99 of 114 (86%)
+L2: 112 of 114 (98%)
