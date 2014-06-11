@@ -48,8 +48,8 @@
 
 (define (cjump-instr-inverse op)
   (case op
-    ('< "jg")
-    ('<= "jge")
+    ('< "jge")
+    ('<= "jg")
     ('= "je")))
 
 (define (set-instr op)
