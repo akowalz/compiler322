@@ -46,6 +46,12 @@
     ('<= "jle")
     ('= "je")))
 
+(define (cjump-instr-inverse op)
+  (case op
+    ('< "jg")
+    ('<= "jge")
+    ('= "je")))
+
 (define (set-instr op)
   (case op
     ['< "setl"]
@@ -154,7 +160,7 @@
                                                   (label-expr-label l2)))]
                                      [(numV? a) (format "cmpl ~A, ~A\n~A ~A\njmp ~A\n"
                                                 (compile a) (compile b)
-                                                (cjump-instr op)
+                                                (cjump-instr-inverse op)
                                                 (label-expr-label l2)
                                                 (label-expr-label l1))]
                                      [else  (format "cmpl ~A, ~A\n~A ~A\njmp ~A\n"
@@ -269,7 +275,7 @@
   "jmp _no\n")
 
 (test (compile (parse `(cjump 17 <= ebx :true :false)))
-  "cmpl $17, %ebx\njle _false\njmp _true\n")
+  "cmpl $17, %ebx\njge _false\njmp _true\n")
 
 
 (test (parse `(eax <- edx = ebx))
