@@ -2,8 +2,8 @@
 (require rackunit racket/set)
 ;L3 compiler
 
-(struct instr/count (instr count))
 (define bounds-count 0)
+(define if-counter 0)
 (define arg-registers '(ecx edx eax))
 
 (define (L3->L2 prog)
@@ -32,17 +32,16 @@
         [else #f]))
 
 (define (compile-e e)
-  (instr/count-instr
-   (compile-e-int e 0)))
+   (compile-e-int e))
 
-(define (compile-e-int e count)
+(define (compile-e-int e)
   (match e 
-    [`(let ([,x ,d]) ,e1) (compile-let x d e1 count)]
-    [`(if ,test ,then ,else) (compile-if test then else count)]
-    [d (instr/count (let ([d-code (compile-d d 'eax #t)])
+    [`(let ([,x ,d]) ,e1) (compile-let x d e1)]
+    [`(if ,test ,then ,else) (compile-if test then else)]
+    [d (let ([d-code (compile-d d 'eax #t)])
                       (if (list-contains? 'tail-call d-code)
                           d-code
-                          (append d-code `((return))))) count)]))
+                          (append d-code `((return)))))]))
   
 
 (define (compile-d d dest tail?)
@@ -163,33 +162,31 @@
       (,dest += ,array)
       (,dest <- (mem ,dest 4)))))                  
 
-(define (compile-let dest dexpr e count)
-  (let* ((newIC (compile-e-int e count))
-         (instrs (instr/count-instr newIC))
-         (new-count (instr/count-count newIC)))
-    (instr/count
+(define (compile-let dest dexpr e)
+  (let* ((newIC (compile-e-int e))
+         (instrs newIC))
      (append (compile-d dexpr dest #f) 
-             instrs)
-     new-count)))
+             instrs)))
 
 
-(define (compile-if test then else count)
-  (let* ([else-lab (new-if-label count "else")]
-         [then-lab (new-if-label count "then")]
-         [compiled-then (compile-e-int then (+ 1 count))]
-         [compiled-else (compile-e-int else (instr/count-count compiled-then))])
-    (instr/count (append `((cjump ,(encode test) = 1 ,else-lab ,then-lab))
+(define (compile-if test then else)
+  (set! if-counter (+ 1 if-counter))
+  (let* ([else-lab (new-if-label "else")]
+         [then-lab (new-if-label "then")]
+         [compiled-then (compile-e-int then)]
+         [compiled-else (compile-e-int else)])
+  (append `((cjump ,(encode test) = 1 ,else-lab ,then-lab))
                          (list then-lab)
-                         (instr/count-instr compiled-then)
+                         compiled-then
                          (list else-lab)
-                         (instr/count-instr compiled-else))
-                 (instr/count-count compiled-else))))
+                         compiled-else)
+                 ))
 
 
-(define (new-if-label count then/else)
+(define (new-if-label then/else)
   (string->symbol
    (string-append ":magic_if_label_"
-                  (number->string count)
+                  (number->string if-counter)
                   then/else)))
 
 (define (new-bounds-label count pass/fail)
@@ -288,28 +285,9 @@
                 (eax += 1)
                 (return)))
 
-(check-equal? (compile-e `(if 1 2 3))
-              `((cjump 1 = 0 :magic_if_label_0else :magic_if_label_0then)
-                :magic_if_label_0then
-                (eax <- 5)
-                (return)
-                :magic_if_label_0else
-                (eax <- 7)
-                (return)))
 
-(check-equal? (compile-e `(if x (if 0 4 5) 3))
-              `((cjump x = 0 :magic_if_label_0else :magic_if_label_0then)
-                :magic_if_label_0then
-                (cjump 0 = 0 :magic_if_label_1else :magic_if_label_1then)
-                :magic_if_label_1then
-                (eax <- 9)
-                (return)
-                :magic_if_label_1else
-                (eax <- 11)
-                (return)
-                :magic_if_label_0else
-                (eax <- 7)
-                (return)))
+
+
 (check-equal? (compile-e `(f)) 
               `((tail-call f)))
 (check-equal? (compile-e `(f y)) 
@@ -440,6 +418,29 @@
         (let ((x_5 (:fib x_4)))
           (let ((x_6 (- n_1 2))) (let ((x_7 (:fib x_6))) (+ x_5 x_7)))))))))
 )
+
+(check-equal? (compile-e `(if 1 2 3))
+              `((cjump 3 = 1 :magic_if_label_1else :magic_if_label_1then)
+                :magic_if_label_1then
+                (eax <- 5)
+                (return)
+                :magic_if_label_1else
+                (eax <- 7)
+                (return)))
+
+(check-equal? (compile-e `(if x (if 0 4 5) 3))
+              `((cjump x = 1 :magic_if_label_2else :magic_if_label_2then)
+                :magic_if_label_2then
+                (cjump 1 = 1 :magic_if_label_3else :magic_if_label_3then)
+                :magic_if_label_3then
+                (eax <- 9)
+                (return)
+                :magic_if_label_3else
+                (eax <- 11)
+                (return)
+                :magic_if_label_2else
+                (eax <- 7)
+                (return)))
 
 
 ;(L3->L2 '((let ((a -1)) (let ((a (+ a 5))) (print a)))))
