@@ -169,14 +169,13 @@
                                   "$1" "$0")
                               (compile dest))]
                      [(numV? a) 
-                      (format "cmpl ~A, ~A\n~A ~A\nmovzbl ~A, ~A\naddl $1, ~A\nandl $1, ~A\n"
+                      (format "cmpl ~A, ~A\n~A ~A\nmovzbl ~A, ~A\n"
                               (compile a) (compile b)
                               (set-instr-inverse op)
                               (compile (small-reg dest))
                               (compile (small-reg dest)) 
                               (compile dest)
-                              (compile dest)
-                              (compile dest))]
+                              )]
                      [else (format "cmpl ~A, ~A\n~A ~A\nmovzbl ~A, ~A\n"
                                    (compile b) (compile a)
                                    (set-instr op)
@@ -289,7 +288,7 @@
   "movl $1, %edx\n")
 
 (test (compile (parse  `(ecx <- 15 < ebx)))
-  "cmpl $15, %ebx\nsetg %cl\nmovzbl %cl, %ecx\naddl $1, %ecx\nandl $1, %ecx\n")
+  "cmpl $15, %ebx\nsetg %cl\nmovzbl %cl, %ecx\n")
 
 
 
