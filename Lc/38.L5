@@ -1,5 +1,5 @@
-(letrec ((f (lambda (x)
+(print (letrec ((f (lambda (x)
                           (if (= x 0)
                               1 
                               (+ (f (- x 1)) (f (- x 1)))))))
-              (f 28))
+              (f 28)))
