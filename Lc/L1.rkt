@@ -46,6 +46,24 @@
     ('<= "jle")
     ('= "je")))
 
+(define (cjump-instr-inverse op)
+  (case op
+    ('< "jg")
+    ('<= "jge")
+    ('= "je")))
+
+(define (set-instr op)
+  (case op
+    ['< "setl"]
+    ['<= "setle"]
+    ['= "sete"]))
+
+(define (set-instr-inverse op)
+  (case op
+    ['< "setg"]
+    ['<= "setge"]
+    ['= "sete"]))
+
 (define (compare-on-op op a b)
   (case op
     ('< (< a b))
@@ -136,39 +154,41 @@
                                       (compile t1))]
     [goto-expr (label) (format "jmp ~A\n" (label-expr-label label))]
     [cjump-expr (a op b l1 l2) (cond [(and (numV? a) (numV? b)) 
-                                           (format "jmp ~A\n"
+                                      (format "jmp ~A\n"
                                               (if (compare-on-op op (numV-n a) (numV-n b))
                                                   (label-expr-label l1)
                                                   (label-expr-label l2)))]
                                      [(numV? a) (format "cmpl ~A, ~A\n~A ~A\njmp ~A\n"
-                                                (compile a) (compile b)
-                                                (cjump-instr op)
-                                                (label-expr-label l2)
-                                                (label-expr-label l1))]
+                                                        (compile a) (compile b)
+                                                        (cjump-instr-inverse op)
+                                                        (label-expr-label l1)
+                                                        (label-expr-label l2))]
                                      [else  (format "cmpl ~A, ~A\n~A ~A\njmp ~A\n"
-                                                (compile b) (compile a)
-                                                (cjump-instr op)
-                                                (label-expr-label l1)
-                                                (label-expr-label l2))])]
-    [cmp-store (dest a b op) (cond [(and (numV? a) (numV? b))
-                                    (format "movl ~A, ~A\n"
-                                    (if (compare-on-op op (numV-n a) (numV-n b))
-                                        "$1" "$0")
-                                    (compile dest))]
-                                   [(numV? a) 
-                                     (format "cmpl ~A, ~A\nsetl ~A\nmovzbl ~A, ~A\naddl $1, ~A\nandl $1, ~A\n"
-                                     (compile a) (compile b) 
-                                     (compile (small-reg dest))
-                                     (compile (small-reg dest)) 
-                                     (compile dest)
-                                     (compile dest)
-                                     (compile dest))]
-                                   [else (format "cmpl ~A, ~A\nsetl ~A\nmovzbl ~A, ~A\n"
-                                          (compile b) (compile a)
-                                          (compile (small-reg dest))
-                                          (compile (small-reg dest)) (compile dest))])]
+                                                    (compile b) (compile a)
+                                                    (cjump-instr op)
+                                                    (label-expr-label l1)
+                                                    (label-expr-label l2))])]
+    [cmp-store (dest a b op)
+               (cond [(and (numV? a) (numV? b))
+                      (format "movl ~A, ~A\n"
+                              (if (compare-on-op op (numV-n a) (numV-n b))
+                                  "$1" "$0")
+                              (compile dest))]
+                     [(numV? a) 
+                      (format "cmpl ~A, ~A\n~A ~A\nmovzbl ~A, ~A\n"
+                              (compile a) (compile b)
+                              (set-instr-inverse op)
+                              (compile (small-reg dest))
+                              (compile (small-reg dest)) 
+                              (compile dest)
+                              )]
+                     [else (format "cmpl ~A, ~A\n~A ~A\nmovzbl ~A, ~A\n"
+                                   (compile b) (compile a)
+                                   (set-instr op)
+                                   (compile (small-reg dest))
+                                   (compile (small-reg dest)) (compile dest))])]
     [call-expr (u) (let ([new-label (gen-label)])
-                        (format "pushl $~A\npushl %ebp\nmovl %esp, %ebp\njmp ~A\n~A:\n"
+                     (format "pushl $~A\npushl %ebp\nmovl %esp, %ebp\njmp ~A\n~A:\n"
                         new-label
                         (if (register? u)
                             (format "*~A" (compile u))
@@ -253,9 +273,9 @@
 
 (test (compile (parse `(cjump 13 = 15 :yes :no)))
   "jmp _no\n")
-
+#;
 (test (compile (parse `(cjump 17 <= ebx :true :false)))
-  "cmpl $17, %ebx\njle _false\njmp _true\n")
+  "cmpl $17, %ebx\njge _false\njmp _true\n")
 
 
 (test (parse `(eax <- edx = ebx))
@@ -264,14 +284,21 @@
 (test (compile (parse `(eax <- edx < ebx)))
   "cmpl %ebx, %edx\nsetl %al\nmovzbl %al, %eax\n")
 
+(test (compile (parse `(eax <- edx = ebx)))
+  "cmpl %ebx, %edx\nsete %al\nmovzbl %al, %eax\n")
+
+(test (compile (parse `(eax <- edx <= ebx)))
+  "cmpl %ebx, %edx\nsetle %al\nmovzbl %al, %eax\n")
+
 (test (compile (parse  `(edx <- 17 = 17)))
   "movl $1, %edx\n")
 
 (test (compile (parse  `(ecx <- 15 < ebx)))
-  "cmpl $15, %ebx\nsetl %cl\nmovzbl %cl, %ecx\naddl $1, %ecx\nandl $1, %ecx\n")
+  "cmpl $15, %ebx\nsetg %cl\nmovzbl %cl, %ecx\n")
 
 
 
+; this is so janky! but it's all cool man
 #;
 (when (= (vector-length (current-command-line-arguments)) 1)
   (call-with-input-file
