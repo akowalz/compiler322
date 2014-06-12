@@ -129,7 +129,17 @@
                                        `(lambda ,args ,(replace-var var new-var body-e)))]
     [`(let ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'let)]
     [`(letrec ([,x ,e1]) ,body-e) (let-replacement x var new-var e1 body-e 'letrec)]
-    [_ (replace-in-list var new-var e)]))
+    [`(if ,e1 ,e2 ,e3) `(if ,@(map (lambda (ex) (replace-var var new-var ex)) (list e1 e2 e3)))]
+    [`(new-tuple ,es ...) `(new-tuple ,@(map (lambda (ex) (replace-var var new-var ex)) es))]
+    [`(begin ,e1 ,e2) `(begin ,(replace-var var new-var e1) ,(replace-var var new-var e2))]
+    [`(,f ,a ...) 
+       (if (set-member? keywords f)
+           `(,f ,@(map (lambda (ex) (replace-var var new-var ex)) a))
+           `(,(replace-var var new-var f) ,@(map (lambda (ex) (replace-var var new-var ex)) a)))]
+    [(? number?) e]
+    [(? symbol?) (if (symbol=? e var)
+                     new-var
+                     e)]))
 
 ; simple recursive list-replace function (has known bug....)
 (define (replace-in-list var new-var e)
@@ -185,7 +195,7 @@
 
 
 ; command line stuff =========================================================
-#;
+
 (when (= (vector-length (current-command-line-arguments)) 1)
     (call-with-input-file
         (vector-ref (current-command-line-arguments) 0)
