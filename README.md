@@ -2,7 +2,7 @@
 
 Compiler for Robby Findler's course at Northwestern University
 
-*--Pair-programmed by Alex Kowalczuk (akowalz) and Nathan Yeazel*
+*-- Pair-programmed by Alex Kowalczuk (akowalz) and Nathan Yeazel*
 
 **Current Status**
 
@@ -13,4 +13,4 @@ Compiler for Robby Findler's course at Northwestern University
 * L2: 112 of 114 (98%)
 * L3: 149 of 152 (98%)
 * L4: 299 of 300 (99%)
-* L5: 85 of 87 (97%)
+* L5: 87 of 87 (100%)
