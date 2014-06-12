@@ -1,4 +1,0 @@
-((let ((a (new-tuple 0 0 0)))
-  (begin
-    (aset a 0 10)
-    (print (aref a 0)))))

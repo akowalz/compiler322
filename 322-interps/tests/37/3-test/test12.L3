@@ -1,4 +1,0 @@
-((let ([x (new-tuple 1 2 4)])
-    (if 3 (let ([y (number? x)])
-              (print y))
-          (number? 3))))

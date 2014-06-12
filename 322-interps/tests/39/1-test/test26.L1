@@ -1,6 +1,0 @@
-(((eax <- :test_function)
-  (call eax)
-  )
- (:test_function
-  (eax <- (print 101))
-  (return)))

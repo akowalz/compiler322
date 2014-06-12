@@ -1,6 +1,0 @@
-((call :start)
- (tail-call :start)
- (goto :finish)
- :finish
- (x &= y)
- (x -= y)) x -20 s

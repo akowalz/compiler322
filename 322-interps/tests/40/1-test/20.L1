@@ -1,8 +1,0 @@
-
-((
- (eax <- 89)
- (goto :l1)
- (eax += 45)
- :l1
- (eax <- (print eax))
-))

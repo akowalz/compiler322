@@ -1,5 +1,0 @@
-((ebx <- 13)
- (ebx += ebx)
- (eax <- 5)
- (eax += ebx)
- (eax <- (print ebx)))

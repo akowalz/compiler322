@@ -1,7 +1,0 @@
-((ebx <- 13)
- (ebx += ebx)
- (eax <- y)
- (eax += ebx)
- (eax <- (print ebx))
- (x <- ebx)
- (eax <- (print x)))

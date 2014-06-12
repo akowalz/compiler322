@@ -1,5 +1,0 @@
-((let ((v1 (:f 10)))
-  (print
-    (aref (new-tuple v1)
-          0)))
-(:f (a) (+ a 17)))

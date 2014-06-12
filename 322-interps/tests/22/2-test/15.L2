@@ -1,6 +1,0 @@
-(((call :start))
-	(:start
-	(tail-call :end))
-	(:end
-	(eax <- (print 11))
-	(return)))

@@ -1,6 +1,0 @@
-(:start
- (eax <- ebx)
- (a += 1)
- (a *= eax)
- (goto :start)
- (return))

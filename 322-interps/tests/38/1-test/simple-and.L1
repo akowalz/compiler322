@@ -1,3 +1,0 @@
-(((eax <- 13)
-(eax &= 21)
-(eax <- (print eax))))

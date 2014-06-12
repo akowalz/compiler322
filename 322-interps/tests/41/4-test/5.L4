@@ -1,1 +1,0 @@
-((print (aref (new-tuple 3 2 1) 0)))

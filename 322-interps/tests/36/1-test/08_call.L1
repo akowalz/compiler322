@@ -1,6 +1,0 @@
-(
- ;; main
- ((call :omg))
- 
- (:omg (eax <- (print 3)) (return))
- )

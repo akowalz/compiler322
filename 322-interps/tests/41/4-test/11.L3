@@ -1,8 +1,0 @@
-((let ((res (:add 0 1))) (print res))
- (:add (sum next)
-   (let ((b (<= next 100)))
-     (if b
-      (let ((a (* sum next)))
-       (let ((c (+ 1 next)))
-        (:add a c)))
-      sum))))

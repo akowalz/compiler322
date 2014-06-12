@@ -1,2 +1,0 @@
-((print
-  (print (new-tuple 3 4))))

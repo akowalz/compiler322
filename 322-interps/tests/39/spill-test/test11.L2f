@@ -1,1 +1,0 @@
-((eax <- (print x)) (eax <- (allocate x y)) (eax <- (allocate y x)) (eax <- (allocate x x)) (eax <- (array-error x y)) (eax <- (array-error y x)) (eax <- (array-error x x))) x 4 a

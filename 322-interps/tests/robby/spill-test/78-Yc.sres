@@ -1,1 +1,0 @@
-((s0 <- (mem ebp -28)) (s0 <- s0 < s0) ((mem ebp -28) <- s0) (s1 <- (mem ebp -28)) (s1 <- s1 < s1) ((mem ebp -28) <- s1))

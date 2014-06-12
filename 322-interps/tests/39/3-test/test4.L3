@@ -1,9 +1,0 @@
-(
-  (let ([x (new-array 3 150)])
-    (let ([ignore (aset x 2 100)])
-      (let ([x2 (aref x 2)])
-        (print x2)
-      )
-    )
-  )
-)

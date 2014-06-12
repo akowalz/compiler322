@@ -1,2 +1,0 @@
-((print (closure-vars (make-closure :bob (new-tuple 2 3 4))))
- (:bob (n) 1))

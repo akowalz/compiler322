@@ -1,9 +1,0 @@
-(((call :f) (eax <- (print eax)))
- (:f
-  (esp -= 4)
-  ((mem esp 0) <- 3)
-  (call :g)
-  (eax <- (mem esp 0))
-  (esp += 4)
-  (return))
- (:g (return)))

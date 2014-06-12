@@ -1,4 +1,0 @@
-((let ((res1 (+ 2 2)))
-  (let ((res2 (* 2 2)))
-   (let ((x (print res1)))
-    (print res2)))))

@@ -1,4 +1,0 @@
-((:a_label
-  (eax <- :a_label)
-  (ebx <- 5)
-  (eax <- (print ebx))))

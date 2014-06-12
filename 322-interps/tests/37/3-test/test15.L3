@@ -1,3 +1,0 @@
-((let ([x (:multiply 2 5)])
-   (print x))
- (:multiply (x1 x2) (* x1 x2)))

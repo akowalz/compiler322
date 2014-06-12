@@ -1,9 +1,0 @@
-(
-  :func
-  (ecx <- 5)
-  :loop
-  (ecx -= 1)
-  (cjump ecx = 1 :done :loop)
-  :done
-  (return)
-)

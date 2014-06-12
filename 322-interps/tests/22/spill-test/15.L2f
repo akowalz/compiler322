@@ -1,6 +1,0 @@
-((cjump a < b :meow :miao)
- :miao
- (eax <- (print a))
- :meow
- (eax <- (print b)))
-a 0 hi

@@ -1,1 +1,0 @@
-((cjump 1 = ecx :T :z) (cjump 1 = ecx :T :z) (cjump 1 = ecx :T :z)) r 0 s

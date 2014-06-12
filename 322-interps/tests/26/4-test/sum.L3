@@ -1,9 +1,0 @@
-((let ([s (:sum 100)])
-   (print s))
- (:sum (n)
-    (let ([t (= 1 n)])
-       (if t
-           1
-           (let ([x (- n 1)])
-             (let ([y (:sum x)])
-               (+ n y)))))))

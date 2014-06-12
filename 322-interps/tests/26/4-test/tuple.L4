@@ -1,1 +1,0 @@
-((print (aref (new-tuple (+ 9 8) (+ 7 6)) 1)))

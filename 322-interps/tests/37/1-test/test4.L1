@@ -1,8 +1,0 @@
-(((call :test3))
- (:test3
-  (eax <- 7)
-  (ebx <- 3)
-  (eax &= ebx)
-  (eax <- (print eax))
-  (return))
-)

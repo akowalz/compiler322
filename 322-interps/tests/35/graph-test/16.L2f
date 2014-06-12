@@ -1,1 +1,0 @@
-((eax <- 5) (return) (eax <- 6) (eax *= eax))

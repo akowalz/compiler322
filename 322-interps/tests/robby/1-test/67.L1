@@ -1,1 +1,0 @@
-(((esi <- 1) (eax <- (print esi)) (eax <- (print esi))))

@@ -1,8 +1,0 @@
-(((call :L_3))
- (:L_3
-  (a <- -1)
-  (x_1 <- 12)
-  (x_1 -= a)
-  (eax <- (print x_1))
-  (eax <- eax)
-  (return)))

@@ -1,7 +1,0 @@
-((print (:a 0 (new-tuple 3 4)))
- (:a
-  (pass results)
-   (new-tuple
-    (let ((x (aref results 0)))
-     (if pass (+ 1 x) x))
-    (+ 1 (aref results 1)))))

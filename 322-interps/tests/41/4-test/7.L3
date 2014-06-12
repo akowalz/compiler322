@@ -1,4 +1,0 @@
-((let ((clo (make-closure :foo 2)))
-  (let ((res (closure-proc clo)))
-   (print 1)))
- (:foo () (- 1 1)))

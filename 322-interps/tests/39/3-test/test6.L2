@@ -1,4 +1,0 @@
-((
-  (eax <- (allocate 11 11))
-  (eax <- (array-error eax 21))
-  ))

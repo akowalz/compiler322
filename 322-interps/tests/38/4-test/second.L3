@@ -1,5 +1,0 @@
-((let ((x1 (+ 5 10)))
-  (let ((x2 (+ 11 12)))
-    (let ((x3 (new-tuple x1 x2)))
-      (let ((x4 (aref x3 0)))
-        (print x4))))))

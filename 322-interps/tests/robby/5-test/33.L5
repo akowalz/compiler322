@@ -1,2 +1,0 @@
-(let ((go-ahead-and-print-it (lambda (l) (print l))))
-  (go-ahead-and-print-it 1))

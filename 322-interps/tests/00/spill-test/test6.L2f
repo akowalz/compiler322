@@ -1,1 +1,0 @@
-((cjump ecx <= x :t :f)) x -4 p

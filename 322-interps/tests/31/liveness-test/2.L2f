@@ -1,4 +1,0 @@
-(:f
- ((mem ebp -4) <- eax)
- ((mem ebp -8) <- eax)
- ((mem ebp -12) <- eax))

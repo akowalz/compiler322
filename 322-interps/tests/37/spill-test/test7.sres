@@ -1,8 +1,0 @@
-((eax <- (mem ebp -4))
- (eax <- (mem ebp -4))
- (ebx <- (mem ebp -4))
- (ebx <- (mem ebp -4))
- (ecx <- (mem ebp -4))
- (ecx <- (mem ebp -4))
- (edx <- (mem ebp -4))
- (edx <- (mem ebp -4)))

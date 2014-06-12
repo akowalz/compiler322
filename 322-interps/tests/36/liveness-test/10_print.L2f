@@ -1,5 +1,0 @@
-(
-  (edi <- 3)
-  (r <- 3 = edi)
-  (eax <- (print r)) 
-) 

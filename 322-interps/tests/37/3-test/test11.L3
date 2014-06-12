@@ -1,4 +1,0 @@
-((let ([x (new-array 10 5)])
-    (let ([res (aset x 0 25)])
-        (let ([y (aref x 0)])
-            (print y)))))

@@ -1,7 +1,0 @@
-(((cjump 2 < 1 :here :there)
-	:here
-	(eax <- 5)
-	(eax <- (print eax))
-	:there
-	(eax <- 11)
-	(eax <- (print eax))))

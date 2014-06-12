@@ -1,1 +1,0 @@
-(((mem ebp -4) <- 2) (y <- 3) (temp <- y) (y <- (mem ebp -4)) ((mem ebp -4) <- temp))

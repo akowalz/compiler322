@@ -1,3 +1,0 @@
-((let ((x (new-tuple 3 4)))
-  (let ((y (print x)))
-	(print y))))

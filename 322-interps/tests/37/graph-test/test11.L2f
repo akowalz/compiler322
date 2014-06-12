@@ -1,5 +1,0 @@
-(:func
- (a <- 3)
- (eax <- (print a))
- (tail-call :f9)
- (return))

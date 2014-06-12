@@ -1,2 +1,0 @@
-((in (edi esi) (edi esi x) (eax edi esi)) 
-(out (edi esi x) (eax edi esi) ()))

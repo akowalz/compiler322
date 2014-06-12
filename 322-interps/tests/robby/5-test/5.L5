@@ -1,1 +1,0 @@
-(print (let ((x (new-tuple 1 2))) (aref x 0)))

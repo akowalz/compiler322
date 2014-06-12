@@ -1,6 +1,0 @@
-((
-  (esi <- 21)
-  (goto :done)
-  (eax <- (print esi))
-  :done
-))

@@ -1,9 +1,0 @@
-;; add 1 to 100
-((let ((res (:add 0 1))) (print res))
- (:add (sum next)
-   (let ((b (<= next 100)))
-     (if b
-       (let ((arg1 (+ sum next)))
-        (let ((arg2 (+ 1 next)))
-	 (:add arg1 arg2)))
-       sum))))

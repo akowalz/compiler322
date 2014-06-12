@@ -1,1 +1,0 @@
-(  (  (eax <- 4)  (call :f)  (eax += 1)  (eax <- (print eax))  )  (  :f  (x2 <- eax)  (x2 *= x2)  (dx2 <- x2)  (dx2 *= 2)  (tx <- eax)  (tx *= 3)  (eax <- dx2)  (eax += tx)  (eax += 4)  (return)))

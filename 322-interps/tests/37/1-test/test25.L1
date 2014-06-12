@@ -1,5 +1,0 @@
-(((eax <- 11)
-  (eax *= 3)
-  (ecx <- 47)
-  (ecx &= 3)
-  (eax <- (print ecx))))

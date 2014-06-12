@@ -1,2 +1,0 @@
-((let ((clo (make-closure :foo 2))) (print (closure-vars clo)))
- (:foo () (- 1 1)))

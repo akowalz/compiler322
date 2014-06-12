@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec racket $(dirname $0)/4-interp-main.rkt "$@"

@@ -1,6 +1,0 @@
-((ebx <- 11)
- (eax <- ebx)
- (x += ecx)
- (x += eax)
- (y <- x)
- (return))

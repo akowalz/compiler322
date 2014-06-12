@@ -1,4 +1,0 @@
-((let ((x (print 1)))
-   (let ((y (print x)))
-	(let ((z (print 0)))
-	  (print z)))))

@@ -1,3 +1,0 @@
-((let ((arr (new-tuple 3 2 1)))
-  (let ((res (aref arr 0)))
-   (print res))))

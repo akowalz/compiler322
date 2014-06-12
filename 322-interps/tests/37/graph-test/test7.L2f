@@ -1,8 +1,0 @@
-(:recursive
- (ebx <- 511)
- :start
- (ebx -= 2)
- (eax <- (print ebx))
- (cjump 1 < ebx :start :end)
- :end
- (return))

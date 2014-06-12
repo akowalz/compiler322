@@ -1,4 +1,0 @@
-(((mem ebp -4) <- 21)
- (moo0 <- (mem ebp -4))
- (moo0 *= moo0)
- ((mem ebp -4) <- moo0))

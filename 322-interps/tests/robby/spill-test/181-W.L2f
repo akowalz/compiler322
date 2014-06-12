@@ -1,1 +1,0 @@
-((eax <- (array-error ebx W))) W -36 s

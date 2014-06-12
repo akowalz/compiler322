@@ -1,2 +1,0 @@
-(
- (print (aref (new-array 1 100) 0)))

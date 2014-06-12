@@ -1,5 +1,0 @@
-((
-  (eax <- 1)
-  (x <- eax)
-  (eax <- (print eax))
-))

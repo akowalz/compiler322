@@ -1,2 +1,0 @@
-((let ([x (new-array 1 50)])
-   (print x)))

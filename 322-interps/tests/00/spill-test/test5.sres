@@ -1,2 +1,0 @@
-((p0 <- (mem ebp -4))
-(eax <- (print p0)))

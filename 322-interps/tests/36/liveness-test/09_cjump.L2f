@@ -1,9 +1,0 @@
-( 
-	(a <- 5)
-	(b <- 9)
-	(cjump a <= b :begin :end)
-	:begin
-	(c <- 1)
-	:end
-	(d <- 3)
-)

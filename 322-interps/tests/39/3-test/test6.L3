@@ -1,5 +1,0 @@
-(
-  (let ([x (new-array 5 5)])
-    (aref x 10)
-  )
-)

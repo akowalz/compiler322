@@ -1,3 +1,0 @@
-((print ((:higher_order)))
- (:higher_order () :afunc)
- (:afunc () 12))

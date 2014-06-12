@@ -1,4 +1,0 @@
-(
-  ((mem eax 0) <- edx)
-  (return)
-)

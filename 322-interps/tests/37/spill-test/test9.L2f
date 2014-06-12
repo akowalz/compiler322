@@ -1,6 +1,0 @@
-((eax <<= x)
- (eax >>= x)
- (x <- x)
- (x *= x)
- (x <- x)
- (return)) x -4 s

@@ -1,5 +1,0 @@
-(((eax <- 13)
-(goto :mount_doom)
-(eax <- 17)
-:mount_doom
-(eax <- (print eax))))

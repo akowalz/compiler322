@@ -1,4 +1,0 @@
-(:g
-(rx <- eax)
-(rx += ebx) (rx += ecx) (rx += edx)
-(rx += edi) (rx += esi) (rx += eax))

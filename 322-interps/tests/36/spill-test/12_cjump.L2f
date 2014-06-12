@@ -1,1 +1,0 @@
-((cjump ebx < a :true :false)) a -4 var_

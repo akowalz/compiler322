@@ -1,2 +1,0 @@
-(((call :L_1))
- (:L_1 (a <- 3) (a -= 4) (eax <- (print a)) (eax <- eax) (return)))

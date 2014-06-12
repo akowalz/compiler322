@@ -1,7 +1,0 @@
-(
-  (let ([result (* 1 0)])
-    (if result (:truefunc) (:falsefunc))
-  )
-  (:truefunc () (print 100))
-  (:falsefunc () (print 200))
-)

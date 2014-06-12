@@ -1,5 +1,0 @@
-((let ([x (make-closure :closure 5)])
-    (let ([y (closure-proc x)])
-        (let ([z (closure-vars x)])
-            (print z))))
- (:closure () 10))

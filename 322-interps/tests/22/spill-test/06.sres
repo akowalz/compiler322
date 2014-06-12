@@ -1,2 +1,0 @@
-((eax <- (mem ebp -12))
- ((mem ebp -12) <- eax))

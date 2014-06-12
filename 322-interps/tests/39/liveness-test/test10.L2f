@@ -1,5 +1,0 @@
-(
-  (x <- (mem eax 0))
-  (eax <- x)
-  (return)
-)

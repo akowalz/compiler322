@@ -1,7 +1,0 @@
-((print
-  (:a 1 (new-tuple 10 11)))  
- (:a 
-  (x results)
-  (new-tuple
-	(+ x (aref results 0))
-	(+ x (aref results 1)))))

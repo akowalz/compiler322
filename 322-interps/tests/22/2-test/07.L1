@@ -1,6 +1,0 @@
-(((ebx <- 63)
-	(ecx <- 42)
-	(ebx &= ecx)
-	(ebx *= 2)
-	(ebx += 1)
-	(eax <- (print ebx))))

@@ -1,4 +1,0 @@
-;; print some 7s 
-(((eax <- (allocate 43 15)) ;; ))))))
-  (eax <- (print eax)))) ;; ()()() print print
-

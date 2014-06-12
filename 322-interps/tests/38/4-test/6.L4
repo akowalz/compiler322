@@ -1,7 +1,0 @@
-((print
-  (let ((a (new-tuple 1 2)))
-  (if
-    (= (aref a 0)
-       (aref a 1))
-       10
-       20))))

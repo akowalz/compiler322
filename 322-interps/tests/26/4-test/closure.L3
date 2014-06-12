@@ -1,5 +1,0 @@
-((let ([t (new-tuple 2 3 4)])
-   (let ([c (make-closure :bob t)])
-      (let ([v (closure-vars c)])
-         (print v))))
- (:bob (n) 1))

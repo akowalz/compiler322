@@ -1,8 +1,0 @@
-((x <- y < t)
- (ebx <- x)
- (eax += x)
- (eax -= x)
- (eax &= x)
- (eax *= x)
- (eax <<= x)
- (eax >>= x)) x -4 s

@@ -1,1 +1,0 @@
-(((mem ebp -4) <- 89) (goto :l1) (s0 <- (mem ebp -4)) (s0 += 45) ((mem ebp -4) <- s0) :l1 (s1 <- (mem ebp -4)) (eax <- (print s1)))

@@ -1,2 +1,0 @@
-(let ([f (lambda (x) (+ x 16))])
-	(print (f 16)))

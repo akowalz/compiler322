@@ -1,7 +1,0 @@
-(((call :sum)
-  (eax <- (print eax)))
- (:sum
-  (eax <- 6)
-  (ebx <- 9)
-  (eax += ebx)
-  (return)))

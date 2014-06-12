@@ -1,1 +1,0 @@
-(if (< 10 5) 5 (alen (new-array 5 5)))

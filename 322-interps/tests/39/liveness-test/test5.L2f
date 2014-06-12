@@ -1,4 +1,0 @@
-(
-  (x <- :a_function)
-  (tail-call x)
-)

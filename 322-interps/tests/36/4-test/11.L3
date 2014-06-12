@@ -1,3 +1,0 @@
-(
-	(let ([myprint (print 15)])
-		(print  16)))

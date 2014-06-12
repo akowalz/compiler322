@@ -1,5 +1,0 @@
-(let ([func_with_private_var ((lambda ()
-                                (let ([x 101])
-                                  (lambda () x))))])
-  (print (func_with_private_var)))
-    

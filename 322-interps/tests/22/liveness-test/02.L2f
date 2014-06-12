@@ -1,3 +1,0 @@
-((eax <- 11)
- (ebx += eax)
- (eax += ebx))

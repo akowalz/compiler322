@@ -1,6 +1,0 @@
-(((eax <- (allocate 9 3))
-  (esi <- eax)
-  (eax <- (allocate 5 5))
-  (edx <- eax)
-  ((mem edx 8) <- esi)
-  (eax <- (print eax))))

@@ -1,2 +1,0 @@
-((addr_0 <- (mem ebp -8))
-(call addr_0))

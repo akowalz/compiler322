@@ -1,0 +1,17 @@
+(letrec ([div (lambda (x y) 
+	(if (< x y) 
+		0
+		(+ 1 (div (- x y) y))))])
+(let ([remainder (lambda (x y) (- x (* y (div x y))))])
+
+(letrec ([isprime (lambda (x n) 
+                    (if (< x 2)
+                        0
+                        (if (= n x)
+                            1
+                            (if (= 0 (remainder x n))
+                                0
+                                (isprime x (+ 1 n))))))])
+(letrec ([loop (lambda (n) (if (= n 0)   (print (isprime 19801 2)) (begin (isprime 19801 2) (loop (- n 1)))))])
+  (loop 2000)))))
+

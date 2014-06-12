@@ -1,4 +1,0 @@
-((:hello
- (cjump 1 < 3 :hi :foo)
- :foo
- :hi))

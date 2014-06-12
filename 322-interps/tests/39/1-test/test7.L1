@@ -1,7 +1,0 @@
-(((ebx <- 7)
-  (ecx <- 9)
-  (eax <- ebx < ecx)
-  (eax <<= 1)
-  (eax += 1)
-  (eax <- (print eax))
-  ))

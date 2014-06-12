@@ -1,3 +1,0 @@
-((let ([x (:afunc)])
-   (print (+ x 1)))
- (:afunc () 4))

@@ -1,5 +1,0 @@
-((print (= (:len_greater_than_n
-            (new-array 10 0) 101)
-            1))
-(:len_greater_than_n (a n)
-  (<= n (alen a))))

@@ -1,9 +1,0 @@
-((a <- eax)
- (b <- ebx)
- (b *= b)
- (eax <- (print b))
- (a *= a)
- (eax <- (print a))
- (a += b)
- (eax <- a)
- (return)) b -4 s

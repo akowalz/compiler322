@@ -1,3 +1,0 @@
-((ruf0 <- (mem ebp -12))
- (ruf0 *= ruf0)
- ((mem ebp -12) <- ruf0))

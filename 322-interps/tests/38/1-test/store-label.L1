@@ -1,9 +1,0 @@
-(((eax <- :isengard)
-(ebx <- 77)
-(call eax)
-(edx <- eax)
-(eax <- (print edx)))
-(:isengard
-(edx <- 23)
-(eax <- edx)
-(return)))

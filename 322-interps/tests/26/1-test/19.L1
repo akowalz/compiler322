@@ -1,6 +1,0 @@
-((
-  (eax <- 255)
-  (ecx <- 4)
-  (eax >>= ecx)
-  (eax <- (print eax))
-))

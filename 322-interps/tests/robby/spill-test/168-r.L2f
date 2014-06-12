@@ -1,1 +1,0 @@
-((eax <- (allocate 1 l))) r -12 s

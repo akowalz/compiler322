@@ -1,5 +1,0 @@
-(((eax <- 21)
-  (goto :jumping)
-  (eax <- (print eax))
-  :jumping
-  (eax <- (print eax))))

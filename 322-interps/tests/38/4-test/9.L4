@@ -1,4 +1,0 @@
-((print 
-  (aset (new-array 4 3)
-        0
-        1)))

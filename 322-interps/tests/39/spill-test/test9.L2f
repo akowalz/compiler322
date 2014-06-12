@@ -1,1 +1,0 @@
-((cjump x <= 1 :a :b) (cjump 1 <= x :a :b) (cjump x <= x :a :b) (cjump x <= y :a :b) (cjump y <= y :a :b)) x -4 a

@@ -1,8 +1,0 @@
-(
-  (:abinaryfunc 3 3)
-  (:abinaryfunc (arg1 arg2)
-    (let ([x (+ arg1 arg2)])
-      (print x)
-    )
-  )
-)

@@ -1,4 +1,0 @@
-((
-  (eax <- (print 33))
-  (eax <- (print 1))
-  ))

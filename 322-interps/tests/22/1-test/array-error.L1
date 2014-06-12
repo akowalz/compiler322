@@ -1,8 +1,0 @@
-(((ebx <- 7)
-  (eax <- (allocate ebx 0))
-  (ecx <- eax)
-  ((mem ecx 4) <- 5)
-  ((mem ecx 8) <- 9)
-  ((mem ecx 12) <- 13)
-  (ebx <- (mem ecx 4))
-  (eax <- (array-error ecx 8))))

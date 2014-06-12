@@ -1,7 +1,0 @@
-(let ([get_x ((lambda ()
-  (let ([x 12])
-    (lambda () x))))])
-  (let ([x 4])
-    ((lambda ()
-       (print (+ x (get_x)))))))
-    

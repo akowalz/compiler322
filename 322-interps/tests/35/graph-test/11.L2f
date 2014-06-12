@@ -1,1 +1,0 @@
-((x <- 5) (y <- 8) (cjump x = y :a :b) :a (eax <- 4) :b (return))

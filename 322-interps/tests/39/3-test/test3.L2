@@ -1,4 +1,0 @@
-((
-  (eax <- (allocate 11 257))
-  (eax <- (print eax))
-))

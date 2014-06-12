@@ -1,3 +1,0 @@
-;; not error but error!
-(((eax <- (allocate 43 3))
-  (eax <- (array-error eax 21))))

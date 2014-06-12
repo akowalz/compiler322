@@ -1,8 +1,0 @@
-(((b <- 7)
-  (eax <- (allocate b 0))
-  (ecx <- eax)
-  ((mem ecx 4) <- 5)
-  ((mem ecx 8) <- 9)
-  ((mem ecx 12) <- 13)
-  (b <- (mem ecx 4))
-  (eax <- (print b))))

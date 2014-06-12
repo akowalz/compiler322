@@ -1,7 +1,0 @@
-((x <- 5)
-(eax <- ( print x))
-(y <- 1)
-(x -= y)
-(eax <- (print x))
-(x += x)
-(eax <- ( print x ))) x -12 s

@@ -1,8 +1,0 @@
-(((edi <- 5)
-  (esi <- 7)
-  (edx <- edi <= esi)
-  (edx <<= 1)
-  (edx += 1)
-  (eax <- (print edx))
-  ))
-  

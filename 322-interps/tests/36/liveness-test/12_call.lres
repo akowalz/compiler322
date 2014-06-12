@@ -1,2 +1,0 @@
-((in (address eax ecx edx))
- (out ()))

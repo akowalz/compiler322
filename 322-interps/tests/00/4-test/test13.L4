@@ -1,8 +1,0 @@
-((print (if (< 0 1)
-         (:a 2 (new-tuple 3 4))
-        0))
- (:a
-  (x results)
-  (new-tuple
-        (+ x (aref results 0))
-        (+ x (aref results 1)))))

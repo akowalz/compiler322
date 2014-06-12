@@ -1,4 +1,0 @@
-(
-  (eax <- ecx < edx)
-  (return)
-)

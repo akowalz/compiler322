@@ -1,4 +1,0 @@
-((:new_label 18)
-(:new_label
-(fresh-var)
-(print fresh-var)))

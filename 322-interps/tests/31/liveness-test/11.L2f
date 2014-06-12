@@ -1,4 +1,0 @@
-((call :a)
- (call :b)
- (x <- (mem ebp -4))
- (call :c))

@@ -1,6 +1,0 @@
-((x <- 45)
-((mem ebp -8) <- x)
-(s0 <- (mem ebp -8))
-(eax <- (print s0))
-(z <- (mem ebp -8))
-(eax <- (print z)))

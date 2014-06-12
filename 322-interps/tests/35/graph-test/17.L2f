@@ -1,1 +1,0 @@
-(:a (x <- 5) (y <- 6) (eax <- (array-error x y)))

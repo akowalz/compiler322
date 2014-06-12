@@ -1,9 +1,0 @@
-((
-	(ebx <- 3)
-	(eax <- 5)
-	(cjump eax < ebx :label1 :label3)
-	:label1
-	(eax <- (print ebx))
-	:label3
-	(eax <- (print eax))
-))

@@ -1,4 +1,0 @@
-(((edx <- ebp)
-	((mem edx -4) <- 23)
-	(ecx <- (mem edx -4))
-	(eax <- (print ecx))))

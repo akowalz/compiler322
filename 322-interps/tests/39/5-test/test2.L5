@@ -1,2 +1,0 @@
-(let ([x (lambda (arg1) arg1)])
-  (print (x 123)))

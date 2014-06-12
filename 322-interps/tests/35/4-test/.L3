@@ -1,1 +1,0 @@
-((if 5 :a (aset 8 8 8))(:a (x y) (new-array x y)))

@@ -1,6 +1,0 @@
-((
-	(ebx <- 77)
-	(eax <- (allocate ebx 5))
-	(ecx <- eax)
-	(eax <- (print ecx))
-))

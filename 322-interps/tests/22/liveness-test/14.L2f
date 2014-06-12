@@ -1,4 +1,0 @@
-((eax <- (print 5))
- :hi
- :bye
- (tail-call :ouch))

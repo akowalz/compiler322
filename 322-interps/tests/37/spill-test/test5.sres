@@ -1,5 +1,0 @@
-((s0 <- (mem ebp -24))
- (call s0)
- (s1 <- (mem ebp -24))
- (tail-call s1)
- (goto :x))

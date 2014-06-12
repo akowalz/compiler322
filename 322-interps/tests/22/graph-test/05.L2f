@@ -1,7 +1,0 @@
-((eax <- 5)
- (ebx <- eax)
- (ebx += 5)
- (edx <- eax)
- (edx *= ecx)
- (x *= esi)
- (eax <- (allocate y esi)))

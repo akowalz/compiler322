@@ -1,5 +1,0 @@
-(((ecx <- 63)
-	(ecx >>= 5)
-	(ecx *= 2)
-	(ecx += 1)
-	(eax <- (print ecx))))

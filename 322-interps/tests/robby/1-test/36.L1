@@ -1,1 +1,0 @@
-(((call :f)) (:f (eax <- (print 1)) (return)))

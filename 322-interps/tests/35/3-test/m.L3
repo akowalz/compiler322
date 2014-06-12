@@ -1,1 +1,0 @@
-((new-array 5 10) (:a (x) (aref x 5)))

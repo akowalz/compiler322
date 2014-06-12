@@ -1,6 +1,0 @@
-(((eax <- 15)
-  (cjump eax < 9 :true :false)
-  :true
-   (eax <- (print 5))
-  :false
-   (eax <- (print 9))))

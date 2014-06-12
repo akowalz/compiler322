@@ -1,1 +1,0 @@
-((eax <- (allocate t ecx)) (eax <- (allocate t ecx)) (eax <- (allocate t ecx)))

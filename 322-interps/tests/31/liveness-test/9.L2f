@@ -1,4 +1,0 @@
-(:f
- (eax <- a)
- (eax <- (print a)))
- 

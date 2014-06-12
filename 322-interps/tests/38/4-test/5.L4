@@ -1,4 +1,0 @@
-((print
-  (if (aref (new-array 10 0) 0)
-      1
-      2)))

@@ -1,0 +1,18 @@
+(let ([y (lambda (a)
+           ((lambda (f) (a (lambda (x) ((f f) x))))
+            (lambda (f) (a (lambda (x) ((f f) x))))))])
+  (begin (let ([partial-fac (lambda (f)
+                              (lambda (n)
+                                (if (= n 0)
+                                    1
+                                    (* n (f (- n 1))))))])
+           (print ((y partial-fac) 12)))
+         (let ([partial-fib (lambda (f)
+                              (lambda (n)
+                                (if (= n 0)
+                                    0
+                                    (if (= n 1)
+                                        1
+                                        (+ (f (- n 1))
+                                           (f (- n 2)))))))])
+           (print ((y partial-fib) 38)))))
