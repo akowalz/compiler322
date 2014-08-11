@@ -1,16 +1,80 @@
-#### EECS 322 | Compiler Construction 
+# L to x86 Compiler
 
-Compiler for Robby Findler's course at Northwestern University
+This is a compiler for a simple Scheme-like language into x86 assembly code, which can be run Intel x86 architecture.
+This is my fork of a project that Nathan Yeazel [(@nateyeazel)](https://github.com/nateyeazel) and I did for Robby
+Findler's course 'Compiler Construction' at Northwestern in the Spring of 2014.
 
-*-- Pair-programmed by Alex Kowalczuk (akowalz) and Nathan Yeazel*
+The compiler takes an input a program of the following Scheme-like grammar:
 
-**Current Status**
+```
+e ::= (lambda (x ...) e)
+    | x
+    | (let ([x e]) e)
+    | (letrec ([x e]) e)
+    | (if e e e)
+    | (new-tuple e ...)
+    | (begin e e)
+    | (e e ...) ;; application expression
+    | prim
+    | num
 
-* L1: 310 of 310 (100%)
-* graph: 168 of 168 (100%)
-* spill: 415 of 415 (100%)
-* liveness: 218 of 219 (99%)
-* L2: 112 of 114 (98%)
-* L3: 149 of 152 (98%)
-* L4: 299 of 300 (99%)
-* L5: 87 of 87 (100%)
+prim ::= biop
+       | pred
+       | print
+       | new-array
+       | aref
+       | aset
+       | alen
+
+biop ::= + | - | * | < | <= | =
+pred ::= number? | a?
+
+
+# source: http://www.eecs.northwestern.edu/~robby/courses/322-2014-spring/lecture10.txt
+```
+
+and produces valid x86 assembly.  As you can see, the language allows for lambdas, variables (`let`), recursion through mutation (`letrec`), arrays,
+tuples, and a variety of primitive operations.
+
+## Methodology
+
+The compiler works by compiling down from the high-level language shown above (dubbed L5) through five intermediate
+languages (dubbed Ls 4-1) and finally into assembly.  A basic summary of the processes involved is as follows:
+
+
+#### L5 -> L4
+
+Higher order function transformation.
+
+#### L4 -> L3
+
+Linearization (creating explicit order of evaluaton)
+
+#### L3 -> L2
+
+Transformation from x86 operations to high-level operations
+
+#### L2 -> L1
+
+Register allocation
+
+#### L1 - x86
+
+Formatting of the assembly, headers, linking, stack preparation
+
+## Using the compiler
+
+If you'd like to try out the compiler yourself you'll need Racket installed, and to run the output you'll need to have
+access to GNU Linux.  The binary to run the compiler is located in the `Lc` directory and named itself `Lc`, and should
+be called with a path to an L5 program as its first and only input.
+
+```
+# from the project root
+$ Lc/Lc ./path/to/prog.L5
+```
+
+This will write a file called L5.asm and attempt to run it using default compilation options.
+
+
+The final compiler is simply the composition of the previously listed functions, all of which can also be used in a
+similar way.
