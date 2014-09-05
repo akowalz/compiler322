@@ -52,7 +52,8 @@ Linearization (creating explicit order of evaluaton)
 
 #### L3 -> L2
 
-Transformation from x86 operations to high-level operations
+Transformation from higher-level functions to x86 instructions (use basic
+operators, etc)
 
 #### L2 -> L1
 
@@ -78,3 +79,14 @@ This will write a file called L5.asm and attempt to run it using default compila
 
 The final compiler is simply the composition of the previously listed functions, all of which can also be used in a
 similar way.
+
+(Literally a composition, look at this thing:)
+
+```racket
+(define (compile-L L5-prog)
+  (L1->x86
+   (L2->L1
+    (L3->L2
+     (L4->L3
+      (L5->L4 L5-prog))))))
+```
